@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Manipulating and Simplifying Social Network Data in igraph | R for Social Network Analysis</title>
+  <meta name="description" content="TBD." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Manipulating and Simplifying Social Network Data in igraph | R for Social Network Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="TBD." />
+  <meta name="github-repo" content="cjcallag/r4sna" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Manipulating and Simplifying Social Network Data in igraph | R for Social Network Analysis" />
+  
+  <meta name="twitter:description" content="TBD." />
+  
+
+<meta name="author" content="CORE Lab" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"/>
+<link rel="next" href="manipulating-and-simplifying-social-network-data-in-statnet.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="my_style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Social Network Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instructors"><i class="fa fa-check"></i><b>1.1</b> Instructors</a></li>
+</ul></li>
+<li class="part"><span><b>I Setting Up</b></span></li>
+<li class="chapter" data-level="2" data-path="setting-up-r-and-rstudio.html"><a href="setting-up-r-and-rstudio.html"><i class="fa fa-check"></i><b>2</b> Setting Up R and RStudio</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setting-up-r-and-rstudio.html"><a href="setting-up-r-and-rstudio.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.1</b> R and RStudio Basics</a></li>
+<li class="chapter" data-level="2.2" data-path="setting-up-r-and-rstudio.html"><a href="setting-up-r-and-rstudio.html#basics-of-r-coding-in-rstudio"><i class="fa fa-check"></i><b>2.2</b> Basics of R Coding in RStudio</a></li>
+<li class="chapter" data-level="2.3" data-path="setting-up-r-and-rstudio.html"><a href="setting-up-r-and-rstudio.html#project-workflow"><i class="fa fa-check"></i><b>2.3</b> Project Workflow</a></li>
+</ul></li>
+<li class="part"><span><b>II Lab 1</b></span></li>
+<li class="chapter" data-level="3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <code>igraph</code></a></li>
+<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
+<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Lab 2</b></span></li>
+<li class="chapter" data-level="5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>5</b> Manipulating and Simplifying Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#setup-2"><i class="fa fa-check"></i><b>5.1</b> Setup</a></li>
+<li class="chapter" data-level="5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-libraries-2"><i class="fa fa-check"></i><b>5.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-the-backbones-of-two-mode-network-projections"><i class="fa fa-check"></i><b>5.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-data"><i class="fa fa-check"></i><b>5.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#non-statistical-projections-of-the-co-sponsorhip-data"><i class="fa fa-check"></i><b>5.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="5.3.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-backbones"><i class="fa fa-check"></i><b>5.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#simplifying-networks-in-igraph-anabaptist-leadership-network"><i class="fa fa-check"></i><b>5.4</b> Simplifying Networks in <strong>igraph</strong>: Anabaptist Leadership Network</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-network-and-attribute-data"><i class="fa fa-check"></i><b>5.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-the-anabaptist-network"><i class="fa fa-check"></i><b>5.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="5.4.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#shrinking-collapsing-contracting-networks"><i class="fa fa-check"></i><b>5.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="5.4.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-subnetworks"><i class="fa fa-check"></i><b>5.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#multiple-stacked-networks-in-igraph-sampson-monastery"><i class="fa fa-check"></i><b>5.5</b> Multiple (Stacked) Networks in <strong>igraph</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-edge-list-network-data"><i class="fa fa-check"></i><b>5.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="5.5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-stacked-networks"><i class="fa fa-check"></i><b>5.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="5.5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-and-plotting-individual-networks"><i class="fa fa-check"></i><b>5.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>6</b> Manipulating and Simplifying Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#setup-3"><i class="fa fa-check"></i><b>6.1</b> Setup</a></li>
+<li class="chapter" data-level="6.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-libraries-3"><i class="fa fa-check"></i><b>6.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="6.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-the-backbones-of-two-mode-network-projections-1"><i class="fa fa-check"></i><b>6.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-data-1"><i class="fa fa-check"></i><b>6.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#non-statistical-projections-of-the-co-sponsorhip-data-1"><i class="fa fa-check"></i><b>6.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="6.3.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-backbones-1"><i class="fa fa-check"></i><b>6.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#simplifying-networks-in-statnet-anabaptist-network"><i class="fa fa-check"></i><b>6.4</b> Simplifying Networks in <strong>statnet</strong>: Anabaptist Network</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-network-and-attribute-data-1"><i class="fa fa-check"></i><b>6.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="6.4.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-the-anabaptist-network-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="6.4.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#shrinking-collapsing-contracting-networks-1"><i class="fa fa-check"></i><b>6.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-subnetworks-1"><i class="fa fa-check"></i><b>6.5</b> Extracting Subnetworks</a></li>
+<li class="chapter" data-level="6.6" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#multiple-stacked-networks-in-statnet-sampson-monastery"><i class="fa fa-check"></i><b>6.6</b> Multiple (Stacked) Networks in <strong>statnet</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-edge-list-network-data-1"><i class="fa fa-check"></i><b>6.6.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="6.6.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-stacked-networks-1"><i class="fa fa-check"></i><b>6.6.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="6.6.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-and-plotting-individual-networks-1"><i class="fa fa-check"></i><b>6.6.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Lab 3</b></span></li>
+<li class="chapter" data-level="7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html"><i class="fa fa-check"></i><b>7</b> Network Topography in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#load-libraries-4"><i class="fa fa-check"></i><b>7.1</b> Load Libraries</a></li>
+<li class="chapter" data-level="7.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#import-data"><i class="fa fa-check"></i><b>7.2</b> Import Data</a></li>
+<li class="chapter" data-level="7.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size-and-interconnectedness"><i class="fa fa-check"></i><b>7.3</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size"><i class="fa fa-check"></i><b>7.3.1</b> Network Size</a></li>
+<li class="chapter" data-level="7.3.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#density-and-average-degree"><i class="fa fa-check"></i><b>7.3.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="7.3.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#clustering-coefficient-global-and-local"><i class="fa fa-check"></i><b>7.3.3</b> Clustering Coefficient (Global and Local)</a></li>
+<li class="chapter" data-level="7.3.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#cohesion-and-fragmentation"><i class="fa fa-check"></i><b>7.3.4</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="7.3.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#compactness-and-breadth"><i class="fa fa-check"></i><b>7.3.5</b> Compactness and Breadth</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization-and-related-measures-of-spread"><i class="fa fa-check"></i><b>7.4</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization"><i class="fa fa-check"></i><b>7.4.1</b> Centralization</a></li>
+<li class="chapter" data-level="7.4.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#variance-and-standard-deviation"><i class="fa fa-check"></i><b>7.4.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="7.4.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#diameter-and-average-path-distance"><i class="fa fa-check"></i><b>7.4.3</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#calculating-the-e-i-index-with-isnar"><i class="fa fa-check"></i><b>7.5</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+<li class="chapter" data-level="7.6" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-level-measures-table"><i class="fa fa-check"></i><b>7.6</b> Network Level Measures Table</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html"><i class="fa fa-check"></i><b>8</b> Network Topography in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#load-libraries-5"><i class="fa fa-check"></i><b>8.1</b> Load Libraries</a></li>
+<li class="chapter" data-level="8.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#import-data-1"><i class="fa fa-check"></i><b>8.2</b> Import Data</a></li>
+<li class="chapter" data-level="8.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-and-interconnectedness-1"><i class="fa fa-check"></i><b>8.3</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-1"><i class="fa fa-check"></i><b>8.3.1</b> Network Size</a></li>
+<li class="chapter" data-level="8.3.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#density-and-average-degree-1"><i class="fa fa-check"></i><b>8.3.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="8.3.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#cohesion-and-fragmentation-1"><i class="fa fa-check"></i><b>8.3.3</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="8.3.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#compactness-and-breadth-1"><i class="fa fa-check"></i><b>8.3.4</b> Compactness and Breadth</a></li>
+<li class="chapter" data-level="8.3.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-interconnectedness-scores"><i class="fa fa-check"></i><b>8.3.5</b> Table of Interconnectedness Scores</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-and-related-measures-of-spread-1"><i class="fa fa-check"></i><b>8.4</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-1"><i class="fa fa-check"></i><b>8.4.1</b> Centralization</a></li>
+<li class="chapter" data-level="8.4.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#variance-and-standard-deviation-1"><i class="fa fa-check"></i><b>8.4.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="8.4.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-centralization-scores"><i class="fa fa-check"></i><b>8.4.3</b> Table of Centralization Scores</a></li>
+<li class="chapter" data-level="8.4.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#diameter-and-average-path-distance-1"><i class="fa fa-check"></i><b>8.4.4</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#calculating-the-e-i-index-with-isnar-1"><i class="fa fa-check"></i><b>8.5</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+</ul></li>
+<li class="part"><span><b>V References</b></span></li>
+<li class="chapter" data-level="9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>9</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown">
+Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Social Network Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="manipulating-and-simplifying-social-network-data-in-igraph" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Manipulating and Simplifying Social Network Data in <strong>igraph</strong></h1>
+<p>In this lab we’ll explore a variety of methods for manipulating and simplifying social network data. As with the previous lab, we’ll use a variety of social networks, some of which you’ll recognize from other classes.</p>
+<div id="setup-2" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Setup</h2>
+<p>Find and open your RStudio Project associated with this class. Begin by opening a new script. It’s generally a good idea to place a header at the top of your scripts that tell you what the script does, its name, etc.</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="do">#######################################################################</span></span>
+<span id="cb176-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="co"># What: Manipulating and Simplifying Social Network Data</span></span>
+<span id="cb176-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb176-3" aria-hidden="true" tabindex="-1"></a><span class="co"># File: lab2_igraph.R</span></span>
+<span id="cb176-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb176-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Created: 02.28.14</span></span>
+<span id="cb176-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb176-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Revised: 12.23.21</span></span>
+<span id="cb176-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb176-6" aria-hidden="true" tabindex="-1"></a><span class="do">#######################################################################</span></span></code></pre></div>
+<p>If you have not set up your RStudio Project to clear the workspace on exit, your environment contain the objects and functions from your prior session. To clear these before beginning use the following command.</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code></pre></div>
+<p>Proceed to place the data required for this lab (<code>Anabaptists.csv</code>, <code>Anabaptists.net</code>, <code>High esteem.csv</code>, <code>Liking3.csv</code>, <code>Positive Influence.csv</code>, <code>Praise.csv</code>, <code>S114 attributes.csv</code>, and <code>S114.csv</code>) also inside your R Project folder. We have placed it in a sub folder titled <code>data</code> for organizational purposes; however, this is not necessary.</p>
+</div>
+<div id="load-libraries-2" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Load Libraries</h2>
+<p>We need to load the libraries we plan to use. Here we will use <strong>igraph</strong>. Because <strong>igraph</strong> and <strong>sna</strong> conflict with one another sometimes, we do not want to have them loaded at the same time, so you’ll want to detach it. Alternatively, you may choose to namespace functions using the <code>::</code> operator as needed (e.g., <code>igraph::betweenness()</code> vs. <code>sna::betweenness()</code>). Of course, this applies only if you had the <strong>statnet</strong> suite loaded already.</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb178-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Warning: package &#39;igraph&#39; was built under R version 4.1.2</span></span></code></pre></div>
+<div class="infobox">
+<p><strong>Note</strong>: <strong>igraph</strong> imports the <code>%&gt;%</code> operator on load (<code>library(igraph)</code>). This series of exercises leverages the operator because we find it very useful in chaining functions.</p>
+</div>
+<p>In addition to <strong>igraph</strong>, we will be introducing and using <strong>backbone</strong>. Since this may be the first time you are using this tool, please ensure you install it prior to loading it.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If you haven&#39;t done so, install backbone</span></span>
+<span id="cb179-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;backbone&quot;)</span></span>
+<span id="cb179-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb179-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb179-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb179-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(backbone)</span></code></pre></div>
+<pre><code>##  ____   backbone v2.0.0</code></pre>
+<pre><code>## |  _ \  Cite: Domagalski, R., Neal, Z. P., &amp; Sagan, B. (2021). Backbone: An</code></pre>
+<pre><code>## |#|_) |       R package for extracting the backbone of bipartite projections.</code></pre>
+<pre><code>## |# _ &lt;        PLoS ONE, 16(1), e0244363. https://doi.org/10.1371/journal.pone.0244363</code></pre>
+<pre><code>## |#|_) | Help: type vignette(&quot;backbone&quot;); email zpneal@msu.edu; github zpneal/backbone</code></pre>
+<pre><code>## |____/  Beta: type devtools::install_github(&quot;zpneal/backbone&quot;, ref = &quot;devel&quot;)</code></pre>
+</div>
+<div id="extracting-the-backbones-of-two-mode-network-projections" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Extracting the “Backbones” of Two-Mode Network Projections</h2>
+<p>In this section, we illustrate how to extract the backbone of a projected two-mode network, a concept that we discussed in class and will not discuss in too much detail here. The basic idea is to use statistical tests to compare an edge’s observed weight in the two-mode projection to the distribution of its expected weight under a null model, controlling for different factors. An edge’s observed weight is considered to be statistically significant (and thus an actual tie) if it is in the upper or lower tail of the distribution of possible edge weights. Positive edges (ties) are found in the upper tail, while negative edges are found in the lower tail. For this, we will use the <strong>backbone</strong> package <span class="citation">(<a href="#ref-Domagalski2021" role="doc-biblioref">Domagalski, Neal, and Sagan 2021</a>)</span>.</p>
+<p>Because we need a much larger network to stochastically (statistically) project the backbone, here we will use bill co-sponsorship in the 114th US Senate (<code>S114.csv</code>) to illustrate this process.</p>
+<div class="infobox">
+<p>The code found in this section is adapted from code written by Zachary Neal, Rachel Domagalski, and Bruce Sagan for the “Backbone Workshop” delivered on 13 July 2020, which can be viewed at <a href="https://youtu.be/qLrUMZp93D0" class="uri">https://youtu.be/qLrUMZp93D0</a>. For complete workshop materials and more details about <strong>backbone</strong>, visit <a href="http://www.zacharyneal.com/backbone" class="uri">http://www.zacharyneal.com/backbone</a> or contact Zachary Neal at <a href="mailto:zpneal@msu.edu" class="email">zpneal@msu.edu</a>.</p>
+</div>
+<p>Specify the seeds before starting the analysis.</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">19</span>)</span></code></pre></div>
+<div id="load-data" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Load Data</h3>
+<p>Load and examine the network data. We will begin working with matrix data. As you can see, there are 100 Senators who sponsored a total of 3,549 bills.</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb187-1" aria-hidden="true" tabindex="-1"></a>senate_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(</span>
+<span id="cb187-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb187-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="st">&quot;data/S114.csv&quot;</span>,</span>
+<span id="cb187-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb187-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb187-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb187-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb187-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb187-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb187-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb187-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb187-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb187-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb187-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb187-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve the dimension of a matrix.</span></span>
+<span id="cb187-9"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb187-9" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(senate_mat)</span></code></pre></div>
+<pre><code>## [1]  100 3589</code></pre>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the first five rows and columns.</span></span>
+<span id="cb189-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb189-2" aria-hidden="true" tabindex="-1"></a>senate_mat[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>##                      sj9 sj8 sj7 sj6 sj5
+## Alexander, L. (TN-R)   0   1   0   1   0
+## Boxer, B. (CA-D)       0   0   0   0   1
+## Cantwell, M. (WA-D)    0   0   0   0   1
+## Carper, T. (DE-D)      0   0   0   0   1
+## Cochran, T. (MS-R)     0   1   0   1   0</code></pre>
+<p>Now, load the attribute (party) data.</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb191-1" aria-hidden="true" tabindex="-1"></a>S114attributes_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(</span>
+<span id="cb191-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb191-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="st">&quot;data/S114 attributes.csv&quot;</span>,</span>
+<span id="cb191-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb191-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb191-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb191-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb191-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb191-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb191-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb191-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>Take a quick look.</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get first five rows.</span></span>
+<span id="cb192-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb192-2" aria-hidden="true" tabindex="-1"></a>S114attributes_mat[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span></code></pre></div>
+<pre><code>## Alexander, L. (TN-R)     Boxer, B. (CA-D)  Cantwell, M. (WA-D) 
+##                    1                    2                    2 
+##    Carper, T. (DE-D)   Cochran, T. (MS-R) 
+##                    2                    1</code></pre>
+</div>
+<div id="non-statistical-projections-of-the-co-sponsorhip-data" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Non-Statistical Projections of the Co-Sponsorhip Data</h3>
+<div id="standard-projection" class="section level4" number="5.3.2.1">
+<h4><span class="header-section-number">5.3.2.1</span> Standard Projection</h4>
+<p>Project the one-mode network the by multiplying the matrix times its transpose.</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb194-1" aria-hidden="true" tabindex="-1"></a>senators_mat <span class="ot">&lt;-</span> senate_mat <span class="sc">%*%</span> <span class="fu">t</span>(senate_mat)</span></code></pre></div>
+<p>As the result from the <code>dim()</code> function indicates, the one-mode network is a 100 x 100 network (100 senators x 100 senators).</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(senators_mat)</span></code></pre></div>
+<pre><code>## [1] 100 100</code></pre>
+<p>Turn the matrix into an <code>igraph</code> object and then simplify it.</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb197-1" aria-hidden="true" tabindex="-1"></a>senators_ig <span class="ot">&lt;-</span> <span class="fu">graph.adjacency</span>(senators_mat, </span>
+<span id="cb197-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb197-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">mode =</span> <span class="st">&quot;undirected&quot;</span>,</span>
+<span id="cb197-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb197-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">weighted =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb197-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb197-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb197-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb197-5" aria-hidden="true" tabindex="-1"></a>senators_ig <span class="ot">&lt;-</span> <span class="fu">simplify</span>(senators_ig,</span>
+<span id="cb197-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb197-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">remove.multiple =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb197-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb197-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">remove.loops =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb197-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb197-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">edge.attr.comb =</span> sum)</span>
+<span id="cb197-9"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb197-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb197-10"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb197-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that you can also pipe the operations:</span></span>
+<span id="cb197-11"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb197-11" aria-hidden="true" tabindex="-1"></a><span class="co"># senators_ig &lt;- graph.adjacency(senators_mat, mode = &quot;undirected&quot;, </span></span>
+<span id="cb197-12"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb197-12" aria-hidden="true" tabindex="-1"></a><span class="co">#                                weighted = TRUE) %&gt;%</span></span>
+<span id="cb197-13"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb197-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   simplify(remove.multiple = TRUE, remove.loops = TRUE,</span></span>
+<span id="cb197-14"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb197-14" aria-hidden="true" tabindex="-1"></a><span class="co">#            edge.attr.comb = sum)</span></span></code></pre></div>
+<p>Now, plot the network, but first set the colors to blue (Democrats), red (Republicans), and white (Independents).</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create recoding named vector</span></span>
+<span id="cb198-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb198-2" aria-hidden="true" tabindex="-1"></a>recode <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;blue&quot;</span>, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb198-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb198-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Recode and assign strings to vertex attribute</span></span>
+<span id="cb198-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb198-4" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(senators_ig)<span class="sc">$</span>color <span class="ot">&lt;-</span> recode[<span class="fu">as.character</span>(S114attributes_mat[, <span class="dv">1</span>])]</span>
+<span id="cb198-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb198-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb198-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb198-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(senators_ig,</span>
+<span id="cb198-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb198-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_with_fr,</span>
+<span id="cb198-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb198-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="fu">V</span>(senators_ig)<span class="sc">$</span>color,</span>
+<span id="cb198-9"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb198-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb198-10"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb198-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb198-11"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb198-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">12</span>,</span>
+<span id="cb198-12"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb198-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.width =</span> <span class="fl">0.1</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_igraph_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>How densely interconnected are actors?</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">edge_density</span>(senators_ig)</span></code></pre></div>
+<pre><code>## [1] 0.999798</code></pre>
+<p>As you can see the senators are clearly separated into two groups, but the network’s density is almost 100% (0.999798), which suggests that we’re picking up ties between senators that really shouldn’t be there.</p>
+</div>
+<div id="universal-threshold-projection" class="section level4" number="5.3.2.2">
+<h4><span class="header-section-number">5.3.2.2</span> Universal Threshold Projection</h4>
+<p>A common approach to reducing the number of ties in a projected one-mode network is to choose a threshold where cells greater than the threshold are set to “1” while all others are set to “0.” Here, we will use mean and median edge weights as thresholds. First, we need to get the mean and median edge weight.</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">E</span>(senators_ig)<span class="sc">$</span>weight)</span></code></pre></div>
+<pre><code>## [1] 44.17054</code></pre>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(<span class="fu">E</span>(senators_ig)<span class="sc">$</span>weight)</span></code></pre></div>
+<pre><code>## [1] 38</code></pre>
+<p>Create a projection using mean edge weight as a threshold value. To do so, use the <code>global()</code> function from the <strong>backbone</strong> library, which will handle the projection of a weighter network.</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb205-1" aria-hidden="true" tabindex="-1"></a>threshold_mean_bb <span class="ot">&lt;-</span> <span class="fu">global</span>(senate_mat,</span>
+<span id="cb205-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb205-2" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Set upper threshold value</span></span>
+<span id="cb205-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb205-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">upper =</span> <span class="fu">mean</span>(<span class="fu">E</span>(senators_ig)<span class="sc">$</span>weight))</span>
+<span id="cb205-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb205-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look at the matrix:</span></span>
+<span id="cb205-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb205-5" aria-hidden="true" tabindex="-1"></a>threshold_mean_bb[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>##                      Alexander, L. (TN-R) Boxer, B. (CA-D) Cantwell, M. (WA-D)
+## Alexander, L. (TN-R)                    0                0                   0
+## Boxer, B. (CA-D)                        0                0                   1
+## Cantwell, M. (WA-D)                     0                1                   0
+## Carper, T. (DE-D)                       0                1                   0
+## Cochran, T. (MS-R)                      0                0                   0
+##                      Carper, T. (DE-D) Cochran, T. (MS-R)
+## Alexander, L. (TN-R)                 0                  0
+## Boxer, B. (CA-D)                     1                  0
+## Cantwell, M. (WA-D)                  0                  0
+## Carper, T. (DE-D)                    0                  0
+## Cochran, T. (MS-R)                   0                  0</code></pre>
+<p>Now create an <code>igraph</code> object from this matrix.</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb207-1" aria-hidden="true" tabindex="-1"></a>threshold_mean_ig <span class="ot">&lt;-</span> <span class="fu">graph.adjacency</span>(threshold_mean_bb, </span>
+<span id="cb207-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb207-2" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">mode =</span> <span class="st">&quot;undirected&quot;</span>,</span>
+<span id="cb207-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb207-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">weighted =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Create a projection using median edge weight.</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb208-1" aria-hidden="true" tabindex="-1"></a>threshold_med_bb <span class="ot">&lt;-</span> <span class="fu">global</span>(senate_mat,</span>
+<span id="cb208-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb208-2" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Set upper threshold value</span></span>
+<span id="cb208-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb208-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">upper =</span> <span class="fu">median</span>(<span class="fu">E</span>(senators_ig)<span class="sc">$</span>weight))</span>
+<span id="cb208-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb208-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an igraph graph with this object</span></span>
+<span id="cb208-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb208-5" aria-hidden="true" tabindex="-1"></a>threshold_med_ig <span class="ot">&lt;-</span> <span class="fu">graph.adjacency</span>(threshold_med_bb, </span>
+<span id="cb208-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb208-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">mode =</span> <span class="st">&quot;undirected&quot;</span>,</span>
+<span id="cb208-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb208-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">weighted =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Now, visualize the two projected networks.</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set graph parameters to 1 row and 2 columns</span></span>
+<span id="cb209-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb209-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb209-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Recode and assign strings to vertex attribute</span></span>
+<span id="cb209-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-5" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(threshold_mean_ig)<span class="sc">$</span>color <span class="ot">&lt;-</span> recode[<span class="fu">as.character</span>(S114attributes_mat[, <span class="dv">1</span>])]</span>
+<span id="cb209-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-6" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(threshold_med_ig)<span class="sc">$</span>color <span class="ot">&lt;-</span> recode[<span class="fu">as.character</span>(S114attributes_mat[, <span class="dv">1</span>])]</span>
+<span id="cb209-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb209-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Save coordinates</span></span>
+<span id="cb209-9"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-9" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">layout_with_fr</span>(threshold_mean_ig)</span>
+<span id="cb209-10"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb209-11"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(threshold_mean_ig,</span>
+<span id="cb209-12"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb209-13"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.2</span>,</span>
+<span id="cb209-14"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb209-15"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">12</span>)</span>
+<span id="cb209-16"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb209-17"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(threshold_med_ig,</span>
+<span id="cb209-18"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb209-19"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.2</span>,</span>
+<span id="cb209-20"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb209-21"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb209-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">12</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_igraph_files/figure-html/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Once again, take a look at each graph’s edge density.</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">edge_density</span>(threshold_mean_ig)</span></code></pre></div>
+<pre><code>## [1] 0.4226263</code></pre>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">edge_density</span>(threshold_med_ig)</span></code></pre></div>
+<pre><code>## [1] 0.4987879</code></pre>
+<p>These are definitely less dense (0.423 and 0.499) than the standard projection and Democrats and Republicans are clearly sorted into separate clusters. Still, these projections aren’t statistically derived although at least the thresholds aren’t entirely arbitrary. The next section demonstrates three statistical methods for extracting backbones.</p>
+</div>
+</div>
+<div id="extracting-backbones" class="section level3" number="5.3.3">
+<h3><span class="header-section-number">5.3.3</span> Extracting Backbones</h3>
+<p>As noted above, the <strong>backbone</strong> package uses statistical tests to compare an edge’s observed weight in the bipartite (two-mode) projection to the distribution of its weights expected under a null model. And an edge’s observed weight is statistically significant if it is in the upper or lower tail of the distribution. We will only focus on positive ties, so we’ll only extract backbones based on the upper tail of the distribution.</p>
+<p>With the co-sponsorship data, edge weights depend on how many bills each senator sponsors (row sums), and how many sponsors each bill has (column sums). (<strong>Note</strong>: If the rows were terrorists and the columns represented groups with which they were affiliated, then the edge weights would depend on how many groups to which the terrorists belonged and how many terrorists each group has.)</p>
+<div id="hypergeometric-backbone" class="section level4" number="5.3.3.1">
+<h4><span class="header-section-number">5.3.3.1</span> Hypergeometric Backbone</h4>
+<p>The Hypergeometric Model (formerly <code>hyperg()</code>, currently <code>fixedrow()</code>) controls exactly for row sums and is the fastest of the three <strong>backbone</strong> functions. First, we need to compute the probabilities and extract the backbone, saving it as an <code>igraph</code> object.</p>
+<p>You’ll notice that there are numerous arguments for the <code>fixedrow()</code> function:</p>
+<ul>
+<li>The <code>signed</code> option returns a signed network if set to <code>TRUE</code> (default is <code>FALSE</code>);</li>
+<li>The <code>alpha</code> option sets the significance test, the <code>fwer</code> indicates whether to apply at familywise error rate correction (default is “none”);</li>
+<li>The <code>class</code> indicates what type of object to return (it can return both <code>igraph</code> and <code>network\statnet</code> objects).</li>
+</ul>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the probabilities and create a backbone object</span></span>
+<span id="cb214-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb214-2" aria-hidden="true" tabindex="-1"></a>hyperg_probs <span class="ot">&lt;-</span> <span class="fu">fixedrow</span>(senate_mat)</span></code></pre></div>
+<pre><code>## This matrix object is being treated as an unweighted bipartite network of 100 agents and 3589 artifacts.</code></pre>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract a backbone network from a backbone object</span></span>
+<span id="cb216-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb216-2" aria-hidden="true" tabindex="-1"></a>hyperg_ig <span class="ot">&lt;-</span> <span class="fu">backbone.extract</span>(hyperg_probs, </span>
+<span id="cb216-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb216-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">signed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb216-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb216-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">alpha =</span> .<span class="dv">01</span>, </span>
+<span id="cb216-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb216-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">fwer =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb216-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb216-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">class =</span> <span class="st">&quot;igraph&quot;</span>)</span></code></pre></div>
+<p>Now, plot the projected network. Once again the network is clustered into two distinct groups, and the density (0.704) is much lower than the standard projection.</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(hyperg_ig)<span class="sc">$</span>color <span class="ot">&lt;-</span> recode[<span class="fu">as.character</span>(S114attributes_mat[, <span class="dv">1</span>])]</span>
+<span id="cb217-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb217-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb217-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb217-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(hyperg_ig,</span>
+<span id="cb217-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb217-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_with_fr,</span>
+<span id="cb217-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb217-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.4</span>,</span>
+<span id="cb217-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb217-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb217-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb217-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">12</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_igraph_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">edge_density</span>(hyperg_ig)</span></code></pre></div>
+<pre><code>## [1] 0.7038384</code></pre>
+</div>
+<div id="stochastic-degree-sequence-model-sdsm-backbone" class="section level4" number="5.3.3.2">
+<h4><span class="header-section-number">5.3.3.2</span> Stochastic Degree Sequence Model (SDSM) Backbone</h4>
+<p>The Stochastic Degree Sequence Model (<code>sdsm()</code>) approximately controls for both row and column sums and is slower than the Hypergeometric Model (but probably more accurate).</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the probabilities</span></span>
+<span id="cb220-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb220-2" aria-hidden="true" tabindex="-1"></a>sdsm_probs <span class="ot">&lt;-</span> <span class="fu">sdsm</span>(senate_mat,</span>
+<span id="cb220-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb220-3" aria-hidden="true" tabindex="-1"></a>                   <span class="co"># If TRUE the suggested text and citation will be</span></span>
+<span id="cb220-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb220-4" aria-hidden="true" tabindex="-1"></a>                   <span class="co"># displayed, which you can use for your write up.</span></span>
+<span id="cb220-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb220-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">narrative =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
+<pre><code>## This matrix object is being treated as an unweighted bipartite network of 100 agents and 3589 artifacts.</code></pre>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract a backbone network from a backbone object</span></span>
+<span id="cb222-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb222-2" aria-hidden="true" tabindex="-1"></a>sdsm_ig <span class="ot">&lt;-</span> <span class="fu">backbone.extract</span>(sdsm_probs, </span>
+<span id="cb222-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb222-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">signed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb222-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb222-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">alpha =</span> .<span class="dv">01</span>, </span>
+<span id="cb222-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb222-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fwer =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb222-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb222-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">class =</span> <span class="st">&quot;igraph&quot;</span>)</span></code></pre></div>
+<p>Once again, plot the network and take a look at the edge density.</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(sdsm_ig)<span class="sc">$</span>color <span class="ot">&lt;-</span> recode[<span class="fu">as.character</span>(S114attributes_mat[, <span class="dv">1</span>])]</span>
+<span id="cb223-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb223-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb223-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb223-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sdsm_ig,</span>
+<span id="cb223-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb223-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_with_fr,</span>
+<span id="cb223-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb223-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.4</span>,</span>
+<span id="cb223-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb223-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb223-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb223-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">12</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_igraph_files/figure-html/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">edge_density</span>(sdsm_ig)</span></code></pre></div>
+<pre><code>## [1] 0.3084848</code></pre>
+<p>This network plot clearly differs from what we’ve seen so far. The density is much lower (0.3085) and now the two parties are more distinct. Moreover, we can see that there are a handful of senators that appear to lie in between the two clusters.</p>
+</div>
+<div id="fixed-degree-sequence-model-fdsm-backbone" class="section level4" number="5.3.3.3">
+<h4><span class="header-section-number">5.3.3.3</span> Fixed Degree Sequence Model (FDSM) Backbone</h4>
+<p>The Fixed Degree Sequence Model (<code>fdsm()</code>) exactly controls for both row and column sums and is the slowest of the three models (but probably the most accurate). We extract the FDSM backbone like we did the previous two.</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the probabilities</span></span>
+<span id="cb226-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb226-2" aria-hidden="true" tabindex="-1"></a>fdsm_probs <span class="ot">&lt;-</span> <span class="fu">fdsm</span>(senate_mat,</span>
+<span id="cb226-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb226-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">narrative =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb226-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb226-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract a backbone network from a backbone object</span></span>
+<span id="cb226-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb226-5" aria-hidden="true" tabindex="-1"></a>fdsm_ig <span class="ot">&lt;-</span> <span class="fu">backbone.extract</span>(fdsm_probs, </span>
+<span id="cb226-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb226-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">signed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb226-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb226-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">alpha =</span> .<span class="dv">01</span>, </span>
+<span id="cb226-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb226-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fwer =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb226-9"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb226-9" aria-hidden="true" tabindex="-1"></a>                            <span class="at">class =</span> <span class="st">&quot;igraph&quot;</span>)</span></code></pre></div>
+<p>Now, let’s plot this backbone and calculate the edge density.</p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(fdsm_ig)<span class="sc">$</span>color <span class="ot">&lt;-</span> recode[<span class="fu">as.character</span>(S114attributes_mat[, <span class="dv">1</span>])]</span>
+<span id="cb227-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb227-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb227-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb227-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fdsm_ig,</span>
+<span id="cb227-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb227-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_with_fr,</span>
+<span id="cb227-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb227-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.4</span>,</span>
+<span id="cb227-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb227-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb227-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb227-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">12</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_igraph_files/figure-html/unnamed-chunk-25-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">edge_density</span>(fdsm_ig)</span></code></pre></div>
+<pre><code>## [1] 0.3612121</code></pre>
+<p>This network is a bit denser (0.3606) than the previous network, but it looks quite similar to it. That said, in this network map more senators appear as brokers between the Republicans and Democrats.</p>
+</div>
+</div>
+</div>
+<div id="simplifying-networks-in-igraph-anabaptist-leadership-network" class="section level2" number="5.4">
+<h2><span class="header-section-number">5.4</span> Simplifying Networks in <strong>igraph</strong>: Anabaptist Leadership Network</h2>
+<p>For this section, we will use the Anabaptist Leadership network and its related attribute data in order to see how to shrink (collapse) a network in <strong>igraph</strong>. The data set includes 67 actors, 55 who were sixteenth century Anabaptist leaders and 12 who were prominent Protestant Reformation leaders (e.g., Martin Luther, John Calvin, Ulrich Zwingli, Martin Bucer, and Philip Melanchthon) who had contact with and influenced some of the Anabaptist leaders included in this dataset. These data build on a smaller data set <span class="citation">(<a href="#ref-Matthew2013" role="doc-biblioref">Matthews et al. 2013</a>)</span> that did not include some leading Anabaptist leaders, such as Menno Simons, who is generally seen as the “founder” of the Amish and Mennonites.</p>
+<div id="importing-network-and-attribute-data" class="section level3" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> Importing Network and Attribute Data</h3>
+<p>Import the leadership network from a Pajek file and indicate that it is undirected.</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-1" aria-hidden="true" tabindex="-1"></a>anabaptist_ig <span class="ot">&lt;-</span> <span class="fu">read.graph</span>(<span class="st">&quot;data/Anabaptist Leaders.net&quot;</span>,</span>
+<span id="cb230-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">format =</span> <span class="st">&quot;pajek&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb230-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Coerce the network to undirected</span></span>
+<span id="cb230-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.undirected</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb230-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Simplify the graph </span></span>
+<span id="cb230-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">simplify</span>(<span class="at">remove.multiple =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb230-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">remove.loops =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb230-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">edge.attr.comb =</span> sum)</span>
+<span id="cb230-9"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb230-10"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-10" aria-hidden="true" tabindex="-1"></a><span class="co"># If you are not comfortable using pipes (%&gt;%) you can use the following code:</span></span>
+<span id="cb230-11"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-11" aria-hidden="true" tabindex="-1"></a><span class="co"># anabaptist_ig &lt;- read.graph(&quot;data/Anabaptist Leaders.net&quot;,</span></span>
+<span id="cb230-12"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-12" aria-hidden="true" tabindex="-1"></a><span class="co">#                             format = &quot;pajek&quot;)</span></span>
+<span id="cb230-13"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-13" aria-hidden="true" tabindex="-1"></a><span class="co"># anabaptist_ig &lt;- as.undirected(anabaptist_ig)</span></span>
+<span id="cb230-14"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-14" aria-hidden="true" tabindex="-1"></a><span class="co"># anabaptist_ig &lt;- simplify(anabaptist_ig,</span></span>
+<span id="cb230-15"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-15" aria-hidden="true" tabindex="-1"></a><span class="co">#                           remove.multiple = TRUE,</span></span>
+<span id="cb230-16"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-16" aria-hidden="true" tabindex="-1"></a><span class="co">#                           remove.loops = TRUE,</span></span>
+<span id="cb230-17"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-17" aria-hidden="true" tabindex="-1"></a><span class="co">#                           edge.attr.comb = sum)</span></span>
+<span id="cb230-18"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb230-19"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Now inspect the object</span></span>
+<span id="cb230-20"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb230-20" aria-hidden="true" tabindex="-1"></a>anabaptist_ig</span></code></pre></div>
+<pre><code>## IGRAPH 4253732 UNW- 67 183 -- 
+## + attr: id (v/c), name (v/c), x (v/n), y (v/n), z (v/n), weight (e/n)
+## + edges from 4253732 (vertex names):
+##  [1] Martin Luther --Ulrich Zwingli      Martin Luther --Thomas Muntzer     
+##  [3] Martin Luther --Andreas Carlstadt   Martin Luther --Caspar Schwenckfeld
+##  [5] Martin Luther --Melchior Hofmann    Martin Luther --Philipp Melanchthon
+##  [7] Martin Luther --Martin Bucer        John Calvin   --Wolfgang Capito    
+##  [9] John Calvin   --Martin Bucer        Ulrich Zwingli--Joachim Vadian     
+## [11] Ulrich Zwingli--Conrad Grebel       Ulrich Zwingli--Felix Manz         
+## [13] Ulrich Zwingli--George Blaurock     Ulrich Zwingli--Wilhelm Reublin    
+## [15] Ulrich Zwingli--Johannes Brotli     Ulrich Zwingli--Louis Haetzer      
+## + ... omitted several edges</code></pre>
+<p>Let’s check to see if the ids (<code>id</code>) and names (<code>name</code>) are the same. Here we will test this using the <code>setdiff()</code> function, which calculates the set difference between two vectors. An output stating <code>character(0)</code> indicates no difference between the values in the first vector and the second.</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setdiff</span>(<span class="fu">V</span>(anabaptist_ig)<span class="sc">$</span>id, <span class="fu">V</span>(anabaptist_ig)<span class="sc">$</span>name)</span></code></pre></div>
+<pre><code>## character(0)</code></pre>
+<p>Now, let’s bring in the <code>Anabaptist Attributes.csv</code> data, which includes the node attributes. The first six identify whether someone (1) embraced believer’s baptism, (2) supported violence, (3) participated in the Münster Rebellion, (4) held apocalyptic beliefs, (5) was an Anabaptist, and/or (6) was a follower of Melchior Hoffman (i.e., a Melchiorite).</p>
+<p>The last two combine other vectors in order to create a new set of attributes. The first creates vector that distinguishes between Anabaptists who didn’t participate in the Münster Rebellion, Anabaptists who did, and non-Anabaptists (e.g, Martin Luther, John Calvin). The values of the resulting vector equal “0” for non-Anabaptists, “1” for Anabaptists who didn’t participate in the rebellion, and “2” for those who did.</p>
+<p>The second creates a vector that distinguishes between Melchiorite Anabaptists, Non-Melchiorite Anabaptists, and non-Anabaptists. The values of the resulting vector equal “0” for non-Anabaptists, “1” for non-Melchiorite Anabaptists, and “2” for Melchiorite Anabaptists.</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb234-1" aria-hidden="true" tabindex="-1"></a>attributes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Anabaptist Attributes.csv&quot;</span>,</span>
+<span id="cb234-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb234-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Before moving forward to the next step, let’s briefly inspect the imported attribute variables in <code>attributes</code>. Begining with looking at the column names.</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(attributes)</span></code></pre></div>
+<pre><code>##  [1] &quot;ï..Names&quot;          &quot;Believers.Baptism&quot; &quot;Violence&quot;         
+##  [4] &quot;Munster.Rebellion&quot; &quot;Apocalyptic&quot;       &quot;Anabaptist&quot;       
+##  [7] &quot;Melchiorite&quot;       &quot;Swiss.Brethren&quot;    &quot;Denck&quot;            
+## [10] &quot;Hut&quot;               &quot;Hutterite&quot;         &quot;Other.Anabaptist&quot; 
+## [13] &quot;Lutheran&quot;          &quot;Reformed&quot;          &quot;Other.Protestant&quot; 
+## [16] &quot;Tradition&quot;         &quot;Origin..&quot;          &quot;Operate..&quot;</code></pre>
+<p>Each column in the data frame represents a vector of values that correspond with the nodes in our graph. We can subset each or multiple columns using the <code>[</code> operator. If you are unfamiliar with this form of subsetting, keep in mind that you may provide two sets of values separated by a comma to access either rows or columns. The former will subset rows (e.g., <code>attributes[1:3, ]</code>), the latter will return columns (e.g., <code>attributes[, 12]</code>). However, since we have named columns, we can also supply the name of the column in order to subset (e.g., <code>attributes[, "Violence"]</code>). For instance, we can select the first five rows of the <code>Anabaptist</code> column.</p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb237-1" aria-hidden="true" tabindex="-1"></a>attributes[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="st">&quot;Anabaptist&quot;</span>]</span></code></pre></div>
+<pre><code>## [1] 0 0 0 0 1</code></pre>
+<p>What this tells us is that of the first five actors listed in the data, only Conrad Grebel was an Anabaptist. We can also get the same information this way.</p>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb239-1" aria-hidden="true" tabindex="-1"></a>attributes[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="co"># Rows 1 through 5</span></span>
+<span id="cb239-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb239-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">6</span>)] <span class="co"># Columns 1 and 6</span></span></code></pre></div>
+<pre><code>##         ï..Names Anabaptist
+## 1  Martin Luther          0
+## 2    John Calvin          0
+## 3 Ulrich Zwingli          0
+## 4 Joachim Vadian          0
+## 5  Conrad Grebel          1</code></pre>
+<p>The following commands create and add a series of vectors to the attributes <code>data.frame</code> that we can later use with our network.</p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb241-1" aria-hidden="true" tabindex="-1"></a>attributes[[<span class="st">&quot;anabmunst&quot;</span>]] <span class="ot">&lt;-</span> attributes[, <span class="st">&quot;Munster.Rebellion&quot;</span>] <span class="sc">+</span></span>
+<span id="cb241-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb241-2" aria-hidden="true" tabindex="-1"></a>  attributes[, <span class="st">&quot;Anabaptist&quot;</span>]</span>
+<span id="cb241-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb241-3" aria-hidden="true" tabindex="-1"></a>attributes[[<span class="st">&quot;anabmelch&quot;</span>]] <span class="ot">&lt;-</span> attributes[, <span class="st">&quot;Melchiorite&quot;</span>] <span class="sc">+</span></span>
+<span id="cb241-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb241-4" aria-hidden="true" tabindex="-1"></a>  attributes[, <span class="st">&quot;Anabaptist&quot;</span>]</span></code></pre></div>
+</div>
+<div id="plotting-the-anabaptist-network" class="section level3" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> Plotting the Anabaptist Network</h3>
+<p>Plot the network where color indicates whether the actor is an Anabaptist who didn’t participate in the Munster Rebellion, an Anabaptist who did, or a non-Anabaptist (<code>anabmunst</code> variable).</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save coordinates</span></span>
+<span id="cb242-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb242-2" aria-hidden="true" tabindex="-1"></a>layout_fr <span class="ot">&lt;-</span> <span class="fu">layout_with_fr</span>(anabaptist_ig)</span>
+<span id="cb242-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb242-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot graph</span></span>
+<span id="cb242-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb242-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anabaptist_ig,</span>
+<span id="cb242-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb242-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_fr,</span>
+<span id="cb242-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb242-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.4</span>,</span>
+<span id="cb242-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb242-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb242-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb242-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">12</span>,</span>
+<span id="cb242-9"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb242-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> attributes[[<span class="st">&quot;anabmunst&quot;</span>]])</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_igraph_files/figure-html/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Blue nodes are those who participated in Munster Rebellion, orange nodes are Anabaptists who didn’t, and white nodes are non-Anabaptists. Now, let’s give the network a bit more color.</p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Declare which values correspond to which color</span></span>
+<span id="cb243-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb243-2" aria-hidden="true" tabindex="-1"></a>recode <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">0</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;yellow&quot;</span>, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;lightblue&quot;</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb243-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb243-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a new variable to our attributes data.frame for color</span></span>
+<span id="cb243-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb243-4" aria-hidden="true" tabindex="-1"></a>attributes[[<span class="st">&quot;color&quot;</span>]] <span class="ot">&lt;-</span> recode[<span class="fu">as.character</span>(attributes[[<span class="st">&quot;anabmunst&quot;</span>]])]</span>
+<span id="cb243-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb243-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb243-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb243-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anabaptist_ig,</span>
+<span id="cb243-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb243-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_fr,</span>
+<span id="cb243-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb243-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.4</span>,</span>
+<span id="cb243-9"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb243-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb243-10"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb243-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">12</span>,</span>
+<span id="cb243-11"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb243-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> attributes[[<span class="st">&quot;color&quot;</span>]])</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_igraph_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+</div>
+<div id="shrinking-collapsing-contracting-networks" class="section level3" number="5.4.3">
+<h3><span class="header-section-number">5.4.3</span> Shrinking (Collapsing, Contracting) Networks</h3>
+<p>Shrink (collapse) the Anabaptist Leadership network by “Melchiorite,” “Non-Melchiorite,” and Non-Anabaptist (“Other”). First, we need to change the numbering scheme of <code>anabmelch.vec</code> from “0, 1, 2” to “1, 2, 3” (<code>igraph</code> doesn’t like ids with “0’s”).</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, take a look at the values you will be recoding</span></span>
+<span id="cb244-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb244-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(attributes[, <span class="st">&quot;anabmelch&quot;</span>])</span></code></pre></div>
+<pre><code>## 
+##  0  1  2 
+## 12 39 16</code></pre>
+<p>A <code>0</code> represents “Other,” <code>1</code> “Non-Melchiorite,” and <code>2</code> “Melchiorite.” With these categories, let’s contract all vertices from a given category into a single vertex. To do so, we will use the <code>contract()</code> function, which creates a new graph by merging nodes. Note that we will need to provide a numeric vector that specifies the group of each vertex. Note that the vector must be numeric and <strong>igraph</strong> does not like zeros. As such, we can add a 1 to the values, changing the numbering scheme of <code>anabmelch</code> from <code>0</code>, <code>1</code>, <code>2</code> to <code>1</code>, <code>2</code>, <code>3</code>.</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contract</span></span>
+<span id="cb246-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb246-2" aria-hidden="true" tabindex="-1"></a>anagroup_ig <span class="ot">&lt;-</span> <span class="fu">contract</span>(anabaptist_ig,</span>
+<span id="cb246-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb246-3" aria-hidden="true" tabindex="-1"></a>                        attributes[[<span class="st">&quot;anabmelch&quot;</span>]] <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb246-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb246-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at output</span></span>
+<span id="cb246-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb246-5" aria-hidden="true" tabindex="-1"></a>anagroup_ig</span></code></pre></div>
+<pre><code>## IGRAPH 42b828a UNW- 3 183 -- 
+## + attr: name (v/x), weight (e/n)
+## + edges from 42b828a (vertex names):
+## [1] Martin Luther      , John Calvin        , Ulrich Zwingli     , Joachim Vadian     , Leo Jud            , Henry Bullinger    , Thomas Muntzer     , Andreas Carlstadt  , Caspar Schwenckfeld, Philipp Melanchthon, Wolfgang Capito    , Martin Bucer       --Martin Luther      , John Calvin        , Ulrich Zwingli     , Joachim Vadian     , Leo Jud            , Henry Bullinger    , Thomas Muntzer     , Andreas Carlstadt  , Caspar Schwenckfeld, Philipp Melanchthon, Wolfgang Capito    , Martin Bucer       
+## + ... omitted several edges</code></pre>
+<p>After shrinking, we can relabel the categories from <code>1</code>, <code>2</code> and <code>3</code> to the string names.</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb248-1" aria-hidden="true" tabindex="-1"></a>anagroup_ig <span class="ot">&lt;-</span> <span class="fu">set.vertex.attribute</span>(anagroup_ig, </span>
+<span id="cb248-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb248-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">name =</span> <span class="st">&quot;label&quot;</span>,</span>
+<span id="cb248-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb248-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">value =</span> <span class="fu">c</span>(<span class="st">&quot;Other&quot;</span>, <span class="st">&quot;Non-Melchiorite&quot;</span>, <span class="st">&quot;Melchiorite&quot;</span>))</span></code></pre></div>
+<p>Now plot resulting graph. Note that here we first estimate and then store the layout coordinates as an attribute of the graph, rather than as separate coordinates.</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb249-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Set coordinates</span></span>
+<span id="cb249-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-3" aria-hidden="true" tabindex="-1"></a>anabaptist_ig <span class="ot">&lt;-</span> <span class="fu">set.graph.attribute</span>(anabaptist_ig, <span class="at">name =</span> <span class="st">&quot;layout&quot;</span>,</span>
+<span id="cb249-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">value =</span> <span class="fu">layout_with_fr</span>(anabaptist_ig))</span>
+<span id="cb249-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-5" aria-hidden="true" tabindex="-1"></a>anagroup_ig <span class="ot">&lt;-</span> <span class="fu">set.graph.attribute</span>(anagroup_ig, <span class="at">name =</span> <span class="st">&quot;layout&quot;</span>,</span>
+<span id="cb249-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">value =</span> <span class="fu">layout_with_fr</span>(anagroup_ig))</span>
+<span id="cb249-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Now plot</span></span>
+<span id="cb249-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anabaptist_ig,</span>
+<span id="cb249-9"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> attributes[[<span class="st">&quot;anabmelch&quot;</span>]],</span>
+<span id="cb249-10"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb249-11"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb249-12"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb249-13"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anagroup_ig,</span>
+<span id="cb249-14"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightblue&quot;</span>,</span>
+<span id="cb249-15"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb249-16"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb249-17"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb249-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.mode =</span> <span class="dv">0</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_igraph_files/figure-html/unnamed-chunk-38-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Note that there are multiple edges; let’s get rid of those using <code>simplify()</code> and then replot.</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb250-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb250-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb250-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb250-3" aria-hidden="true" tabindex="-1"></a>anagroup_ig <span class="ot">&lt;-</span> <span class="fu">simplify</span>(anagroup_ig)</span>
+<span id="cb250-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb250-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb250-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb250-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anabaptist_ig,</span>
+<span id="cb250-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb250-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">vertex.color =</span> attributes[[<span class="st">&quot;anabmelch&quot;</span>]],</span>
+<span id="cb250-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb250-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb250-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb250-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb250-9"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb250-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb250-10"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb250-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anagroup_ig,</span>
+<span id="cb250-11"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb250-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color=</span><span class="st">&quot;Sky Blue&quot;</span>,</span>
+<span id="cb250-12"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb250-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex=</span>.<span class="dv">6</span>,</span>
+<span id="cb250-13"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb250-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color=</span><span class="st">&quot;black&quot;</span>,</span>
+<span id="cb250-14"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb250-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.mode=</span><span class="dv">0</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_igraph_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p>The graph isn’t too exciting although it does highlight how the Melchiorites (at least at the leadership level) were only connected to other Anabaptists through non-Anabaptists like Martin Luther. Now, let’s collapse it by religious tradition and then assign labels to the collapsed groups.</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb251-1" aria-hidden="true" tabindex="-1"></a>anatrad_ig <span class="ot">&lt;-</span> <span class="fu">contract</span>(anabaptist_ig,</span>
+<span id="cb251-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb251-2" aria-hidden="true" tabindex="-1"></a>                       attributes[[<span class="st">&quot;Tradition&quot;</span>]])</span>
+<span id="cb251-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb251-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb251-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb251-4" aria-hidden="true" tabindex="-1"></a>anatrad_ig <span class="ot">&lt;-</span> <span class="fu">set.vertex.attribute</span>(anatrad_ig, <span class="st">&quot;label&quot;</span>,</span>
+<span id="cb251-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb251-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">value  =</span> <span class="fu">c</span>(<span class="st">&quot;Melchiorite&quot;</span>, <span class="st">&quot;Swiss Brethren&quot;</span>,</span>
+<span id="cb251-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb251-6" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;Denck&quot;</span>, <span class="st">&quot;Hut&quot;</span>, <span class="st">&quot;Hutterite&quot;</span>,</span>
+<span id="cb251-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb251-7" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;Other Anabaptist&quot;</span>, <span class="st">&quot;Lutheran&quot;</span>,</span>
+<span id="cb251-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb251-8" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">&quot;Reformed&quot;</span>, <span class="st">&quot;Other Protestant&quot;</span>))</span></code></pre></div>
+<p>Simplify the network, this time weighting edges by sum of the multiple lines.</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb252-1" aria-hidden="true" tabindex="-1"></a>anatrad_ig <span class="ot">&lt;-</span> <span class="fu">simplify</span>(anatrad_ig, </span>
+<span id="cb252-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb252-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">edge.attr.comb =</span> sum)</span></code></pre></div>
+<p>Now plot the Anabaptist graph colored by <code>Tradition</code> side-by-side with the collapsed graph.</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb253-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb253-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-3" aria-hidden="true" tabindex="-1"></a>anatrad_ig <span class="ot">&lt;-</span> <span class="fu">set.graph.attribute</span>(anatrad_ig, <span class="at">name =</span> <span class="st">&quot;layout&quot;</span>,</span>
+<span id="cb253-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">layout.kamada.kawai</span>(anatrad_ig))</span>
+<span id="cb253-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb253-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anabaptist_ig,</span>
+<span id="cb253-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> attributes[[<span class="st">&quot;Tradition&quot;</span>]],</span>
+<span id="cb253-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb253-9"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb253-10"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb253-11"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anatrad_ig,</span>
+<span id="cb253-12"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;skyblue&quot;</span>,</span>
+<span id="cb253-13"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb253-14"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb253-15"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.mode =</span> <span class="dv">0</span>,</span>
+<span id="cb253-16"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb253-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.width =</span> <span class="fu">E</span>(anatrad_ig)<span class="sc">$</span>weight<span class="sc">/</span><span class="dv">5</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_igraph_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+</div>
+<div id="extracting-subnetworks" class="section level3" number="5.4.4">
+<h3><span class="header-section-number">5.4.4</span> Extracting Subnetworks</h3>
+<p>To extract subnetworks in <strong>igraph</strong>, we use the <code>induced_subgraph()</code> command. Here, we extract just the Anabaptists and plot the resulting network. First, though, we need to assign the Anabaptist attribute to the network. Using the <code>table</code> command, we can see that there are 55 Anabaptists, which means that the extracted subnetwork should have 55 actors. That is what we end up with.</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(attributes[[<span class="st">&quot;Anabaptist&quot;</span>]])</span></code></pre></div>
+<pre><code>## 
+##  0  1 
+## 12 55</code></pre>
+<p>Now assign this vector to a vertex attribute using the <code>V()</code> function.</p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="fu">V</span>(anabaptist_ig)<span class="sc">$</span>anabaptist <span class="ot">&lt;-</span> attributes[[<span class="st">&quot;Anabaptist&quot;</span>]]</span></code></pre></div>
+<p>Now extract the subgraph by indicating which vertices should be included. To do so, use the <code>induced_subgraph()</code> function, specifying the vertices with a value of <code>1</code> for the attribute <code>anabaptist</code>.</p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb257-1" aria-hidden="true" tabindex="-1"></a>anabaptist2_ig <span class="ot">&lt;-</span> <span class="fu">induced_subgraph</span>(anabaptist_ig,</span>
+<span id="cb257-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb257-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">vids =</span> <span class="fu">which</span>(<span class="fu">V</span>(anabaptist_ig)<span class="sc">$</span>anabaptist <span class="sc">==</span> <span class="dv">1</span>))</span>
+<span id="cb257-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb257-3" aria-hidden="true" tabindex="-1"></a>anabaptist2_ig</span></code></pre></div>
+<pre><code>## IGRAPH 43594af UNW- 55 131 -- 
+## + attr: layout (g/n), id (v/c), name (v/c), x (v/n), y (v/n), z (v/n),
+## | anabaptist (v/n), weight (e/n)
+## + edges from 43594af (vertex names):
+##  [1] Conrad Grebel--Felix Manz              
+##  [2] Conrad Grebel--George Blaurock         
+##  [3] Conrad Grebel--Wilhelm Reublin         
+##  [4] Conrad Grebel--Johannes Brotli         
+##  [5] Conrad Grebel--Louis Haetzer           
+##  [6] Conrad Grebel--Wolfgang Ulimann        
+##  [7] Conrad Grebel--Andrew Castelberger     
+## + ... omitted several edges</code></pre>
+<p>Now, let’s plot the subnetwork. Note that it is disconnected, something which we saw above when we collapsed the network by “Melchiorite,” “Non-Melchiorite,” and Non-Anabaptist (“Other”). In other words, it is held together by non-Anabaptists.</p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(anabaptist2_ig,</span>
+<span id="cb259-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb259-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_with_kk,</span>
+<span id="cb259-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb259-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;light blue&quot;</span>,</span>
+<span id="cb259-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb259-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb259-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb259-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb259-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb259-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">12</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_igraph_files/figure-html/unnamed-chunk-46-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="multiple-stacked-networks-in-igraph-sampson-monastery" class="section level2" number="5.5">
+<h2><span class="header-section-number">5.5</span> Multiple (Stacked) Networks in <strong>igraph</strong>: Sampson Monastery</h2>
+<p>The data we will use in this exercise are the Sampson Monastery network data collected by Samuel Sampson. Sampson observed and recorded the social interactions among a group of novices (men who were preparing to join a monastic order). He recorded four types of “ties”: esteem (SAMPES) and disesteem (SAMPDES); liking (SAMPLK - three different time periods recorded) and disliking (SAMPDLK - one-time period recorded); positive influence (SAMPIN) and negative influence (SAMPNIN); praise (SAMPPR) and blame (SAMPNPR). Each novice only ranked his top three choices for each type of tie where a 3 indicates their first choice, a 2 their second, and a 1 their third (some subjects offered tied ranks for their top four choices).</p>
+<p>During Sampson’s period of observation, a “crisis in the cloister” occurred in response to some of the changes proposed by the Second Vatican Council (Vatican II). This led to the expulsion of four novices and the voluntary departure of several others. Based on his observations, Sampson partitioned (i.e., sorted, divided) the novices into four groups: (1) the young turks, (2) the loyal opposition, (3) the outcasts, and (4) the neutrals. The young turks arrived later and questioned some of the monastery’s practices, which the loyal opposition defended. The outcasts were novices that were not accepted by the larger group, and the neutrals were those who did not take sides in the debate. Most of the loyal opposition had attended a seminary, “Cloisterville,” prior to their arrival at the monastery.</p>
+<p>For <strong>igraph</strong>, we will read in the data as edge lists and store them as data frames. Typically, edge lists do not contain zeros; they only include edges (ties) that actually exist (i.e., of tie strength “1” or higher). However, when “stacking” edge lists, we need to include edges of strength “0” so that all possible pairs of actors are included. Otherwise, it’s impossible to merge them together.</p>
+<div id="importing-edge-list-network-data" class="section level3" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> Importing Edge List Network Data</h3>
+<p>We’ll bring in the four positive tie edge If you are interested in what the edge lists look like, inspect them after importing.</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb260-1" aria-hidden="true" tabindex="-1"></a>liking3 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Liking 3.csv&quot;</span>,</span>
+<span id="cb260-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb260-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb260-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb260-3" aria-hidden="true" tabindex="-1"></a>esteem <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/High esteem.csv&quot;</span>,</span>
+<span id="cb260-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb260-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb260-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb260-5" aria-hidden="true" tabindex="-1"></a>influence <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Positive Influence.csv&quot;</span>, </span>
+<span id="cb260-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb260-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb260-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb260-7" aria-hidden="true" tabindex="-1"></a>praise <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Praise.csv&quot;</span>, </span>
+<span id="cb260-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb260-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>You can and should inspect all imported objects. Do they share column names?</p>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(liking3)</span>
+<span id="cb261-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb261-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(esteem)</span>
+<span id="cb261-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb261-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(influence)</span>
+<span id="cb261-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb261-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(praise)</span></code></pre></div>
+<p>Since each <code>data.frame</code> shares the same column headers, we can go ahead and row bind them together using the <code>rbind()</code> function.</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb262-1" aria-hidden="true" tabindex="-1"></a>samp_pos <span class="ot">&lt;-</span> <span class="fu">rbind</span>(liking3, esteem, influence, praise)</span>
+<span id="cb262-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb262-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the data</span></span>
+<span id="cb262-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb262-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(samp_pos)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    202 obs. of  4 variables:
+##  $ ï..Source: chr  &quot;ROMUALD&quot; &quot;ROMUALD&quot; &quot;ROMUALD&quot; &quot;ROMUALD&quot; ...
+##  $ Target   : chr  &quot;BONAVENTURE&quot; &quot;AMBROSE&quot; &quot;PETER&quot; &quot;AMAND&quot; ...
+##  $ Weight   : int  1 1 3 2 1 3 2 1 3 2 ...
+##  $ Relation : chr  &quot;Liking 3&quot; &quot;Liking 3&quot; &quot;Liking 3&quot; &quot;Liking 3&quot; ...</code></pre>
+<p>Now, convert the data frame to an <code>igraph</code> object.</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb264-1" aria-hidden="true" tabindex="-1"></a>samp_pos_ig <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(<span class="at">d =</span> samp_pos,</span>
+<span id="cb264-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb264-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">directed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb264-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb264-3" aria-hidden="true" tabindex="-1"></a>samp_pos_ig</span></code></pre></div>
+<pre><code>## IGRAPH 438abb5 DN-- 18 202 -- 
+## + attr: name (v/c), Weight (e/n), Relation (e/c)
+## + edges from 438abb5 (vertex names):
+##  [1] ROMUALD    -&gt;BONAVENTURE ROMUALD    -&gt;AMBROSE     ROMUALD    -&gt;PETER      
+##  [4] ROMUALD    -&gt;AMAND       BONAVENTURE-&gt;AMBROSE     BONAVENTURE-&gt;PETER      
+##  [7] BONAVENTURE-&gt;LOUIS       AMBROSE    -&gt;BONAVENTURE AMBROSE    -&gt;VICTOR     
+## [10] AMBROSE    -&gt;WINFRID     BERTHOLD   -&gt;BONAVENTURE BERTHOLD   -&gt;AMBROSE    
+## [13] BERTHOLD   -&gt;PETER       PETER      -&gt;BONAVENTURE PETER      -&gt;BERTHOLD   
+## [16] PETER      -&gt;LOUIS       LOUIS      -&gt;BONAVENTURE LOUIS      -&gt;VICTOR     
+## [19] LOUIS      -&gt;HUGH        VICTOR     -&gt;AMBROSE     VICTOR     -&gt;BERTHOLD   
+## [22] VICTOR     -&gt;PETER       WINFRID    -&gt;JOHN_BOSCO  WINFRID    -&gt;GREGORY    
+## + ... omitted several edges</code></pre>
+</div>
+<div id="plotting-stacked-networks" class="section level3" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Plotting Stacked Networks</h3>
+<p>Let’s plot the graph, saving the coordinates into an object so that we can use them later.</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb266-1" aria-hidden="true" tabindex="-1"></a>samp_pos_layout <span class="ot">&lt;-</span> <span class="fu">layout_with_fr</span>(samp_pos_ig)</span>
+<span id="cb266-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb266-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb266-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb266-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(samp_pos_ig,</span>
+<span id="cb266-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb266-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> samp_pos_layout,</span>
+<span id="cb266-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb266-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightblue&quot;</span>,</span>
+<span id="cb266-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb266-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb266-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb266-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb266-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb266-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.25</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_igraph_files/figure-html/unnamed-chunk-51-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Let’s set the color of the edges so that they’ll be different for each type of tie. We’ll set the colors to red, blue, yellow, and green.</p>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a named vector used for recoding</span></span>
+<span id="cb267-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb267-2" aria-hidden="true" tabindex="-1"></a>recode <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Liking 3&quot;</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>, <span class="st">&quot;High Esteem&quot;</span> <span class="ot">=</span> <span class="st">&quot;blue&quot;</span>,</span>
+<span id="cb267-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb267-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">&quot;Positive Influence&quot;</span> <span class="ot">=</span> <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;Praise&quot;</span> <span class="ot">=</span> <span class="st">&quot;green&quot;</span>)</span>
+<span id="cb267-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb267-4" aria-hidden="true" tabindex="-1"></a><span class="co"># We will create a color edge attribute by recoding based on the Relation</span></span>
+<span id="cb267-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb267-5" aria-hidden="true" tabindex="-1"></a><span class="co"># edge attribute that we imported into the graph from the edge list</span></span>
+<span id="cb267-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb267-6" aria-hidden="true" tabindex="-1"></a><span class="fu">E</span>(samp_pos_ig)<span class="sc">$</span>color <span class="ot">&lt;-</span> recode[<span class="fu">E</span>(samp_pos_ig)<span class="sc">$</span>Relation]</span>
+<span id="cb267-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb267-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb267-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb267-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(samp_pos_ig,</span>
+<span id="cb267-9"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb267-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> samp_pos_layout,</span>
+<span id="cb267-10"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb267-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightblue&quot;</span>,</span>
+<span id="cb267-11"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb267-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb267-12"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb267-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb267-13"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb267-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.25</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_igraph_files/figure-html/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="extracting-and-plotting-individual-networks" class="section level3" number="5.5.3">
+<h3><span class="header-section-number">5.5.3</span> Extracting and Plotting Individual Networks</h3>
+<p>Here’s how to extract the <code>Liking 3</code> network from the larger stacked network and then plot it.</p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb268-1" aria-hidden="true" tabindex="-1"></a>samp_liking3_ig <span class="ot">&lt;-</span> <span class="fu">subgraph.edges</span>(samp_pos_ig,</span>
+<span id="cb268-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb268-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">eids =</span> <span class="fu">which</span>(</span>
+<span id="cb268-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb268-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="fu">E</span>(samp_pos_ig)<span class="sc">$</span>Relation <span class="sc">==</span> <span class="st">&quot;Liking 3&quot;</span>),</span>
+<span id="cb268-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb268-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">delete.vertices =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Here’s a network plot based solely on the ties of the <code>Liking 3</code> network.</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(samp_liking3_ig,</span>
+<span id="cb269-2"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb269-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> samp_pos_layout,</span>
+<span id="cb269-3"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb269-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightblue&quot;</span>,</span>
+<span id="cb269-4"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb269-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb269-5"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb269-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb269-6"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb269-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.5</span>,</span>
+<span id="cb269-7"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb269-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;darkgrey&quot;</span>,</span>
+<span id="cb269-8"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#cb269-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_igraph_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p>That’s all (for <strong>igraph</strong>) for now.</p>
+
+</div>
+</div>
+</div>
+<h3> References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Domagalski2021" class="csl-entry">
+Domagalski, Rachel, Zachary P. Neal, and Bruce Sagan. 2021. <span>“<span>Backbone</span>: An r Package for Extracting the Backbone of Bipartite Projections.”</span> <em>PLoS ONE</em> 16 (1): e0244363. <a href="https://doi.org/10.1371/journal.pone.0244363">https://doi.org/10.1371/journal.pone.0244363</a>.
+</div>
+<div id="ref-Matthew2013" class="csl-entry">
+Matthews, Luke, Jeffrey Edmonds, Wesley Wildman, and Charles Nunn. 2013. <span>“Cultural Inheritance or Cultural Diffusion of Religious Violence? A Quantitative Case Study of the Radical Reformation.”</span> <em>Religion, Brain &amp; Behaviour</em> 3 (1): 3–15.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="manipulating-and-simplifying-social-network-data-in-statnet.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjcallag/r4ds/edit/editing/2-Manipulating_and_Simplifying_in_igraph.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"font_settings": {
+"family": "sans",
+"theme": "white",
+"size": 2
+},
+"info": true,
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 One-mode Social Network Data in igraph: Koschade Network | R for Social Network Analysis</title>
+  <meta name="description" content="TBD." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 One-mode Social Network Data in igraph: Koschade Network | R for Social Network Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="TBD." />
+  <meta name="github-repo" content="cjcallag/r4sna" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 One-mode Social Network Data in igraph: Koschade Network | R for Social Network Analysis" />
+  
+  <meta name="twitter:description" content="TBD." />
+  
+
+<meta name="author" content="CORE Lab" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"/>
+<link rel="next" href="two-mode-social-network-data-in-igraph-davis-southern-women.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="my_style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Social Network Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="part"><span><b>I Setting Up</b></span></li>
+<li class="chapter" data-level="2" data-path="setting-up-r.html"><a href="setting-up-r.html"><i class="fa fa-check"></i><b>2</b> Setting Up R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setting-up-r.html"><a href="setting-up-r.html#basics-of-r-coding-in-rstudio"><i class="fa fa-check"></i><b>2.1</b> Basics of R Coding in RStudio</a></li>
+</ul></li>
+<li class="part"><span><b>II Importing and Visualizing Network Data</b></span></li>
+<li class="chapter" data-level="3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="one-mode-social-network-data-in-igraph-koschade-network.html"><a href="one-mode-social-network-data-in-igraph-koschade-network.html"><i class="fa fa-check"></i><b>4</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="one-mode-social-network-data-in-igraph-koschade-network.html"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>4.1</b> Importing One-Mode Social Network Data</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="one-mode-social-network-data-in-igraph-koschade-network.html"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#option-1-importing-one-mode-network-data-in-matrix-format"><i class="fa fa-check"></i><b>4.1.1</b> Option 1: Importing One-Mode Network Data in Matrix Format</a></li>
+<li class="chapter" data-level="4.1.2" data-path="one-mode-social-network-data-in-igraph-koschade-network.html"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#option-2-importing-one-mode-network-data-as-an-edge-list"><i class="fa fa-check"></i><b>4.1.2</b> Option 2: Importing One-Mode Network Data as an Edge List</a></li>
+<li class="chapter" data-level="4.1.3" data-path="one-mode-social-network-data-in-igraph-koschade-network.html"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#option-3-importing-one-mode-network-data-in-pajek-format"><i class="fa fa-check"></i><b>4.1.3</b> Option 3: Importing One-Mode Network Data in Pajek Format</a></li>
+<li class="chapter" data-level="4.1.4" data-path="one-mode-social-network-data-in-igraph-koschade-network.html"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#option-4-importing-one-mode-network-data-into-statnet-format-using-intergraph"><i class="fa fa-check"></i><b>4.1.4</b> Option 4: Importing One-Mode Network Data into <strong>statnet</strong> Format using <strong>intergraph</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="one-mode-social-network-data-in-igraph-koschade-network.html"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>4.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="4.3" data-path="one-mode-social-network-data-in-igraph-koschade-network.html"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>4.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="4.4" data-path="one-mode-social-network-data-in-igraph-koschade-network.html"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#saving-network-data"><i class="fa fa-check"></i><b>4.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="two-mode-social-network-data-in-igraph-davis-southern-women.html"><a href="two-mode-social-network-data-in-igraph-davis-southern-women.html"><i class="fa fa-check"></i><b>5</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="two-mode-social-network-data-in-igraph-davis-southern-women.html"><a href="two-mode-social-network-data-in-igraph-davis-southern-women.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>5.1</b> Importing Two-Mode Social Network Data into <code>igraph</code></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="two-mode-social-network-data-in-igraph-davis-southern-women.html"><a href="two-mode-social-network-data-in-igraph-davis-southern-women.html#option-1-importing-two-mode-social-network-data-in-matrix-format"><i class="fa fa-check"></i><b>5.1.1</b> Option 1: Importing Two-Mode Social Network Data in Matrix Format</a></li>
+<li class="chapter" data-level="5.1.2" data-path="two-mode-social-network-data-in-igraph-davis-southern-women.html"><a href="two-mode-social-network-data-in-igraph-davis-southern-women.html#option-2-importing-two-mode-social-network-data-as-an-edge-list"><i class="fa fa-check"></i><b>5.1.2</b> Option 2: Importing Two-Mode Social Network Data as an Edge List</a></li>
+<li class="chapter" data-level="5.1.3" data-path="two-mode-social-network-data-in-igraph-davis-southern-women.html"><a href="two-mode-social-network-data-in-igraph-davis-southern-women.html#option-3-importing-two-mode-social-network-data-in-pajek-format"><i class="fa fa-check"></i><b>5.1.3</b> Option 3: Importing Two-Mode Social Network Data in Pajek Format</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="two-mode-social-network-data-in-igraph-davis-southern-women.html"><a href="two-mode-social-network-data-in-igraph-davis-southern-women.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>5.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="5.3" data-path="two-mode-social-network-data-in-igraph-davis-southern-women.html"><a href="two-mode-social-network-data-in-igraph-davis-southern-women.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>5.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="two-mode-social-network-data-in-igraph-davis-southern-women.html"><a href="two-mode-social-network-data-in-igraph-davis-southern-women.html#multiplying-matrices"><i class="fa fa-check"></i><b>5.3.1</b> Multiplying Matrices</a></li>
+<li class="chapter" data-level="5.3.2" data-path="two-mode-social-network-data-in-igraph-davis-southern-women.html"><a href="two-mode-social-network-data-in-igraph-davis-southern-women.html#projecting-two-mode-igraph-graphs"><i class="fa fa-check"></i><b>5.3.2</b> Projecting Two-Mode <strong>igraph</strong> Graphs</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="two-mode-social-network-data-in-igraph-davis-southern-women.html"><a href="two-mode-social-network-data-in-igraph-davis-southern-women.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>5.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="5.5" data-path="two-mode-social-network-data-in-igraph-davis-southern-women.html"><a href="two-mode-social-network-data-in-igraph-davis-southern-women.html#saving-network-plots"><i class="fa fa-check"></i><b>5.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="5.6" data-path="two-mode-social-network-data-in-igraph-davis-southern-women.html"><a href="two-mode-social-network-data-in-igraph-davis-southern-women.html#saving-network-data-1"><i class="fa fa-check"></i><b>5.6</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>6</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="introduction-1.html"><a href="introduction-1.html#setup-1"><i class="fa fa-check"></i><b>6.1</b> Setup</a></li>
+<li class="chapter" data-level="6.2" data-path="introduction-1.html"><a href="introduction-1.html#load-libraries-1"><i class="fa fa-check"></i><b>6.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="6.3" data-path="introduction-1.html"><a href="introduction-1.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>6.3</b> Importing One-Mode Social Network Data</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="introduction-1.html"><a href="introduction-1.html#option-1-importing-one-mode-social-network-data-in-matrix-format"><i class="fa fa-check"></i><b>6.3.1</b> Option 1: Importing One-Mode Social Network Data in Matrix Format</a></li>
+<li class="chapter" data-level="6.3.2" data-path="introduction-1.html"><a href="introduction-1.html#worked-through-here"><i class="fa fa-check"></i><b>6.3.2</b> Worked through here</a></li>
+<li class="chapter" data-level="6.3.3" data-path="introduction-1.html"><a href="introduction-1.html#option-2-importing-one-mode-social-network-data-as-an-edge-list"><i class="fa fa-check"></i><b>6.3.3</b> Option 2: Importing One-Mode Social Network Data as an Edge List</a></li>
+<li class="chapter" data-level="6.3.4" data-path="introduction-1.html"><a href="introduction-1.html#option-3-importing-one-mode-social-network-data-in-pajek-format"><i class="fa fa-check"></i><b>6.3.4</b> Option 3: Importing One-Mode Social Network Data in Pajek Format</a></li>
+<li class="chapter" data-level="6.3.5" data-path="introduction-1.html"><a href="introduction-1.html#option-4-importing-one-mode-social-network-data-in-igraph-format-using-intergraph"><i class="fa fa-check"></i><b>6.3.5</b> Option 4: Importing One-Mode Social Network Data in <strong>igraph</strong> Format using <strong>intergraph</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="introduction-1.html"><a href="introduction-1.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>6.4</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="6.5" data-path="introduction-1.html"><a href="introduction-1.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>6.5</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="6.6" data-path="introduction-1.html"><a href="introduction-1.html#saving-network-data-2"><i class="fa fa-check"></i><b>6.6</b> Saving Network Data</a></li>
+<li class="chapter" data-level="6.7" data-path="introduction-1.html"><a href="introduction-1.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>6.7</b> Importing Two-Mode Network Data</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="introduction-1.html"><a href="introduction-1.html#option-1-importing-two-mode-network-data-in-matrix-format"><i class="fa fa-check"></i><b>6.7.1</b> Option 1: Importing Two-Mode Network Data in Matrix Format</a></li>
+<li class="chapter" data-level="6.7.2" data-path="introduction-1.html"><a href="introduction-1.html#option-2-importing-two-mode-network-data-as-an-edge-list"><i class="fa fa-check"></i><b>6.7.2</b> Option 2: Importing Two-Mode Network Data as an Edge List</a></li>
+<li class="chapter" data-level="6.7.3" data-path="introduction-1.html"><a href="introduction-1.html#option-3-importing-two-mode-social-network-data-in-pajek-format-1"><i class="fa fa-check"></i><b>6.7.3</b> Option 3: Importing Two-Mode Social Network Data in Pajek Format</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="introduction-1.html"><a href="introduction-1.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>6.8</b> Plotting Two-Mode Networks</a></li>
+<li class="chapter" data-level="6.9" data-path="introduction-1.html"><a href="introduction-1.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>6.9</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a>
+<ul>
+<li class="chapter" data-level="6.9.1" data-path="introduction-1.html"><a href="introduction-1.html#multiplying-matrices-1"><i class="fa fa-check"></i><b>6.9.1</b> Multiplying Matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="6.10" data-path="introduction-1.html"><a href="introduction-1.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>6.10</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="6.11" data-path="introduction-1.html"><a href="introduction-1.html#saving-network-plots-1"><i class="fa fa-check"></i><b>6.11</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="6.12" data-path="introduction-1.html"><a href="introduction-1.html#saving-network-data-3"><i class="fa fa-check"></i><b>6.12</b> Saving Network Data</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown">
+Published con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Social Network Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="one-mode-social-network-data-in-igraph-koschade-network" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</h1>
+<p>Here, we will use data collected by Stuart Koschade of the 17 individuals who participated in the first Bali bombing. Koschade (2006) recorded both the ties between the individuals, as well as the strength of the tie between them.</p>
+<div id="importing-one-mode-social-network-data" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Importing One-Mode Social Network Data</h2>
+<div id="option-1-importing-one-mode-network-data-in-matrix-format" class="section level3" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Option 1: Importing One-Mode Network Data in Matrix Format</h3>
+<p>One way is to read network in from a matrix saved as a csv file.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, read the csv file using the required arguments</span></span>
+<span id="cb4-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb4-2" aria-hidden="true" tabindex="-1"></a>koschade_dat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/Koschade Bali (Matrix).csv&quot;</span>,</span>
+<span id="cb4-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb4-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb4-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb4-5"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb4-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-6"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, coherce the data.frame to a matrix</span></span>
+<span id="cb4-7"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb4-7" aria-hidden="true" tabindex="-1"></a>koschade_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(koschade_dat)</span></code></pre></div>
+<p>The two-step operation above could be combined:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb5-1" aria-hidden="true" tabindex="-1"></a>koschade_mat <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/Koschade Bali (Matrix).csv&quot;</span>,</span>
+<span id="cb5-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb5-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb5-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb5-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb5-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">check.names =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span></code></pre></div>
+<p>Turn the <code>matrix</code> into an <code>igraph</code> object using the <code>graph_from_adjacency_matrix()</code> function from the <strong>igraph</strong> library:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb6-1" aria-hidden="true" tabindex="-1"></a>koschade1_ig  <span class="ot">&lt;-</span> <span class="fu">graph_from_adjacency_matrix</span>(<span class="at">adjmatrix =</span> koschade_mat,</span>
+<span id="cb6-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb6-2" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">mode =</span> <span class="st">&quot;undirected&quot;</span>,</span>
+<span id="cb6-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb6-3" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">weighted =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Now that the matrix has been imported, let’s examine the object. First, take a look at it’s class:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(koschade1_ig)</span></code></pre></div>
+<pre><code>## [1] &quot;igraph&quot;</code></pre>
+<p>What is it? If you ran the code above the printout on your console should read <code>igraph</code>. Many R objects have a class, which describes a type of object, describing the properties it possesses, how it behaves, and how it relates to other objects and functions <span class="citation">(<a href="#ref-Wickham2019" role="doc-biblioref">Wickham 2019</a>)</span>. An <code>igraph</code> class denotes that this object is an <strong>igraph</strong> graph and that it will work with the functions from this library.</p>
+<p>One key characteristic of <strong>igraph</strong> graphs is that they are printed to the screen in a special format:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb9-1" aria-hidden="true" tabindex="-1"></a>koschade1_ig</span></code></pre></div>
+<pre><code>## IGRAPH 2ca8483 UNW- 17 63 -- 
+## + attr: name (v/c), weight (e/n)
+## + edges from 2ca8483 (vertex names):
+##  [1] Muklas --Amrozi   Muklas --Imron    Muklas --Samudra  Muklas --Dulmatin
+##  [5] Muklas --Idris    Muklas --Azahari  Muklas --Ghoni    Muklas --Patek   
+##  [9] Muklas --Sarijo   Amrozi --Samudra  Amrozi --Idris    Amrozi --Mubarok 
+## [13] Imron  --Samudra  Imron  --Dulmatin Imron  --Idris    Imron  --Azahari 
+## [17] Imron  --Ghoni    Imron  --Patek    Imron  --Feri     Imron  --Sarijo  
+## [21] Samudra--Dulmatin Samudra--Idris    Samudra--Mubarok  Samudra--Azahari 
+## [25] Samudra--Ghoni    Samudra--Arnasan  Samudra--Rauf     Samudra--Octavia 
+## [29] Samudra--Hidayat  Samudra--Junaedi  Samudra--Patek    Samudra--Sarijo  
+## + ... omitted several edges</code></pre>
+<p>This printout provides important information about the object. The first line starts with <code>IGRAPH</code>, which denotes that this is an <strong>igraph</strong> graph. The following seven character code is the unique id for the graph. The following four letters distinguish whether:</p>
+<ul>
+<li>The graph is directed (<code>D</code>) or undirected (<code>U</code>)</li>
+<li>The graph is named (e.g., vertex names are set) (<code>N</code>)</li>
+<li>The graph is weighted (<code>W</code>)</li>
+<li>The graph is bipartite (<code>B</code>)</li>
+</ul>
+<p>The second line (prefixed with <code>+attr:</code>) includes the attributes of the graph (<code>g</code>), the vertices (<code>v</code>), and edges (<code>e</code>). For instance, in this example, the <code>name</code> attribute is a vertex attribute, while <code>weight</code> is an edge attribute. The remainder of the printout (prefixed with <code>+ edges</code>) includes a sample of the relationships in the graph.</p>
+<p>One advantage of storing data as an <code>igraph</code> object is that the library has functions to transform relational records into a variety of formats. For example, from <code>igraph</code> to an edge list. To do such, pass the <code>koschade1_ig</code> object to the <code>get.data.frame()</code> function.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get.data.frame</span>(koschade1_ig) <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##     from       to weight
+## 1 Muklas   Amrozi      2
+## 2 Muklas    Imron      2
+## 3 Muklas  Samudra      1
+## 4 Muklas Dulmatin      1
+## 5 Muklas    Idris      5</code></pre>
+<p>Similarly, edge and node attributes can be fetched back from the <code>igraph</code> object. For example, extract a vector of edge weights, which we can use later vary edge width in our visualizations.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb13-1" aria-hidden="true" tabindex="-1"></a>edge_weight_1 <span class="ot">&lt;-</span> <span class="fu">get.edge.attribute</span>(koschade1_ig,</span>
+<span id="cb13-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb13-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">name =</span> <span class="st">&quot;weight&quot;</span>) <span class="co"># Attribute name</span></span></code></pre></div>
+</div>
+<div id="option-2-importing-one-mode-network-data-as-an-edge-list" class="section level3" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Option 2: Importing One-Mode Network Data as an Edge List</h3>
+<p>Here is how we can import an edge list, and then check the first few rows with the <code>head()</code> command.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb14-1" aria-hidden="true" tabindex="-1"></a>koschade2_el <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;data/Koschade Bali (Edge).csv&quot;</span>,</span>
+<span id="cb14-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb14-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(koschade2_el)</span></code></pre></div>
+<pre><code>##   Source   Target Weight
+## 1 Muklas   Amrozi      2
+## 2 Muklas    Imron      2
+## 3 Muklas  Samudra      1
+## 4 Muklas Dulmatin      1
+## 5 Muklas    Idris      5
+## 6 Muklas  Azahari      1</code></pre>
+<p>Convert the edge list to an <code>igraph</code> object and check for basic information.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-1" aria-hidden="true" tabindex="-1"></a>koschade2_ig <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(<span class="at">d =</span> koschade2_el, </span>
+<span id="cb16-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the printout</span></span>
+<span id="cb16-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-4" aria-hidden="true" tabindex="-1"></a>koschade2_ig</span>
+<span id="cb16-5"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="do">## IGRAPH 2cc1008 UN-- 17 63 -- </span></span>
+<span id="cb16-6"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="do">## + attr: name (v/c), Weight (e/n)</span></span>
+<span id="cb16-7"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="do">## + edges from 2cc1008 (vertex names):</span></span>
+<span id="cb16-8"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="do">##  [1] Muklas --Amrozi   Muklas --Imron    Muklas --Samudra  Muklas --Dulmatin</span></span>
+<span id="cb16-9"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  [5] Muklas --Idris    Muklas --Azahari  Muklas --Ghoni    Muklas --Patek   </span></span>
+<span id="cb16-10"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  [9] Muklas --Sarijo   Amrozi --Samudra  Amrozi --Idris    Amrozi --Mubarok </span></span>
+<span id="cb16-11"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [13] Imron  --Samudra  Imron  --Dulmatin Imron  --Idris    Imron  --Azahari </span></span>
+<span id="cb16-12"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="do">## [17] Imron  --Ghoni    Imron  --Patek    Imron  --Feri     Imron  --Sarijo  </span></span>
+<span id="cb16-13"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="do">## [21] Samudra--Dulmatin Samudra--Idris    Samudra--Mubarok  Samudra--Azahari </span></span>
+<span id="cb16-14"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="do">## [25] Samudra--Ghoni    Samudra--Arnasan  Samudra--Rauf     Samudra--Octavia </span></span>
+<span id="cb16-15"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="do">## [29] Samudra--Hidayat  Samudra--Junaedi  Samudra--Patek    Samudra--Sarijo  </span></span>
+<span id="cb16-16"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="do">## + ... omitted several edges</span></span></code></pre></div>
+</div>
+<div id="option-3-importing-one-mode-network-data-in-pajek-format" class="section level3" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Option 3: Importing One-Mode Network Data in Pajek Format</h3>
+<p>Another way to bring the data into <strong>igraph</strong> is to import the data from the Pajek file (*.net). The <code>read_graph()</code> function is able to read graphs from multiple foreign formats. Note that by default the command brings data in as a directed network. We’ll change that below.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb17-1" aria-hidden="true" tabindex="-1"></a>koschade3_ig <span class="ot">&lt;-</span> <span class="fu">read.graph</span>(<span class="at">file =</span> <span class="st">&quot;data/Koschade Bali.net&quot;</span>,</span>
+<span id="cb17-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb17-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">format =</span> <span class="st">&quot;pajek&quot;</span>)</span>
+<span id="cb17-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the printout</span></span>
+<span id="cb17-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb17-4" aria-hidden="true" tabindex="-1"></a>koschade3_ig</span></code></pre></div>
+<pre><code>## IGRAPH 2cc5467 UNW- 17 63 -- 
+## + attr: id (v/c), name (v/c), x (v/n), y (v/n), z (v/n), weight (e/n)
+## + edges from 2cc5467 (vertex names):
+##  [1] Muklas --Amrozi   Muklas --Imron    Muklas --Samudra  Muklas --Dulmatin
+##  [5] Muklas --Idris    Muklas --Azahari  Muklas --Ghoni    Muklas --Patek   
+##  [9] Muklas --Sarijo   Amrozi --Samudra  Amrozi --Idris    Amrozi --Mubarok 
+## [13] Imron  --Samudra  Imron  --Dulmatin Imron  --Idris    Imron  --Azahari 
+## [17] Imron  --Ghoni    Imron  --Patek    Imron  --Feri     Imron  --Sarijo  
+## [21] Samudra--Dulmatin Samudra--Idris    Samudra--Mubarok  Samudra--Azahari 
+## [25] Samudra--Ghoni    Samudra--Arnasan  Samudra--Rauf     Samudra--Octavia 
+## [29] Samudra--Hidayat  Samudra--Junaedi  Samudra--Patek    Samudra--Sarijo  
+## + ... omitted several edges</code></pre>
+<p>Transform the graph object to a <code>data.frame</code> and view it (<code>View()</code>).</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb19-1" aria-hidden="true" tabindex="-1"></a>koschade3_ig <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get.data.frame</span>(<span class="at">what =</span> <span class="st">&quot;edges&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##     from       to weight
+## 1 Muklas   Amrozi      2
+## 2 Muklas    Imron      2
+## 3 Muklas  Samudra      1
+## 4 Muklas Dulmatin      1
+## 5 Muklas    Idris      5
+## 6 Muklas  Azahari      1</code></pre>
+<p>Note that this command brings up a data for a directed (asymmetric) network. We need to convert the graph from directed to undirected using the <code>as.undirected()</code> function.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb21-1" aria-hidden="true" tabindex="-1"></a>koschade3_ig <span class="ot">&lt;-</span> <span class="fu">as.undirected</span>(koschade3_ig,</span>
+<span id="cb21-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb21-2" aria-hidden="true" tabindex="-1"></a>                              <span class="co"># Specifies what to do with the edge attributes</span></span>
+<span id="cb21-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb21-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">edge.attr.comb =</span> <span class="fu">list</span>(<span class="at">weight =</span> <span class="st">&quot;mean&quot;</span>))</span>
+<span id="cb21-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the printout</span></span>
+<span id="cb21-5"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb21-5" aria-hidden="true" tabindex="-1"></a>koschade3_ig</span></code></pre></div>
+<pre><code>## IGRAPH 2ccd358 UNW- 17 63 -- 
+## + attr: id (v/c), name (v/c), x (v/n), y (v/n), z (v/n), weight (e/n)
+## + edges from 2ccd358 (vertex names):
+##  [1] Muklas --Amrozi   Muklas --Imron    Muklas --Samudra  Muklas --Dulmatin
+##  [5] Muklas --Idris    Muklas --Azahari  Muklas --Ghoni    Muklas --Patek   
+##  [9] Muklas --Sarijo   Amrozi --Samudra  Amrozi --Idris    Amrozi --Mubarok 
+## [13] Imron  --Samudra  Imron  --Dulmatin Imron  --Idris    Imron  --Azahari 
+## [17] Imron  --Ghoni    Imron  --Patek    Imron  --Feri     Imron  --Sarijo  
+## [21] Samudra--Dulmatin Samudra--Idris    Samudra--Mubarok  Samudra--Azahari 
+## [25] Samudra--Ghoni    Samudra--Arnasan  Samudra--Rauf     Samudra--Octavia 
+## [29] Samudra--Hidayat  Samudra--Junaedi  Samudra--Patek    Samudra--Sarijo  
+## + ... omitted several edges</code></pre>
+<p>Once again, extract the edge list from the graph and view the data. Note that the order of nodes may change (but all should be fine).</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb23-1" aria-hidden="true" tabindex="-1"></a>koschade3_ig <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get.data.frame</span>(<span class="at">what =</span> <span class="st">&quot;edges&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##     from       to weight
+## 1 Muklas   Amrozi      2
+## 2 Muklas    Imron      2
+## 3 Muklas  Samudra      1
+## 4 Muklas Dulmatin      1
+## 5 Muklas    Idris      5
+## 6 Muklas  Azahari      1</code></pre>
+</div>
+<div id="option-4-importing-one-mode-network-data-into-statnet-format-using-intergraph" class="section level3" number="4.1.4">
+<h3><span class="header-section-number">4.1.4</span> Option 4: Importing One-Mode Network Data into <strong>statnet</strong> Format using <strong>intergraph</strong></h3>
+<p>You may find yourself working with data in <strong>igraph</strong> and have to convert it to <strong>statnet</strong>. Luckily, the <strong>intergraph</strong> library let’s you jump pretty smoothly between the data classes required by each library.</p>
+<p>Here we will take an <code>igraph</code> object and convert it to a <code>network</code> class object required by the <strong>statnet</strong> suite. Then, we will return that object from <code>network</code> to <code>igraph</code> class.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform an igraph object to network class</span></span>
+<span id="cb25-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb25-2" aria-hidden="true" tabindex="-1"></a>koschade_network <span class="ot">&lt;-</span> <span class="fu">asNetwork</span>(koschade1_ig)</span>
+<span id="cb25-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Print it</span></span>
+<span id="cb25-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb25-4" aria-hidden="true" tabindex="-1"></a>koschade_network</span></code></pre></div>
+<pre><code>##  Network attributes:
+##   vertices = 17 
+##   directed = FALSE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = FALSE 
+##   total edges= 63 
+##     missing edges= 0 
+##     non-missing edges= 63 
+## 
+##  Vertex attribute names: 
+##     vertex.names 
+## 
+##  Edge attribute names: 
+##     weight</code></pre>
+<p>Note the different printout. Also, you can verify the class change using the <code>class()</code> function.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(koschade_network)</span></code></pre></div>
+<pre><code>## [1] &quot;network&quot;</code></pre>
+<p>Now, return the <code>network</code> object back into <code>igraph</code> and view the data as an edge list.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb29-1" aria-hidden="true" tabindex="-1"></a>koschade_ig <span class="ot">&lt;-</span> <span class="fu">asIgraph</span>(koschade_network)</span>
+<span id="cb29-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb29-3" aria-hidden="true" tabindex="-1"></a>koschade_ig <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get.data.frame</span>(<span class="at">what =</span> <span class="st">&quot;edges&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-5"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##   from to    na weight
+## 1    1  2 FALSE      2
+## 2    1  3 FALSE      2
+## 3    1  4 FALSE      1
+## 4    1  5 FALSE      1
+## 5    1  6 FALSE      5
+## 6    1  8 FALSE      1</code></pre>
+<p>What changed? Note that some variables and entries may have changed in the transition.</p>
+</div>
+</div>
+<div id="plotting-visualizing-the-koschade-network" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Plotting (Visualizing) the Koschade Network</h2>
+<p>Here’s a simple plot using <strong>igraph</strong>.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(koschade1_ig)</span></code></pre></div>
+<p><img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that you can also plot the other two graph:</span></span>
+<span id="cb32-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(koschade2_ig)</span></span>
+<span id="cb32-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(koschade3_ig)</span></span></code></pre></div>
+<p>Let’s try making some more sophisticated plots. Before we do that, however, let’s save the coordinates so that the remaining plots will have the same layout. Here, we will use the Fruchterman Reingold layout algorithm (<code>layout_with_kk()</code>).</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb33-1" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">layout_with_fr</span>(koschade1_ig)</span></code></pre></div>
+<p>Now, visualize the network with some additional parameters, such as changing the node color (i.e., <code>vertex.color</code>), the label size (i.e., <code>vertex.label.cex</code>), and the node label color (i.e., <code>vertex.label.color</code>). From here on out, we’ll just use the <code>koschade1_ig</code> network.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(koschade1_ig,</span>
+<span id="cb34-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb34-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb34-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb34-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;Skyblue2&quot;</span>,</span>
+<span id="cb34-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb34-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> .<span class="dv">6</span>,</span>
+<span id="cb34-5"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb34-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+<p><img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>Now, let’s size the edges by tie strength and plot again.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(koschade1_ig,</span>
+<span id="cb35-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb35-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb35-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb35-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;Skyblue2&quot;</span>,</span>
+<span id="cb35-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb35-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> .<span class="dv">6</span>,</span>
+<span id="cb35-5"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb35-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb35-6"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb35-6" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Recall the edge weight vector previously created</span></span>
+<span id="cb35-7"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb35-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.width =</span> edge_weight_1)</span></code></pre></div>
+<p><img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>Note that the layout above is the same as the previous layout. This is helpful when presenting successive graphs in your papers and theses. It makes it easier for readers to compare the network graphs.</p>
+<p>We can also change the edges to curved edges.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(koschade1_ig,</span>
+<span id="cb36-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb36-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb36-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb36-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;Skyblue2&quot;</span>,</span>
+<span id="cb36-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb36-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> .<span class="dv">6</span>,</span>
+<span id="cb36-5"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb36-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb36-6"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb36-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.width =</span> edge_weight_1,</span>
+<span id="cb36-7"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb36-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+</div>
+<div id="saving-network-plots-e.g.-pdf-jpeg-png-tiff" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</h2>
+<p>Save final plot in various formats.</p>
+<p>Begin by saving the output in PDF format. To do such, use the <code>pdf()</code> function, which starts the graphics driver for producing PDFs.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start the graphic driver, name output file, and set size</span></span>
+<span id="cb37-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="at">file =</span> <span class="st">&quot;koschade1.pdf&quot;</span>,</span>
+<span id="cb37-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="dv">4</span>)</span>
+<span id="cb37-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the output into the file</span></span>
+<span id="cb37-5"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(koschade1_ig,</span>
+<span id="cb37-6"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb37-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb37-7"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb37-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;Skyblue2&quot;</span>,</span>
+<span id="cb37-8"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb37-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> .<span class="dv">6</span>,</span>
+<span id="cb37-9"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb37-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb37-10"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb37-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.width =</span> edge_weight_1)</span>
+<span id="cb37-11"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn off the graphics driver</span></span>
+<span id="cb37-12"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<p>To store the image as a JPEG, use the <code>jpeg()</code> function. The <code>bg = "transparent</code> option saves the graphs with a transparent background (rather than white), which can be helpful when placing in slides or on non-white backgrounds.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">jpeg</span>(<span class="at">file =</span> <span class="st">&quot;koschade1.jpg&quot;</span>,</span>
+<span id="cb38-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb38-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="dv">4</span>,</span>
+<span id="cb38-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb38-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">units =</span> <span class="st">&#39;in&#39;</span>,</span>
+<span id="cb38-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb38-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">res =</span> <span class="dv">600</span>,</span>
+<span id="cb38-5"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb38-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">bg =</span> <span class="st">&quot;transparent&quot;</span>)</span>
+<span id="cb38-6"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(koschade1_ig,</span>
+<span id="cb38-8"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb38-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb38-9"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb38-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;Skyblue2&quot;</span>,</span>
+<span id="cb38-10"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb38-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> .<span class="dv">6</span>,</span>
+<span id="cb38-11"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb38-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb38-12"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb38-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.width =</span> edge_weight_1)</span>
+<span id="cb38-13"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<p>To store the image as a PNG, use the <code>png()</code> function.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="at">file =</span> <span class="st">&quot;koschade1.png&quot;</span>,</span>
+<span id="cb39-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="dv">4</span>,</span>
+<span id="cb39-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> <span class="st">&#39;in&#39;</span>,</span>
+<span id="cb39-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">res =</span> <span class="dv">300</span>,</span>
+<span id="cb39-5"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">bg =</span> <span class="st">&quot;transparent&quot;</span>)</span>
+<span id="cb39-6"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-7"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(koschade1_ig,</span>
+<span id="cb39-8"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb39-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb39-9"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb39-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;Skyblue2&quot;</span>,</span>
+<span id="cb39-10"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb39-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> .<span class="dv">6</span>,</span>
+<span id="cb39-11"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb39-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb39-12"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb39-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.width =</span> edge_weight_1)</span>
+<span id="cb39-13"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb39-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-14"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<p>To store the image as a TIFF, use the <code>tiff()</code> function.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tiff</span>(<span class="at">file =</span> <span class="st">&quot;koschade3.tif&quot;</span>,</span>
+<span id="cb40-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb40-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="dv">4</span>,</span>
+<span id="cb40-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb40-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">units =</span> <span class="st">&#39;in&#39;</span>,</span>
+<span id="cb40-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb40-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">res =</span> <span class="dv">300</span>,</span>
+<span id="cb40-5"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb40-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">bg =</span> <span class="st">&quot;transparent&quot;</span>)</span>
+<span id="cb40-6"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb40-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-7"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(koschade1_ig,</span>
+<span id="cb40-8"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb40-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb40-9"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb40-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;Skyblue2&quot;</span>,</span>
+<span id="cb40-10"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb40-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> .<span class="dv">6</span>,</span>
+<span id="cb40-11"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb40-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb40-12"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb40-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.width =</span> edge_weight_1)</span>
+<span id="cb40-13"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb40-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-14"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+</div>
+<div id="saving-network-data" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Saving Network Data</h2>
+<p>Finally, it doesn’t hurt to save the data that you’ve imported and created. Perhaps not all (e.g., coordinates) but it is helpful to save those that you may want to use in another setting.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(koschade_dat, </span>
+<span id="cb41-2"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb41-2" aria-hidden="true" tabindex="-1"></a>     koschade_mat,</span>
+<span id="cb41-3"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb41-3" aria-hidden="true" tabindex="-1"></a>     koschade1_ig, </span>
+<span id="cb41-4"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb41-4" aria-hidden="true" tabindex="-1"></a>     koschade2_ig, </span>
+<span id="cb41-5"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb41-5" aria-hidden="true" tabindex="-1"></a>     koschade3_ig, </span>
+<span id="cb41-6"><a href="one-mode-social-network-data-in-igraph-koschade-network.html#cb41-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">file =</span> <span class="st">&quot;koschade_igraph.RData&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Wickham2019" class="csl-entry">
+Wickham, Hadley. 2019. <em>Advanced r</em>. 12th ed. Paperback; Chapman; Hall/CRC. <a href="https://adv-r.hadley.nz/">https://adv-r.hadley.nz/</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="two-mode-social-network-data-in-igraph-davis-southern-women.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjcallag/r4ds/edit/editing/1-Importing_and_Manipulating_in_igraph.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"font_settings": {
+"family": "sans",
+"theme": "white",
+"size": 2
+},
+"info": true,
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Importing and Visualizing One- and Two-Mode Social Network Data in statnet | R for Social Network Analysis</title>
+  <meta name="description" content="TBD." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Importing and Visualizing One- and Two-Mode Social Network Data in statnet | R for Social Network Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="TBD." />
+  <meta name="github-repo" content="cjcallag/r4sna" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Importing and Visualizing One- and Two-Mode Social Network Data in statnet | R for Social Network Analysis" />
+  
+  <meta name="twitter:description" content="TBD." />
+  
+
+<meta name="author" content="CORE Lab" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"/>
+<link rel="next" href="manipulating-and-simplifying-social-network-data-in-igraph.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="my_style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Social Network Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instructors"><i class="fa fa-check"></i><b>1.1</b> Instructors</a></li>
+</ul></li>
+<li class="part"><span><b>I Setting Up</b></span></li>
+<li class="chapter" data-level="2" data-path="setting-up-r-and-rstudio.html"><a href="setting-up-r-and-rstudio.html"><i class="fa fa-check"></i><b>2</b> Setting Up R and RStudio</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setting-up-r-and-rstudio.html"><a href="setting-up-r-and-rstudio.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.1</b> R and RStudio Basics</a></li>
+<li class="chapter" data-level="2.2" data-path="setting-up-r-and-rstudio.html"><a href="setting-up-r-and-rstudio.html#basics-of-r-coding-in-rstudio"><i class="fa fa-check"></i><b>2.2</b> Basics of R Coding in RStudio</a></li>
+<li class="chapter" data-level="2.3" data-path="setting-up-r-and-rstudio.html"><a href="setting-up-r-and-rstudio.html#project-workflow"><i class="fa fa-check"></i><b>2.3</b> Project Workflow</a></li>
+</ul></li>
+<li class="part"><span><b>II Lab 1</b></span></li>
+<li class="chapter" data-level="3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <code>igraph</code></a></li>
+<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
+<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Lab 2</b></span></li>
+<li class="chapter" data-level="5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>5</b> Manipulating and Simplifying Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#setup-2"><i class="fa fa-check"></i><b>5.1</b> Setup</a></li>
+<li class="chapter" data-level="5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-libraries-2"><i class="fa fa-check"></i><b>5.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-the-backbones-of-two-mode-network-projections"><i class="fa fa-check"></i><b>5.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-data"><i class="fa fa-check"></i><b>5.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#non-statistical-projections-of-the-co-sponsorhip-data"><i class="fa fa-check"></i><b>5.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="5.3.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-backbones"><i class="fa fa-check"></i><b>5.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#simplifying-networks-in-igraph-anabaptist-leadership-network"><i class="fa fa-check"></i><b>5.4</b> Simplifying Networks in <strong>igraph</strong>: Anabaptist Leadership Network</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-network-and-attribute-data"><i class="fa fa-check"></i><b>5.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-the-anabaptist-network"><i class="fa fa-check"></i><b>5.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="5.4.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#shrinking-collapsing-contracting-networks"><i class="fa fa-check"></i><b>5.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="5.4.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-subnetworks"><i class="fa fa-check"></i><b>5.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#multiple-stacked-networks-in-igraph-sampson-monastery"><i class="fa fa-check"></i><b>5.5</b> Multiple (Stacked) Networks in <strong>igraph</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-edge-list-network-data"><i class="fa fa-check"></i><b>5.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="5.5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-stacked-networks"><i class="fa fa-check"></i><b>5.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="5.5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-and-plotting-individual-networks"><i class="fa fa-check"></i><b>5.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>6</b> Manipulating and Simplifying Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#setup-3"><i class="fa fa-check"></i><b>6.1</b> Setup</a></li>
+<li class="chapter" data-level="6.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-libraries-3"><i class="fa fa-check"></i><b>6.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="6.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-the-backbones-of-two-mode-network-projections-1"><i class="fa fa-check"></i><b>6.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-data-1"><i class="fa fa-check"></i><b>6.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#non-statistical-projections-of-the-co-sponsorhip-data-1"><i class="fa fa-check"></i><b>6.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="6.3.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-backbones-1"><i class="fa fa-check"></i><b>6.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#simplifying-networks-in-statnet-anabaptist-network"><i class="fa fa-check"></i><b>6.4</b> Simplifying Networks in <strong>statnet</strong>: Anabaptist Network</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-network-and-attribute-data-1"><i class="fa fa-check"></i><b>6.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="6.4.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-the-anabaptist-network-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="6.4.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#shrinking-collapsing-contracting-networks-1"><i class="fa fa-check"></i><b>6.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-subnetworks-1"><i class="fa fa-check"></i><b>6.5</b> Extracting Subnetworks</a></li>
+<li class="chapter" data-level="6.6" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#multiple-stacked-networks-in-statnet-sampson-monastery"><i class="fa fa-check"></i><b>6.6</b> Multiple (Stacked) Networks in <strong>statnet</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-edge-list-network-data-1"><i class="fa fa-check"></i><b>6.6.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="6.6.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-stacked-networks-1"><i class="fa fa-check"></i><b>6.6.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="6.6.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-and-plotting-individual-networks-1"><i class="fa fa-check"></i><b>6.6.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Lab 3</b></span></li>
+<li class="chapter" data-level="7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html"><i class="fa fa-check"></i><b>7</b> Network Topography in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#load-libraries-4"><i class="fa fa-check"></i><b>7.1</b> Load Libraries</a></li>
+<li class="chapter" data-level="7.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#import-data"><i class="fa fa-check"></i><b>7.2</b> Import Data</a></li>
+<li class="chapter" data-level="7.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size-and-interconnectedness"><i class="fa fa-check"></i><b>7.3</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size"><i class="fa fa-check"></i><b>7.3.1</b> Network Size</a></li>
+<li class="chapter" data-level="7.3.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#density-and-average-degree"><i class="fa fa-check"></i><b>7.3.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="7.3.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#clustering-coefficient-global-and-local"><i class="fa fa-check"></i><b>7.3.3</b> Clustering Coefficient (Global and Local)</a></li>
+<li class="chapter" data-level="7.3.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#cohesion-and-fragmentation"><i class="fa fa-check"></i><b>7.3.4</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="7.3.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#compactness-and-breadth"><i class="fa fa-check"></i><b>7.3.5</b> Compactness and Breadth</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization-and-related-measures-of-spread"><i class="fa fa-check"></i><b>7.4</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization"><i class="fa fa-check"></i><b>7.4.1</b> Centralization</a></li>
+<li class="chapter" data-level="7.4.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#variance-and-standard-deviation"><i class="fa fa-check"></i><b>7.4.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="7.4.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#diameter-and-average-path-distance"><i class="fa fa-check"></i><b>7.4.3</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#calculating-the-e-i-index-with-isnar"><i class="fa fa-check"></i><b>7.5</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+<li class="chapter" data-level="7.6" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-level-measures-table"><i class="fa fa-check"></i><b>7.6</b> Network Level Measures Table</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html"><i class="fa fa-check"></i><b>8</b> Network Topography in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#load-libraries-5"><i class="fa fa-check"></i><b>8.1</b> Load Libraries</a></li>
+<li class="chapter" data-level="8.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#import-data-1"><i class="fa fa-check"></i><b>8.2</b> Import Data</a></li>
+<li class="chapter" data-level="8.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-and-interconnectedness-1"><i class="fa fa-check"></i><b>8.3</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-1"><i class="fa fa-check"></i><b>8.3.1</b> Network Size</a></li>
+<li class="chapter" data-level="8.3.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#density-and-average-degree-1"><i class="fa fa-check"></i><b>8.3.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="8.3.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#cohesion-and-fragmentation-1"><i class="fa fa-check"></i><b>8.3.3</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="8.3.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#compactness-and-breadth-1"><i class="fa fa-check"></i><b>8.3.4</b> Compactness and Breadth</a></li>
+<li class="chapter" data-level="8.3.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-interconnectedness-scores"><i class="fa fa-check"></i><b>8.3.5</b> Table of Interconnectedness Scores</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-and-related-measures-of-spread-1"><i class="fa fa-check"></i><b>8.4</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-1"><i class="fa fa-check"></i><b>8.4.1</b> Centralization</a></li>
+<li class="chapter" data-level="8.4.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#variance-and-standard-deviation-1"><i class="fa fa-check"></i><b>8.4.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="8.4.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-centralization-scores"><i class="fa fa-check"></i><b>8.4.3</b> Table of Centralization Scores</a></li>
+<li class="chapter" data-level="8.4.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#diameter-and-average-path-distance-1"><i class="fa fa-check"></i><b>8.4.4</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#calculating-the-e-i-index-with-isnar-1"><i class="fa fa-check"></i><b>8.5</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+</ul></li>
+<li class="part"><span><b>V References</b></span></li>
+<li class="chapter" data-level="9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>9</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown">
+Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Social Network Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></h1>
+<p>In this lab we’ll explore a variety of methods for importing social network data into R, manipulating one- and two-mode network data, and visualizing social networks. We’ll be using a variety of social networks, some of which you’ll recognize from other classes. We’ll also illustrate a variety of ways to import network data, something that should be easy to do but often turns out to be challenging because a number of resources jump over this important step.</p>
+<div class="infobox">
+<p><strong>Note</strong>: This lab has gone through many iterations and reflects the influence from a variety of individuals, including Phil Murphy, and Brendan Knapp.</p>
+</div>
+<div id="setup-1" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Setup</h2>
+<p>Find and open your RStudio Project associated with this class. Begin by opening a new script. It’s generally a good idea to place a header at the top of your scripts that tell you what the script does, its name, etc.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="do">#######################################################################</span></span>
+<span id="cb94-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="co"># What: Importing and Visualizing One- and Two-Mode Social Network Data</span></span>
+<span id="cb94-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="co"># File: lab1_statnet.R</span></span>
+<span id="cb94-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Created: 02.28.14</span></span>
+<span id="cb94-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Revised: 12.22.21</span></span>
+<span id="cb94-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb94-6" aria-hidden="true" tabindex="-1"></a><span class="do">#######################################################################</span></span></code></pre></div>
+<p>If you have not set up your RStudio Project to clear the workspace on exit, your environment contain the objects and functions from your prior session. To clear these before beginning use the following command.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code></pre></div>
+<p>Proceed to place the data required for this lab (<code>davis.csv</code>, <code>davis.net</code>, <code>davisedge.csv</code>, <code>Koschade Bali (Edge).csv</code>, <code>Koschade Bali (Matrix).csv</code>, and <code>Koschade Bali.net</code>) also inside your R Project folder. We have placed it in a sub folder titled <code>data</code> for organizational purposes; however, this is not necessary.</p>
+</div>
+<div id="load-libraries-1" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Load Libraries</h2>
+<p>We need to load the libraries we plan to use. Here we will use **statnet*. Because <strong>igraph</strong> and <strong>statnet</strong> conflict with one another sometimes, we do not want to have them loaded at the same time, so you may want to detach it. Alternatively, you may choose to namespace functions using the <code>::</code> operator as needed (e.g., <code>igraph::betweenness()</code> vs. <code>sna::betweenness()</code>). Of course, this applies only if you had the <code>igraph</code> package loaded already. The <code>intergraph</code> package allows users to transform network data back and forth between <strong>igraph</strong> and <strong>statnet</strong>.</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If you haven&#39;t done so, install the required packages:</span></span>
+<span id="cb96-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;statnet&quot;)</span></span>
+<span id="cb96-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;intergraph&quot;)</span></span>
+<span id="cb96-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb96-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb96-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Now load them:</span></span>
+<span id="cb96-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statnet)</span>
+<span id="cb96-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb96-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(intergraph)</span></code></pre></div>
+</div>
+<div id="one-mode-social-network-data-in-statnet-koschade-network" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</h2>
+<p>Here, we will use data collected by Stuart Koschade of the 17 individuals who participated in the first Bali bombing. Koschade (2006) recorded both the ties between the individuals, as well as the strength of the tie between them.</p>
+<div id="importing-one-mode-social-network-data-1" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Importing One-Mode Social Network Data</h3>
+<div id="option-1-importing-one-mode-social-network-data-in-matrix-format" class="section level4" number="4.3.1.1">
+<h4><span class="header-section-number">4.3.1.1</span> Option 1: Importing One-Mode Social Network Data in Matrix Format</h4>
+<p>We can import the network data as a matrix, first using the <code>as.matrix()</code> function, and then transforming into a <code>network</code> object, which is the object class used by <strong>statnet</strong>, using the <code>as.network()</code> function.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here we are nesting functions, the inner functions are evaluated first.</span></span>
+<span id="cb97-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb97-2" aria-hidden="true" tabindex="-1"></a>koschade1_net <span class="ot">&lt;-</span> <span class="fu">as.network</span>(</span>
+<span id="cb97-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>(</span>
+<span id="cb97-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb97-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">read.csv</span>(<span class="st">&quot;data/Koschade Bali (Matrix).csv&quot;</span>, </span>
+<span id="cb97-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb97-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb97-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb97-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb97-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb97-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb97-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb97-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb97-9"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb97-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Arguments for the as.network() function.</span></span>
+<span id="cb97-10"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb97-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">directed =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb97-11"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb97-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ignore.eval =</span> <span class="cn">FALSE</span></span>
+<span id="cb97-12"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb97-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Now that the data has been imported, let’s examine the object. First, take a look at it’s class:</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(koschade1_net)</span></code></pre></div>
+<pre><code>## [1] &quot;network&quot;</code></pre>
+<p>What is it? The printout should read <code>network</code> which is a <strong>statnet</strong> graph object that works with the functions from this library. Many R objects have a class, which describes a type of object, describing the properties it possesses, how it behaves, and how it relates to other objects and functions <span class="citation">(<a href="#ref-Wickham2019" role="doc-biblioref">Wickham 2019</a>)</span>.</p>
+<p>By typing the name of the network object into the console, we can get basic information about it.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb100-1" aria-hidden="true" tabindex="-1"></a>koschade1_net</span></code></pre></div>
+<pre><code>##  Network attributes:
+##   vertices = 17 
+##   directed = FALSE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = FALSE 
+##   total edges= 63 
+##     missing edges= 0 
+##     non-missing edges= 63 
+## 
+##  Vertex attribute names: 
+##     vertex.names 
+## 
+##  Edge attribute names: 
+##     1</code></pre>
+<p>Like with <strong>igraph</strong> we can retrieve and store attribute data for the graph, vertices (e.g., actor names) or edges (e.g., edge weight) on the graph object. Note that there are multiple ways of retrieving the vertex attributes, such as actor names.</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get.vertex.attribute</span>(koschade1_net, <span class="st">&quot;vertex.names&quot;</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;Muklas&quot;   &quot;Amrozi&quot;   &quot;Imron&quot;    &quot;Samudra&quot;  &quot;Dulmatin&quot; &quot;Idris&quot;   
+##  [7] &quot;Mubarok&quot;  &quot;Azahari&quot;  &quot;Ghoni&quot;    &quot;Arnasan&quot;  &quot;Rauf&quot;     &quot;Octavia&quot; 
+## [13] &quot;Hidayat&quot;  &quot;Junaedi&quot;  &quot;Patek&quot;    &quot;Feri&quot;     &quot;Sarijo&quot;</code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">network.vertex.names</span>(koschade1_net)</span></code></pre></div>
+<pre><code>##  [1] &quot;Muklas&quot;   &quot;Amrozi&quot;   &quot;Imron&quot;    &quot;Samudra&quot;  &quot;Dulmatin&quot; &quot;Idris&quot;   
+##  [7] &quot;Mubarok&quot;  &quot;Azahari&quot;  &quot;Ghoni&quot;    &quot;Arnasan&quot;  &quot;Rauf&quot;     &quot;Octavia&quot; 
+## [13] &quot;Hidayat&quot;  &quot;Junaedi&quot;  &quot;Patek&quot;    &quot;Feri&quot;     &quot;Sarijo&quot;</code></pre>
+<p>There could be more vertex attributes, which can be called using the attribute name and the <code>get.vertex.attribute()</code> function. If you are not certain what the attribute is named, use the <code>list.vertex.attributes()</code> function to get a printout of the possible variable names.</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.vertex.attributes</span>(koschade1_net)</span></code></pre></div>
+<pre><code>## [1] &quot;na&quot;           &quot;vertex.names&quot;</code></pre>
+<p>Similarly, we can access edge attribute data using <strong>statnet</strong> functions.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The edge weights are stored in a variable named &#39;1&#39;</span></span>
+<span id="cb108-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get.edge.attribute</span>(koschade1_net, <span class="st">&quot;1&quot;</span>)</span></code></pre></div>
+<pre><code>##  [1] 2 2 1 1 5 1 1 1 1 2 4 5 3 5 3 5 5 5 1 5 2 5 2 2 2 2 2 2 2 2 2 2 2 5 5 5 1 5
+## [39] 2 2 2 2 2 5 2 1 2 5 1 5 2 2 2 2 2 2 2 2 2 2 1 5 1</code></pre>
+<p>Once again, you can always get a list of potential edge attribute variable names.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb110-1" aria-hidden="true" tabindex="-1"></a>network<span class="sc">::</span><span class="fu">list.edge.attributes</span>(koschade1_net)</span></code></pre></div>
+<pre><code>## [1] &quot;1&quot;  &quot;na&quot;</code></pre>
+</div>
+<div id="option-2-importing-one-mode-social-network-data-as-an-edge-list" class="section level4" number="4.3.1.2">
+<h4><span class="header-section-number">4.3.1.2</span> Option 2: Importing One-Mode Social Network Data as an Edge List</h4>
+<p>We can also begin by importing an edge list. Like before, we will begin by reading the data into R using the base function <code>read.csv()</code> and examining the data. Then, we will pass the data to the <strong>statnet</strong> function <code>as.network()</code>, which constructs a <code>network</code> object.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb112-1" aria-hidden="true" tabindex="-1"></a>koschade_el <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Koschade Bali (Edge).csv&quot;</span>,</span>
+<span id="cb112-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb112-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb112-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine top 5 rows</span></span>
+<span id="cb112-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb112-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(koschade_el, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   Source   Target Weight
+## 1 Muklas   Amrozi      2
+## 2 Muklas    Imron      2
+## 3 Muklas  Samudra      1
+## 4 Muklas Dulmatin      1
+## 5 Muklas    Idris      5</code></pre>
+<p>Next, we convert it to a <code>network</code> object.</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb114-1" aria-hidden="true" tabindex="-1"></a>koschade2_net <span class="ot">&lt;-</span> <span class="fu">as.network</span>(koschade_el,</span>
+<span id="cb114-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb114-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">matrix.type =</span> <span class="st">&quot;edgelist&quot;</span>,</span>
+<span id="cb114-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb114-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">directed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb114-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb114-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">ignore.eval =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Type the object name to get a printout with basic information about the network. Note that here the edge weight attribute is called <code>Weight</code>.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb115-1" aria-hidden="true" tabindex="-1"></a>koschade2_net</span></code></pre></div>
+<pre><code>##  Network attributes:
+##   vertices = 17 
+##   directed = FALSE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = FALSE 
+##   total edges= 63 
+##     missing edges= 0 
+##     non-missing edges= 63 
+## 
+##  Vertex attribute names: 
+##     vertex.names 
+## 
+##  Edge attribute names: 
+##     Weight</code></pre>
+</div>
+<div id="option-3-importing-one-mode-social-network-data-in-pajek-format" class="section level4" number="4.3.1.3">
+<h4><span class="header-section-number">4.3.1.3</span> Option 3: Importing One-Mode Social Network Data in Pajek Format</h4>
+<p>We can also read network data in from a Pajek file (*.net extension) and retrieve/check basic information about the network.</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb117-1" aria-hidden="true" tabindex="-1"></a>koschade3_net <span class="ot">&lt;-</span> <span class="fu">read.paj</span>(<span class="st">&quot;data/Koschade Bali.net&quot;</span>)</span>
+<span id="cb117-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb117-2" aria-hidden="true" tabindex="-1"></a>koschade3_net</span></code></pre></div>
+<pre><code>##  Network attributes:
+##   vertices = 17 
+##   directed = FALSE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = FALSE 
+##   title = Koschade Bali 
+##   total edges= 63 
+##     missing edges= 0 
+##     non-missing edges= 63 
+## 
+##  Vertex attribute names: 
+##     vertex.names x y z 
+## 
+##  Edge attribute names: 
+##     Koschade Bali</code></pre>
+<p>Here, the edge weight attribute is imported by default as <code>Koschade Bali</code>, which may be misleading. Luckily, the <code>read.paj()</code> function has an optional argument to provide the name for he edge variable read from the file.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb119-1" aria-hidden="true" tabindex="-1"></a>koschade3_net <span class="ot">&lt;-</span> <span class="fu">read.paj</span>(<span class="st">&quot;data/Koschade Bali.net&quot;</span>,</span>
+<span id="cb119-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb119-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">edge.name =</span> <span class="st">&quot;Weight&quot;</span>)</span>
+<span id="cb119-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb119-3" aria-hidden="true" tabindex="-1"></a>koschade3_net</span></code></pre></div>
+<pre><code>##  Network attributes:
+##   vertices = 17 
+##   directed = FALSE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = FALSE 
+##   title = Koschade Bali 
+##   total edges= 63 
+##     missing edges= 0 
+##     non-missing edges= 63 
+## 
+##  Vertex attribute names: 
+##     vertex.names x y z 
+## 
+##  Edge attribute names: 
+##     Weight</code></pre>
+<p>Note that in addition to edge attributes, importing Pajek files includes coordinates of the Pajek layout, stored as <code>x</code>, <code>y</code>, and <code>z</code>. Once again, you can access these attributes using <strong>statnet</strong>’s <code>get.vertex.attribute()</code>function.</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get.vertex.attribute</span>(koschade3.net, <span class="st">&quot;x&quot;</span>)</span>
+<span id="cb121-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="fu">get.vertex.attribute</span>(koschade3.net, <span class="st">&quot;y&quot;</span>)</span>
+<span id="cb121-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb121-3" aria-hidden="true" tabindex="-1"></a><span class="fu">get.vertex.attribute</span>(koschade3.net, <span class="st">&quot;z&quot;</span>)</span></code></pre></div>
+</div>
+<div id="option-4-importing-one-mode-social-network-data-in-igraph-format-using-intergraph" class="section level4" number="4.3.1.4">
+<h4><span class="header-section-number">4.3.1.4</span> Option 4: Importing One-Mode Social Network Data in <strong>igraph</strong> Format using <strong>intergraph</strong></h4>
+<p>You may find yourself working with data in <strong>statnet</strong> and have to convert it to <strong>igraph</strong>. Luckily, the <strong>intergraph</strong> library let’s you jump pretty smoothly between the data classes required by each library.</p>
+<p>Here we will take an <code>network</code> object and convert it to a <code>igraph</code> class object required by the <strong>igraph</strong> library. Then, we will return that object from <code>igraph</code> to <code>network</code> class.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform an igraph object to network class</span></span>
+<span id="cb122-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb122-2" aria-hidden="true" tabindex="-1"></a>koschade1_ig <span class="ot">&lt;-</span> <span class="fu">asIgraph</span>(koschade1_net)</span>
+<span id="cb122-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb122-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Print it</span></span>
+<span id="cb122-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb122-4" aria-hidden="true" tabindex="-1"></a>koschade1_ig</span></code></pre></div>
+<pre><code>## IGRAPH 35537a4 U--- 17 63 -- 
+## + attr: na (v/l), vertex.names (v/c), X1 (e/n), na (e/l)
+## + edges from 35537a4:
+##  [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 8  1-- 9  1--15  1--17  2-- 4
+## [11]  2-- 6  2-- 7  3-- 4  3-- 5  3-- 6  3-- 8  3-- 9  3--15  3--16  3--17
+## [21]  4-- 5  4-- 6  4-- 7  4-- 8  4-- 9  4--10  4--11  4--12  4--13  4--14
+## [31]  4--15  4--17  5-- 6  5-- 8  5-- 9  5--15  5--16  5--17  6-- 7  6-- 8
+## [41]  6-- 9  6--15  6--17  8-- 9  8--15  8--16  8--17  9--15  9--16  9--17
+## [51] 10--11 10--12 10--13 10--14 11--12 11--13 11--14 12--13 12--14 13--14
+## [61] 15--16 15--17 16--17</code></pre>
+<p>Note the different printout. Also, you can verify the class change using the <code>class()</code> function.</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(koschade1_ig)</span></code></pre></div>
+<pre><code>## [1] &quot;igraph&quot;</code></pre>
+<p>Now, return the <code>igraph</code> object back into <code>network</code>, extract the edge list and print the top 5 rows.</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb126-1" aria-hidden="true" tabindex="-1"></a>koschade_network <span class="ot">&lt;-</span> <span class="fu">asNetwork</span>(koschade1_ig)</span>
+<span id="cb126-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb126-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb126-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb126-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Extract the edge list with as.data.frame.network()</span></span>
+<span id="cb126-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb126-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Print only top rows with head()</span></span>
+<span id="cb126-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb126-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">as.data.frame.network</span>(koschade_network))</span></code></pre></div>
+<pre><code>##    .tail    .head X1
+## 1 Muklas   Amrozi  2
+## 2 Muklas    Imron  2
+## 3 Muklas  Samudra  1
+## 4 Muklas Dulmatin  1
+## 5 Muklas    Idris  5
+## 6 Muklas  Azahari  1</code></pre>
+<p>What changed? Note that some variables and entries may have changed in the transition.</p>
+</div>
+</div>
+<div id="plotting-visualizing-the-koschade-network-1" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Plotting (Visualizing) the Koschade Network</h3>
+<p>Plotting in <strong>statnet</strong> is fairly straight forward. The primary function is <code>gplot()</code>, which produces a two dimensional network visualization and allows you to control vertex placements, edge characteristics, colors, etc. We suggest that you take a quick look at the documentation using the command <code>?gplot</code>.</p>
+<p>To get us started with let’s compare a base visualization against a much more refined graph. The first uses <strong>statnet</strong>’s defaults, for the second we will modify many of the arguments. In particular, the second tells R that the network is a one-mode network (<code>gmode = graph</code> rather than <code>digraph</code>, which is the default), adds labels using the <code>network.vertex.names()</code> function , colors the labels black, places them in the center of the nodes (<code>label.pos = 5</code>), and changes their size (<code>label.cex = 1.6</code>). The next series of arguments set the size and color of the vertices, hides the arrows, and colors the ties (edges) gray. Note that we saved the coordinates so both plots would have the same layout</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set graph parameters to 1 row and 2 columns</span></span>
+<span id="cb128-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb128-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Save coordinates in an object</span></span>
+<span id="cb128-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-5" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">network.layout.kamadakawai</span>(koschade1_net,</span>
+<span id="cb128-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-6" aria-hidden="true" tabindex="-1"></a>                                     <span class="co"># The function expects a list of parameters</span></span>
+<span id="cb128-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-7" aria-hidden="true" tabindex="-1"></a>                                     <span class="co"># pass a NULL to use defaults</span></span>
+<span id="cb128-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-8" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">layout.par =</span> <span class="cn">NULL</span>)</span>
+<span id="cb128-9"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-10"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot base graph</span></span>
+<span id="cb128-11"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-11" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(koschade1_net,</span>
+<span id="cb128-12"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord=</span> coords)</span>
+<span id="cb128-13"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-14"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot graph using vertex coordinates and additional arugments</span></span>
+<span id="cb128-15"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-15" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(koschade1_net,</span>
+<span id="cb128-16"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>,</span>
+<span id="cb128-17"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords,</span>
+<span id="cb128-18"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(koschade1_net),</span>
+<span id="cb128-19"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb128-20"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb128-21"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb128-22"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.6</span>,</span>
+<span id="cb128-23"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;light blue&quot;</span>,</span>
+<span id="cb128-24"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb128-25"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb128-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
+<p><img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>In the previous visualizations, we used the Kamada and Kawai algorithm to layout the nodes. By default, <code>gplot()</code> uses the Fruchterman and Reingold algorithm to determine the positions of nodes. Let’s compare the visual output of three layout algorithms: Kamada and Kawai, Fruchterman and Reigold, and circle. Please note that many other layouts exist, for a more indepth list look at the documenation <code>?gplot.layout</code>.</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set graph parameters to 1 row and 3 columns</span></span>
+<span id="cb129-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb129-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb129-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Kamada and Kawai</span></span>
+<span id="cb129-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(koschade1_net,</span>
+<span id="cb129-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>,</span>
+<span id="cb129-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">mode =</span> <span class="st">&quot;kamadakawai&quot;</span>,</span>
+<span id="cb129-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.6</span>,</span>
+<span id="cb129-9"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;light blue&quot;</span>,</span>
+<span id="cb129-10"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb129-11"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb129-12"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb129-13"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Kamada and Kawai</span></span>
+<span id="cb129-14"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-14" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(koschade1_net,</span>
+<span id="cb129-15"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>,</span>
+<span id="cb129-16"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">mode =</span> <span class="st">&quot;fruchtermanreingold&quot;</span>,</span>
+<span id="cb129-17"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.6</span>,</span>
+<span id="cb129-18"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;light blue&quot;</span>,</span>
+<span id="cb129-19"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb129-20"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb129-21"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb129-22"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Circle</span></span>
+<span id="cb129-23"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-23" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(koschade1_net,</span>
+<span id="cb129-24"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>,</span>
+<span id="cb129-25"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">mode =</span> <span class="st">&quot;circle&quot;</span>,</span>
+<span id="cb129-26"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.6</span>,</span>
+<span id="cb129-27"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;light blue&quot;</span>,</span>
+<span id="cb129-28"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb129-29"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb129-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
+<p><img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Before we move forward, let’s take a look at three more arguments that can grately improve the look of your graphs. First, the <code>jitter</code> argument insures that <code>gplot()</code> does not draw vertices on top of one another. Second, remember that the edge and vertex attributes can be called and used to aid the visuals. Here we use the <code>get.edge.attribute()</code> function to call the edge weight vector (<code>1</code>) and rescale the thickness of these. Finally, we can curve edges setting <code>usecurve</code> to <code>TRUE</code>.</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(koschade1_net,</span>
+<span id="cb130-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>,</span>
+<span id="cb130-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords,</span>
+<span id="cb130-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(koschade1_net),</span>
+<span id="cb130-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb130-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb130-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb130-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.6</span>,</span>
+<span id="cb130-9"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;light blue&quot;</span>,</span>
+<span id="cb130-10"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb130-11"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;gray&quot;</span>,</span>
+<span id="cb130-12"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-12" aria-hidden="true" tabindex="-1"></a>      <span class="co"># New arguments</span></span>
+<span id="cb130-13"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">jitter =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb130-14"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.lwd =</span> <span class="fu">get.edge.attribute</span>(koschade1_net, <span class="st">&quot;1&quot;</span>),</span>
+<span id="cb130-15"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">usecurve =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb130-16"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb130-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.curve =</span> .<span class="dv">1</span>)</span></code></pre></div>
+<p><img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+</div>
+<div id="saving-network-plots-e.g.-pdf-jpeg-png-tiff-1" class="section level3" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</h3>
+<p>Save final plot in various formats. Begin by saving the output in PDF format. To do such, use the <code>pdf()</code> function, which starts the graphics driver for producing PDFs.</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start the graphic driver, name output file, and set size</span></span>
+<span id="cb131-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="at">file =</span> <span class="st">&quot;koschade1.pdf&quot;</span>,</span>
+<span id="cb131-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="dv">4</span>)</span>
+<span id="cb131-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the output into the file</span></span>
+<span id="cb131-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(koschade1_net,</span>
+<span id="cb131-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>,</span>
+<span id="cb131-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords,</span>
+<span id="cb131-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">jitter =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb131-9"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(koschade1_net),</span>
+<span id="cb131-10"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb131-11"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb131-12"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb131-13"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.6</span>,</span>
+<span id="cb131-14"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;light blue&quot;</span>,</span>
+<span id="cb131-15"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb131-16"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb131-17"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn off the graphics driver</span></span>
+<span id="cb131-18"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb131-18" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<p>To store the image as a JPEG, use the <code>jpeg()</code> function. The <code>bg = "transparent</code> option saves the graphs with a transparent background (rather than white), which can be helpful when placing in slides or on non-white backgrounds.</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">jpeg</span>(<span class="at">file =</span> <span class="st">&quot;koschade1.jpg&quot;</span>,</span>
+<span id="cb132-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="dv">4</span>,</span>
+<span id="cb132-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">units =</span> <span class="st">&#39;in&#39;</span>,</span>
+<span id="cb132-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">res =</span> <span class="dv">600</span>,</span>
+<span id="cb132-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">bg =</span> <span class="st">&quot;transparent&quot;</span>)</span>
+<span id="cb132-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-7" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(koschade1_net,</span>
+<span id="cb132-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>,</span>
+<span id="cb132-9"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords,</span>
+<span id="cb132-10"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">jitter =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb132-11"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(koschade1_net),</span>
+<span id="cb132-12"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb132-13"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb132-14"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb132-15"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.6</span>,</span>
+<span id="cb132-16"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;light blue&quot;</span>,</span>
+<span id="cb132-17"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb132-18"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb132-19"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-20"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb132-20" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<p>To store the image as a PNG, use the <code>png()</code> function.</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="at">file =</span> <span class="st">&quot;koschade1.png&quot;</span>,</span>
+<span id="cb133-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="dv">4</span>,</span>
+<span id="cb133-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> <span class="st">&#39;in&#39;</span>,</span>
+<span id="cb133-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">res =</span> <span class="dv">300</span>,</span>
+<span id="cb133-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">bg =</span> <span class="st">&quot;transparent&quot;</span>)</span>
+<span id="cb133-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb133-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-7" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(koschade1_net,</span>
+<span id="cb133-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>,</span>
+<span id="cb133-9"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords,</span>
+<span id="cb133-10"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">jitter =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb133-11"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(koschade1_net),</span>
+<span id="cb133-12"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb133-13"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb133-14"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb133-15"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.6</span>,</span>
+<span id="cb133-16"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;light blue&quot;</span>,</span>
+<span id="cb133-17"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb133-18"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb133-19"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb133-20"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb133-20" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<p>To store the image as a TIFF, use the <code>tiff()</code> function.</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tiff</span>(<span class="at">file =</span> <span class="st">&quot;koschade3.tif&quot;</span>,</span>
+<span id="cb134-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="dv">4</span>,</span>
+<span id="cb134-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">units =</span> <span class="st">&#39;in&#39;</span>,</span>
+<span id="cb134-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">res =</span> <span class="dv">300</span>,</span>
+<span id="cb134-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">bg =</span> <span class="st">&quot;transparent&quot;</span>)</span>
+<span id="cb134-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-7" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(koschade1_net,</span>
+<span id="cb134-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>,</span>
+<span id="cb134-9"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords,</span>
+<span id="cb134-10"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">jitter =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb134-11"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(koschade1_net),</span>
+<span id="cb134-12"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb134-13"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb134-14"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb134-15"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.6</span>,</span>
+<span id="cb134-16"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;light blue&quot;</span>,</span>
+<span id="cb134-17"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb134-18"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;gray&quot;</span>)</span>
+<span id="cb134-19"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-20"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb134-20" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+</div>
+<div id="saving-network-data-2" class="section level3" number="4.3.4">
+<h3><span class="header-section-number">4.3.4</span> Saving Network Data</h3>
+<p>Finally, it doesn’t hurt to save the data that you’ve imported and created. Perhaps not all (e.g., coordinates) but it is helpful to save those that you may want to use in another setting.</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(koschade_el,  </span>
+<span id="cb135-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb135-2" aria-hidden="true" tabindex="-1"></a>     koschade1_net, </span>
+<span id="cb135-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb135-3" aria-hidden="true" tabindex="-1"></a>     koschade2_net, </span>
+<span id="cb135-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb135-4" aria-hidden="true" tabindex="-1"></a>     koschade3_net, </span>
+<span id="cb135-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb135-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">file =</span> <span class="st">&quot;koschade_statnet.RData&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="two-mode-social-network-data-in-statnet-davis-southern-women" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</h2>
+<p>We will now switch to another data set to import, manipulate, and visualize two-mode network data in <strong>statnet</strong>. The data that we will use here is what is known as Davis’ Southern Club Women. Davis and her colleagues recorded the observed attendance of 18 Southern women at 14 different social events.</p>
+<p>Recall that in two-mode network ties only exist between modes. That means that ties are only possible between women and events, not between women and women or between events and events. Any direct ties between nodes within a mode may be derived (projected), as we will do below. But they should not appear within the original network.</p>
+<div id="importing-two-mode-network-data" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Importing Two-Mode Network Data</h3>
+<div id="option-1-importing-two-mode-network-data-in-matrix-format" class="section level4" number="4.4.1.1">
+<h4><span class="header-section-number">4.4.1.1</span> Option 1: Importing Two-Mode Network Data in Matrix Format</h4>
+<p>Let’s begin my importing two-mode network data that’s recorded in matrix format (i.e., an incidence matrix).</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb136-1" aria-hidden="true" tabindex="-1"></a>davis_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(</span>
+<span id="cb136-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb136-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="st">&quot;data/davis.csv&quot;</span>,</span>
+<span id="cb136-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb136-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb136-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb136-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">row.names   =</span> <span class="dv">1</span>,</span>
+<span id="cb136-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb136-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb136-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb136-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>Convert the matrix into a <code>network</code> object with the <code>as.network()</code> function, specifying that the network is bipartite and directed through the appropriate arguments.</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb137-1" aria-hidden="true" tabindex="-1"></a>davis1_net  <span class="ot">&lt;-</span> <span class="fu">as.network</span>(davis_mat,</span>
+<span id="cb137-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb137-2" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># Should the network be interpreted as bipartite?</span></span>
+<span id="cb137-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb137-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">bipartite =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb137-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb137-4" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># Should the edges be interpreted as directed?</span></span>
+<span id="cb137-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb137-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">directed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb137-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb137-6" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># Ignore edge values?</span></span>
+<span id="cb137-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb137-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">ignore.eval =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb137-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb137-8" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># Optional edgeset constructor argument:</span></span>
+<span id="cb137-9"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb137-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">matrix.type =</span> <span class="st">&quot;incidence&quot;</span>)</span>
+<span id="cb137-10"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb137-10" aria-hidden="true" tabindex="-1"></a>davis1_net</span></code></pre></div>
+<pre><code>##  Network attributes:
+##   vertices = 32 
+##   directed = FALSE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = 18 
+##   total edges= 89 
+##     missing edges= 0 
+##     non-missing edges= 89 
+## 
+##  Vertex attribute names: 
+##     vertex.names 
+## 
+##  Edge attribute names: 
+##     NULL</code></pre>
+<p>Note that you can use the <code>is.bipartite()</code> function to make sure the object is indeed a bipartite (two-mode) network.</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.bipartite</span>(davis1_net)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="option-2-importing-two-mode-network-data-as-an-edge-list" class="section level4" number="4.4.1.2">
+<h4><span class="header-section-number">4.4.1.2</span> Option 2: Importing Two-Mode Network Data as an Edge List</h4>
+<p>Let’s begin by importing an edge list and then check the first few rows with the <code>head()</code> command.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb141-1" aria-hidden="true" tabindex="-1"></a>davis_el <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/davisedge.csv&quot;</span>,</span>
+<span id="cb141-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb141-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb141-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb141-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(davis_el)</span></code></pre></div>
+<pre><code>##   Source Target Weight
+## 1 EVELYN     E1      1
+## 2 EVELYN     E2      1
+## 3 EVELYN     E3      1
+## 4 EVELYN     E4      1
+## 5 EVELYN     E5      1
+## 6 EVELYN     E6      1</code></pre>
+<p>As you can see, the first column is the women and the second is the events they attended. This is how a two-mode edge list should be organized: the first mode will be whatever is represented in the first column and the second mode represented in the second.</p>
+<p>To read a bipartite edge list to <strong>statnet</strong> use the <code>as.network()</code> function like before. Specify the <code>matrix.type</code> as <code>edgelist</code>, <code>directed = TRUE</code>, and <code>bipartite = TRUE</code>.</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb143-1" aria-hidden="true" tabindex="-1"></a>davis2_net <span class="ot">&lt;-</span> <span class="fu">as.network</span>(davis_el,</span>
+<span id="cb143-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb143-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">matrix.type =</span> <span class="st">&quot;edgelist&quot;</span>,</span>
+<span id="cb143-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb143-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">directed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb143-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb143-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">bipartite =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb143-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb143-5" aria-hidden="true" tabindex="-1"></a>davis2_net</span></code></pre></div>
+<pre><code>##  Network attributes:
+##   vertices = 32 
+##   directed = FALSE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = 18 
+##   total edges= 89 
+##     missing edges= 0 
+##     non-missing edges= 89 
+## 
+##  Vertex attribute names: 
+##     vertex.names 
+## 
+##  Edge attribute names: 
+##     Weight</code></pre>
+<p>Let’s check the graph object by plotting it. Once again, you will have to specify the type of graph being evaluated by <code>gplot()</code>; to do so, set the <code>gmode</code> argument to <code>twomode</code>. Note that the women are colored red and events are colored red.</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(davis2_net,</span>
+<span id="cb145-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb145-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;twomode&quot;</span>, </span>
+<span id="cb145-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb145-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb145-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb145-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb145-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb145-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb145-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb145-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> .<span class="dv">6</span>)</span></code></pre></div>
+<p><img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+</div>
+<div id="option-3-importing-two-mode-social-network-data-in-pajek-format-1" class="section level4" number="4.4.1.3">
+<h4><span class="header-section-number">4.4.1.3</span> Option 3: Importing Two-Mode Social Network Data in Pajek Format</h4>
+<p>We can also read two-mode network data into R from a Pajek network file. To do so, we will use the <code>read.paj()</code> function, then look at the printout to ensure the import worked.</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb146-1" aria-hidden="true" tabindex="-1"></a>davis3_net <span class="ot">&lt;-</span> <span class="fu">read.paj</span>(<span class="st">&quot;data/davis.net&quot;</span>)</span>
+<span id="cb146-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb146-2" aria-hidden="true" tabindex="-1"></a>davis3_net</span></code></pre></div>
+<pre><code>##  Network attributes:
+##   vertices = 32 
+##   directed = FALSE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = 18 
+##   title = davis 
+##   total edges= 89 
+##     missing edges= 0 
+##     non-missing edges= 89 
+## 
+##  Vertex attribute names: 
+##     vertex.names x y z 
+## 
+##  Edge attribute names: 
+##     davis</code></pre>
+<p>Is it bipartite?</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.bipartite</span>(davis3_net)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Notice again that <strong>statnet</strong> has imported the coordinates from the Pajek layout. Additionally, the file was imported as bipartite, but not as directed. To solve this, use the <code>set.network.attribute()</code> function to overwrite the <code>directed</code> attribute from <code>FALSE</code> to <code>TRUE</code>.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb150-1" aria-hidden="true" tabindex="-1"></a>davis3_net <span class="ot">&lt;-</span> <span class="fu">set.network.attribute</span>(davis3_net,</span>
+<span id="cb150-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb150-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">attrname =</span> <span class="st">&quot;directed&quot;</span>,</span>
+<span id="cb150-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb150-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb150-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb150-4" aria-hidden="true" tabindex="-1"></a>davis3_net</span></code></pre></div>
+<pre><code>##  Network attributes:
+##   vertices = 32 
+##   directed = TRUE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = 18 
+##   title = davis 
+##   total edges= 89 
+##     missing edges= 0 
+##     non-missing edges= 89 
+## 
+##  Vertex attribute names: 
+##     vertex.names x y z 
+## 
+##  Edge attribute names: 
+##     davis</code></pre>
+<p>Finally, remember you can list attributes and actor (vertex) names.</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.vertex.attributes</span>(davis3_net)</span></code></pre></div>
+<pre><code>## [1] &quot;na&quot;           &quot;vertex.names&quot; &quot;x&quot;            &quot;y&quot;            &quot;z&quot;</code></pre>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">network.vertex.names</span>(davis3_net)</span></code></pre></div>
+<pre><code>##  [1] &quot;EVELYN&quot;    &quot;LAURA&quot;     &quot;THERESA&quot;   &quot;BRENDA&quot;    &quot;CHARLOTTE&quot; &quot;FRANCES&quot;  
+##  [7] &quot;ELEANOR&quot;   &quot;PEARL&quot;     &quot;RUTH&quot;      &quot;VERNE&quot;     &quot;MYRNA&quot;     &quot;KATHERINE&quot;
+## [13] &quot;SYLVIA&quot;    &quot;NORA&quot;      &quot;HELEN&quot;     &quot;DOROTHY&quot;   &quot;OLIVIA&quot;    &quot;FLORA&quot;    
+## [19] &quot;E1&quot;        &quot;E2&quot;        &quot;E3&quot;        &quot;E4&quot;        &quot;E5&quot;        &quot;E6&quot;       
+## [25] &quot;E7&quot;        &quot;E8&quot;        &quot;E9&quot;        &quot;E10&quot;       &quot;E11&quot;       &quot;E12&quot;      
+## [31] &quot;E13&quot;       &quot;E14&quot;</code></pre>
+</div>
+</div>
+<div id="plotting-two-mode-networks" class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Plotting Two-Mode Networks</h3>
+<p>At this point, we have already plotted one bipartite network. Here we will compare a few plots using only the <code>davis1_net</code> network. Note that we need to tell <code>gplot()</code> that it is a two-mode network (with the argument <code>gmode = "twomode"</code>). Like before, we will compare layout algorithms side-by-side on the same row.</p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set graph parameters to 1 row and 3 columns</span></span>
+<span id="cb156-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb156-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Store coordinates</span></span>
+<span id="cb156-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-4" aria-hidden="true" tabindex="-1"></a>coords_fr <span class="ot">&lt;-</span> <span class="fu">gplot.layout.fruchtermanreingold</span>(davis1_net,</span>
+<span id="cb156-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-5" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">layout.par =</span> <span class="cn">NULL</span>)</span>
+<span id="cb156-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-6" aria-hidden="true" tabindex="-1"></a>coords_kk <span class="ot">&lt;-</span> <span class="fu">gplot.layout.kamadakawai</span>(davis1_net,</span>
+<span id="cb156-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">layout.par =</span> <span class="cn">NULL</span>)</span>
+<span id="cb156-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-8" aria-hidden="true" tabindex="-1"></a>coords_cr <span class="ot">&lt;-</span> <span class="fu">gplot.layout.circle</span>(davis1_net,</span>
+<span id="cb156-9"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-9" aria-hidden="true" tabindex="-1"></a>                               <span class="at">layout.par =</span> <span class="cn">NULL</span>)</span>
+<span id="cb156-10"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot graphs</span></span>
+<span id="cb156-11"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-11" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> davis1_net,</span>
+<span id="cb156-12"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;twomode&quot;</span>,</span>
+<span id="cb156-13"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords_fr,</span>
+<span id="cb156-14"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(davis1_net),</span>
+<span id="cb156-15"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb156-16"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb156-17"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb156-18"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb156-19"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb156-20"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-20" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> davis1_net,</span>
+<span id="cb156-21"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;twomode&quot;</span>,</span>
+<span id="cb156-22"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords_kk,</span>
+<span id="cb156-23"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(davis1_net),</span>
+<span id="cb156-24"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb156-25"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb156-26"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb156-27"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb156-28"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb156-29"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-29" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> davis1_net,</span>
+<span id="cb156-30"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;twomode&quot;</span>,</span>
+<span id="cb156-31"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords_cr,</span>
+<span id="cb156-32"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(davis1_net),</span>
+<span id="cb156-33"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-33" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb156-34"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-34" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb156-35"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb156-36"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb156-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p>The default colors for <strong>statnet</strong> are blue and red, so if we want to assign different colors we can do so by creating a separate <code>color</code> vector.</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, create a vector of length 18 with the value &quot;light blue&quot;</span></span>
+<span id="cb157-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb157-2" aria-hidden="true" tabindex="-1"></a>women  <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;light blue&quot;</span>, <span class="at">times =</span> <span class="dv">18</span>)</span>
+<span id="cb157-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb157-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb157-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb157-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Next, create a vector of length 14 with the value &quot;yellow&quot;</span></span>
+<span id="cb157-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb157-5" aria-hidden="true" tabindex="-1"></a>events <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;yellow&quot;</span>, <span class="at">times =</span> <span class="dv">14</span>)</span>
+<span id="cb157-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb157-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb157-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb157-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, combine both into a single vector</span></span>
+<span id="cb157-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb157-8" aria-hidden="true" tabindex="-1"></a>color  <span class="ot">&lt;-</span> <span class="fu">c</span>(women, events)</span></code></pre></div>
+<p>Now, replot the same networks as above. The only difference in the following commands from those above is that they use the stored coordinates and the color vector we just created.</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb158-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> davis1_net,</span>
+<span id="cb158-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;twomode&quot;</span>,</span>
+<span id="cb158-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords_fr,</span>
+<span id="cb158-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(davis1_net),</span>
+<span id="cb158-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb158-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb158-9"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb158-10"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> color,</span>
+<span id="cb158-11"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb158-12"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-13"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-13" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> davis1_net,</span>
+<span id="cb158-14"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;twomode&quot;</span>,</span>
+<span id="cb158-15"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords_kk,</span>
+<span id="cb158-16"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(davis1_net),</span>
+<span id="cb158-17"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb158-18"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb158-19"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb158-20"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> color,</span>
+<span id="cb158-21"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb158-22"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-23"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-23" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> davis1_net,</span>
+<span id="cb158-24"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;twomode&quot;</span>,</span>
+<span id="cb158-25"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords_cr,</span>
+<span id="cb158-26"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(davis1_net),</span>
+<span id="cb158-27"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb158-28"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb158-29"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb158-30"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> color,</span>
+<span id="cb158-31"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb158-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p>Let’s calculate two-mode degree centrality and then assign the scores as actor attributes. First, let’s take a look at how to calculate node degree.</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">degree</span>(davis1_net)</span></code></pre></div>
+<pre><code>##  [1] 16 14 16 14  8  8  8  6  8  8  8 12 14 16 10  4  4  4  6  6 12  8 16 16 20
+## [26] 28 24 10  8 12  6  6</code></pre>
+<p>Note that you can assign that vector of scores as a vertex attributes.</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb161-1" aria-hidden="true" tabindex="-1"></a>davis1_net <span class="ot">&lt;-</span> <span class="fu">set.vertex.attribute</span>(davis1_net,</span>
+<span id="cb161-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb161-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">attrname =</span> <span class="st">&quot;degree&quot;</span>,</span>
+<span id="cb161-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb161-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">value =</span> <span class="fu">degree</span>(davis1_net))</span>
+<span id="cb161-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb161-4" aria-hidden="true" tabindex="-1"></a>davis1_net</span></code></pre></div>
+<pre><code>##  Network attributes:
+##   vertices = 32 
+##   directed = FALSE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = 18 
+##   total edges= 89 
+##     missing edges= 0 
+##     non-missing edges= 89 
+## 
+##  Vertex attribute names: 
+##     degree vertex.names 
+## 
+##  Edge attribute names: 
+##     NULL</code></pre>
+<p>You can always call this attribute back.</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get.vertex.attribute</span>(davis1_net, <span class="st">&quot;degree&quot;</span>)</span></code></pre></div>
+<pre><code>##  [1] 16 14 16 14  8  8  8  6  8  8  8 12 14 16 10  4  4  4  6  6 12  8 16 16 20
+## [26] 28 24 10  8 12  6  6</code></pre>
+<p>Plot graph with node size reflecting two-mode degree centrality. The degree scores are rescaled so that the vertices don’t overwhelm the graph.</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> davis1_net,</span>
+<span id="cb165-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb165-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;twomode&quot;</span>,</span>
+<span id="cb165-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb165-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords_fr,</span>
+<span id="cb165-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb165-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(davis1_net),</span>
+<span id="cb165-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb165-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb165-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb165-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb165-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb165-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb165-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb165-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> color,</span>
+<span id="cb165-9"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb165-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fu">get.vertex.attribute</span>(davis1_net,</span>
+<span id="cb165-10"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb165-10" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">attrname =</span> <span class="st">&quot;degree&quot;</span>)<span class="sc">/</span><span class="dv">10</span>,</span>
+<span id="cb165-11"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb165-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+</div>
+<div id="projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet." class="section level3" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</h3>
+<p>For this section, we will just use the <code>davis1_net</code> network ojbect.</p>
+<div id="multiplying-matrices-1" class="section level4" number="4.4.3.1">
+<h4><span class="header-section-number">4.4.3.1</span> Multiplying Matrices</h4>
+<p>We can transform the network into a one-mode network of the women by multiplying the matrix (not the graph) by its transpose in order to get a one-mode of the women-to-women.</p>
+<p>First, let’s take a look at how to extract an adjacency matrix from the graph.</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix.network.adjacency</span>(davis1_net)</span></code></pre></div>
+<pre><code>##           E1 E2 E3 E4 E5 E6 E7 E8 E9 E10 E11 E12 E13 E14
+## EVELYN     1  1  1  1  1  1  0  1  1   0   0   0   0   0
+## LAURA      1  1  1  0  1  1  1  1  0   0   0   0   0   0
+## THERESA    0  1  1  1  1  1  1  1  1   0   0   0   0   0
+## BRENDA     1  0  1  1  1  1  1  1  0   0   0   0   0   0
+## CHARLOTTE  0  0  1  1  1  0  1  0  0   0   0   0   0   0
+## FRANCES    0  0  1  0  1  1  0  1  0   0   0   0   0   0
+## ELEANOR    0  0  0  0  1  1  1  1  0   0   0   0   0   0
+## PEARL      0  0  0  0  0  1  0  1  1   0   0   0   0   0
+## RUTH       0  0  0  0  1  0  1  1  1   0   0   0   0   0
+## VERNE      0  0  0  0  0  0  1  1  1   0   0   1   0   0
+## MYRNA      0  0  0  0  0  0  0  1  1   1   0   1   0   0
+## KATHERINE  0  0  0  0  0  0  0  1  1   1   0   1   1   1
+## SYLVIA     0  0  0  0  0  0  1  1  1   1   0   1   1   1
+## NORA       0  0  0  0  0  1  1  0  1   1   1   1   1   1
+## HELEN      0  0  0  0  0  0  1  1  0   1   1   1   0   0
+## DOROTHY    0  0  0  0  0  0  0  1  1   0   0   0   0   0
+## OLIVIA     0  0  0  0  0  0  0  0  1   0   1   0   0   0
+## FLORA      0  0  0  0  0  0  0  0  1   0   1   0   0   0</code></pre>
+<p>Now, let’s generate a one-mode matrix of women-to-women relations based on shared participation in an event. To do so, we will multiply the adjacency matrix using the <code>%*%</code> operator times its transpose (<code>t()</code>).</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb168-1" aria-hidden="true" tabindex="-1"></a>davis_women_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix.network.adjacency</span>(davis1_net) <span class="sc">%*%</span></span>
+<span id="cb168-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb168-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>(<span class="fu">as.matrix.network.adjacency</span>(davis1_net))</span></code></pre></div>
+<p>View the matrix:</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb169-1" aria-hidden="true" tabindex="-1"></a>davis_women_mat</span></code></pre></div>
+<p>Repeat the process, this time switch the order of the transposed matrix to generate an events-to-events matrix.</p>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb170-1" aria-hidden="true" tabindex="-1"></a>davis_events_mat <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">as.matrix.network.adjacency</span>(davis1_net)) <span class="sc">%*%</span></span>
+<span id="cb170-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb170-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix.network.adjacency</span>(davis1_net)</span></code></pre></div>
+<p>Finally, convert the new matrices into <code>network</code> objects.</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb171-1" aria-hidden="true" tabindex="-1"></a>davis_women_net <span class="ot">&lt;-</span> <span class="fu">as.network</span>(davis_women_mat)</span>
+<span id="cb171-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb171-2" aria-hidden="true" tabindex="-1"></a>davis_events_net <span class="ot">&lt;-</span> <span class="fu">as.network</span>(davis_events_mat)</span></code></pre></div>
+</div>
+</div>
+<div id="plotting-projected-one-mode-networks-1" class="section level3" number="4.4.4">
+<h3><span class="header-section-number">4.4.4</span> Plotting Projected One-Mode Networks</h3>
+<p>Now that we have extracted the one-mode networks, plot the two new graphs using <code>gplot()</code> and the additional arguments used previously.</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb172-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Save coordinates</span></span>
+<span id="cb172-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-3" aria-hidden="true" tabindex="-1"></a>coords_women_kk <span class="ot">&lt;-</span> <span class="fu">gplot.layout.kamadakawai</span>(davis_women_net,</span>
+<span id="cb172-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-4" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">layout.par =</span> <span class="cn">NULL</span>)</span>
+<span id="cb172-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-5" aria-hidden="true" tabindex="-1"></a>coords_events_kk <span class="ot">&lt;-</span> <span class="fu">gplot.layout.kamadakawai</span>(davis_events_net,</span>
+<span id="cb172-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-6" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">layout.par =</span> <span class="cn">NULL</span>)</span>
+<span id="cb172-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot graphs</span></span>
+<span id="cb172-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-8" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> davis_women_net,</span>
+<span id="cb172-9"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;onemode&quot;</span>,</span>
+<span id="cb172-10"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords_women_kk,</span>
+<span id="cb172-11"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(davis_women_net),</span>
+<span id="cb172-12"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb172-13"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb172-14"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb172-15"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;light blue&quot;</span>,</span>
+<span id="cb172-16"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb172-17"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-17" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> davis_events_net,</span>
+<span id="cb172-18"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;onemode&quot;</span>,</span>
+<span id="cb172-19"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords_events_kk,</span>
+<span id="cb172-20"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(davis_events_net),</span>
+<span id="cb172-21"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb172-22"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb172-23"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb172-24"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;yellow&quot;</span>,</span>
+<span id="cb172-25"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb172-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows  =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p>Resize the nodes by degree centrality. This time, we will not store the value as a vertex attribute.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb173-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot graphs</span></span>
+<span id="cb173-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> davis_women_net,</span>
+<span id="cb173-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;onemode&quot;</span>,</span>
+<span id="cb173-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords_women_kk,</span>
+<span id="cb173-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(davis_women_net),</span>
+<span id="cb173-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb173-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb173-9"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb173-10"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;light blue&quot;</span>,</span>
+<span id="cb173-11"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fu">degree</span>(davis_women_net, <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>)<span class="sc">/</span><span class="dv">10</span>,</span>
+<span id="cb173-12"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb173-13"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-13" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> davis_events_net,</span>
+<span id="cb173-14"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;onemode&quot;</span>,</span>
+<span id="cb173-15"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords_events_kk,</span>
+<span id="cb173-16"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(davis_events_net),</span>
+<span id="cb173-17"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb173-18"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb173-19"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb173-20"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;yellow&quot;</span>,</span>
+<span id="cb173-21"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fu">degree</span>(davis_events_net, <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>)<span class="sc">/</span><span class="dv">10</span>,</span>
+<span id="cb173-22"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb173-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows  =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+</div>
+<div id="saving-network-plots-1" class="section level3" number="4.4.5">
+<h3><span class="header-section-number">4.4.5</span> Saving Network Plots</h3>
+<p>Now, save plots of the two-mode network and the two one-mode networks.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="at">file =</span> <span class="st">&quot;davis1.png&quot;</span>, <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">units =</span> <span class="st">&#39;in&#39;</span>, <span class="at">res =</span> <span class="dv">300</span>,</span>
+<span id="cb174-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">bg =</span> <span class="st">&quot;transparent&quot;</span>)</span>
+<span id="cb174-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> davis1_net,</span>
+<span id="cb174-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;twomode&quot;</span>,</span>
+<span id="cb174-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords_fr,</span>
+<span id="cb174-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(davis1_net),</span>
+<span id="cb174-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb174-8"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb174-9"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb174-10"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> color,</span>
+<span id="cb174-11"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fu">get.vertex.attribute</span>(davis1_net, <span class="at">attrname =</span> <span class="st">&quot;degree&quot;</span>)<span class="sc">/</span><span class="dv">10</span>,</span>
+<span id="cb174-12"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb174-13"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-13" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span>
+<span id="cb174-14"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb174-15"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-15" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="at">file =</span> <span class="st">&quot;daviswomen.png&quot;</span>, <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">units =</span> <span class="st">&#39;in&#39;</span>, <span class="at">res =</span> <span class="dv">300</span>,</span>
+<span id="cb174-16"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">bg =</span> <span class="st">&quot;transparent&quot;</span>)</span>
+<span id="cb174-17"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-17" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> davis_women_net,</span>
+<span id="cb174-18"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;onemode&quot;</span>,</span>
+<span id="cb174-19"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords_women_kk,</span>
+<span id="cb174-20"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(davis_women_net),</span>
+<span id="cb174-21"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb174-22"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb174-23"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb174-24"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;light blue&quot;</span>,</span>
+<span id="cb174-25"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fu">degree</span>(davis_women_net, <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>)<span class="sc">/</span><span class="dv">10</span>,</span>
+<span id="cb174-26"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb174-27"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-27" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span>
+<span id="cb174-28"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb174-29"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-29" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="at">file =</span> <span class="st">&quot;davisevents.png&quot;</span>, <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="dv">4</span>, <span class="at">units =</span> <span class="st">&#39;in&#39;</span>, <span class="at">res =</span> <span class="dv">300</span>,</span>
+<span id="cb174-30"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">bg =</span> <span class="st">&quot;transparent&quot;</span>)</span>
+<span id="cb174-31"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-31" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> davis_events_net,</span>
+<span id="cb174-32"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;onemode&quot;</span>,</span>
+<span id="cb174-33"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-33" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords_events_kk,</span>
+<span id="cb174-34"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-34" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(davis_events_net),</span>
+<span id="cb174-35"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb174-36"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb174-37"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb174-38"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-38" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;yellow&quot;</span>,</span>
+<span id="cb174-39"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-39" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fu">degree</span>(davis_events_net, <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>)<span class="sc">/</span><span class="dv">10</span>,</span>
+<span id="cb174-40"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb174-41"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb174-41" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+</div>
+<div id="saving-network-data-3" class="section level3" number="4.4.6">
+<h3><span class="header-section-number">4.4.6</span> Saving Network Data</h3>
+<p>Once again, it doesn’t hurt to save the data that you’ve imported and created.</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(davis_el, </span>
+<span id="cb175-2"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb175-2" aria-hidden="true" tabindex="-1"></a>     davis1_net, </span>
+<span id="cb175-3"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb175-3" aria-hidden="true" tabindex="-1"></a>     davis2_net, </span>
+<span id="cb175-4"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb175-4" aria-hidden="true" tabindex="-1"></a>     davis3_net, </span>
+<span id="cb175-5"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb175-5" aria-hidden="true" tabindex="-1"></a>     davis_events_net,</span>
+<span id="cb175-6"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb175-6" aria-hidden="true" tabindex="-1"></a>     davis_women_net,</span>
+<span id="cb175-7"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#cb175-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">file =</span> <span class="st">&quot;data/davis_statnet.RData&quot;</span>)</span></code></pre></div>
+<p>That’s all (for <strong>statnet</strong>) for now.</p>
+
+</div>
+</div>
+</div>
+
+
+
+<h3> References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Wickham2019" class="csl-entry">
+Wickham, Hadley. 2019. <em>Advanced r</em>. 12th ed. Paperback; Chapman; Hall/CRC. <a href="https://adv-r.hadley.nz/">https://adv-r.hadley.nz/</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="manipulating-and-simplifying-social-network-data-in-igraph.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjcallag/r4ds/edit/editing/1-Importing_and_Visualizing_in_statnet.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"font_settings": {
+"family": "sans",
+"theme": "white",
+"size": 2
+},
+"info": true,
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

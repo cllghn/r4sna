@@ -1,0 +1,29 @@
+bookdown::gitbook:
+  always_allow_html: yes
+  config:
+    edit:
+      link: https://github.com/cjcallag/r4ds/edit/editing/%s
+      test: "Edit"
+    font_settings: 
+      family: sans
+      theme: white
+      size: 2
+    info: true
+    toc:
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown">
+        Published with bookdown</a></li>
+      before: |
+        <li><a href="./">R for Social Network Analysis</a></li>
+      collapse: section # section or subsection
+      scroll_highlight: yes
+    toolbar:
+      position: fixed
+    search: 
+      engine: lunr
+      options: null
+    sharing: no
+  css: [my_style.css]
+  description: |
+    TBD.
+  split_by: chapter

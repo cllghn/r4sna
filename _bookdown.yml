@@ -1,0 +1,24 @@
+new_session: yes
+output_dir: docs
+language:
+  label:
+    fig: "Figure "
+    tab: "Table "
+    eq: "Equation"
+  ui:
+    edit: Edit
+
+rmd_files: ["index.Rmd", 
+            "0-Setting_Up.Rmd",
+            "1-Importing_and_Manipulating_in_igraph.Rmd",
+            "1-Importing_and_Visualizing_in_statnet.Rmd",
+            "2-Manipulating_and_Simplifying_in_igraph.Rmd",
+            "2-Manipulating_and_Simplifying_in_statnet.Rmd",
+            "3-Network_Topography_in_igraph.Rmd",
+            "3-Network_Topography_in_statnet.Rmd",
+            "_base_v_tidyverse_comparison.Rmd",
+            "references.Rmd"
+            ]
+
+delete_merged_file: true
+before_chapter_script: "_common.R"

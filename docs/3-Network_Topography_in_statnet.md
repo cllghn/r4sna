@@ -1,0 +1,615 @@
+---
+output: html_document
+---
+
+# Network Topography in **statnet**
+
+Find and open your RStudio Project associated with this class. Begin by opening a new script. It's generally a good idea to place a header at the top of your scripts that tell you what the script does, its name, etc. 
+
+
+```r
+#################################################
+# What: Network Topography in R
+# Created: 02.28.14
+# Revised: 10.12.20
+#################################################
+```
+
+If you have not set up your RStudio Project to clear the workspace on exit, your environment contain the objects and functions from your prior session. To clear these before beginning use the following command.
+
+
+```r
+rm(list = ls())
+```
+
+Proceed to place the data required for this lab (`Anabaptists.csv`, and `Anabaptists Attributes.csv`) also inside your R Project folder. We have placed it in a sub folder titled `data` for organizational purposes; however, this is not necessary.
+
+For this exercise, we’ll use the Anabaptist Leadership network and its related attribute data, both of which can be found in the zipped file  we shared with you. The data set includes 67 actors, 55 who were sixteenth century Anabaptist leaders and 12 who were prominent Protestant Reformation leaders who had contact with and influenced some of the Anabaptist leaders included in this data set. These network data build upon a smaller dataset [@Matthew2013] that did not include some leading Anabaptist leaders, such as Menno Simons, who is generally seen as the "founder" of the Amish and Mennonites.
+
+
+## Load Libraries
+
+Load **statnet** library.
+
+
+```r
+library(statnet)
+```
+
+```
+## Warning: package 'statnet' was built under R version 4.1.2
+```
+
+```
+## Warning: package 'tergm' was built under R version 4.1.2
+```
+
+```
+## Warning: package 'ergm' was built under R version 4.1.2
+```
+
+```
+## Warning: package 'networkDynamic' was built under R version 4.1.2
+```
+
+```
+## Warning: package 'ergm.count' was built under R version 4.1.2
+```
+
+```
+## Warning: package 'tsna' was built under R version 4.1.2
+```
+
+::: {.infobox data-latex="infobox"}
+It is not currently possible to calculate the E-I index in **statnet** and **igraph**, but a package, **isnar**, has been developed to do just that. Its functionality is demonstrated at the end of this lab. We've included the scripts in both **statnet** and **igraph** versions of this lab, but you need to do this section only once.
+:::
+
+In addition to **statnet**, we will be introducing and using **isnar**. Since this may be the first time you are using this tool, please ensure you install it prior to loading it. You will need to install **remotes** in order to use the function `install_github()` to download and set up **isnar** as it is not published on the CRAN.
+
+
+```r
+install.packages("remotes")
+```
+
+Now install **isnar**.
+
+
+```r
+remotes::install_github("mbojan/isnar")
+```
+
+Before moving forward, let's load the **isnar** package:
+
+
+```r
+library(isnar)
+```
+
+```
+## 
+## Attaching package: 'isnar'
+```
+
+```
+## The following object is masked from 'package:sna':
+## 
+##     symmetrize
+```
+
+## Import Data
+
+Let's import the data, which we've stored as a matrix, using the `read.csv()` function nested within `as.matrix()` in order to return a `matrix` class object, which is one format required by the `as.network()` function to generate a `network` object.
+
+
+```r
+# First, read it the matrix of relations
+anabaptist_mat <- as.matrix(
+  read.csv("data/Anabaptist Leaders.csv",
+           header = TRUE,
+           row.names = 1, 
+           check.names = FALSE)
+  )
+```
+
+Now transform the matrix to a `network` object.
+
+
+```r
+anabaptist_net <- as.network(anabaptist_mat)
+```
+
+Take a look at the newly created object.
+
+
+```r
+anabaptist_net
+```
+
+```
+##  Network attributes:
+##   vertices = 67 
+##   directed = TRUE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = FALSE 
+##   total edges= 366 
+##     missing edges= 0 
+##     non-missing edges= 366 
+## 
+##  Vertex attribute names: 
+##     vertex.names 
+## 
+## No edge attributes
+```
+\
+
+## Network Size and Interconnectedness
+
+### Network Size
+
+Network size is a basic descriptive statistic that is important to know because many of the subsequent measures are sensitive to it. Network size is easy to get with the `network.size()` function.
+
+
+```r
+network.size(anabaptist_net)
+```
+
+```
+## [1] 67
+```
+
+### Density and Average Degree
+
+Network density equals actual ties divided by all possible ties. However, density tends to decrease as social networks get larger because the number of possible ties increases exponentially, whereas the number of ties that each actor can maintain tends to be limited. Consequently, we can only use it to compare networks of the same size. An alternative to network density is average degree centrality, which is not sensitive to network size and thus can be used to compare different sized networks. Let's see how we can get these two measures in **statnet**.
+
+First, calculate density using density using the `gden()` function.
+
+
+```r
+gden(anabaptist_net)
+```
+
+```
+## [1] 0.08276798
+```
+
+In order to calculate the average degree centrality, you will have to calculate vertex degree and proceed taking the average of this vector of scores.
+
+
+```r
+mean(
+  degree(anabaptist_net,
+         # Indicate the type of graphe evaluated as undirected
+         gmode = "graph")
+)
+```
+
+```
+## [1] 5.462687
+```
+
+### Cohesion and Fragmentation
+
+In **statnet** the `connectedness()` function take a graph and return the Krackhardt connectedness score [@Krackhardt1994], which other programs, such as `UCINET`, call cohesion. Fragmentation is simply the additive inverse of cohesion
+
+First take a look at how to calculate connectedness.
+
+
+```r
+connectedness(anabaptist_net)
+```
+
+```
+## [1] 1
+```
+
+Now calculate fragmentation.
+
+
+```r
+1 - connectedness(anabaptist_net)
+```
+
+```
+## [1] 0
+```
+
+### Compactness and Breadth
+
+Because the network is not disconnected, cohesion is 1.00 and fragmentation is 0.00. However, with a little manipulation, we can also compute distance weighted cohesion and fragmentation, what other programs, such as UCINET, calls compactness and breadth.
+
+Calculating compactness requires calculating the geodesic distances between all nodes in the network. Then take the inverse of these scores, which are the reciprocal geodesic distance. Remove self loops. Finally, replace the infinity scores, which occur in disconnected graphs, with `0`.
+
+Fist, let's begin by calculating the distances:
+
+
+```r
+distance <- geodist(anabaptist_net, 
+                    # Replace the Inf values with 0s
+                    inf.replace = 0)
+```
+
+Take a look at the matrix of distances, here only the first five rows and columns:
+
+
+```r
+distance$gdist[1:5, 1:5]
+```
+
+```
+##      [,1] [,2] [,3] [,4] [,5]
+## [1,]    0    2    1    2    2
+## [2,]    2    0    2    3    3
+## [3,]    1    2    0    1    1
+## [4,]    2    3    1    0    1
+## [5,]    2    3    1    1    0
+```
+
+We can read these distances as steps between nodes. So node one is two steps away from node 2.
+
+Proceed with the remaining steps outlined above to calculate the desired measure.
+
+
+```r
+# Calculate reciprocal distances
+reciprocal_distances <- 1/distance$gdist
+# Modify the reciprocal_distances matrix
+diag(reciprocal_distances) <- NA
+reciprocal_distances[reciprocal_distances == Inf] <- 0
+# Calculate compactness
+compactness <- mean(reciprocal_distances, na.rm = TRUE)
+compactness
+```
+
+```
+## [1] 0.3800372
+```
+
+For breadth, we could, of course, just take the additive inverse of compactness.
+
+
+```r
+breadth <- 1 - compactness
+breadth
+```
+
+```
+## [1] 0.6199628
+```
+
+Of course, we can automate the process of calculating compactness by turning the process into a function.
+
+
+```r
+my_compactness <- function(dat, na_rm = TRUE) {
+  stopifnot(!is.network(dat) == "dat must be network object.")
+  stopifnot(!is.logical(na_rm) == "na_rm must be a logical.")
+  # Get reciprocal distances:
+  reciprocal_distances <- 1/geodist(anabaptist_net, 
+                                    inf.replace = 0)$gdist
+  # Clean up the matrix:
+  diag(reciprocal_distances) <- NA
+  reciprocal_distances[reciprocal_distances == Inf] <- 0
+  # Calculate compacteness
+  mean(reciprocal_distances, na.rm = na_rm)
+}
+```
+
+Run the function.
+
+
+```r
+my_compactness(anabaptist_net)
+```
+
+```
+## [1] 0.3800372
+```
+
+### Table of Interconnectedness Scores
+
+We can create a table of interconnectedness scores and save them to a csv file. You can check your working directory to see the results in the `interconnectedness.csv` file.
+
+
+```r
+# Create a data.frame with the desired measures
+interconnectedness <- data.frame(
+  "Size" = network.size(anabaptist_net),
+  "Density" = gden(anabaptist_net),
+  "Average Degree" = mean(degree(anabaptist_net, gmode = "graph")),
+  "Cohesion" = connectedness(anabaptist_net),
+  "Fragmentation" = 1 - connectedness(anabaptist_net),
+  "Compactness" = my_compactness(anabaptist_net),
+  "Breadth" = 1 - my_compactness(anabaptist_net)
+)
+# Take a look
+str(interconnectedness)
+```
+
+```
+## 'data.frame':	1 obs. of  7 variables:
+##  $ Size          : num 67
+##  $ Density       : num 0.0828
+##  $ Average.Degree: num 5.46
+##  $ Cohesion      : num 1
+##  $ Fragmentation : num 0
+##  $ Compactness   : num 0.38
+##  $ Breadth       : num 0.62
+```
+
+Now write it to a CSV:
+
+
+```r
+write.csv(interconnectedness, 
+          file = "interconnectedness.csv", 
+          row.names = FALSE)
+```
+
+
+## Centralization and Related Measures of Spread
+
+Network centralization, variance, and standard deviation are measures that can capture the hierarchical dimension of a network’s topography. Centralization uses the variation in actor centrality (as compared to the highest centrality score) within the network to measure the level of centralization. More variation yields higher network centralization scores, while less yields lower scores. In general, the larger a centralization index is, the more likely it is that a single actor is very central while the other actors are not. Thus, the index can be seen as measuring how unequal the distribution of individual actor scores are. Because we can calculate centralization using different measures of centrality (e.g., degree, betweenness, closeness, and eigenvector), we need to interpret the results in light of the type of centrality used. Centralization scores range from 0.00 – 1.00 (or 0 – 100%) when analyzing dichotomized data. If you are analyzing valued data, centralization scores will sometimes be larger than 1.00; thus, it’s generally a good idea to dichotomize your data before estimating network centralization.
+
+### Centralization
+
+Here's how to get centralization scores for the four primary measures of centrality.
+
+
+```r
+# Degree centralization
+centralization(dat = anabaptist_net,
+               # Function to return nodal centrality scores, here degree
+               FUN = degree,
+               # Indicate the type of graph being evaluated as undirected
+               mode = "graph")
+```
+
+```
+## [1] 0.1645688
+```
+
+```r
+# Betweenness centralization
+centralization(dat = anabaptist_net,
+               # Function to return nodal centrality scores, here betweenness
+               FUN = betweenness,
+               # Indicate the type of graph being evaluated as undirected
+               mode = "graph")
+```
+
+```
+## [1] 0.1974781
+```
+
+```r
+# Closeness centralization
+centralization(dat = anabaptist_net,
+               # Function to return nodal centrality scores, here closeness
+               FUN = closeness,
+               # Indicate the type of graph being evaluated as undirected
+               mode = "graph")
+```
+
+```
+## [1] 0.2199767
+```
+
+```r
+# Eigenvector centralization
+centralization(dat = anabaptist_net,
+               # Function to return nodal centrality scores, here evcent
+               FUN = evcent,
+               # Indicate the type of graph being evaluated as undirected
+               mode = "graph")
+```
+
+```
+## [1] 0.3067772
+```
+
+
+To calculate ARD (average reciprocal distance) closeness, which is what we want to use when we're analyzing a disconnected network, you will have to pass along an additional argument (`cmode = "suminvundir"`) to specifyt the type of closeness being computed.
+
+
+```r
+# ARD Closeness centralization
+centralization(dat = anabaptist_net,
+               # Function to return nodal centrality scores, here closeness
+               FUN = closeness,
+               # Indicate the type of closeness being computed
+               cmode = "suminvundir",
+               # Indicate the type of graph being evaluated as undirected
+               mode = "graph")
+```
+
+```
+## [1] 0.3061346
+```
+
+### Variance and Standard Deviation
+
+Variance and standard deviation are similar to centralization. They differ from centralization in that rather comparing individual scores to the highest centrality score, they compare individual scores to the average centrality score. Because standard deviation is the square root of the variance, it is probably preferable to variance because it returns it returns to the original unit of analysis.
+
+Let's begin by setting up the code to calculate the standard deviation for the `anabaptist_ig` graph based on degree centrality.
+
+
+```r
+# Calculate standard deviation
+sd(
+  # Provide the numeric vector of degree scores
+  degree(anabaptist_net, 
+         gmode = "graph")
+  )
+```
+
+```
+## [1] 3.434797
+```
+
+Now calculate the standard deviation for closeness, betweenness, and eigenvector centrality.
+
+
+```r
+sd(
+  closeness(anabaptist_net, 
+            gmode = "graph")
+  )
+```
+
+```
+## [1] 0.05769685
+```
+
+```r
+sd(
+  betweenness(anabaptist_net,
+              gmode = "graph")
+)
+```
+
+```
+## [1] 110.4204
+```
+
+```r
+sd(
+  evcent(anabaptist_net,
+         gmode = "graph")
+)
+```
+
+```
+## [1] 0.0801868
+```
+
+### Table of Centralization Scores
+
+Let's create a table of centralization scores and save them to a CSV file, which you should see in your working directory after running the following lines of code.
+
+
+```r
+centralization <- data.frame(
+  "Type" = c("Degree", "Betweenness", "Closeness", "ARD Closeness", 
+             "Eigenvector"),
+  "Centralization" = c(
+    centralization(anabaptist_net, FUN = degree, mode = "graph"),
+    centralization(anabaptist_net, FUN = betweenness, mode = "graph"),
+    centralization(anabaptist_net, FUN = closeness, mode = "graph"),
+    centralization(anabaptist_net, FUN = closeness, mode = "graph",
+                   cmode = "suminvundir"),
+    centralization(anabaptist_net, FUN = evcent, mode = "graph")),
+  "Standard Deviation" = c(
+    sd(degree(anabaptist_net, gmode = "graph")),
+    sd(betweenness(anabaptist_net, gmode = "graph")),
+    sd(closeness(anabaptist_net, gmode = "graph")),
+    sd(closeness(anabaptist_net, gmode = "graph", cmode = "suminvundir")),
+    sd(evcent(anabaptist_net, gmode = "graph")))
+)
+
+centralization
+```
+
+```
+##            Type Centralization Standard.Deviation
+## 1        Degree      0.1645688         3.43479680
+## 2   Betweenness      0.1974781       110.42040498
+## 3     Closeness      0.2199767         0.05769685
+## 4 ARD Closeness      0.3061346         0.07458466
+## 5   Eigenvector      0.3067772         0.08018680
+```
+
+Now save it:
+
+```r
+write.csv(centralization, file= "centralization.csv", row.names = FALSE)
+```
+
+### Diameter and Average Path Distance
+
+Here's how to get geodesic information on a network and then use it to calculate average distance and diameter. 
+
+The diameter is the longest of all shortest paths that traverse the network. It is calculated in **statnet** using the `geodist()` function. Because the function returns a named list, we need to specifically extract the geodesic distances that were calculated by command using `$gdist`. We also need to set the diagonal of each the geodistance network to `NA` rather than `0`, otherwise our scores take into account the diagonal.
+
+
+```r
+# Calculate distances
+distances <- geodist(anabaptist_net,
+                     inf.replace = NA)$gdist
+# Clean up diagonal
+diag(distances) <- NA
+```
+
+After all that is done, then for average distance we simply get the mean of the geodesic distances, and for the diameter, we get the maximum.
+
+
+```r
+# Mean distance is the average distance
+mean(distances, na.rm = TRUE)
+```
+
+```
+## [1] 3.354138
+```
+
+```r
+# Max distance is the diameter
+max(distances, na.rm = TRUE)
+```
+
+```
+## [1] 9
+```
+
+## Calculating the E-I Index with **isnar**
+
+::: {.infobox data-latex="infobox"}
+This section is in *both* **statnet** *and* **igraph** versions of this lab. You only need to do this section one time.
+:::
+
+E-I Index indicate the ration of ties a group has to nongroup members. The index equals 1.0 for groups that have all external ties, while a group with -1.0 score has all internal ties. If the internal and external ties are equal, the index equals 0.0.
+
+The E-I Index is not common to many R packages, and it is not as simple as one would think it would be to program. However, there is a package called **isnar** that does calculate it [@Bojanowski]. It is written and maintained by Michal Bojanowski (m.bojanowski@icm.edu.pl) as a supplement to **igraph**. The only thing is that **isnar** is only available through GitHub. GitHub is a repository for open-source software, like R packages in development. 
+
+To estimate the E-I index, first create an attribute vector. Here, we'll use the Melchiorite attribute included in the attribute file. 
+
+
+```r
+attributes <- read.csv("data/Anabaptist Attributes.csv",
+                       header = TRUE)
+```
+
+Take a look at the vector names.
+
+
+```r
+names(attributes)
+```
+
+```
+##  [1] "ï..Names"          "Believers.Baptism" "Violence"         
+##  [4] "Munster.Rebellion" "Apocalyptic"       "Anabaptist"       
+##  [7] "Melchiorite"       "Swiss.Brethren"    "Denck"            
+## [10] "Hut"               "Hutterite"         "Other.Anabaptist" 
+## [13] "Lutheran"          "Reformed"          "Other.Protestant" 
+## [16] "Tradition"         "Origin.."          "Operate.."
+```
+
+The `Melchiorite` vector can be accessed using the `[[` accessor. Now, use the `ei()` function to get the E-I index.
+
+We've found that calculating the E-I index works best with `igraph` objects.  If you start with **statnet** and you would like to run the E-I index, then we recommend using **intergraph** to convert your `network` object into an `igraph` object using `asIgraph()`.
+
+
+```r
+anabaptist_ig <- intergraph::asIgraph(anabaptist_net)
+
+ei(anabaptist_ig, attributes[["Melchiorite"]],
+   loops = FALSE, directed = FALSE)
+```
+
+```
+## [1] -0.9344262
+```
+
+That's all for **statnet** now.
