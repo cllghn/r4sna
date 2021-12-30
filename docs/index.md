@@ -16,7 +16,7 @@ always_allow_html: yes
 
 This document accompanies the CORE Lab's *Dynamic Network Analysis* (DA4610) course, designed to introduce students to the use of the statistical package R, for engaging in social network analysis (SNA). It is not an introduction to SNA, however. It assumes that students have a background in SNA; in particular, they will be reasonably familiar with the various metrics and algorithms (e.g., topography, subgroups, centrality, and brokerage) that social network analysts regularly use.
 
-<img src="imgs/core.png" width="596" style="display: block; margin: auto;" />
+<img src="imgs/core.png" width="70%" style="display: block; margin: auto;" />
 
 ## Instructors
 

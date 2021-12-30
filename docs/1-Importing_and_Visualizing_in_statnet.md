@@ -2,11 +2,14 @@
 output: html_document
 ---
 
+
+
+
 # Importing and Visualizing One- and Two-Mode Social Network Data in **statnet**
 
 In this lab we'll explore a variety of methods for importing social network data into R, manipulating one- and two-mode network data, and visualizing social networks. We'll be using a variety of social networks, some of which you'll recognize from other classes. We'll also illustrate a variety of ways to import network data, something that should be easy to do but often turns out to be challenging because a number of resources jump over this important step.
 
-::: {.infobox data-latex="infobox"}
+::: {.infobox data-latex=""}
 **Note**: This lab has gone through many iterations and reflects the influence from a variety of individuals, including Phil Murphy, and Brendan Knapp.
 :::
 
@@ -35,7 +38,7 @@ Proceed to place the data required for this lab (`davis.csv`, `davis.net`, `davi
 
 ## Load Libraries
 
-We need to load the libraries we plan to use. Here we will use **statnet*. Because **igraph** and **statnet** conflict with one another sometimes, we do not want to have them loaded at the same time, so you may want to detach it. Alternatively, you may choose to namespace functions using the `::` operator as needed (e.g., `igraph::betweenness()` vs. `sna::betweenness()`). Of course, this applies only if you had the `igraph` package loaded already. The `intergraph` package allows users to transform network data back and forth between **igraph** and **statnet**.
+We need to load the libraries we plan to use. Here we will use **statnet**. Because **igraph** and **statnet** conflict with one another sometimes, we do not want to have them loaded at the same time, so you may want to detach it. Alternatively, you may choose to namespace functions using the `::` operator as needed (e.g., `igraph::betweenness()` vs. `sna::betweenness()`). Of course, this applies only if you had the `igraph` package loaded already. The `intergraph` package allows users to transform network data back and forth between **igraph** and **statnet**.
 
 
 ```r
@@ -83,7 +86,7 @@ class(koschade1_net)
 ```
 
 ```
-## [1] "network"
+[1] "network"
 ```
 
 What is it? The printout should read `network` which is a **statnet** graph object that works with the functions from this library. Many R objects have a class, which describes a type of object, describing the properties it possesses, how it behaves, and how it relates to other objects and functions [@Wickham2019].
@@ -96,22 +99,22 @@ koschade1_net
 ```
 
 ```
-##  Network attributes:
-##   vertices = 17 
-##   directed = FALSE 
-##   hyper = FALSE 
-##   loops = FALSE 
-##   multiple = FALSE 
-##   bipartite = FALSE 
-##   total edges= 63 
-##     missing edges= 0 
-##     non-missing edges= 63 
-## 
-##  Vertex attribute names: 
-##     vertex.names 
-## 
-##  Edge attribute names: 
-##     1
+ Network attributes:
+  vertices = 17 
+  directed = FALSE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = FALSE 
+  total edges= 63 
+    missing edges= 0 
+    non-missing edges= 63 
+
+ Vertex attribute names: 
+    vertex.names 
+
+ Edge attribute names: 
+    1 
 ```
 
 Like with **igraph** we can retrieve and store attribute data for the graph, vertices (e.g., actor names) or edges (e.g., edge weight) on the graph object. Note that there are multiple ways of retrieving the vertex attributes, such as actor names.
@@ -122,9 +125,9 @@ get.vertex.attribute(koschade1_net, "vertex.names")
 ```
 
 ```
-##  [1] "Muklas"   "Amrozi"   "Imron"    "Samudra"  "Dulmatin" "Idris"   
-##  [7] "Mubarok"  "Azahari"  "Ghoni"    "Arnasan"  "Rauf"     "Octavia" 
-## [13] "Hidayat"  "Junaedi"  "Patek"    "Feri"     "Sarijo"
+ [1] "Muklas"   "Amrozi"   "Imron"    "Samudra"  "Dulmatin" "Idris"   
+ [7] "Mubarok"  "Azahari"  "Ghoni"    "Arnasan"  "Rauf"     "Octavia" 
+[13] "Hidayat"  "Junaedi"  "Patek"    "Feri"     "Sarijo"  
 ```
 
 ```r
@@ -132,9 +135,9 @@ network.vertex.names(koschade1_net)
 ```
 
 ```
-##  [1] "Muklas"   "Amrozi"   "Imron"    "Samudra"  "Dulmatin" "Idris"   
-##  [7] "Mubarok"  "Azahari"  "Ghoni"    "Arnasan"  "Rauf"     "Octavia" 
-## [13] "Hidayat"  "Junaedi"  "Patek"    "Feri"     "Sarijo"
+ [1] "Muklas"   "Amrozi"   "Imron"    "Samudra"  "Dulmatin" "Idris"   
+ [7] "Mubarok"  "Azahari"  "Ghoni"    "Arnasan"  "Rauf"     "Octavia" 
+[13] "Hidayat"  "Junaedi"  "Patek"    "Feri"     "Sarijo"  
 ```
 
 There could be more vertex attributes, which can be called using the attribute name and the `get.vertex.attribute()` function. If you are not certain what the attribute is named, use the `list.vertex.attributes()` function to get a printout of the possible variable names.
@@ -145,7 +148,7 @@ list.vertex.attributes(koschade1_net)
 ```
 
 ```
-## [1] "na"           "vertex.names"
+[1] "na"           "vertex.names"
 ```
 
 Similarly, we can access edge attribute data using **statnet** functions.
@@ -157,8 +160,8 @@ get.edge.attribute(koschade1_net, "1")
 ```
 
 ```
-##  [1] 2 2 1 1 5 1 1 1 1 2 4 5 3 5 3 5 5 5 1 5 2 5 2 2 2 2 2 2 2 2 2 2 2 5 5 5 1 5
-## [39] 2 2 2 2 2 5 2 1 2 5 1 5 2 2 2 2 2 2 2 2 2 2 1 5 1
+ [1] 2 2 1 1 5 1 1 1 1 2 4 5 3 5 3 5 5 5 1 5 2 5 2 2 2 2 2 2 2 2 2 2 2 5 5 5 1 5
+[39] 2 2 2 2 2 5 2 1 2 5 1 5 2 2 2 2 2 2 2 2 2 2 1 5 1
 ```
 
 Once again, you can always get a list of potential edge attribute variable names.
@@ -169,7 +172,7 @@ network::list.edge.attributes(koschade1_net)
 ```
 
 ```
-## [1] "1"  "na"
+[1] "1"  "na"
 ```
 
 #### Option 2: Importing One-Mode Social Network Data as an Edge List
@@ -179,18 +182,18 @@ We can also begin by importing an edge list. Like before, we will begin by readi
 
 ```r
 koschade_el <- read.csv("data/Koschade Bali (Edge).csv",
-                        header=TRUE)
+                        header = TRUE)
 # Examine top 5 rows
 head(koschade_el, 5)
 ```
 
 ```
-##   Source   Target Weight
-## 1 Muklas   Amrozi      2
-## 2 Muklas    Imron      2
-## 3 Muklas  Samudra      1
-## 4 Muklas Dulmatin      1
-## 5 Muklas    Idris      5
+  Source   Target Weight
+1 Muklas   Amrozi      2
+2 Muklas    Imron      2
+3 Muklas  Samudra      1
+4 Muklas Dulmatin      1
+5 Muklas    Idris      5
 ```
 
 Next, we convert it to a `network` object.
@@ -211,22 +214,22 @@ koschade2_net
 ```
 
 ```
-##  Network attributes:
-##   vertices = 17 
-##   directed = FALSE 
-##   hyper = FALSE 
-##   loops = FALSE 
-##   multiple = FALSE 
-##   bipartite = FALSE 
-##   total edges= 63 
-##     missing edges= 0 
-##     non-missing edges= 63 
-## 
-##  Vertex attribute names: 
-##     vertex.names 
-## 
-##  Edge attribute names: 
-##     Weight
+ Network attributes:
+  vertices = 17 
+  directed = FALSE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = FALSE 
+  total edges= 63 
+    missing edges= 0 
+    non-missing edges= 63 
+
+ Vertex attribute names: 
+    vertex.names 
+
+ Edge attribute names: 
+    Weight 
 ```
 
 #### Option 3: Importing One-Mode Social Network Data in Pajek Format
@@ -240,23 +243,23 @@ koschade3_net
 ```
 
 ```
-##  Network attributes:
-##   vertices = 17 
-##   directed = FALSE 
-##   hyper = FALSE 
-##   loops = FALSE 
-##   multiple = FALSE 
-##   bipartite = FALSE 
-##   title = Koschade Bali 
-##   total edges= 63 
-##     missing edges= 0 
-##     non-missing edges= 63 
-## 
-##  Vertex attribute names: 
-##     vertex.names x y z 
-## 
-##  Edge attribute names: 
-##     Koschade Bali
+ Network attributes:
+  vertices = 17 
+  directed = FALSE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = FALSE 
+  title = Koschade Bali 
+  total edges= 63 
+    missing edges= 0 
+    non-missing edges= 63 
+
+ Vertex attribute names: 
+    vertex.names x y z 
+
+ Edge attribute names: 
+    Koschade Bali 
 ```
 
 Here, the edge weight attribute is imported by default as `Koschade Bali`, which may be misleading. Luckily, the `read.paj()`  function has an optional argument to provide the name for he edge variable read from the file.
@@ -269,23 +272,23 @@ koschade3_net
 ```
 
 ```
-##  Network attributes:
-##   vertices = 17 
-##   directed = FALSE 
-##   hyper = FALSE 
-##   loops = FALSE 
-##   multiple = FALSE 
-##   bipartite = FALSE 
-##   title = Koschade Bali 
-##   total edges= 63 
-##     missing edges= 0 
-##     non-missing edges= 63 
-## 
-##  Vertex attribute names: 
-##     vertex.names x y z 
-## 
-##  Edge attribute names: 
-##     Weight
+ Network attributes:
+  vertices = 17 
+  directed = FALSE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = FALSE 
+  title = Koschade Bali 
+  total edges= 63 
+    missing edges= 0 
+    non-missing edges= 63 
+
+ Vertex attribute names: 
+    vertex.names x y z 
+
+ Edge attribute names: 
+    Weight 
 ```
 
 
@@ -313,16 +316,16 @@ koschade1_ig
 ```
 
 ```
-## IGRAPH 35537a4 U--- 17 63 -- 
-## + attr: na (v/l), vertex.names (v/c), X1 (e/n), na (e/l)
-## + edges from 35537a4:
-##  [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 8  1-- 9  1--15  1--17  2-- 4
-## [11]  2-- 6  2-- 7  3-- 4  3-- 5  3-- 6  3-- 8  3-- 9  3--15  3--16  3--17
-## [21]  4-- 5  4-- 6  4-- 7  4-- 8  4-- 9  4--10  4--11  4--12  4--13  4--14
-## [31]  4--15  4--17  5-- 6  5-- 8  5-- 9  5--15  5--16  5--17  6-- 7  6-- 8
-## [41]  6-- 9  6--15  6--17  8-- 9  8--15  8--16  8--17  9--15  9--16  9--17
-## [51] 10--11 10--12 10--13 10--14 11--12 11--13 11--14 12--13 12--14 13--14
-## [61] 15--16 15--17 16--17
+IGRAPH 5d7f8d9 U--- 17 63 -- 
++ attr: na (v/l), vertex.names (v/c), X1 (e/n), na (e/l)
++ edges from 5d7f8d9:
+ [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 8  1-- 9  1--15  1--17  2-- 4
+[11]  2-- 6  2-- 7  3-- 4  3-- 5  3-- 6  3-- 8  3-- 9  3--15  3--16  3--17
+[21]  4-- 5  4-- 6  4-- 7  4-- 8  4-- 9  4--10  4--11  4--12  4--13  4--14
+[31]  4--15  4--17  5-- 6  5-- 8  5-- 9  5--15  5--16  5--17  6-- 7  6-- 8
+[41]  6-- 9  6--15  6--17  8-- 9  8--15  8--16  8--17  9--15  9--16  9--17
+[51] 10--11 10--12 10--13 10--14 11--12 11--13 11--14 12--13 12--14 13--14
+[61] 15--16 15--17 16--17
 ```
 
 Note the different printout. Also, you can verify the class change using the `class()` function.
@@ -333,7 +336,7 @@ class(koschade1_ig)
 ```
 
 ```
-## [1] "igraph"
+[1] "igraph"
 ```
 
 Now, return the `igraph` object back into `network`, extract the edge list and print the top 5 rows.
@@ -348,13 +351,13 @@ head(as.data.frame.network(koschade_network))
 ```
 
 ```
-##    .tail    .head X1
-## 1 Muklas   Amrozi  2
-## 2 Muklas    Imron  2
-## 3 Muklas  Samudra  1
-## 4 Muklas Dulmatin  1
-## 5 Muklas    Idris  5
-## 6 Muklas  Azahari  1
+   .tail    .head X1
+1 Muklas   Amrozi  2
+2 Muklas    Imron  2
+3 Muklas  Samudra  1
+4 Muklas Dulmatin  1
+5 Muklas    Idris  5
+6 Muklas  Azahari  1
 ```
 
 What changed? Note that some variables and entries may have changed in the transition.
@@ -394,7 +397,7 @@ gplot(koschade1_net,
       edge.col = "gray")
 ```
 
-<img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" />
 
 In the previous visualizations, we used the Kamada and Kawai algorithm to layout the nodes. By default, `gplot()` uses the Fruchterman and Reingold algorithm to determine the positions of nodes. Let's compare the visual output of three layout algorithms: Kamada and Kawai, Fruchterman and Reigold, and circle. Please note that many other layouts exist, for a more indepth list look at the documenation `?gplot.layout`.
 
@@ -431,7 +434,7 @@ gplot(koschade1_net,
       edge.col = "gray")
 ```
 
-<img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" />
 
 Before we move forward, let's take a look at three more arguments that can grately improve the look of your graphs. First, the `jitter` argument insures that `gplot()` does not draw vertices on top of one another. Second, remember that the edge and vertex attributes can be called and used to aid the visuals. Here we use the `get.edge.attribute()` function to call the edge weight vector (`1`) and rescale the thickness of these. Finally, we can curve edges setting `usecurve` to `TRUE`.
 
@@ -455,7 +458,7 @@ gplot(koschade1_net,
       edge.curve = .1)
 ```
 
-<img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" />
 
 ### Saving Network Plots (e.g., pdf, jpeg, png, tiff)
 
@@ -483,7 +486,7 @@ gplot(koschade1_net,
 dev.off()
 ```
 
-To store the image as a JPEG, use the `jpeg()` function. The `bg = "transparent` option saves the graphs with a transparent background (rather than white), which can be helpful when placing in slides or on non-white backgrounds.
+To store the image as a JPEG, use the `jpeg()` function. The `bg = "transparent"` option saves the graphs with a transparent background (rather than white), which can be helpful when placing in slides or on non-white backgrounds.
 
 
 ```r
@@ -613,22 +616,22 @@ davis1_net
 ```
 
 ```
-##  Network attributes:
-##   vertices = 32 
-##   directed = FALSE 
-##   hyper = FALSE 
-##   loops = FALSE 
-##   multiple = FALSE 
-##   bipartite = 18 
-##   total edges= 89 
-##     missing edges= 0 
-##     non-missing edges= 89 
-## 
-##  Vertex attribute names: 
-##     vertex.names 
-## 
-##  Edge attribute names: 
-##     NULL
+ Network attributes:
+  vertices = 32 
+  directed = FALSE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = 18 
+  total edges= 89 
+    missing edges= 0 
+    non-missing edges= 89 
+
+ Vertex attribute names: 
+    vertex.names 
+
+ Edge attribute names: 
+    NULL 
 ```
   
 Note that you can use the `is.bipartite()` function to make sure the object is indeed a bipartite (two-mode) network.
@@ -639,7 +642,7 @@ is.bipartite(davis1_net)
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 
@@ -655,13 +658,13 @@ head(davis_el)
 ```
 
 ```
-##   Source Target Weight
-## 1 EVELYN     E1      1
-## 2 EVELYN     E2      1
-## 3 EVELYN     E3      1
-## 4 EVELYN     E4      1
-## 5 EVELYN     E5      1
-## 6 EVELYN     E6      1
+  Source Target Weight
+1 EVELYN     E1      1
+2 EVELYN     E2      1
+3 EVELYN     E3      1
+4 EVELYN     E4      1
+5 EVELYN     E5      1
+6 EVELYN     E6      1
 ```
 
 As you can see, the first column is the women and the second is the events they attended. This is how a two-mode edge list should be organized: the first mode will be whatever is represented in the first column and the second mode represented in the second.
@@ -678,22 +681,22 @@ davis2_net
 ```
 
 ```
-##  Network attributes:
-##   vertices = 32 
-##   directed = FALSE 
-##   hyper = FALSE 
-##   loops = FALSE 
-##   multiple = FALSE 
-##   bipartite = 18 
-##   total edges= 89 
-##     missing edges= 0 
-##     non-missing edges= 89 
-## 
-##  Vertex attribute names: 
-##     vertex.names 
-## 
-##  Edge attribute names: 
-##     Weight
+ Network attributes:
+  vertices = 32 
+  directed = FALSE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = 18 
+  total edges= 89 
+    missing edges= 0 
+    non-missing edges= 89 
+
+ Vertex attribute names: 
+    vertex.names 
+
+ Edge attribute names: 
+    Weight 
 ```
 
 Let's check the graph object by plotting it. Once again, you will have to specify the type of graph being evaluated by `gplot()`; to do so, set the `gmode` argument to `twomode`. Note that the women are colored red and events are colored red.
@@ -708,7 +711,7 @@ gplot(davis2_net,
       label.cex = .6)
 ```
 
-<img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-33-1.png" width="70%" style="display: block; margin: auto;" />
 
 
 #### Option 3: Importing Two-Mode Social Network Data in Pajek Format
@@ -722,23 +725,23 @@ davis3_net
 ```
 
 ```
-##  Network attributes:
-##   vertices = 32 
-##   directed = FALSE 
-##   hyper = FALSE 
-##   loops = FALSE 
-##   multiple = FALSE 
-##   bipartite = 18 
-##   title = davis 
-##   total edges= 89 
-##     missing edges= 0 
-##     non-missing edges= 89 
-## 
-##  Vertex attribute names: 
-##     vertex.names x y z 
-## 
-##  Edge attribute names: 
-##     davis
+ Network attributes:
+  vertices = 32 
+  directed = FALSE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = 18 
+  title = davis 
+  total edges= 89 
+    missing edges= 0 
+    non-missing edges= 89 
+
+ Vertex attribute names: 
+    vertex.names x y z 
+
+ Edge attribute names: 
+    davis 
 ```
 
 Is it bipartite?
@@ -749,7 +752,7 @@ is.bipartite(davis3_net)
 ```
 
 ```
-## [1] TRUE
+[1] TRUE
 ```
 
 Notice again that **statnet** has imported the coordinates from the Pajek layout. Additionally, the file was imported as bipartite, but not as directed. To solve this, use the `set.network.attribute()` function to overwrite the `directed` attribute from `FALSE` to `TRUE`.
@@ -763,23 +766,23 @@ davis3_net
 ```
 
 ```
-##  Network attributes:
-##   vertices = 32 
-##   directed = TRUE 
-##   hyper = FALSE 
-##   loops = FALSE 
-##   multiple = FALSE 
-##   bipartite = 18 
-##   title = davis 
-##   total edges= 89 
-##     missing edges= 0 
-##     non-missing edges= 89 
-## 
-##  Vertex attribute names: 
-##     vertex.names x y z 
-## 
-##  Edge attribute names: 
-##     davis
+ Network attributes:
+  vertices = 32 
+  directed = TRUE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = 18 
+  title = davis 
+  total edges= 89 
+    missing edges= 0 
+    non-missing edges= 89 
+
+ Vertex attribute names: 
+    vertex.names x y z 
+
+ Edge attribute names: 
+    davis 
 ```
 
 Finally, remember you can list attributes and actor (vertex) names.
@@ -790,7 +793,7 @@ list.vertex.attributes(davis3_net)
 ```
 
 ```
-## [1] "na"           "vertex.names" "x"            "y"            "z"
+[1] "na"           "vertex.names" "x"            "y"            "z"           
 ```
 
 ```r
@@ -798,12 +801,12 @@ network.vertex.names(davis3_net)
 ```
 
 ```
-##  [1] "EVELYN"    "LAURA"     "THERESA"   "BRENDA"    "CHARLOTTE" "FRANCES"  
-##  [7] "ELEANOR"   "PEARL"     "RUTH"      "VERNE"     "MYRNA"     "KATHERINE"
-## [13] "SYLVIA"    "NORA"      "HELEN"     "DOROTHY"   "OLIVIA"    "FLORA"    
-## [19] "E1"        "E2"        "E3"        "E4"        "E5"        "E6"       
-## [25] "E7"        "E8"        "E9"        "E10"       "E11"       "E12"      
-## [31] "E13"       "E14"
+ [1] "EVELYN"    "LAURA"     "THERESA"   "BRENDA"    "CHARLOTTE" "FRANCES"  
+ [7] "ELEANOR"   "PEARL"     "RUTH"      "VERNE"     "MYRNA"     "KATHERINE"
+[13] "SYLVIA"    "NORA"      "HELEN"     "DOROTHY"   "OLIVIA"    "FLORA"    
+[19] "E1"        "E2"        "E3"        "E4"        "E5"        "E6"       
+[25] "E7"        "E8"        "E9"        "E10"       "E11"       "E12"      
+[31] "E13"       "E14"      
 ```
 
 ### Plotting Two-Mode Networks
@@ -850,7 +853,7 @@ gplot(dat = davis1_net,
       usearrows = FALSE)
 ```
 
-<img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-38-1.png" width="672" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-38-1.png" width="70%" style="display: block; margin: auto;" />
 
 The default colors for **statnet** are blue and red, so if we want to assign different colors we can do so by creating a separate `color` vector.
 
@@ -903,7 +906,7 @@ gplot(dat = davis1_net,
       usearrows = FALSE)
 ```
 
-<img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-40-1.png" width="672" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-40-1.png" width="70%" style="display: block; margin: auto;" />
 
 Let's calculate two-mode degree centrality and then assign the scores as actor attributes. First, let's take a look at how to calculate node degree.
 
@@ -913,8 +916,8 @@ degree(davis1_net)
 ```
 
 ```
-##  [1] 16 14 16 14  8  8  8  6  8  8  8 12 14 16 10  4  4  4  6  6 12  8 16 16 20
-## [26] 28 24 10  8 12  6  6
+ [1] 16 14 16 14  8  8  8  6  8  8  8 12 14 16 10  4  4  4  6  6 12  8 16 16 20
+[26] 28 24 10  8 12  6  6
 ```
 
 Note that you can assign that vector of scores as a vertex attributes.
@@ -928,22 +931,22 @@ davis1_net
 ```
 
 ```
-##  Network attributes:
-##   vertices = 32 
-##   directed = FALSE 
-##   hyper = FALSE 
-##   loops = FALSE 
-##   multiple = FALSE 
-##   bipartite = 18 
-##   total edges= 89 
-##     missing edges= 0 
-##     non-missing edges= 89 
-## 
-##  Vertex attribute names: 
-##     degree vertex.names 
-## 
-##  Edge attribute names: 
-##     NULL
+ Network attributes:
+  vertices = 32 
+  directed = FALSE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = 18 
+  total edges= 89 
+    missing edges= 0 
+    non-missing edges= 89 
+
+ Vertex attribute names: 
+    degree vertex.names 
+
+ Edge attribute names: 
+    NULL 
 ```
 
 You can always call this attribute back.
@@ -954,8 +957,8 @@ get.vertex.attribute(davis1_net, "degree")
 ```
 
 ```
-##  [1] 16 14 16 14  8  8  8  6  8  8  8 12 14 16 10  4  4  4  6  6 12  8 16 16 20
-## [26] 28 24 10  8 12  6  6
+ [1] 16 14 16 14  8  8  8  6  8  8  8 12 14 16 10  4  4  4  6  6 12  8 16 16 20
+[26] 28 24 10  8 12  6  6
 ```
 
 Plot graph with node size reflecting two-mode degree centrality. The degree scores are rescaled so that the vertices don't overwhelm the graph.
@@ -975,7 +978,7 @@ gplot(dat = davis1_net,
       usearrows = FALSE)
 ```
 
-<img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-44-1.png" width="672" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-44-1.png" width="70%" style="display: block; margin: auto;" />
 
 ### Projecting (Folding) Two-Mode Networks into One-Mode Networks in **statnet**.
 
@@ -993,25 +996,25 @@ as.matrix.network.adjacency(davis1_net)
 ```
 
 ```
-##           E1 E2 E3 E4 E5 E6 E7 E8 E9 E10 E11 E12 E13 E14
-## EVELYN     1  1  1  1  1  1  0  1  1   0   0   0   0   0
-## LAURA      1  1  1  0  1  1  1  1  0   0   0   0   0   0
-## THERESA    0  1  1  1  1  1  1  1  1   0   0   0   0   0
-## BRENDA     1  0  1  1  1  1  1  1  0   0   0   0   0   0
-## CHARLOTTE  0  0  1  1  1  0  1  0  0   0   0   0   0   0
-## FRANCES    0  0  1  0  1  1  0  1  0   0   0   0   0   0
-## ELEANOR    0  0  0  0  1  1  1  1  0   0   0   0   0   0
-## PEARL      0  0  0  0  0  1  0  1  1   0   0   0   0   0
-## RUTH       0  0  0  0  1  0  1  1  1   0   0   0   0   0
-## VERNE      0  0  0  0  0  0  1  1  1   0   0   1   0   0
-## MYRNA      0  0  0  0  0  0  0  1  1   1   0   1   0   0
-## KATHERINE  0  0  0  0  0  0  0  1  1   1   0   1   1   1
-## SYLVIA     0  0  0  0  0  0  1  1  1   1   0   1   1   1
-## NORA       0  0  0  0  0  1  1  0  1   1   1   1   1   1
-## HELEN      0  0  0  0  0  0  1  1  0   1   1   1   0   0
-## DOROTHY    0  0  0  0  0  0  0  1  1   0   0   0   0   0
-## OLIVIA     0  0  0  0  0  0  0  0  1   0   1   0   0   0
-## FLORA      0  0  0  0  0  0  0  0  1   0   1   0   0   0
+          E1 E2 E3 E4 E5 E6 E7 E8 E9 E10 E11 E12 E13 E14
+EVELYN     1  1  1  1  1  1  0  1  1   0   0   0   0   0
+LAURA      1  1  1  0  1  1  1  1  0   0   0   0   0   0
+THERESA    0  1  1  1  1  1  1  1  1   0   0   0   0   0
+BRENDA     1  0  1  1  1  1  1  1  0   0   0   0   0   0
+CHARLOTTE  0  0  1  1  1  0  1  0  0   0   0   0   0   0
+FRANCES    0  0  1  0  1  1  0  1  0   0   0   0   0   0
+ELEANOR    0  0  0  0  1  1  1  1  0   0   0   0   0   0
+PEARL      0  0  0  0  0  1  0  1  1   0   0   0   0   0
+RUTH       0  0  0  0  1  0  1  1  1   0   0   0   0   0
+VERNE      0  0  0  0  0  0  1  1  1   0   0   1   0   0
+MYRNA      0  0  0  0  0  0  0  1  1   1   0   1   0   0
+KATHERINE  0  0  0  0  0  0  0  1  1   1   0   1   1   1
+SYLVIA     0  0  0  0  0  0  1  1  1   1   0   1   1   1
+NORA       0  0  0  0  0  1  1  0  1   1   1   1   1   1
+HELEN      0  0  0  0  0  0  1  1  0   1   1   1   0   0
+DOROTHY    0  0  0  0  0  0  0  1  1   0   0   0   0   0
+OLIVIA     0  0  0  0  0  0  0  0  1   0   1   0   0   0
+FLORA      0  0  0  0  0  0  0  0  1   0   1   0   0   0
 ```
 
 Now, let's generate a one-mode matrix of women-to-women relations based on shared participation in an event. To do so, we will multiply the adjacency matrix using the `%*%` operator times its transpose (`t()`).
@@ -1045,7 +1048,7 @@ davis_women_net <- as.network(davis_women_mat)
 davis_events_net <- as.network(davis_events_mat)
 ```
 
-### Plotting Projected One-Mode Networks
+#### Plotting Projected One-Mode Networks
 
 Now that we have extracted the one-mode networks, plot the two new graphs using `gplot()` and the additional arguments used previously.
 
@@ -1078,7 +1081,7 @@ gplot(dat = davis_events_net,
       usearrows  = FALSE)
 ```
 
-<img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-50-1.png" width="672" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-50-1.png" width="70%" style="display: block; margin: auto;" />
 
 Resize the nodes by degree centrality. This time, we will not store the value as a vertex attribute.
 
@@ -1108,7 +1111,7 @@ gplot(dat = davis_events_net,
       usearrows  = FALSE)
 ```
 
-<img src="1-Importing_and_Visualizing_in_statnet_files/figure-html/unnamed-chunk-51-1.png" width="672" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-51-1.png" width="70%" style="display: block; margin: auto;" />
 
 ### Saving Network Plots
 
@@ -1174,4 +1177,4 @@ save(davis_el,
      file = "data/davis_statnet.RData")
 ```
 
-That's all (for **statnet**) for now.
+That's all for **statnet** for now.

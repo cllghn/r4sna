@@ -8,7 +8,7 @@ output: html_document
 
 In this lab we'll explore a variety of methods for importing social network data into R, manipulating one- and two-mode network data, and visualizing social networks. We'll be using a variety of social networks, some of which you'll recognize from other classes. We'll also illustrate a variety of ways to import network data, something that should be easy to do but often turns out to be challenging because a number of resources jump over this important step.
 
-::: {.infobox data-latex="infobox"}
+::: {.infobox data-latex=""}
 **Note**: This lab has gone through many iterations and reflects the influence from a variety of individuals, including Phil Murphy, and Brendan Knapp.
 :::
 
@@ -35,7 +35,7 @@ Proceed to place the data required for this lab (`davis.csv`, `davis.net`, `davi
 
 ## Load Libraries
 
-We need to load the libraries we plan to use. Here we will use **igraph**. Because **igraph** and **statnet** conflict with one another sometimes, we do not want to have them loaded at the same time, so you may want to detach it. Alternatively, you may choose to namespace functions using the `::` operator as needed (e.g., `igraph::betweenness()` vs. `sna::betweenness()`). Of course, this applies only if you had the `statnet` package loaded already. The `intergraph` package allows users to transform network data back and forth between **igraph** and **statnet**.
+We need to load the libraries we plan to use. Here we will use **igraph**. Because **igraph** and **statnet** conflict with one another sometimes, we do not want to have them loaded at the same time, so you may want to detach it. Alternatively, you may choose to namespace functions using the `::` operator as needed (e.g., `igraph::betweenness()` vs. `sna::betweenness()`). Of course, this applies only if you had the `statnet` package loaded already. The **intergraph** package allows users to transform network data back and forth between **igraph** and **statnet**.
 
 ```{r, include = TRUE, collapse = FALSE, message = FALSE, warning = FALSE}
 # If you haven't done so, install the required packages:
@@ -47,7 +47,7 @@ library(igraph)
 library(intergraph)
 ```
 
-::: {.infobox data-latex="infobox"}
+::: {.infobox data-latex=""}
 **Note**: **igraph** imports the `%>%` operator on load (`library(igraph)`). This series of exercises leverages the operator because we find it very useful in chaining functions. 
 :::
 
@@ -96,7 +96,7 @@ Now that the matrix has been imported, let's examine the object. First, take a l
 class(koschade1_ig)
 ```
 
-What is it? If you ran the code above the printout on your console should read `igraph`. Many R objects have a class, which describes a type of object, describing the properties it possesses, how it behaves, and how it relates to other objects and functions [@Wickham2019]. An `igraph` class denotes that this object is an **igraph** graph and that it will work with the functions from this library.
+What is it? If you ran the code above the printout on your console should read `igraph`. Many R objects have a class, which describes a type of object, the properties it possesses, how it behaves, and how it relates to other objects and functions [@Wickham2019]. An `igraph` class denotes that this object is an **igraph** graph and that it will work with the functions from this library.
 
 One key characteristic of **igraph** graphs is that they are printed to the screen in a special format:
 
@@ -150,7 +150,7 @@ koschade2_ig
 
 #### Option 3: Importing One-Mode Network Data in Pajek Format
 
-Another way to bring the data into **igraph** is to import the data from the Pajek file (*.net). The `read_graph()` function is able to read graphs from multiple foreign formats. Note that by default the command brings data in as a directed network. We'll change that below.
+Another way to bring the data into **igraph** is to import the data from the Pajek file (*.net). The `read_graph()` function is able to read graphs from multiple foreign formats. 
 
 ```{r, include = TRUE, collapse = FALSE, warning = FALSE}
 koschade3_ig <- read.graph(file = "data/Koschade Bali.net",
@@ -160,24 +160,6 @@ koschade3_ig
 ```
 
 Transform the graph object to a `data.frame` and view it (`View()`).
-
-```{r, include = TRUE, collapse = FALSE, warning = FALSE}
-koschade3_ig %>%
-  get.data.frame(what = "edges") %>%
-  head()
-```
-
-Note that this command brings up a data for a directed (asymmetric) network. We need to convert the graph from directed to undirected using the `as.undirected()` function.
-
-```{r, include = TRUE, collapse = FALSE, warning = FALSE}
-koschade3_ig <- as.undirected(koschade3_ig,
-                              # Specifies what to do with the edge attributes
-                              edge.attr.comb = list(weight = "mean"))
-# Look at the printout
-koschade3_ig
-```
-
-Once again, extract the edge list from the graph and view the data. Note that the order of nodes may change (but all should be fine).
 
 ```{r, include = TRUE, collapse = FALSE, warning = FALSE}
 koschade3_ig %>%
@@ -365,7 +347,7 @@ save(koschade_dat,
 
 We will now switch to another data set to import, manipulate, and visualize two-mode network data in **igraph**. The data that we will use here is what is known as Davis' Southern Club Women. Davis and her colleagues recorded the observed attendance of 18 Southern women at 14 different social events.
 
-### Importing Two-Mode Social Network Data into `igraph`
+### Importing Two-Mode Social Network Data into **igraph**
 
 #### Option 1: Importing Two-Mode Social Network Data in Matrix Format
 
@@ -391,7 +373,7 @@ Note the `B` letter in the four letter code string that describes the network qu
 
 #### Option 2: Importing Two-Mode Social Network Data as an Edge List
 
-::: {.infobox data-latex="infobox"}
+::: {.infobox data-latex=""}
 **Note**: This section is adapted from code written by Phil Murphy and Brendan Knapp.
 :::
 
@@ -509,7 +491,7 @@ plot(davis1_ig,
      vertex.label.color="black")
 ```
 
-Now, re-plot the networks with the new colors and save the coordinate while we're at it.
+Now, re-plot the networks with the new colors and saved the coordinate while we're at it.
 
 ```{r, fig.align = "center"}
 # Set graph parameters to 1 row and 3 columns
@@ -764,4 +746,4 @@ save(davis_mat,
      file = "data/davis_igraph.RData")
 ```
 
-That's all (for **igraph**) for now.
+That's all for **igraph** for now.

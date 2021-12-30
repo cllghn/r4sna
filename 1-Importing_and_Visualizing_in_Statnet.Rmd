@@ -2,11 +2,19 @@
 output: html_document
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo      = TRUE,
+                      collapse  = FALSE,
+                      fig.align = "center",
+                      message   = FALSE)
+```
+
+
 # Importing and Visualizing One- and Two-Mode Social Network Data in **statnet**
 
 In this lab we'll explore a variety of methods for importing social network data into R, manipulating one- and two-mode network data, and visualizing social networks. We'll be using a variety of social networks, some of which you'll recognize from other classes. We'll also illustrate a variety of ways to import network data, something that should be easy to do but often turns out to be challenging because a number of resources jump over this important step.
 
-::: {.infobox data-latex="infobox"}
+::: {.infobox data-latex=""}
 **Note**: This lab has gone through many iterations and reflects the influence from a variety of individuals, including Phil Murphy, and Brendan Knapp.
 :::
 
@@ -33,7 +41,7 @@ Proceed to place the data required for this lab (`davis.csv`, `davis.net`, `davi
 
 ## Load Libraries
 
-We need to load the libraries we plan to use. Here we will use **statnet*. Because **igraph** and **statnet** conflict with one another sometimes, we do not want to have them loaded at the same time, so you may want to detach it. Alternatively, you may choose to namespace functions using the `::` operator as needed (e.g., `igraph::betweenness()` vs. `sna::betweenness()`). Of course, this applies only if you had the `igraph` package loaded already. The `intergraph` package allows users to transform network data back and forth between **igraph** and **statnet**.
+We need to load the libraries we plan to use. Here we will use **statnet**. Because **igraph** and **statnet** conflict with one another sometimes, we do not want to have them loaded at the same time, so you may want to detach it. Alternatively, you may choose to namespace functions using the `::` operator as needed (e.g., `igraph::betweenness()` vs. `sna::betweenness()`). Of course, this applies only if you had the `igraph` package loaded already. The `intergraph` package allows users to transform network data back and forth between **igraph** and **statnet**.
 
 ```{r, include = TRUE, collapse = FALSE, message = FALSE, warning = FALSE}
 # If you haven't done so, install the required packages:
@@ -117,7 +125,7 @@ We can also begin by importing an edge list. Like before, we will begin by readi
 
 ```{r, include = TRUE, collapse = FALSE, warning = FALSE, message = FALSE}
 koschade_el <- read.csv("data/Koschade Bali (Edge).csv",
-                        header=TRUE)
+                        header = TRUE)
 # Examine top 5 rows
 head(koschade_el, 5)
 ```
@@ -308,7 +316,7 @@ gplot(koschade1_net,
 dev.off()
 ```
 
-To store the image as a JPEG, use the `jpeg()` function. The `bg = "transparent` option saves the graphs with a transparent background (rather than white), which can be helpful when placing in slides or on non-white backgrounds.
+To store the image as a JPEG, use the `jpeg()` function. The `bg = "transparent"` option saves the graphs with a transparent background (rather than white), which can be helpful when placing in slides or on non-white backgrounds.
 
 ```{r, eval = FALSE}
 jpeg(file = "koschade1.jpg",
@@ -673,7 +681,7 @@ davis_women_net <- as.network(davis_women_mat)
 davis_events_net <- as.network(davis_events_mat)
 ```
 
-### Plotting Projected One-Mode Networks
+#### Plotting Projected One-Mode Networks
 
 Now that we have extracted the one-mode networks, plot the two new graphs using `gplot()` and the additional arguments used previously.
 
@@ -794,4 +802,4 @@ save(davis_el,
      file = "data/davis_statnet.RData")
 ```
 
-That's all (for **statnet**) for now.
+That's all for **statnet** for now.
