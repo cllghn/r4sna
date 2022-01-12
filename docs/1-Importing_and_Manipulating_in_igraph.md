@@ -22,7 +22,7 @@ Find and open your RStudio Project associated with this class. Begin by opening 
 # What: Importing and Visualizing One- and Two-Mode Social Network Data
 # File: lab1_igraph.R
 # Created: 02.28.14
-# Revised: 12.22.21
+# Revised: 01.06.22
 #######################################################################
 ```
 
@@ -33,7 +33,7 @@ If you have not set up your RStudio Project to clear the workspace on exit, your
 rm(list = ls())
 ```
 
-Proceed to place the data required for this lab (`davis.csv`, `davis.net`, `davisedge.csv`, `Koschade Bali (Edge).csv`, `Koschade Bali (Matrix).csv`, and `Koschade Bali.net`) also inside your R Project folder. We have placed it in a sub folder titled `data` for organizational purposes; however, this is not necessary.
+Proceed to place the data required for this lab (`davis.csv`, `davis.net`, `davisedge.csv`, `Koschade Bali (Edge).csv`, `Koschade Bali (Matrix).csv`, and `Koschade Bali.net`) also inside your R Project folder. We have placed it in a sub-folder titled `data` for organizational purposes; however, this is not necessary.
 
 ## Load Libraries
 
@@ -51,7 +51,7 @@ library(intergraph)
 ```
 
 ::: {.infobox data-latex=""}
-**Note**: **igraph** imports the `%>%` operator on load (`library(igraph)`). This series of exercises leverages the operator because we find it very useful in chaining functions. 
+**Note**: **igraph** imports the `%>%` (piping) operator on load (`library(igraph)`). This lab leverages the operator because we find it very useful in chaining functions, although in doing so we will sometimes illustrate how to carry out the same operations using base R. 
 :::
 
 ## One-mode Social Network Data in **igraph**: Koschade Network
@@ -71,11 +71,21 @@ koschade_dat <- read.csv(file = "data/Koschade Bali (Matrix).csv",
                          header = TRUE,
                          row.names = 1,
                          check.names = FALSE)
-# Now, coherce the data.frame to a matrix
+# Now, coerce the data.frame to a matrix
 koschade_mat <- as.matrix(koschade_dat)
 ```
 
-The two-step operation above could be combined:
+The two-step operation above could be combined with and without piping. First, without:
+
+
+```r
+koschade_mat <- as.matrix(read.csv(file = "data/Koschade Bali (Matrix).csv",
+                                   header = TRUE,
+                                   row.names = 1,
+                                   check.names = FALSE))
+```
+
+And now with: 
 
 
 ```r
@@ -117,9 +127,9 @@ koschade1_ig
 ```
 
 ```
-IGRAPH 59f2ebd UNW- 17 63 -- 
+IGRAPH d12349e UNW- 17 63 -- 
 + attr: name (v/c), weight (e/n)
-+ edges from 59f2ebd (vertex names):
++ edges from d12349e (vertex names):
  [1] Muklas --Amrozi   Muklas --Imron    Muklas --Samudra  Muklas --Dulmatin
  [5] Muklas --Idris    Muklas --Azahari  Muklas --Ghoni    Muklas --Patek   
  [9] Muklas --Sarijo   Amrozi --Samudra  Amrozi --Idris    Amrozi --Mubarok 
@@ -165,7 +175,6 @@ edge_weight_1 <- get.edge.attribute(koschade1_ig,
                                     name = "weight") # Attribute name
 ```
 
-
 #### Option 2: Importing One-Mode Network Data as an Edge List
 
 Here is how we can import an edge list, and then check the first few rows with the `head()` command.
@@ -196,9 +205,39 @@ koschade2_ig <- graph_from_data_frame(d = koschade2_el,
                                       directed = FALSE)
 # Look at the printout
 koschade2_ig
-IGRAPH 5a0fef3 UN-- 17 63 -- 
+IGRAPH d146b08 UN-- 17 63 -- 
 + attr: name (v/c), Weight (e/n)
-+ edges from 5a0fef3 (vertex names):
++ edges from d146b08 (vertex names):
+ [1] Muklas --Amrozi   Muklas --Imron    Muklas --Samudra  Muklas --Dulmatin
+ [5] Muklas --Idris    Muklas --Azahari  Muklas --Ghoni    Muklas --Patek   
+ [9] Muklas --Sarijo   Amrozi --Samudra  Amrozi --Idris    Amrozi --Mubarok 
+[13] Imron  --Samudra  Imron  --Dulmatin Imron  --Idris    Imron  --Azahari 
+[17] Imron  --Ghoni    Imron  --Patek    Imron  --Feri     Imron  --Sarijo  
+[21] Samudra--Dulmatin Samudra--Idris    Samudra--Mubarok  Samudra--Azahari 
+[25] Samudra--Ghoni    Samudra--Arnasan  Samudra--Rauf     Samudra--Octavia 
+[29] Samudra--Hidayat  Samudra--Junaedi  Samudra--Patek    Samudra--Sarijo  
++ ... omitted several edges
+```
+
+Here's how to do all that using piping:
+
+
+```r
+koschade2_ig <- read.csv(file = "data/Koschade Bali (Edge).csv",
+                         header = TRUE) %>%
+ graph_from_data_frame(directed = FALSE)
+```
+
+Look at the printout
+
+```r
+koschade2_ig
+```
+
+```
+IGRAPH d14ccb1 UN-- 17 63 -- 
++ attr: name (v/c), Weight (e/n)
++ edges from d14ccb1 (vertex names):
  [1] Muklas --Amrozi   Muklas --Imron    Muklas --Samudra  Muklas --Dulmatin
  [5] Muklas --Idris    Muklas --Azahari  Muklas --Ghoni    Muklas --Patek   
  [9] Muklas --Sarijo   Amrozi --Samudra  Amrozi --Idris    Amrozi --Mubarok 
@@ -223,9 +262,9 @@ koschade3_ig
 ```
 
 ```
-IGRAPH 5a150b6 UNW- 17 63 -- 
+IGRAPH d15b981 UNW- 17 63 -- 
 + attr: id (v/c), name (v/c), x (v/n), y (v/n), z (v/n), weight (e/n)
-+ edges from 5a150b6 (vertex names):
++ edges from d15b981 (vertex names):
  [1] Muklas --Amrozi   Muklas --Imron    Muklas --Samudra  Muklas --Dulmatin
  [5] Muklas --Idris    Muklas --Azahari  Muklas --Ghoni    Muklas --Patek   
  [9] Muklas --Sarijo   Amrozi --Samudra  Amrozi --Idris    Amrozi --Mubarok 
@@ -258,9 +297,16 @@ koschade3_ig %>%
 
 #### Option 4: Importing One-Mode Network Data into **statnet** Format using **intergraph**
 
-You may find yourself working with data in **igraph** and have to convert it to **statnet**. Luckily, the **intergraph** library let's you jump pretty smoothly between the data classes required by each library. 
+If you first worked with the data in **statnet**, you can use **intergraph** to convert a **statnet** network object to an **igraph** object. The **intergraph** library let's you jump pretty smoothly between the data classes required by each library.
 
-Here we will take an `igraph` object and convert it to a `network` class object required by the **statnet** suite. Then, we will return that object from `network` to `igraph` class.
+**To be clear**: this command only works if you already have a statnet network object
+
+
+```r
+koschade_ig <- asIgraph(koschade_net)
+```
+
+Of course, you may begin working with data in **igraph** and have to convert it to **statnet**. Here we will take an `igraph` object and convert it to a `network` class object required by the **statnet** suite. Then, we will return that object from `network` to `igraph` class.
 
 
 ```r
@@ -336,7 +382,7 @@ plot(koschade1_ig)
 # plot(koschade3_ig)
 ```
 
-<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" />
 
 Let's try making some more sophisticated plots. Before we do that, however, let's save the coordinates so that the remaining plots will have the same layout. Here, we will use the Fruchterman Reingold layout algorithm (`layout_with_kk()`).
 
@@ -356,7 +402,7 @@ plot(koschade1_ig,
      vertex.label.color = "black")
 ```
 
-<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" />
 
 Now, let's size the edges by tie strength and plot again.
 
@@ -371,7 +417,7 @@ plot(koschade1_ig,
      edge.width = edge_weight_1)
 ```
 
-<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" />
 
 Note that the layout above is the same as the previous layout. This is helpful when presenting successive graphs in your papers and theses. It makes it easier for readers to compare the network graphs.
 
@@ -388,7 +434,7 @@ plot(koschade1_ig,
      edge.curved = TRUE)
 ```
 
-<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-26-1.png" width="70%" style="display: block; margin: auto;" />
 
 ### Saving Network Plots (e.g., pdf, jpeg, png, tiff)
 
@@ -494,7 +540,25 @@ We will now switch to another data set to import, manipulate, and visualize two-
 
 #### Option 1: Importing Two-Mode Social Network Data in Matrix Format
 
-Once again, begin by reading the data from a CSV using `read.csv()`. Then transform the `data.frame` to a `matrix`, which is passed along to the `graph_from_incidence_matrix()` **igraph** function. This final command, creates a bipartite graph from an incidence matrix, the arguments included below are optional, but needed in this circumstance.
+Once again, begin by reading the data from a CSV using `read.csv()`. This then transformed into a matrix, which, in turn, is turned into a bipartite (two-mode) network using the `graph_from_incidence_matrix()` **igraph** function. As before, we demonstrate how to do this with and without piping.
+
+First, without piping:
+
+
+```r
+davis1_dat <- read.csv(file = "data/davis.csv",
+                        header = TRUE,
+                        row.names = 1,
+                        check.names = FALSE)
+
+davis1_mat <- as.matrix(davis1_dat)
+
+davis1_ig <- graph_from_incidence_matrix(davis1_mat,
+                                         directed = FALSE,
+                                         weighted = NULL)
+```
+
+Now, with piping:
 
 
 ```r
@@ -515,9 +579,9 @@ davis1_ig
 ```
 
 ```
-IGRAPH 5a8c645 UN-B 32 89 -- 
+IGRAPH d2418b6 UN-B 32 89 -- 
 + attr: type (v/l), name (v/c)
-+ edges from 5a8c645 (vertex names):
++ edges from d2418b6 (vertex names):
  [1] EVELYN   --E1 EVELYN   --E2 EVELYN   --E3 EVELYN   --E4 EVELYN   --E5
  [6] EVELYN   --E6 EVELYN   --E8 EVELYN   --E9 LAURA    --E1 LAURA    --E2
 [11] LAURA    --E3 LAURA    --E5 LAURA    --E6 LAURA    --E7 LAURA    --E8
@@ -537,7 +601,20 @@ Note the `B` letter in the four letter code string that describes the network qu
 **Note**: This section is adapted from code written by Phil Murphy and Brendan Knapp.
 :::
 
-You may also begin creating your analysis of two-mode networks from an edge list. To do so, leverage the `read.csv()` function to ingest data. Then, pass the edge list to **igraph**'s `graph_from_data_frame()` function. 
+You may also begin creating your analysis of two-mode networks from an edge list. To do so, leverage the `read.csv()` function to ingest data. Then, pass the edge list to **igraph**'s `graph_from_data_frame()` function. Again, first without piping and then with piping.
+
+Without: 
+
+
+```r
+davis2_el <- read.csv(file = "data/davisedge.csv",
+                      header = TRUE)
+
+davis2_ig <- graph_from_data_frame(davis2_el,
+                                   directed = FALSE)
+```
+
+With:
 
 
 ```r
@@ -554,9 +631,9 @@ davis2_ig
 ```
 
 ```
-IGRAPH 5a9523d UN-- 32 89 -- 
+IGRAPH d2522d4 UN-- 32 89 -- 
 + attr: name (v/c), Weight (e/n)
-+ edges from 5a9523d (vertex names):
++ edges from d2522d4 (vertex names):
  [1] EVELYN   --E1 EVELYN   --E2 EVELYN   --E3 EVELYN   --E4 EVELYN   --E5
  [6] EVELYN   --E6 EVELYN   --E8 EVELYN   --E9 LAURA    --E1 LAURA    --E2
 [11] LAURA    --E3 LAURA    --E5 LAURA    --E6 LAURA    --E7 LAURA    --E8
@@ -612,9 +689,9 @@ davis2_ig
 ```
 
 ```
-IGRAPH 5a9523d UN-B 32 89 -- 
+IGRAPH d2522d4 UN-B 32 89 -- 
 + attr: name (v/c), type (v/l), Weight (e/n)
-+ edges from 5a9523d (vertex names):
++ edges from d2522d4 (vertex names):
  [1] EVELYN   --E1 EVELYN   --E2 EVELYN   --E3 EVELYN   --E4 EVELYN   --E5
  [6] EVELYN   --E6 EVELYN   --E8 EVELYN   --E9 LAURA    --E1 LAURA    --E2
 [11] LAURA    --E3 LAURA    --E5 LAURA    --E6 LAURA    --E7 LAURA    --E8
@@ -666,7 +743,7 @@ Like with one-mode data, two-mode data can be plotted using **igraph**. Once aga
 plot(davis1_ig)
 ```
 
-<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-39-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-45-1.png" width="70%" style="display: block; margin: auto;" />
 
 Once again, we can store the coordinates as a separate object and use it to compare networks. Here we will plot networks side-by-side using the `par()` function. Additionally, we can make some aesthetic improvements through adding arguments (e.g., `vertex.label.cex`, etc.).
 
@@ -685,15 +762,15 @@ plot(davis1_ig,
 plot(davis2_ig,
      layout = coordfr,
      vertex.label.cex  = 0.6,
-     vertex.label.color="black")
+     vertex.label.color = "black")
 
 plot(davis3_ig,
      layout = coordfr,
      vertex.label.cex  = 0.6,
-     vertex.label.color="black")
+     vertex.label.color = "black")
 ```
 
-<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-40-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-46-1.png" width="70%" style="display: block; margin: auto;" />
 
 Now, let’s make a few adjustments to the graph; for instance, we can change the node colors to “light blue” and “yellow” to reflect node types. First, we need to determine what nodes belong to which mode.
 
@@ -732,10 +809,10 @@ plot(davis1_ig,
      vertex.color = ifelse(get.vertex.attribute(davis1_ig, name = "type"),
                            "yellow", "lightblue"),
      vertex.label.cex  = 0.6,
-     vertex.label.color="black")
+     vertex.label.color = "black")
 ```
 
-<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-42-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-48-1.png" width="70%" style="display: block; margin: auto;" />
 
 Now, re-plot the networks with the new colors and saved the coordinate while we're at it.
 
@@ -769,7 +846,7 @@ plot(davis3_ig,
      vertex.size = 10)
 ```
 
-<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-43-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-49-1.png" width="70%" style="display: block; margin: auto;" />
 
 We may want to rescale nodes to reflect those with more adjacent nodes. To do so, we can use the `degree()` function to calculate a node's degree centrality. If this measure is not familiar to you yet, don't worry, we will expand on this topic later in the class.
 
@@ -821,7 +898,7 @@ plot(davis3_ig,
      vertex.size = degree(davis3_ig))
 ```
 
-<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-45-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-51-1.png" width="70%" style="display: block; margin: auto;" />
 
 ### Projecting (Folding) Two-Mode Networks into One-Mode Networks in **igraph**
 
@@ -849,7 +926,7 @@ davis1_mat
 
 Next, multiply the matrices by their transpose. To do so, we use the `%*%` operator to multiply networks and the `t()` function to transpose one matrix during the multiplication.
 
-First, let's create a one-mode matrix of women-to-women based on shared events/
+First, let's create a one-mode matrix of women-to-women based on shared events.
 
 
 ```r
@@ -895,9 +972,9 @@ davis_women_ig
 ```
 
 ```
-IGRAPH 5b7581b UNW- 18 139 -- 
+IGRAPH d3f41f9 UNW- 18 139 -- 
 + attr: name (v/c), weight (e/n)
-+ edges from 5b7581b (vertex names):
++ edges from d3f41f9 (vertex names):
  [1] EVELYN --LAURA     EVELYN --THERESA   EVELYN --BRENDA    EVELYN --CHARLOTTE
  [5] EVELYN --FRANCES   EVELYN --ELEANOR   EVELYN --PEARL     EVELYN --RUTH     
  [9] EVELYN --VERNE     EVELYN --MYRNA     EVELYN --KATHERINE EVELYN --SYLVIA   
@@ -923,9 +1000,9 @@ davis_events_ig
 ```
 
 ```
-IGRAPH 5b7a465 UNW- 14 66 -- 
+IGRAPH d3fbc09 UNW- 14 66 -- 
 + attr: name (v/c), weight (e/n)
-+ edges from 5b7a465 (vertex names):
++ edges from d3fbc09 (vertex names):
  [1] E1 --E2  E1 --E3  E1 --E4  E1 --E5  E1 --E6  E1 --E7  E1 --E8  E1 --E9 
  [9] E2 --E3  E2 --E4  E2 --E5  E2 --E6  E2 --E7  E2 --E8  E2 --E9  E3 --E4 
 [17] E3 --E5  E3 --E6  E3 --E7  E3 --E8  E3 --E9  E4 --E5  E4 --E6  E4 --E7 
@@ -963,9 +1040,9 @@ davis_events_ig
 ```
 
 ```
-IGRAPH 5b826e2 UNW- 14 66 -- 
+IGRAPH d409a42 UNW- 14 66 -- 
 + attr: name (v/c), weight (e/n)
-+ edges from 5b826e2 (vertex names):
++ edges from d409a42 (vertex names):
  [1] E1 --E2  E1 --E3  E1 --E4  E1 --E5  E1 --E6  E1 --E8  E1 --E9  E1 --E7 
  [9] E2 --E3  E2 --E4  E2 --E5  E2 --E6  E2 --E8  E2 --E9  E2 --E7  E3 --E4 
 [17] E3 --E5  E3 --E6  E3 --E8  E3 --E9  E3 --E7  E4 --E5  E4 --E6  E4 --E8 
@@ -987,9 +1064,9 @@ davis_women_ig
 ```
 
 ```
-IGRAPH 5b8f514 UNW- 18 139 -- 
+IGRAPH d411b9b UNW- 18 139 -- 
 + attr: name (v/c), weight (e/n)
-+ edges from 5b8f514 (vertex names):
++ edges from d411b9b (vertex names):
  [1] EVELYN --LAURA     EVELYN --BRENDA    EVELYN --THERESA   EVELYN --CHARLOTTE
  [5] EVELYN --FRANCES   EVELYN --ELEANOR   EVELYN --RUTH      EVELYN --PEARL    
  [9] EVELYN --NORA      EVELYN --VERNE     EVELYN --MYRNA     EVELYN --KATHERINE
@@ -1028,7 +1105,7 @@ plot(davis_events_ig,
      vertex.size = degree(davis_events_ig))
 ```
 
-<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-57-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Manipulating_in_igraph_files/figure-html/unnamed-chunk-63-1.png" width="70%" style="display: block; margin: auto;" />
 
 ### Saving Network Plots
 

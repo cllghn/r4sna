@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Manipulating and Simplifying Social Network Data in statnet | R for Social Network Analysis</title>
+  <meta name="description" content="TBD." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Manipulating and Simplifying Social Network Data in statnet | R for Social Network Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="TBD." />
+  <meta name="github-repo" content="cjcallag/r4sna" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Manipulating and Simplifying Social Network Data in statnet | R for Social Network Analysis" />
+  
+  <meta name="twitter:description" content="TBD." />
+  
+
+<meta name="author" content="CORE Lab" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="manipulating-and-simplifying-social-network-data-in-igraph.html"/>
+<link rel="next" href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="my_style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Social Network Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instructors"><i class="fa fa-check"></i><b>1.1</b> Instructors</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="2" data-path="setting-up.html"><a href="setting-up.html"><i class="fa fa-check"></i><b>2</b> Setting Up</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setting-up.html"><a href="setting-up.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.1</b> R and RStudio Basics</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="setting-up.html"><a href="setting-up.html#basics-of-r-coding-in-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Basics of R Coding in RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="setting-up.html"><a href="setting-up.html#project-workflow"><i class="fa fa-check"></i><b>2.2</b> Project Workflow</a></li>
+</ul></li>
+<li class="part"><span><b>II Lab 1</b></span></li>
+<li class="chapter" data-level="3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
+<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Lab 2</b></span></li>
+<li class="chapter" data-level="5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>5</b> Manipulating and Simplifying Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#setup-2"><i class="fa fa-check"></i><b>5.1</b> Setup</a></li>
+<li class="chapter" data-level="5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-libraries-2"><i class="fa fa-check"></i><b>5.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-the-backbones-of-two-mode-network-projections"><i class="fa fa-check"></i><b>5.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-data"><i class="fa fa-check"></i><b>5.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#non-statistical-projections-of-the-co-sponsorhip-data"><i class="fa fa-check"></i><b>5.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="5.3.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-backbones"><i class="fa fa-check"></i><b>5.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#simplifying-networks-in-igraph-anabaptist-leadership-network"><i class="fa fa-check"></i><b>5.4</b> Simplifying Networks in <strong>igraph</strong>: Anabaptist Leadership Network</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-network-and-attribute-data"><i class="fa fa-check"></i><b>5.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-the-anabaptist-network"><i class="fa fa-check"></i><b>5.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="5.4.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#shrinking-collapsing-contracting-networks"><i class="fa fa-check"></i><b>5.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="5.4.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-subnetworks"><i class="fa fa-check"></i><b>5.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#multiple-stacked-networks-in-igraph-sampson-monastery"><i class="fa fa-check"></i><b>5.5</b> Multiple (Stacked) Networks in <strong>igraph</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-edge-list-network-data"><i class="fa fa-check"></i><b>5.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="5.5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-stacked-networks"><i class="fa fa-check"></i><b>5.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="5.5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-and-plotting-individual-networks"><i class="fa fa-check"></i><b>5.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>6</b> Manipulating and Simplifying Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#setup-3"><i class="fa fa-check"></i><b>6.1</b> Setup</a></li>
+<li class="chapter" data-level="6.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-libraries-3"><i class="fa fa-check"></i><b>6.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="6.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-the-backbones-of-two-mode-network-projections-1"><i class="fa fa-check"></i><b>6.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-data-1"><i class="fa fa-check"></i><b>6.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#non-statistical-projections-of-the-co-sponsorhip-data-1"><i class="fa fa-check"></i><b>6.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="6.3.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-backbones-1"><i class="fa fa-check"></i><b>6.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#simplifying-networks-in-statnet-anabaptist-network"><i class="fa fa-check"></i><b>6.4</b> Simplifying Networks in <strong>statnet</strong>: Anabaptist Network</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-network-and-attribute-data-1"><i class="fa fa-check"></i><b>6.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="6.4.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-the-anabaptist-network-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="6.4.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#shrinking-collapsing-contracting-networks-1"><i class="fa fa-check"></i><b>6.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="6.4.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-subnetworks-1"><i class="fa fa-check"></i><b>6.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#multiple-stacked-networks-in-statnet-sampson-monastery"><i class="fa fa-check"></i><b>6.5</b> Multiple (Stacked) Networks in <strong>statnet</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-edge-list-network-data-1"><i class="fa fa-check"></i><b>6.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="6.5.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-stacked-networks-1"><i class="fa fa-check"></i><b>6.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="6.5.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-and-plotting-individual-networks-1"><i class="fa fa-check"></i><b>6.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Lab 3</b></span></li>
+<li class="part"><span><b>V Lab 4</b></span></li>
+<li class="part"><span><b>VI Lab 5</b></span></li>
+<li class="part"><span><b>VII Lab 6</b></span></li>
+<li class="part"><span><b>VIII Lab 7</b></span></li>
+<li class="part"><span><b>IX Lab 8</b></span></li>
+<li class="part"><span><b>X Lab 9</b></span></li>
+<li class="part"><span><b>XI Lab 10</b></span></li>
+<li class="part"><span><b>XII Appendices</b></span></li>
+<li class="chapter" data-level="7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>7</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>7.1</b> Basic Base R and <strong>dplyr</strong> Functions</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>7.1.1</b> Installation</a></li>
+<li class="chapter" data-level="7.1.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>7.1.2</b> Loading</a></li>
+<li class="chapter" data-level="7.1.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>7.1.3</b> Import and View Data</a></li>
+<li class="chapter" data-level="7.1.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>7.1.4</b> Extracting Variables/Columns</a></li>
+<li class="chapter" data-level="7.1.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>7.1.5</b> Creating Filters/Extracting Rows</a></li>
+<li class="chapter" data-level="7.1.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>7.1.6</b> Arrange Rows</a></li>
+<li class="chapter" data-level="7.1.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>7.1.7</b> Making a New Column/Variable</a></li>
+<li class="chapter" data-level="7.1.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>7.1.8</b> Rename Variables</a></li>
+<li class="chapter" data-level="7.1.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>7.1.9</b> Summarizing</a></li>
+<li class="chapter" data-level="7.1.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>7.1.10</b> Combining Data</a></li>
+<li class="chapter" data-level="7.1.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>7.1.11</b> Piping Multiple Variables</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>8</b> Key SNA Functions and Visualization Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>8.1</b> <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>8.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="8.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>8.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>8.2</b> <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>8.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="8.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>8.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>XIII References</b></span></li>
+<li class="chapter" data-level="9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>9</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown">
+Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Social Network Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="manipulating-and-simplifying-social-network-data-in-statnet" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Manipulating and Simplifying Social Network Data in <strong>statnet</strong></h1>
+<p>In this lab we’ll explore a variety of methods for manipulating and simplifying social network data. As with the previous lab, we’ll use a variety of social networks, some of which you’ll recognize from other classes.</p>
+<div id="setup-3" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Setup</h2>
+<p>Find and open your RStudio Project associated with this class. Begin by opening a new script. It’s generally a good idea to place a header at the top of your scripts that tell you what the script does, its name, etc.</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="do">#######################################################################</span></span>
+<span id="cb265-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb265-2" aria-hidden="true" tabindex="-1"></a><span class="co"># What: Manipulating and Simplifying Social Network Data</span></span>
+<span id="cb265-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb265-3" aria-hidden="true" tabindex="-1"></a><span class="co"># File: lab2_statnet.R</span></span>
+<span id="cb265-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb265-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Created: 02.28.14</span></span>
+<span id="cb265-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb265-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Revised: 12.23.21</span></span>
+<span id="cb265-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb265-6" aria-hidden="true" tabindex="-1"></a><span class="do">#######################################################################</span></span></code></pre></div>
+<p>If you have not set up your RStudio Project to clear the workspace on exit, your environment contain the objects and functions from your prior session. To clear these before beginning use the following command.</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code></pre></div>
+<p>Proceed to place the data required for this lab (<code>Anabaptists.csv</code>, <code>Anabaptists.net</code>, <code>High esteem.csv</code>, <code>Liking3.csv</code>, <code>Positive Influence.csv</code>, <code>Praise.csv</code>, <code>S114 attributes.csv</code>, and <code>S114.csv</code>) also inside your R Project folder. We have placed it in a sub folder titled <code>data</code> for organizational purposes; however, this is not necessary.</p>
+</div>
+<div id="load-libraries-3" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Load Libraries</h2>
+<p>We need to load the libraries we plan to use. Here we will use <strong>statnet</strong>.</p>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statnet)</span></code></pre></div>
+<pre><code>Warning: package &#39;statnet&#39; was built under R version 4.1.2</code></pre>
+<pre><code>Warning: package &#39;tergm&#39; was built under R version 4.1.2</code></pre>
+<pre><code>Warning: package &#39;ergm&#39; was built under R version 4.1.2</code></pre>
+<pre><code>Warning: package &#39;networkDynamic&#39; was built under R version 4.1.2</code></pre>
+<pre><code>Warning: package &#39;ergm.count&#39; was built under R version 4.1.2</code></pre>
+<pre><code>Warning: package &#39;tsna&#39; was built under R version 4.1.2</code></pre>
+<p>In addition to <strong>statnet</strong>, we will be introducing and using <strong>backbone</strong>. Since this may be the first time you are using this tool, please ensure you install it prior to loading it.</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If you haven&#39;t done so, install backbone</span></span>
+<span id="cb274-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb274-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;backbone&quot;)</span></span>
+<span id="cb274-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb274-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb274-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb274-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(backbone)</span></code></pre></div>
+</div>
+<div id="extracting-the-backbones-of-two-mode-network-projections-1" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Extracting the “Backbones” of Two-Mode Network Projections</h2>
+<p>In this section, we illustrate how to extract the backbone of a projected two-mode network, a concept that we discussed in class and will not discuss in too much detail here. The basic idea is to use statistical tests to compare an edge’s observed weight in the two-mode projection to the distribution of its expected weight under a null model, controlling for different factors. An edge’s observed weight is considered to be statistically significant (and thus an actual tie) if it is in the upper or lower tail of the distribution of possible edge weights. Positive edges (ties) are found in the upper tail, while negative edges are found in the lower tail. For this, we will use the <strong>backbone</strong> package <span class="citation">(<a href="#ref-Domagalski2021" role="doc-biblioref">Domagalski, Neal, and Sagan 2021</a>)</span>.</p>
+<p>Because we need a much larger network to stochastically (statistically) project the backbone, here we will use bill co-sponsorship in the 114th US Senate (<code>S114.csv</code>) to illustrate this process.</p>
+<div class="infobox">
+<p>The code found in this section is adapted from code written by Zachary Neal, Rachel Domagalski, and Bruce Sagan for the “Backbone Workshop” delivered on 13 July 2020, which can be viewed at <a href="https://youtu.be/qLrUMZp93D0" class="uri">https://youtu.be/qLrUMZp93D0</a>. For complete workshop materials and more details about <strong>backbone</strong>, visit <a href="http://www.zacharyneal.com/backbone" class="uri">http://www.zacharyneal.com/backbone</a> or contact Zachary Neal at <a href="mailto:zpneal@msu.edu" class="email">zpneal@msu.edu</a>.</p>
+</div>
+<p>Specify the seeds before starting the analysis.</p>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">19</span>)</span></code></pre></div>
+<div id="load-data-1" class="section level3" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Load Data</h3>
+<p>Load and examine the network data. We will begin working with matrix data. As you can see, there are 100 Senators who sponsored a total of 3,549 bills.</p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb276-1" aria-hidden="true" tabindex="-1"></a>senate_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(</span>
+<span id="cb276-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb276-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="st">&quot;data/S114.csv&quot;</span>,</span>
+<span id="cb276-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb276-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb276-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb276-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb276-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb276-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb276-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb276-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb276-7"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb276-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb276-8"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb276-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Retrieve the dimension of a matrix.</span></span>
+<span id="cb276-9"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb276-9" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(senate_mat)</span></code></pre></div>
+<pre><code>[1]  100 3589</code></pre>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the first five rows and columns.</span></span>
+<span id="cb278-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb278-2" aria-hidden="true" tabindex="-1"></a>senate_mat[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>                     sj9 sj8 sj7 sj6 sj5
+Alexander, L. (TN-R)   0   1   0   1   0
+Boxer, B. (CA-D)       0   0   0   0   1
+Cantwell, M. (WA-D)    0   0   0   0   1
+Carper, T. (DE-D)      0   0   0   0   1
+Cochran, T. (MS-R)     0   1   0   1   0</code></pre>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb280-1" aria-hidden="true" tabindex="-1"></a>S114attributes_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(</span>
+<span id="cb280-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb280-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="st">&quot;data/S114 attributes.csv&quot;</span>,</span>
+<span id="cb280-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb280-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb280-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb280-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb280-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb280-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb280-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb280-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>Take a quick look.</p>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get first five rows.</span></span>
+<span id="cb281-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb281-2" aria-hidden="true" tabindex="-1"></a>S114attributes_mat[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ]</span></code></pre></div>
+<pre><code>Alexander, L. (TN-R)     Boxer, B. (CA-D)  Cantwell, M. (WA-D) 
+                   1                    2                    2 
+   Carper, T. (DE-D)   Cochran, T. (MS-R) 
+                   2                    1 </code></pre>
+</div>
+<div id="non-statistical-projections-of-the-co-sponsorhip-data-1" class="section level3" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Non-Statistical Projections of the Co-Sponsorhip Data</h3>
+<div id="standard-projection-1" class="section level4" number="6.3.2.1">
+<h4><span class="header-section-number">6.3.2.1</span> Standard Projection</h4>
+<p>Project the one-mode network the by multiplying the matrix times its transpose.</p>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb283-1" aria-hidden="true" tabindex="-1"></a>senators_mat <span class="ot">&lt;-</span> senate_mat <span class="sc">%*%</span> <span class="fu">t</span>(senate_mat)</span></code></pre></div>
+<p>As the result from the <code>dim()</code> function indicates, the one-mode network is a 100 x 100 network (100 senators x 100 senators).</p>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb284-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(senators_mat)</span></code></pre></div>
+<pre><code>[1] 100 100</code></pre>
+<p>Turn the matrix into an <code>network</code> object</p>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb286-1" aria-hidden="true" tabindex="-1"></a>senators_net <span class="ot">&lt;-</span> <span class="fu">as.network</span>(senators_mat,</span>
+<span id="cb286-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb286-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">directed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb286-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb286-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">ignore.eval =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb286-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb286-4" aria-hidden="true" tabindex="-1"></a>senators_net</span></code></pre></div>
+<pre><code> Network attributes:
+  vertices = 100 
+  directed = FALSE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = FALSE 
+  total edges= 4949 
+    missing edges= 0 
+    non-missing edges= 4949 
+
+ Vertex attribute names: 
+    vertex.names 
+
+ Edge attribute names not shown </code></pre>
+<p>Now, plot the network, but first set the colors to blue (Democrats), red (Republicans), and white (Independents).</p>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create recoding named vector</span></span>
+<span id="cb288-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb288-2" aria-hidden="true" tabindex="-1"></a>recode <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;blue&quot;</span>, <span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb288-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb288-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Recode and assign strings to vertex attribute</span></span>
+<span id="cb288-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb288-4" aria-hidden="true" tabindex="-1"></a>senators_net <span class="sc">%v%</span> <span class="st">&quot;color&quot;</span> <span class="ot">&lt;-</span> recode[<span class="fu">as.character</span>(S114attributes_mat[, <span class="dv">1</span>])]</span>
+<span id="cb288-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb288-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb288-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb288-6" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> senators_net,</span>
+<span id="cb288-7"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb288-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;onemode&quot;</span>,</span>
+<span id="cb288-8"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb288-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">mode =</span> <span class="st">&quot;fruchtermanreingold&quot;</span>,</span>
+<span id="cb288-9"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb288-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> senators_net <span class="sc">%v%</span> <span class="st">&quot;color&quot;</span>,</span>
+<span id="cb288-10"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb288-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">2</span>,</span>
+<span id="cb288-11"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb288-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_statnet_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>How densely interconnected are actors?</p>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gden</span>(senators_net)</span></code></pre></div>
+<pre><code>[1] 0.999798</code></pre>
+<p>The network plot is unhelpful because it’s so dense. It’s almost 100% (0.999798), which suggests that we’re picking up ties between senators that really shouldn’t be there.</p>
+</div>
+<div id="universal-threshold-projection-1" class="section level4" number="6.3.2.2">
+<h4><span class="header-section-number">6.3.2.2</span> Universal Threshold Projection</h4>
+<p>A common approach to reducing the number of ties in a projected one-mode network is to choose a threshold where cells greater than the threshold are set to “1” while all others are set to “0.” Here, we will use mean and median edge weights as thresholds. First, we need to get the mean and median edge weight.</p>
+<p>Because the edge attributes weren’t displayed above, we need to see what the edge weight attribute is with the <code>list.edge.attributes()</code> command.</p>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.edge.attributes</span>(senators_net)</span></code></pre></div>
+<pre><code>[1] &quot;1&quot;  &quot;na&quot;</code></pre>
+<p>Let’s see if <code>1</code> is the edge weight. Here we pull the first twenty edge weights.</p>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get.edge.attribute</span>(senators_net, <span class="st">&quot;1&quot;</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span></code></pre></div>
+<pre><code> [1] 10 15 12 40 48 48 42 16 52 18 37 32 52 48  9 40 30 11 46 27</code></pre>
+<p>It appears that it is. Now, we can get the mean and median edge weight of the entire graph.</p>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">get.edge.attribute</span>(senators_net, <span class="st">&quot;1&quot;</span>))</span></code></pre></div>
+<pre><code>[1] 44.17054</code></pre>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(<span class="fu">get.edge.attribute</span>(senators_net, <span class="st">&quot;1&quot;</span>))</span></code></pre></div>
+<pre><code>[1] 38</code></pre>
+<p>Create a projection using mean edge weight.</p>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb299-1" aria-hidden="true" tabindex="-1"></a>threshold_mean_bb <span class="ot">&lt;-</span> <span class="fu">global</span>(senate_mat,</span>
+<span id="cb299-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb299-2" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Set upper threshold value</span></span>
+<span id="cb299-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb299-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">upper =</span> <span class="fu">mean</span>(<span class="fu">get.edge.attribute</span>(senators_net, <span class="st">&quot;1&quot;</span>)))</span>
+<span id="cb299-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb299-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look at the matrix:</span></span>
+<span id="cb299-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb299-5" aria-hidden="true" tabindex="-1"></a>threshold_mean_bb[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>                     Alexander, L. (TN-R) Boxer, B. (CA-D) Cantwell, M. (WA-D)
+Alexander, L. (TN-R)                    0                0                   0
+Boxer, B. (CA-D)                        0                0                   1
+Cantwell, M. (WA-D)                     0                1                   0
+Carper, T. (DE-D)                       0                1                   0
+Cochran, T. (MS-R)                      0                0                   0
+                     Carper, T. (DE-D) Cochran, T. (MS-R)
+Alexander, L. (TN-R)                 0                  0
+Boxer, B. (CA-D)                     1                  0
+Cantwell, M. (WA-D)                  0                  0
+Carper, T. (DE-D)                    0                  0
+Cochran, T. (MS-R)                   0                  0</code></pre>
+<p>Now create an <code>network</code> object from this matrix.</p>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb301-1" aria-hidden="true" tabindex="-1"></a>threshold_mean_net <span class="ot">&lt;-</span> <span class="fu">as.network</span>(threshold_mean_bb,</span>
+<span id="cb301-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb301-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">directed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb301-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb301-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">ignore.eval =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Create a projection using median edge weight.</p>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb302-1" aria-hidden="true" tabindex="-1"></a>threshold_med_bb <span class="ot">&lt;-</span> <span class="fu">global</span>(senate_mat,</span>
+<span id="cb302-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb302-2" aria-hidden="true" tabindex="-1"></a>                            <span class="co"># Set upper threshold value</span></span>
+<span id="cb302-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb302-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">upper =</span> <span class="fu">median</span>(<span class="fu">get.edge.attribute</span>(senators_net, <span class="st">&quot;1&quot;</span>))</span>
+<span id="cb302-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb302-4" aria-hidden="true" tabindex="-1"></a>                           )</span>
+<span id="cb302-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb302-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an igraph graph with this object</span></span>
+<span id="cb302-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb302-6" aria-hidden="true" tabindex="-1"></a>threshold_med_net <span class="ot">&lt;-</span> <span class="fu">as.network</span>(threshold_med_bb, </span>
+<span id="cb302-7"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb302-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">directed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb302-8"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb302-8" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">ignore.eval =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Now, visualize the two projected networks.</p>
+<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set graph parameters to 1 row and 2 columns</span></span>
+<span id="cb303-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb303-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Recode and assign strings to vertex attribute</span></span>
+<span id="cb303-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-5" aria-hidden="true" tabindex="-1"></a>threshold_mean_net <span class="sc">%v%</span> <span class="st">&quot;color&quot;</span> <span class="ot">&lt;-</span> recode[<span class="fu">as.character</span>(S114attributes_mat[, <span class="dv">1</span>])]</span>
+<span id="cb303-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-6" aria-hidden="true" tabindex="-1"></a>threshold_med_net <span class="sc">%v%</span> <span class="st">&quot;color&quot;</span> <span class="ot">&lt;-</span> recode[<span class="fu">as.character</span>(S114attributes_mat[, <span class="dv">1</span>])]</span>
+<span id="cb303-7"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-8"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Save coordinates</span></span>
+<span id="cb303-9"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-9" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">gplot.layout.fruchtermanreingold</span>(threshold_med_net,</span>
+<span id="cb303-10"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-10" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">layout.par =</span> <span class="cn">NULL</span>)</span>
+<span id="cb303-11"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-12"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot them</span></span>
+<span id="cb303-13"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-13" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> threshold_mean_net,</span>
+<span id="cb303-14"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;onemode&quot;</span>,</span>
+<span id="cb303-15"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords,</span>
+<span id="cb303-16"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> threshold_mean_net <span class="sc">%v%</span> <span class="st">&quot;color&quot;</span>,</span>
+<span id="cb303-17"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">2</span>,</span>
+<span id="cb303-18"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb303-19"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb303-20"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-20" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> threshold_med_net,</span>
+<span id="cb303-21"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;onemode&quot;</span>,</span>
+<span id="cb303-22"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords,</span>
+<span id="cb303-23"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> threshold_mean_net <span class="sc">%v%</span> <span class="st">&quot;color&quot;</span>,</span>
+<span id="cb303-24"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">2</span>,</span>
+<span id="cb303-25"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb303-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_statnet_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Once again, take a look at each graph’s edge density.</p>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gden</span>(threshold_mean_net)</span></code></pre></div>
+<pre><code>[1] 0.4226263</code></pre>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gden</span>(threshold_med_net)</span></code></pre></div>
+<pre><code>[1] 0.4987879</code></pre>
+<p>These are definitely less dense (0.422 and 0.499) than the standard projection and Democrats and Republicans are clearly sorted into separate clusters. Still, these projections aren’t statistically derived although at least the thresholds aren’t entirely arbitrary. The next section demonstrates three statistical methods for extracting backbones.</p>
+</div>
+</div>
+<div id="extracting-backbones-1" class="section level3" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Extracting Backbones</h3>
+<p>As noted above, the <strong>backbone</strong> package uses statistical tests to compare an edge’s observed weight in the bipartite (two-mode) projection to the distribution of its weights expected under a null model. And an edge’s observed weight is statistically significant if it is in the upper or lower tail of the distribution. We will only focus on positive ties, so we’ll only extract backbones based on the upper tail of the distribution.</p>
+<p>With the co-sponsorship data, edge weights depend on how many bills each senator sponsors (row sums), and how many sponsors each bill has (column sums). (<strong>Note</strong>: If the rows were terrorists and the columns represented groups with which they were affiliated, then the edge weights would depend on how many groups to which the terrorists belonged and how many terrorists each group has.)</p>
+<div id="hypergeometric-backbone-1" class="section level4" number="6.3.3.1">
+<h4><span class="header-section-number">6.3.3.1</span> Hypergeometric Backbone</h4>
+<p>The Hypergeometric Model (formerly <code>hyperg()</code>, currently <code>fixedrow()</code>) controls exactly for row sums and is the fastest of the three <strong>backbone</strong> functions. First, we need to compute the probabilities and extract the backbone, saving it as an <code>network</code> object.</p>
+<p>You’ll notice that there are numerous arguments for the <code>fixedrow()</code> function:</p>
+<ul>
+<li>The <code>signed</code> option returns a signed network if set to <code>TRUE</code> (default is <code>FALSE</code>);</li>
+<li>The <code>alpha</code> option sets the significance test, the <code>fwer</code> indicates whether to apply at familywise error rate correction (default is <code>"none"</code>);</li>
+<li>The <code>class</code> indicates what type of object to return (it can return both <code>igraph</code> and <code>network\statnet</code> objects).</li>
+</ul>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the probabilities and create a backbone object</span></span>
+<span id="cb308-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb308-2" aria-hidden="true" tabindex="-1"></a>hyperg_probs <span class="ot">&lt;-</span> <span class="fu">fixedrow</span>(senate_mat)</span></code></pre></div>
+<pre><code>This matrix object is being treated as an unweighted bipartite network of 100 agents and 3589 artifacts.</code></pre>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract a backbone network from a backbone object</span></span>
+<span id="cb310-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb310-2" aria-hidden="true" tabindex="-1"></a>hyperg_net <span class="ot">&lt;-</span> <span class="fu">backbone.extract</span>(hyperg_probs, </span>
+<span id="cb310-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb310-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">signed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb310-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb310-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">alpha =</span> .<span class="dv">01</span>, </span>
+<span id="cb310-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb310-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">fwer =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb310-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb310-6" aria-hidden="true" tabindex="-1"></a>                               <span class="at">class =</span> <span class="st">&quot;network&quot;</span>)</span></code></pre></div>
+<p>Now, plot the projected network. The network is clearly sorted into two distinct clusters, and the density (0.704) is much lower than the standard projection.</p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb311-1" aria-hidden="true" tabindex="-1"></a>hyperg_net <span class="sc">%v%</span> <span class="st">&quot;color&quot;</span> <span class="ot">&lt;-</span> recode[<span class="fu">as.character</span>(S114attributes_mat[, <span class="dv">1</span>])]</span>
+<span id="cb311-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb311-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb311-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb311-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> hyperg_net,</span>
+<span id="cb311-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb311-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;onemode&quot;</span>,</span>
+<span id="cb311-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb311-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">mode =</span> <span class="st">&quot;fruchtermanreingold&quot;</span>,</span>
+<span id="cb311-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb311-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> hyperg_net <span class="sc">%v%</span> <span class="st">&quot;color&quot;</span>,</span>
+<span id="cb311-7"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb311-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">2</span>,</span>
+<span id="cb311-8"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb311-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb311-9"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb311-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.4</span>,</span>
+<span id="cb311-10"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb311-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb311-11"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb311-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb311-12"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb311-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb311-13"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb311-13" aria-hidden="true" tabindex="-1"></a><span class="fu">gden</span>(hyperg_net)</span></code></pre></div>
+<pre><code>[1] 0.7038384</code></pre>
+<p><img src="2-Manipulating_and_Simplifying_in_statnet_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="stochastic-degree-sequence-model-sdsm-backbone-1" class="section level4" number="6.3.3.2">
+<h4><span class="header-section-number">6.3.3.2</span> Stochastic Degree Sequence Model (SDSM) Backbone</h4>
+<p>The Stochastic Degree Sequence Model (<code>sdsm()</code>) approximately controls for both row and column sums and is slower than the Hypergeometric Model (but probably more accurate).</p>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb313-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the probabilities</span></span>
+<span id="cb313-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb313-2" aria-hidden="true" tabindex="-1"></a>sdsm_probs <span class="ot">&lt;-</span> <span class="fu">sdsm</span>(senate_mat,</span>
+<span id="cb313-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb313-3" aria-hidden="true" tabindex="-1"></a>                   <span class="co"># If TRUE the suggested text and citation will be</span></span>
+<span id="cb313-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb313-4" aria-hidden="true" tabindex="-1"></a>                   <span class="co"># displayed, which you can use for your write up.</span></span>
+<span id="cb313-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb313-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">narrative =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
+<pre><code>This matrix object is being treated as an unweighted bipartite network of 100 agents and 3589 artifacts.</code></pre>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract a backbone network from a backbone object</span></span>
+<span id="cb315-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb315-2" aria-hidden="true" tabindex="-1"></a>sdsm_net <span class="ot">&lt;-</span> <span class="fu">backbone.extract</span>(sdsm_probs, </span>
+<span id="cb315-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb315-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">signed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb315-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb315-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">alpha =</span> .<span class="dv">01</span>, </span>
+<span id="cb315-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb315-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fwer =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb315-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb315-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">class =</span> <span class="st">&quot;network&quot;</span>)</span></code></pre></div>
+<p>Now, plot the network backbone.</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb316-1" aria-hidden="true" tabindex="-1"></a>sdsm_net <span class="sc">%v%</span> <span class="st">&quot;color&quot;</span> <span class="ot">&lt;-</span> recode[<span class="fu">as.character</span>(S114attributes_mat[, <span class="dv">1</span>])]</span>
+<span id="cb316-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb316-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb316-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb316-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> sdsm_net,</span>
+<span id="cb316-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb316-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;onemode&quot;</span>,</span>
+<span id="cb316-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb316-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">mode =</span> <span class="st">&quot;fruchtermanreingold&quot;</span>,</span>
+<span id="cb316-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb316-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> sdsm_net <span class="sc">%v%</span> <span class="st">&quot;color&quot;</span>,</span>
+<span id="cb316-7"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb316-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">2</span>,</span>
+<span id="cb316-8"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb316-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb316-9"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb316-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.4</span>,</span>
+<span id="cb316-10"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb316-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb316-11"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb316-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb316-12"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb316-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb316-13"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb316-13" aria-hidden="true" tabindex="-1"></a><span class="fu">gden</span>(sdsm_net)</span></code></pre></div>
+<pre><code>[1] 0.3084848</code></pre>
+<p><img src="2-Manipulating_and_Simplifying_in_statnet_files/figure-html/unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>This network plot clearly differs from what we’ve seen so far. The density is much lower (0.308) and now the two parties are more distinct. Moreover, there are a handful of senators who appear to lie in between the two clusters and are in positions of brokerage.</p>
+</div>
+<div id="fixed-degree-sequence-model-fdsm-backbone-1" class="section level4" number="6.3.3.3">
+<h4><span class="header-section-number">6.3.3.3</span> Fixed Degree Sequence Model (FDSM) Backbone</h4>
+<p>The Fixed Degree Sequence Model (<code>fdsm()</code>) exactly controls for both row and column sums and is the slowest of the three models (but probably the most accurate). We extract the FDSM backbone like we did the previous two.</p>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the probabilities</span></span>
+<span id="cb318-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb318-2" aria-hidden="true" tabindex="-1"></a>fdsm_probs <span class="ot">&lt;-</span> <span class="fu">fdsm</span>(senate_mat,</span>
+<span id="cb318-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb318-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">narrative =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
+<pre><code>This matrix object is being treated as an unweighted bipartite network of 100 agents and 3589 artifacts.</code></pre>
+<pre><code>Constructing empirical edgewise p-values -</code></pre>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract a backbone network from a backbone object</span></span>
+<span id="cb321-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb321-2" aria-hidden="true" tabindex="-1"></a>fdsm_net <span class="ot">&lt;-</span> <span class="fu">backbone.extract</span>(fdsm_probs, </span>
+<span id="cb321-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb321-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">signed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb321-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb321-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">alpha =</span> .<span class="dv">01</span>, </span>
+<span id="cb321-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb321-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fwer =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb321-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb321-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">class =</span> <span class="st">&quot;network&quot;</span>)</span></code></pre></div>
+<p>Now, let’s plot this backbone and calculate the edge density.</p>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb322-1" aria-hidden="true" tabindex="-1"></a>fdsm_net <span class="sc">%v%</span> <span class="st">&quot;color&quot;</span> <span class="ot">&lt;-</span> recode[<span class="fu">as.character</span>(S114attributes_mat[, <span class="dv">1</span>])]</span>
+<span id="cb322-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb322-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb322-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb322-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> fdsm_net,</span>
+<span id="cb322-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb322-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;onemode&quot;</span>,</span>
+<span id="cb322-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb322-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">mode =</span> <span class="st">&quot;fruchtermanreingold&quot;</span>,</span>
+<span id="cb322-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb322-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> fdsm_net <span class="sc">%v%</span> <span class="st">&quot;color&quot;</span>,</span>
+<span id="cb322-7"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb322-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">2</span>,</span>
+<span id="cb322-8"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb322-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb322-9"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb322-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.4</span>,</span>
+<span id="cb322-10"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb322-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb322-11"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb322-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb322-12"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb322-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb322-13"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb322-13" aria-hidden="true" tabindex="-1"></a><span class="fu">gden</span>(fdsm_net)</span></code></pre></div>
+<pre><code>[1] 0.3606061</code></pre>
+<p><img src="2-Manipulating_and_Simplifying_in_statnet_files/figure-html/unnamed-chunk-27-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>This network is a bit denser (0.362) than the previous network, but it looks quite similar to it. Once again, there are a handful of senators who appear to lie in between the two clusters and are in positions of brokerage.</p>
+</div>
+</div>
+</div>
+<div id="simplifying-networks-in-statnet-anabaptist-network" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Simplifying Networks in <strong>statnet</strong>: Anabaptist Network</h2>
+<p>For this exercise, we will use the Anabaptist Leadership network and its related attribute data. The dataset includes 67 actors, 55 who were sixteenth century Anabaptist leaders and 12 who were prominent Protestant Reformation leaders (e.g., Martin Luther, John Calvin, Ulrich Zwingli, Martin Bucer, and Philip Melanchthon) that had contact with and influenced some of the Anabaptist leaders included in this dataset. These data build on a smaller dataset <span class="citation">(<a href="#ref-Matthew2013" role="doc-biblioref">Matthews et al. 2013</a>)</span> that did not include some leading Anabaptist leaders, such as Menno Simons, who is generally seen as the “founder” of the Amish and Mennonites.</p>
+<div id="importing-network-and-attribute-data-1" class="section level3" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> Importing Network and Attribute Data</h3>
+<p>Import the leadership network and modify the graph as undirected.</p>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb324-1" aria-hidden="true" tabindex="-1"></a>anabaptist_net <span class="ot">&lt;-</span> <span class="fu">read.paj</span>(<span class="st">&quot;data/Anabaptist Leaders.net&quot;</span>) </span>
+<span id="cb324-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb324-2" aria-hidden="true" tabindex="-1"></a>anabaptist_net <span class="ot">&lt;-</span> <span class="fu">set.network.attribute</span>(anabaptist_net, <span class="st">&quot;directed&quot;</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb324-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb324-3" aria-hidden="true" tabindex="-1"></a>anabaptist_net <span class="ot">&lt;-</span> <span class="fu">set.network.attribute</span>(anabaptist_net, <span class="st">&quot;multiple&quot;</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb324-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb324-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Now inspect the object</span></span>
+<span id="cb324-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb324-5" aria-hidden="true" tabindex="-1"></a>anabaptist_net</span></code></pre></div>
+<pre><code> Network attributes:
+  vertices = 67 
+  directed = FALSE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = FALSE 
+  title = Anabaptist Leaders 
+  total edges= 366 
+    missing edges= 0 
+    non-missing edges= 366 
+
+ Vertex attribute names: 
+    vertex.names x y z 
+
+ Edge attribute names: 
+    Anabaptist Leaders </code></pre>
+<p>Now, let’s bring in the <code>Anabaptist Attributes.csv</code> data, which includes the node attributes. The first six identify whether someone (1) embraced believer’s baptism, (2) supported violence, (3) participated in the Münster Rebellion, (4) held apocalyptic beliefs, (5) was an Anabaptist, and/or (6) was a follower of Melchior Hoffman (i.e., a Melchiorite).</p>
+<p>The last two combine other vectors in order to create a new set of attributes. The first creates vector that distinguishes between Anabaptists who didn’t participate in the Münster Rebellion, Anabaptists who did, and non-Anabaptists (e.g, Martin Luther, John Calvin). The values of the resulting vector equal “0” for non-Anabaptists, “1” for Anabaptists who didn’t participate in the rebellion, and “2” for those who did.</p>
+<p>The second creates a vector that distinguishes between Melchiorite Anabaptists, Non-Melchiorite Anabaptists, and non-Anabaptists. The values of the resulting vector equal “0” for non-Anabaptists, “1” for non-Melchiorite Anabaptists, and “2” for Melchiorite Anabaptists.</p>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb326-1" aria-hidden="true" tabindex="-1"></a>attributes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Anabaptist Attributes.csv&quot;</span>,</span>
+<span id="cb326-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb326-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Before moving forward to the next step, let’s briefly inspect the imported attribute variables in <code>attributes</code>. Begining with looking at the column names.</p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(attributes)</span></code></pre></div>
+<pre><code> [1] &quot;ï..Names&quot;          &quot;Believers.Baptism&quot; &quot;Violence&quot;         
+ [4] &quot;Munster.Rebellion&quot; &quot;Apocalyptic&quot;       &quot;Anabaptist&quot;       
+ [7] &quot;Melchiorite&quot;       &quot;Swiss.Brethren&quot;    &quot;Denck&quot;            
+[10] &quot;Hut&quot;               &quot;Hutterite&quot;         &quot;Other.Anabaptist&quot; 
+[13] &quot;Lutheran&quot;          &quot;Reformed&quot;          &quot;Other.Protestant&quot; 
+[16] &quot;Tradition&quot;         &quot;Origin..&quot;          &quot;Operate..&quot;        </code></pre>
+<p>Each column in the data frame represents a vector of values that correspond with the nodes in our graph. We can subset each or multiple columns using the <code>[</code> operator. If you are unfamiliar with this form of subsetting, keep in mind that you may provide two sets of values separated by a comma to access either rows or columns. The former will subset rows (e.g., <code>attributes[1:3, ]</code>), the latter will return columns (e.g., <code>attributes[, 12]</code>). However, since we have named columns, we can also supply the name of the column in order to subset (e.g., <code>attributes[, "Violence"]</code>). For instance, we can select the first five rows of the <code>Anabaptist</code> column.</p>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb329-1" aria-hidden="true" tabindex="-1"></a>attributes[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="st">&quot;Anabaptist&quot;</span>]</span></code></pre></div>
+<pre><code>[1] 0 0 0 0 1</code></pre>
+<p>What this tells us is that of the first five actors listed in the data, only Conrad Grebel was an Anabaptist. We can also get the same information this way.</p>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb331-1" aria-hidden="true" tabindex="-1"></a>attributes[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="co"># Rows 1 through 5</span></span>
+<span id="cb331-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb331-2" aria-hidden="true" tabindex="-1"></a>           <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">6</span>)] <span class="co"># Columns 1 and 6</span></span></code></pre></div>
+<pre><code>        ï..Names Anabaptist
+1  Martin Luther          0
+2    John Calvin          0
+3 Ulrich Zwingli          0
+4 Joachim Vadian          0
+5  Conrad Grebel          1</code></pre>
+<p>The following commands create and add a series of vectors to the attributes <code>data.frame</code> that we can later use with our network.</p>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb333-1" aria-hidden="true" tabindex="-1"></a>attributes[[<span class="st">&quot;anabmunst&quot;</span>]] <span class="ot">&lt;-</span> attributes[, <span class="st">&quot;Munster.Rebellion&quot;</span>] <span class="sc">+</span></span>
+<span id="cb333-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb333-2" aria-hidden="true" tabindex="-1"></a>  attributes[, <span class="st">&quot;Anabaptist&quot;</span>]</span>
+<span id="cb333-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb333-3" aria-hidden="true" tabindex="-1"></a>attributes[[<span class="st">&quot;anabmelch&quot;</span>]] <span class="ot">&lt;-</span> attributes[, <span class="st">&quot;Melchiorite&quot;</span>] <span class="sc">+</span></span>
+<span id="cb333-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb333-4" aria-hidden="true" tabindex="-1"></a>  attributes[, <span class="st">&quot;Anabaptist&quot;</span>]</span></code></pre></div>
+</div>
+<div id="plotting-the-anabaptist-network-1" class="section level3" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> Plotting the Anabaptist Network</h3>
+<p>Plot the network (and save the coordinates) where color indicates whether the actor is an Anabaptist who didn’t participate in the Munster Rebellion, an Anabaptist who did, or a non-Anabaptist (<code>anabmunst</code> variable).</p>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save coordinates</span></span>
+<span id="cb334-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb334-2" aria-hidden="true" tabindex="-1"></a>layout_fr <span class="ot">&lt;-</span> <span class="fu">gplot.layout.fruchtermanreingold</span>(anabaptist_net, </span>
+<span id="cb334-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb334-3" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">layout.par =</span> <span class="cn">NULL</span>)</span>
+<span id="cb334-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb334-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot graph</span></span>
+<span id="cb334-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb334-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> anabaptist_net,</span>
+<span id="cb334-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb334-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;onemode&quot;</span>,</span>
+<span id="cb334-7"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb334-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> layout_fr,</span>
+<span id="cb334-8"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb334-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> attributes[[<span class="st">&quot;anabmunst&quot;</span>]],</span>
+<span id="cb334-9"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb334-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">2</span>,</span>
+<span id="cb334-10"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb334-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb334-11"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb334-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> .<span class="dv">6</span>,</span>
+<span id="cb334-12"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb334-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb334-13"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb334-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_statnet_files/figure-html/unnamed-chunk-34-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Black vertices are Anabaptists, red are Anabaptists who participated in the Munster Rebellion, and White are non-Anabaptists. Now, let’s give the network some more colorful colors.</p>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Declare which values correspond to which color</span></span>
+<span id="cb335-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb335-2" aria-hidden="true" tabindex="-1"></a>recode <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">0</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;yellow&quot;</span>, <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;lightblue&quot;</span>, <span class="st">`</span><span class="at">2</span><span class="st">`</span> <span class="ot">=</span> <span class="st">&quot;red&quot;</span>)</span>
+<span id="cb335-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb335-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a new variable to our attributes data.frame for color</span></span>
+<span id="cb335-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb335-4" aria-hidden="true" tabindex="-1"></a>attributes[[<span class="st">&quot;color&quot;</span>]] <span class="ot">&lt;-</span> recode[<span class="fu">as.character</span>(attributes[[<span class="st">&quot;anabmunst&quot;</span>]])]</span>
+<span id="cb335-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb335-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb335-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb335-6" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> anabaptist_net,</span>
+<span id="cb335-7"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb335-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;onemode&quot;</span>,</span>
+<span id="cb335-8"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb335-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> layout_fr,</span>
+<span id="cb335-9"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb335-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> attributes[[<span class="st">&quot;color&quot;</span>]],</span>
+<span id="cb335-10"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb335-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">2</span>,</span>
+<span id="cb335-11"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb335-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb335-12"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb335-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> .<span class="dv">6</span>,</span>
+<span id="cb335-13"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb335-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb335-14"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb335-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_statnet_files/figure-html/unnamed-chunk-35-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="shrinking-collapsing-contracting-networks-1" class="section level3" number="6.4.3">
+<h3><span class="header-section-number">6.4.3</span> Shrinking (Collapsing, Contracting) Networks</h3>
+<p>Currently, <strong>statnet</strong> does not have a function for collapsing, contracting, shrinking networks; <strong>igraph</strong> does. You could use <strong>intergraph</strong> to transition neatly from <strong>statnet</strong> to <strong>igraph</strong> and back.</p>
+</div>
+<div id="extracting-subnetworks-1" class="section level3" number="6.4.4">
+<h3><span class="header-section-number">6.4.4</span> Extracting Subnetworks</h3>
+<p>To extract subnetworks in <strong>statnet</strong>, we use the <code>get.inducedSubgraph()</code> command. Here, we extract just the Anabaptists and plot the resulting network. First, though, we need to assign the Anabaptist attribute to the network. Using the <code>table()</code> command, we can see that there are 55 Anabaptists, which means that the extracted subnetwork should have 55 actors. That is what we end up with.</p>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(attributes[[<span class="st">&quot;Anabaptist&quot;</span>]])</span></code></pre></div>
+<pre><code>
+ 0  1 
+12 55 </code></pre>
+<p>Now assign this vector to a vertex attribute using the <code>%v%</code> operator.</p>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb338-1" aria-hidden="true" tabindex="-1"></a>anabaptist_net <span class="sc">%v%</span> <span class="st">&quot;anabaptist&quot;</span> <span class="ot">&lt;-</span> attributes[[<span class="st">&quot;Anabaptist&quot;</span>]]</span></code></pre></div>
+<p>Now, extract the subgraph by indicating which vertices should be included. To do so, use the <code>get.inducedSubgraph()</code> function, specifying the vertices with a value of <code>1</code> for the attribute <code>anabaptist</code>.</p>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract just the Anabaptists</span></span>
+<span id="cb339-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb339-2" aria-hidden="true" tabindex="-1"></a>anabaptists_net <span class="ot">&lt;-</span> <span class="fu">get.inducedSubgraph</span>(anabaptist_net,</span>
+<span id="cb339-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb339-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">v =</span> <span class="fu">which</span>(</span>
+<span id="cb339-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb339-4" aria-hidden="true" tabindex="-1"></a>                                         anabaptist_net <span class="sc">%v%</span> <span class="st">&quot;anabaptist&quot;</span> <span class="sc">==</span> <span class="dv">1</span>))</span></code></pre></div>
+<p>Now, plot the extracted network. Note that it is disconnected. That is, it is held together by non-Anabaptists.</p>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> anabaptists_net,</span>
+<span id="cb340-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb340-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;onemode&quot;</span>,</span>
+<span id="cb340-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb340-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">mode =</span> <span class="st">&quot;fruchtermanreingold&quot;</span>,</span>
+<span id="cb340-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb340-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;Light Blue&quot;</span>,</span>
+<span id="cb340-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb340-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">2</span>,</span>
+<span id="cb340-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb340-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb340-7"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb340-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> .<span class="dv">6</span>,</span>
+<span id="cb340-8"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb340-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb340-9"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb340-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_statnet_files/figure-html/unnamed-chunk-39-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="multiple-stacked-networks-in-statnet-sampson-monastery" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> Multiple (Stacked) Networks in <strong>statnet</strong>: Sampson Monastery</h2>
+<p>The data we will use in this exercise are the Sampson Monastery network data collected by Samuel Sampson. Sampson observed and recorded the social interactions among a group of novices (men who were preparing to join a monastic order). He recorded four types of “ties”: esteem (SAMPES) and disesteem (SAMPDES); liking (SAMPLK - three different time periods recorded) and disliking (SAMPDLK - one-time period recorded); positive influence (SAMPIN) and negative influence (SAMPNIN); praise (SAMPPR) and blame (SAMPNPR). Each novice only ranked his top three choices for each type of tie where a 3 indicates their first choice, a 2 their second, and a 1 their third (some subjects offered tied ranks for their top four choices).</p>
+<p>During Sampson’s period of observation, a “crisis in the cloister” occurred in response to some of the changes proposed by the Second Vatican Council (Vatican II). This led to the expulsion of four novices and the voluntary departure of several others. Based on his observations, Sampson partitioned (i.e., sorted, divided) the novices into four groups: (1) the young turks, (2) the loyal opposition, (3) the outcasts, and (4) the neutrals. The young turks arrived later and questioned some of the monastery’s practices, which the loyal opposition defended. The outcasts were novices that were not accepted by the larger group, and the neutrals were those who did not take sides in the debate. Most of the loyal opposition had attended a seminary, “Cloisterville,” prior to their arrival at the monastery.</p>
+<div id="importing-edge-list-network-data-1" class="section level3" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> Importing Edge List Network Data</h3>
+<p>We’ll bring in the four positive tie edge If you are interested in what the edge lists look like, inspect them after importing.</p>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb341-1" aria-hidden="true" tabindex="-1"></a>liking3 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Liking 3.csv&quot;</span>,</span>
+<span id="cb341-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb341-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb341-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb341-3" aria-hidden="true" tabindex="-1"></a>esteem <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/High esteem.csv&quot;</span>,</span>
+<span id="cb341-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb341-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb341-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb341-5" aria-hidden="true" tabindex="-1"></a>influence <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Positive Influence.csv&quot;</span>, </span>
+<span id="cb341-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb341-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb341-7"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb341-7" aria-hidden="true" tabindex="-1"></a>praise <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Praise.csv&quot;</span>, </span>
+<span id="cb341-8"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb341-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">header =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>You can and should inspect all imported objects. Do they share column names?</p>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(liking3)</span>
+<span id="cb342-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb342-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(esteem)</span>
+<span id="cb342-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb342-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(influence)</span>
+<span id="cb342-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb342-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(praise)</span></code></pre></div>
+<p>Now, let’s convert each edge list into <code>network</code> objects that <strong>statnet</strong> will recognize.</p>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb343-1" aria-hidden="true" tabindex="-1"></a>liking3_net <span class="ot">&lt;-</span> <span class="fu">network</span>(<span class="at">x =</span> liking3,</span>
+<span id="cb343-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb343-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">matrix.type =</span> <span class="st">&quot;edgelist&quot;</span>,</span>
+<span id="cb343-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb343-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">directed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb343-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb343-4" aria-hidden="true" tabindex="-1"></a>esteem_net <span class="ot">&lt;-</span> <span class="fu">network</span>(<span class="at">x =</span> esteem,</span>
+<span id="cb343-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb343-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">matrix.type =</span> <span class="st">&quot;edgelist&quot;</span>,</span>
+<span id="cb343-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb343-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">directed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb343-7"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb343-7" aria-hidden="true" tabindex="-1"></a>influence_net <span class="ot">&lt;-</span> <span class="fu">network</span>(<span class="at">x =</span> influence,</span>
+<span id="cb343-8"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb343-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">matrix.type =</span> <span class="st">&quot;edgelist&quot;</span>,</span>
+<span id="cb343-9"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb343-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">directed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb343-10"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb343-10" aria-hidden="true" tabindex="-1"></a>praise_net <span class="ot">&lt;-</span> <span class="fu">network</span>(<span class="at">x =</span> praise,</span>
+<span id="cb343-11"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb343-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">matrix.type =</span> <span class="st">&quot;edgelist&quot;</span>,</span>
+<span id="cb343-12"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb343-12" aria-hidden="true" tabindex="-1"></a>                         <span class="at">directed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>We can use the flexibility of the <code>list()</code> function to create an ordered container for the network objects.</p>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb344-1" aria-hidden="true" tabindex="-1"></a>samppos <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;liking3&quot;</span> <span class="ot">=</span> liking3_net,</span>
+<span id="cb344-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb344-2" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;esteem&quot;</span> <span class="ot">=</span> esteem_net,</span>
+<span id="cb344-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb344-3" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;influence&quot;</span> <span class="ot">=</span> influence_net,</span>
+<span id="cb344-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb344-4" aria-hidden="true" tabindex="-1"></a>                 <span class="st">&quot;praise&quot;</span> <span class="ot">=</span> praise_net)</span></code></pre></div>
+<p>Next, we will turn each network object in <code>samppos</code> into a sociomatrix (<code>matrix</code> class) in a new list. We are doing this, to demonstrate a feature of <strong>statnet</strong> for working with <code>network</code> and <code>matrix</code> stacks.</p>
+<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb345-1" aria-hidden="true" tabindex="-1"></a>samp_pos_smats <span class="ot">&lt;-</span> <span class="fu">lapply</span>(samppos, as.sociomatrix)</span></code></pre></div>
+<p>Let’s examine the output <code>samp_pos_smats</code> and compare it with the list input <code>sampos</code>.</p>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(samppos)</span></code></pre></div>
+<pre><code>          Length Class   Mode
+liking3   5      network list
+esteem    5      network list
+influence 5      network list
+praise    5      network list</code></pre>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(samp_pos_smats)</span></code></pre></div>
+<pre><code>          Length Class  Mode   
+liking3   324    -none- numeric
+esteem    324    -none- numeric
+influence 324    -none- numeric
+praise    324    -none- numeric</code></pre>
+<p>As you can see, both contain 4 objects. <code>samppos</code> contains four networks while <code>samp_pos_smats</code> includes only 18x18 sociomatrices. Both objects are stacks of objects. We can run the <code>stackcount()</code> function to see how many networks or networks are stacked together.</p>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stackcount</span>(samppos)</span></code></pre></div>
+<pre><code>[1] 4</code></pre>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stackcount</span>(samp_pos_smats)</span></code></pre></div>
+<pre><code>[1] 4</code></pre>
+</div>
+<div id="plotting-stacked-networks-1" class="section level3" number="6.5.2">
+<h3><span class="header-section-number">6.5.2</span> Plotting Stacked Networks</h3>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb354-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Save coordinates</span></span>
+<span id="cb354-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-3" aria-hidden="true" tabindex="-1"></a>coordskk <span class="ot">&lt;-</span> <span class="fu">gplot.layout.kamadakawai</span>(samppos,</span>
+<span id="cb354-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">layout.par =</span> <span class="cn">NULL</span>)</span>
+<span id="cb354-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb354-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-6" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> samp_pos_smats[[<span class="st">&quot;liking3&quot;</span>]]<span class="sc">|</span></span>
+<span id="cb354-7"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-7" aria-hidden="true" tabindex="-1"></a>            samp_pos_smats[[<span class="st">&quot;esteem&quot;</span>]]<span class="sc">|</span></span>
+<span id="cb354-8"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-8" aria-hidden="true" tabindex="-1"></a>            samp_pos_smats[[<span class="st">&quot;influence&quot;</span>]]<span class="sc">|</span></span>
+<span id="cb354-9"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-9" aria-hidden="true" tabindex="-1"></a>            samp_pos_smats[[<span class="st">&quot;praise&quot;</span>]],</span>
+<span id="cb354-10"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;digraph&quot;</span>,</span>
+<span id="cb354-11"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coordskk,</span>
+<span id="cb354-12"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(samppos[[<span class="st">&quot;liking3&quot;</span>]]),</span>
+<span id="cb354-13"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;Light Blue&quot;</span>,</span>
+<span id="cb354-14"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb354-15"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.4</span>,</span>
+<span id="cb354-16"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb354-17"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;gray&quot;</span>,</span>
+<span id="cb354-18"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.curve =</span> <span class="fl">0.05</span>,</span>
+<span id="cb354-19"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">usecurve =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb354-20"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">TRUE</span></span>
+<span id="cb354-21"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-21" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb354-22"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb354-23"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-23" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> samppos[[<span class="st">&quot;liking3&quot;</span>]]<span class="sc">|</span></span>
+<span id="cb354-24"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-24" aria-hidden="true" tabindex="-1"></a>            samppos[[<span class="st">&quot;esteem&quot;</span>]]<span class="sc">|</span></span>
+<span id="cb354-25"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-25" aria-hidden="true" tabindex="-1"></a>            samppos[[<span class="st">&quot;influence&quot;</span>]]<span class="sc">|</span></span>
+<span id="cb354-26"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-26" aria-hidden="true" tabindex="-1"></a>            samppos[[<span class="st">&quot;praise&quot;</span>]],</span>
+<span id="cb354-27"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;digraph&quot;</span>,</span>
+<span id="cb354-28"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coordskk,</span>
+<span id="cb354-29"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(samppos[[<span class="st">&quot;liking3&quot;</span>]]),</span>
+<span id="cb354-30"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;Light Blue&quot;</span>,</span>
+<span id="cb354-31"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb354-32"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.4</span>,</span>
+<span id="cb354-33"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-33" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb354-34"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-34" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;gray&quot;</span>,</span>
+<span id="cb354-35"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.curve =</span> <span class="fl">0.05</span>,</span>
+<span id="cb354-36"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">usecurve =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb354-37"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb354-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_statnet_files/figure-html/unnamed-chunk-47-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Now, let’s plot the networks where the ties between the actors vary in color based on the type of tie. First, let’s visualize the stacked list of network in <code>samppos</code>.</p>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> samppos[[<span class="st">&quot;liking3&quot;</span>]]<span class="sc">|</span></span>
+<span id="cb355-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb355-2" aria-hidden="true" tabindex="-1"></a>            samppos[[<span class="st">&quot;esteem&quot;</span>]]<span class="sc">|</span></span>
+<span id="cb355-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb355-3" aria-hidden="true" tabindex="-1"></a>            samppos[[<span class="st">&quot;influence&quot;</span>]]<span class="sc">|</span></span>
+<span id="cb355-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb355-4" aria-hidden="true" tabindex="-1"></a>            samppos[[<span class="st">&quot;praise&quot;</span>]],</span>
+<span id="cb355-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb355-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;digraph&quot;</span>,</span>
+<span id="cb355-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb355-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coordskk,</span>
+<span id="cb355-7"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb355-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(samppos[[<span class="st">&quot;liking3&quot;</span>]]),</span>
+<span id="cb355-8"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb355-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;Light Blue&quot;</span>,</span>
+<span id="cb355-9"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb355-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb355-10"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb355-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.4</span>,</span>
+<span id="cb355-11"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb355-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb355-12"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb355-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="fu">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;yellow&quot;</span>),</span>
+<span id="cb355-13"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb355-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.curve =</span> <span class="fl">0.05</span>,</span>
+<span id="cb355-14"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb355-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">usecurve =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb355-15"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb355-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_statnet_files/figure-html/unnamed-chunk-48-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="extracting-and-plotting-individual-networks-1" class="section level3" number="6.5.3">
+<h3><span class="header-section-number">6.5.3</span> Extracting and Plotting Individual Networks</h3>
+<p>We can also extract individual networks and sociomatrices from the containers and plot them separately. For instance, let’s extract <code>liking3</code>.</p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb356-2"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb356-3"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot individual layers:</span></span>
+<span id="cb356-4"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> samppos[[<span class="st">&quot;liking3&quot;</span>]],</span>
+<span id="cb356-5"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;digraph&quot;</span>,</span>
+<span id="cb356-6"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coordskk,</span>
+<span id="cb356-7"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-7" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Note that the function to extract names expects a network object:</span></span>
+<span id="cb356-8"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(samppos[[<span class="st">&quot;liking3&quot;</span>]]),</span>
+<span id="cb356-9"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;Light Blue&quot;</span>,</span>
+<span id="cb356-10"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb356-11"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb356-12"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb356-13"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb356-14"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-14" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(<span class="at">dat =</span> samp_pos_smats[[<span class="st">&quot;liking3&quot;</span>]],</span>
+<span id="cb356-15"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;digraph&quot;</span>,</span>
+<span id="cb356-16"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coordskk,</span>
+<span id="cb356-17"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-17" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Note that the function to extract names expects a matrix object:</span></span>
+<span id="cb356-18"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">rownames</span>(samp_pos_smats[[<span class="st">&quot;liking3&quot;</span>]]),</span>
+<span id="cb356-19"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;Light Blue&quot;</span>,</span>
+<span id="cb356-20"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb356-21"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb356-22"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb356-23"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#cb356-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="2-Manipulating_and_Simplifying_in_statnet_files/figure-html/unnamed-chunk-49-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>That’s all for <strong>statnet</strong> for now.</p>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+<h3> References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Domagalski2021" class="csl-entry">
+Domagalski, Rachel, Zachary P. Neal, and Bruce Sagan. 2021. <span>“<span>Backbone</span>: An r Package for Extracting the Backbone of Bipartite Projections.”</span> <em>PLoS ONE</em> 16 (1): e0244363. <a href="https://doi.org/10.1371/journal.pone.0244363">https://doi.org/10.1371/journal.pone.0244363</a>.
+</div>
+<div id="ref-Matthew2013" class="csl-entry">
+Matthews, Luke, Jeffrey Edmonds, Wesley Wildman, and Charles Nunn. 2013. <span>“Cultural Inheritance or Cultural Diffusion of Religious Violence? A Quantitative Case Study of the Radical Reformation.”</span> <em>Religion, Brain &amp; Behaviour</em> 3 (1): 3–15.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="manipulating-and-simplifying-social-network-data-in-igraph.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjcallag/r4ds/edit/editing/2-Manipulating_and_Simplifying_in_statnet.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"font_settings": {
+"family": "sans",
+"theme": "white",
+"size": 2
+},
+"info": true,
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

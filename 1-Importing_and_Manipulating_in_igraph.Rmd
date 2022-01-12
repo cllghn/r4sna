@@ -21,7 +21,7 @@ Find and open your RStudio Project associated with this class. Begin by opening 
 # What: Importing and Visualizing One- and Two-Mode Social Network Data
 # File: lab1_igraph.R
 # Created: 02.28.14
-# Revised: 12.22.21
+# Revised: 01.06.22
 #######################################################################
 ```
 
@@ -31,7 +31,7 @@ If you have not set up your RStudio Project to clear the workspace on exit, your
 rm(list = ls())
 ```
 
-Proceed to place the data required for this lab (`davis.csv`, `davis.net`, `davisedge.csv`, `Koschade Bali (Edge).csv`, `Koschade Bali (Matrix).csv`, and `Koschade Bali.net`) also inside your R Project folder. We have placed it in a sub folder titled `data` for organizational purposes; however, this is not necessary.
+Proceed to place the data required for this lab (`davis.csv`, `davis.net`, `davisedge.csv`, `Koschade Bali (Edge).csv`, `Koschade Bali (Matrix).csv`, and `Koschade Bali.net`) also inside your R Project folder. We have placed it in a sub-folder titled `data` for organizational purposes; however, this is not necessary.
 
 ## Load Libraries
 
@@ -48,7 +48,7 @@ library(intergraph)
 ```
 
 ::: {.infobox data-latex=""}
-**Note**: **igraph** imports the `%>%` operator on load (`library(igraph)`). This series of exercises leverages the operator because we find it very useful in chaining functions. 
+**Note**: **igraph** imports the `%>%` (piping) operator on load (`library(igraph)`). This lab leverages the operator because we find it very useful in chaining functions, although in doing so we will sometimes illustrate how to carry out the same operations using base R. 
 :::
 
 ## One-mode Social Network Data in **igraph**: Koschade Network
@@ -67,11 +67,20 @@ koschade_dat <- read.csv(file = "data/Koschade Bali (Matrix).csv",
                          header = TRUE,
                          row.names = 1,
                          check.names = FALSE)
-# Now, coherce the data.frame to a matrix
+# Now, coerce the data.frame to a matrix
 koschade_mat <- as.matrix(koschade_dat)
 ```
 
-The two-step operation above could be combined:
+The two-step operation above could be combined with and without piping. First, without:
+
+```{r,include=TRUE,collapse=TRUE,warning=FALSE}
+koschade_mat <- as.matrix(read.csv(file = "data/Koschade Bali (Matrix).csv",
+                                   header = TRUE,
+                                   row.names = 1,
+                                   check.names = FALSE))
+```
+
+And now with: 
 
 ```{r,include=TRUE,collapse=TRUE,warning=FALSE}
 koschade_mat <- read.csv(file = "data/Koschade Bali (Matrix).csv",
@@ -127,7 +136,6 @@ edge_weight_1 <- get.edge.attribute(koschade1_ig,
                                     name = "weight") # Attribute name
 ```
 
-
 #### Option 2: Importing One-Mode Network Data as an Edge List
 
 Here is how we can import an edge list, and then check the first few rows with the `head()` command.
@@ -145,6 +153,19 @@ Convert the edge list to an `igraph` object and check for basic information.
 koschade2_ig <- graph_from_data_frame(d = koschade2_el, 
                                       directed = FALSE)
 # Look at the printout
+koschade2_ig
+```
+
+Here's how to do all that using piping:
+
+```{r}
+koschade2_ig <- read.csv(file = "data/Koschade Bali (Edge).csv",
+                         header = TRUE) %>%
+ graph_from_data_frame(directed = FALSE)
+```
+
+Look at the printout
+```{r}
 koschade2_ig
 ```
 
@@ -169,9 +190,15 @@ koschade3_ig %>%
 
 #### Option 4: Importing One-Mode Network Data into **statnet** Format using **intergraph**
 
-You may find yourself working with data in **igraph** and have to convert it to **statnet**. Luckily, the **intergraph** library let's you jump pretty smoothly between the data classes required by each library. 
+If you first worked with the data in **statnet**, you can use **intergraph** to convert a **statnet** network object to an **igraph** object. The **intergraph** library let's you jump pretty smoothly between the data classes required by each library.
 
-Here we will take an `igraph` object and convert it to a `network` class object required by the **statnet** suite. Then, we will return that object from `network` to `igraph` class.
+**To be clear**: this command only works if you already have a statnet network object
+
+```{r, eval = FALSE, message = FALSE}
+koschade_ig <- asIgraph(koschade_net)
+```
+
+Of course, you may begin working with data in **igraph** and have to convert it to **statnet**. Here we will take an `igraph` object and convert it to a `network` class object required by the **statnet** suite. Then, we will return that object from `network` to `igraph` class.
 
 ```{r, eval = TRUE, message = FALSE}
 # Transform an igraph object to network class
@@ -351,7 +378,24 @@ We will now switch to another data set to import, manipulate, and visualize two-
 
 #### Option 1: Importing Two-Mode Social Network Data in Matrix Format
 
-Once again, begin by reading the data from a CSV using `read.csv()`. Then transform the `data.frame` to a `matrix`, which is passed along to the `graph_from_incidence_matrix()` **igraph** function. This final command, creates a bipartite graph from an incidence matrix, the arguments included below are optional, but needed in this circumstance.
+Once again, begin by reading the data from a CSV using `read.csv()`. This then transformed into a matrix, which, in turn, is turned into a bipartite (two-mode) network using the `graph_from_incidence_matrix()` **igraph** function. As before, we demonstrate how to do this with and without piping.
+
+First, without piping:
+
+```{r}
+davis1_dat <- read.csv(file = "data/davis.csv",
+                        header = TRUE,
+                        row.names = 1,
+                        check.names = FALSE)
+
+davis1_mat <- as.matrix(davis1_dat)
+
+davis1_ig <- graph_from_incidence_matrix(davis1_mat,
+                                         directed = FALSE,
+                                         weighted = NULL)
+```
+
+Now, with piping:
 
 ```{r}
 davis1_ig <- read.csv(file = "data/davis.csv",
@@ -377,7 +421,19 @@ Note the `B` letter in the four letter code string that describes the network qu
 **Note**: This section is adapted from code written by Phil Murphy and Brendan Knapp.
 :::
 
-You may also begin creating your analysis of two-mode networks from an edge list. To do so, leverage the `read.csv()` function to ingest data. Then, pass the edge list to **igraph**'s `graph_from_data_frame()` function. 
+You may also begin creating your analysis of two-mode networks from an edge list. To do so, leverage the `read.csv()` function to ingest data. Then, pass the edge list to **igraph**'s `graph_from_data_frame()` function. Again, first without piping and then with piping.
+
+Without: 
+
+```{r}
+davis2_el <- read.csv(file = "data/davisedge.csv",
+                      header = TRUE)
+
+davis2_ig <- graph_from_data_frame(davis2_el,
+                                   directed = FALSE)
+```
+
+With:
 
 ```{r}
 davis2_ig <- read.csv(file = "data/davisedge.csv",
@@ -460,12 +516,12 @@ plot(davis1_ig,
 plot(davis2_ig,
      layout = coordfr,
      vertex.label.cex  = 0.6,
-     vertex.label.color="black")
+     vertex.label.color = "black")
 
 plot(davis3_ig,
      layout = coordfr,
      vertex.label.cex  = 0.6,
-     vertex.label.color="black")
+     vertex.label.color = "black")
 ```
 
 Now, let’s make a few adjustments to the graph; for instance, we can change the node colors to “light blue” and “yellow” to reflect node types. First, we need to determine what nodes belong to which mode.
@@ -488,7 +544,7 @@ plot(davis1_ig,
      vertex.color = ifelse(get.vertex.attribute(davis1_ig, name = "type"),
                            "yellow", "lightblue"),
      vertex.label.cex  = 0.6,
-     vertex.label.color="black")
+     vertex.label.color = "black")
 ```
 
 Now, re-plot the networks with the new colors and saved the coordinate while we're at it.
@@ -583,7 +639,7 @@ davis1_mat
 
 Next, multiply the matrices by their transpose. To do so, we use the `%*%` operator to multiply networks and the `t()` function to transpose one matrix during the multiplication.
 
-First, let's create a one-mode matrix of women-to-women based on shared events/
+First, let's create a one-mode matrix of women-to-women based on shared events.
 
 ```{r}
 davis_women_mat <- davis1_mat %*% t(davis1_mat)

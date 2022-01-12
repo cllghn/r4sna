@@ -27,7 +27,7 @@ Find and open your RStudio Project associated with this class. Begin by opening 
 # What: Importing and Visualizing One- and Two-Mode Social Network Data
 # File: lab1_statnet.R
 # Created: 02.28.14
-# Revised: 12.22.21
+# Revised: 01.05.22
 #######################################################################
 ```
 
@@ -77,6 +77,20 @@ koschade1_net <- as.network(
   directed = FALSE, 
   ignore.eval = FALSE
 )
+```
+
+Here's another way to write the same command:
+
+```{r, include = TRUE, collapse = FALSE, warning = FALSE, message = FALSE}
+koschade1_net <- as.network(
+                     as.matrix(
+                         read.csv("data/Koschade Bali (Matrix).csv", 
+                                  header = TRUE,
+                                  row.names = 1,
+                                  check.names = FALSE)),
+                  # Arguments for the as.network() function.
+                            directed = FALSE, 
+                            ignore.eval = FALSE)
 ```
 
 Now that the data has been imported, let's examine the object. First, take a look at it's class:
@@ -154,7 +168,7 @@ koschade3_net <- read.paj("data/Koschade Bali.net")
 koschade3_net
 ```
 
-Here, the edge weight attribute is imported by default as `Koschade Bali`, which may be misleading. Luckily, the `read.paj()`  function has an optional argument to provide the name for he edge variable read from the file.
+Here, the edge weight attribute is imported by default as `Koschade Bali`, which may be misleading. Luckily, the `read.paj()` function has an optional argument to provide the name for the edge variable read from the file.
 
 ```{r, collapse = FALSE}
 koschade3_net <- read.paj("data/Koschade Bali.net",
@@ -220,7 +234,7 @@ coords <- network.layout.kamadakawai(koschade1_net,
 
 # Plot base graph
 gplot(koschade1_net,
-      coord= coords)
+      coord = coords)
 
 # Plot graph using vertex coordinates and additional arugments
 gplot(koschade1_net,
@@ -681,7 +695,7 @@ davis_women_net <- as.network(davis_women_mat)
 davis_events_net <- as.network(davis_events_mat)
 ```
 
-#### Plotting Projected One-Mode Networks
+### Plotting Projected One-Mode Networks
 
 Now that we have extracted the one-mode networks, plot the two new graphs using `gplot()` and the additional arguments used previously.
 

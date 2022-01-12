@@ -23,7 +23,7 @@ Find and open your RStudio Project associated with this class. Begin by opening 
 # What: Importing and Visualizing One- and Two-Mode Social Network Data
 # File: lab1_statnet.R
 # Created: 02.28.14
-# Revised: 12.22.21
+# Revised: 01.05.22
 #######################################################################
 ```
 
@@ -76,6 +76,21 @@ koschade1_net <- as.network(
   directed = FALSE, 
   ignore.eval = FALSE
 )
+```
+
+Here's another way to write the same command:
+
+
+```r
+koschade1_net <- as.network(
+                     as.matrix(
+                         read.csv("data/Koschade Bali (Matrix).csv", 
+                                  header = TRUE,
+                                  row.names = 1,
+                                  check.names = FALSE)),
+                  # Arguments for the as.network() function.
+                            directed = FALSE, 
+                            ignore.eval = FALSE)
 ```
 
 Now that the data has been imported, let's examine the object. First, take a look at it's class:
@@ -262,7 +277,7 @@ koschade3_net
     Koschade Bali 
 ```
 
-Here, the edge weight attribute is imported by default as `Koschade Bali`, which may be misleading. Luckily, the `read.paj()`  function has an optional argument to provide the name for he edge variable read from the file.
+Here, the edge weight attribute is imported by default as `Koschade Bali`, which may be misleading. Luckily, the `read.paj()` function has an optional argument to provide the name for the edge variable read from the file.
 
 
 ```r
@@ -316,9 +331,9 @@ koschade1_ig
 ```
 
 ```
-IGRAPH 5d7f8d9 U--- 17 63 -- 
+IGRAPH 97d4b60 U--- 17 63 -- 
 + attr: na (v/l), vertex.names (v/c), X1 (e/n), na (e/l)
-+ edges from 5d7f8d9:
++ edges from 97d4b60:
  [1]  1-- 2  1-- 3  1-- 4  1-- 5  1-- 6  1-- 8  1-- 9  1--15  1--17  2-- 4
 [11]  2-- 6  2-- 7  3-- 4  3-- 5  3-- 6  3-- 8  3-- 9  3--15  3--16  3--17
 [21]  4-- 5  4-- 6  4-- 7  4-- 8  4-- 9  4--10  4--11  4--12  4--13  4--14
@@ -381,7 +396,7 @@ coords <- network.layout.kamadakawai(koschade1_net,
 
 # Plot base graph
 gplot(koschade1_net,
-      coord= coords)
+      coord = coords)
 
 # Plot graph using vertex coordinates and additional arugments
 gplot(koschade1_net,
@@ -397,7 +412,7 @@ gplot(koschade1_net,
       edge.col = "gray")
 ```
 
-<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" />
 
 In the previous visualizations, we used the Kamada and Kawai algorithm to layout the nodes. By default, `gplot()` uses the Fruchterman and Reingold algorithm to determine the positions of nodes. Let's compare the visual output of three layout algorithms: Kamada and Kawai, Fruchterman and Reigold, and circle. Please note that many other layouts exist, for a more indepth list look at the documenation `?gplot.layout`.
 
@@ -434,7 +449,7 @@ gplot(koschade1_net,
       edge.col = "gray")
 ```
 
-<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" />
 
 Before we move forward, let's take a look at three more arguments that can grately improve the look of your graphs. First, the `jitter` argument insures that `gplot()` does not draw vertices on top of one another. Second, remember that the edge and vertex attributes can be called and used to aid the visuals. Here we use the `get.edge.attribute()` function to call the edge weight vector (`1`) and rescale the thickness of these. Finally, we can curve edges setting `usecurve` to `TRUE`.
 
@@ -458,7 +473,7 @@ gplot(koschade1_net,
       edge.curve = .1)
 ```
 
-<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" />
 
 ### Saving Network Plots (e.g., pdf, jpeg, png, tiff)
 
@@ -711,7 +726,7 @@ gplot(davis2_net,
       label.cex = .6)
 ```
 
-<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-33-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-34-1.png" width="70%" style="display: block; margin: auto;" />
 
 
 #### Option 3: Importing Two-Mode Social Network Data in Pajek Format
@@ -853,7 +868,7 @@ gplot(dat = davis1_net,
       usearrows = FALSE)
 ```
 
-<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-38-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-39-1.png" width="70%" style="display: block; margin: auto;" />
 
 The default colors for **statnet** are blue and red, so if we want to assign different colors we can do so by creating a separate `color` vector.
 
@@ -906,7 +921,7 @@ gplot(dat = davis1_net,
       usearrows = FALSE)
 ```
 
-<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-40-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-41-1.png" width="70%" style="display: block; margin: auto;" />
 
 Let's calculate two-mode degree centrality and then assign the scores as actor attributes. First, let's take a look at how to calculate node degree.
 
@@ -978,7 +993,7 @@ gplot(dat = davis1_net,
       usearrows = FALSE)
 ```
 
-<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-44-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-45-1.png" width="70%" style="display: block; margin: auto;" />
 
 ### Projecting (Folding) Two-Mode Networks into One-Mode Networks in **statnet**.
 
@@ -1048,7 +1063,7 @@ davis_women_net <- as.network(davis_women_mat)
 davis_events_net <- as.network(davis_events_mat)
 ```
 
-#### Plotting Projected One-Mode Networks
+### Plotting Projected One-Mode Networks
 
 Now that we have extracted the one-mode networks, plot the two new graphs using `gplot()` and the additional arguments used previously.
 
@@ -1081,7 +1096,7 @@ gplot(dat = davis_events_net,
       usearrows  = FALSE)
 ```
 
-<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-50-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-51-1.png" width="70%" style="display: block; margin: auto;" />
 
 Resize the nodes by degree centrality. This time, we will not store the value as a vertex attribute.
 
@@ -1111,7 +1126,7 @@ gplot(dat = davis_events_net,
       usearrows  = FALSE)
 ```
 
-<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-51-1.png" width="70%" style="display: block; margin: auto;" />
+<img src="1-Importing_and_Visualizing_in_Statnet_files/figure-html/unnamed-chunk-52-1.png" width="70%" style="display: block; margin: auto;" />
 
 ### Saving Network Plots
 
