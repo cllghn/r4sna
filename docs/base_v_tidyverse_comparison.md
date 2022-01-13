@@ -6,49 +6,61 @@ output: html_document
 
 # Basic Base R and Tidyverse Data Manipulation Cheat Sheet
 
-This document's purpose is to serve as a simple reference guide comparing a handful of basic functions in base R and the **dplyr** package, which is part of the **tidyverse**. It is designed to help you begin to understand some basic differences between the two as you learn R and come across different styles on the web and elsewhere. It does not provide you with all "data manipulation" (or "wrangling" and "carpentry") techniques in R or in the **tidyverse**. Several other packages exist that are part of the **tidyverse**, such as **tidyr**, **stringr**, and **purrr**, and will support you with key functions and procedures depending on the type of data with which you are working and your analytic needs. In fact, we will most certainly work with these packages during the quarter. An excellent place to start exploring the **tidyverse** is <https://bookdown.org>, which contains useful references for a variety of topics.
+This document's purpose is to serve as a simple reference guide
+comparing a handful of basic functions in base R and the **dplyr**
+package, which is part of the **tidyverse**. It is designed to help you
+begin to understand some basic differences between the two as you learn
+R and come across different styles on the web and elsewhere. It does not
+provide you with all "data manipulation" (or "wrangling" and
+"carpentry") techniques in R or in the **tidyverse**. Several other
+packages exist that are part of the **tidyverse**, such as **tidyr**,
+**stringr**, and **purrr**, and will support you with key functions and
+procedures depending on the type of data with which you are working and
+your analytic needs. In fact, we will most certainly work with these
+packages during the quarter. An excellent place to start exploring the
+**tidyverse** is <https://bookdown.org>, which contains useful
+references for a variety of topics.
 
-Finally, you can switch back and forth between base R and **tidyverse** in your analysis; they are not mutually exclusive. However, several advantages exist in staying consistent in your code.
+Finally, you can switch back and forth between base R and **tidyverse**
+in your analysis; they are not mutually exclusive. However, several
+advantages exist in staying consistent in your code.
 
 ## Basic Base R and **dplyr** Functions
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 <img src="imgs/Rlogo.png" width="50%" angle=0 style="display: block; margin: auto;" />
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 <img src="imgs/04-dplyr-logo.png" width="50%" angle=0 style="display: block; margin: auto;" />
 :::
 :::
 
+## Installation
 
-### Installation
-
-The first step is to make sure that you have installed and loaded the necessary packages.
+The first step is to make sure that you have installed and loaded the
+necessary packages.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 # No installation required
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 install.packages("tidyverse")
@@ -60,26 +72,30 @@ install.packages("readr")
 :::
 :::
 
-### Loading
+## Loading
 
-You can either install and load **tidyverse**, or you can load specific packages within it, such as **dplyr**. Though it is not required for this demonstration, we will use `::` to call **dplyr** before using one of its functions, in part, because some packages have the same name for different functions and we think this is a useful practice when using multiple packages during an analysis, which will be the case most of time.
-
+You can either install and load **tidyverse**, or you can load specific
+packages within it, such as **dplyr**. Though it is not required for
+this demonstration, we will use `::` to call **dplyr** before using one
+of its functions, in part, because some packages have the same name for
+different functions and we think this is a useful practice when using
+multiple packages during an analysis, which will be the case most of
+time.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 # No loading required.
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 # You may load the whole tidyverse
@@ -92,28 +108,31 @@ library(readr)
 :::
 :::
 
-
 ::: {.infobox data-latex=""}
-The **tidyverse** often utilizes "piping" (`%>%`) to execute an action. You can think of the `%>%` as saying "and then" followed by a function or action. The use of this operator is not required, but we will use it here.
+The **tidyverse** often utilizes "piping" (`%>%`) to execute an action.
+You can think of the `%>%` as saying "and then" followed by a function
+or action. The use of this operator is not required, but we will use it
+here.
 
-For example, you can think of a data frame object as a noun in a sentence, and the functions as verbs. Compare the following two morning routines to see the advantages of using `%>%`to write programming instructions:
+For example, you can think of a data frame object as a noun in a
+sentence, and the functions as verbs. Compare the following two morning
+routines to see the advantages of using `%>%`to write programming
+instructions:
 
 ::: {.row data-latex=""}
-
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 go_work(get_ready(eat(wake_up(you))))
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 you %>% # 'and then...'
@@ -123,20 +142,22 @@ you %>% # 'and then...'
   go_work() # 'and then...'
 ```
 :::
-
 :::
 
-Which "sentence" makes more sense in understanding the sequence of events? Some prefer the syntax on the right as it improves readability. 
-
+Which "sentence" makes more sense in understanding the sequence of
+events? Some prefer the syntax on the right as it improves readability.
 :::
 
-### Import and View Data
+## Import and View Data
 
-Go ahead and load the data set for this walk through, which is a Twitter data set pulled from Twitter's open API that focuses on the Popular Mobilization Forces (PMF) in Iraq.
+Go ahead and load the data set for this walk through, which is a Twitter
+data set pulled from Twitter's open API that focuses on the Popular
+Mobilization Forces (PMF) in Iraq.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
-Some people feel more comfortable using base R functions to import data with `read.csv()`.
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
+Some people feel more comfortable using base R functions to import data
+with `read.csv()`.
 
 
 ```r
@@ -166,14 +187,14 @@ View(df)
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
-To import csv files using the tidy framework, use the **readr** package's `read_csv()` function.
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
+To import csv files using the tidy framework, use the **readr**
+package's `read_csv()` function.
 
 
 ```r
@@ -205,11 +226,14 @@ tb %>%
 :::
 
 ::: {.infobox data-latex=""}
-Note that in this cheat sheet we are not assigning the output from each operation into a new object. If the printed output in the console is not enough to compare the differences between the base R and tidy grammar, you may want to assign the output to new objects and inspect it in the viewer like so:
+Note that in this cheat sheet we are not assigning the output from each
+operation into a new object. If the printed output in the console is not
+enough to compare the differences between the base R and tidy grammar,
+you may want to assign the output to new objects and inspect it in the
+viewer like so:
 
 ::: {.row data-latex=""}
-
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 my_df_head <- head(df)
@@ -218,13 +242,12 @@ View(my_df_head)
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 tb %>%
@@ -232,16 +255,15 @@ tb %>%
   View()
 ```
 :::
-
+:::
 :::
 
-:::
-
-### Extracting Variables/Columns
+## Extracting Variables/Columns
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
-Extracting variables in base R uses the `[` accessor in combination with `c()` to extract the desired columns. Note the quotation marks around each variable.
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
+Extracting variables in base R uses the `[` accessor in combination with
+`c()` to extract the desired columns. 
 
 
 ```r
@@ -250,7 +272,8 @@ df[, c("screen_name",
        "location", "followers_count")]
 ```
 
-You can extract by column index in base R. The numbers indicate the column numbers (e.g., `screen_name` is column 4 in our data).
+You can extract by column index in base R. The numbers indicate the
+column numbers (e.g., `screen_name` is column 4 in our data).
 
 
 ```r
@@ -259,14 +282,14 @@ df[, c(4, 14, 74, 78)]
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
-Use **dplyr's** `select()` function to extract a handful of columns of interest. Note that variable names are unquoted and separated by commas.
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
+Use **dplyr's** `select()` function to extract a handful of columns of
+interest. Note that variable names are unquoted and separated by commas.
 
 
 ```r
@@ -275,7 +298,8 @@ tb %>%
          location, followers_count)
 ```
 
-You can use a column index as well. Note you can just declare the column indexes inside the `select()` function.
+You can use a column index as well. Note you can just declare the column
+indexes inside the `select()` function.
 
 
 ```r
@@ -285,12 +309,61 @@ tb %>%
 :::
 :::
 
-### Creating Filters/Extracting Rows
-
-Here we will create a filter for all tweets that have been retweeted 10 or more times.
+You could take a look at the top 5 rows of the selected variables by
+combining functions.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
+
+```r
+# Combine indexes with c()
+head(df[, c(4, 14, 78)],
+     n = 5)
+```
+
+```
+   screen_name retweet_count followers_count
+1 warmediateam             1            3073
+2 warmediateam             2            3073
+3 warmediateam             2            3073
+4 warmediateam             3            3073
+5 warmediateam             3            3073
+```
+:::
+
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
+a column separator for tex -->
+:::
+
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
+
+```r
+tb %>%
+  dplyr::select(4, 14, 78) %>%
+  head(n = 5)
+```
+
+```
+# A tibble: 5 x 3
+  screen_name  retweet_count followers_count
+  <chr>                <dbl>           <dbl>
+1 warmediateam             1            3073
+2 warmediateam             2            3073
+3 warmediateam             2            3073
+4 warmediateam             3            3073
+5 warmediateam             3            3073
+```
+:::
+:::
+
+## Creating Filters/Extracting Rows
+
+Here we will create a filter for all tweets that have been retweeted 10
+or more times.
+
+::: {.row data-latex=""}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 Filtering in base R requires the `[` accessor.
 
 
@@ -307,14 +380,12 @@ subset(df, retweet_count >= 10)
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
-
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 Create filters using the `filter()` function.
 
 
@@ -325,10 +396,12 @@ tb %>%
 :::
 :::
 
-You may use multiple filtering criteria by chaining the arguments with the `|` (or) and `&` (and) operators. For instance, add a second filter to return only tweets from the account "warmediateam".
+You may use multiple filtering criteria by chaining the arguments with
+the `|` (or) and `&` (and) operators. For instance, add a second filter
+to return only tweets from the account "warmediateam".
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 subset(df, 
@@ -337,13 +410,12 @@ subset(df,
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 tb %>%
@@ -353,10 +425,11 @@ tb %>%
 :::
 :::
 
-For a much clearer print out, combine the filtering techniques with the variable selection methods:
+For a much clearer print out, combine the filtering techniques with the
+variable selection methods:
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 # Pass limited data frame to subset().
@@ -366,13 +439,12 @@ subset(df[, c(4, 14, 74, 78)],
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 tb %>%
@@ -383,13 +455,66 @@ tb %>%
 :::
 :::
 
-### Arrange Rows
+You could take a look at the top rows of the filtered output combining
+functions.
+
+::: {.row data-latex=""}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
+
+```r
+head(
+  subset(df[, c(4, 14, 78)], 
+         retweet_count >= 10 &
+        screen_name == "warmediateam"),
+  n = 5)
+```
+
+```
+    screen_name retweet_count followers_count
+17 warmediateam            22            3073
+31 warmediateam            13            3073
+33 warmediateam            13            3073
+36 warmediateam            10            3073
+37 warmediateam            10            3073
+```
+:::
+
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
+a column separator for tex -->
+:::
+
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
+
+```r
+tb %>%
+  dplyr::filter(retweet_count >= 10 &
+           screen_name == "warmediateam") %>%
+  dplyr::select(4, 14, 78) %>%
+  head(n = 5)
+```
+
+```
+# A tibble: 5 x 3
+  screen_name  retweet_count followers_count
+  <chr>                <dbl>           <dbl>
+1 warmediateam            22            3073
+2 warmediateam            13            3073
+3 warmediateam            13            3073
+4 warmediateam            10            3073
+5 warmediateam            10            3073
+```
+:::
+:::
+
+## Arrange Rows
 
 Here we will arrange that data frame alphabetically by `screen_name`.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
-Arranging in base R requires the `[` accessor and the `order()` function.
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
+Arranging in base R requires the `[` accessor and the `order()`
+function.
 
 
 ```r
@@ -398,13 +523,12 @@ df[order(df$screen_name), ]
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 In **dplyr** use the `arrange()` function to sort in ascending order.
 
 
@@ -415,11 +539,61 @@ tb %>%
 :::
 :::
 
+You can clean up the printout by combining functions to select relevant variables and examine the top 5 rows.
+
+::: {.row data-latex=""}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
+
+```r
+head(
+  df[order(df$screen_name), 
+     c("screen_name", "retweet_count")],
+  n = 5)
+```
+
+```
+         screen_name retweet_count
+3729 5qxsN9lLdn1Nanl             0
+3730 5qxsN9lLdn1Nanl            36
+3731 5qxsN9lLdn1Nanl             0
+3732 5qxsN9lLdn1Nanl            24
+3733 5qxsN9lLdn1Nanl             0
+```
+:::
+
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
+a column separator for tex -->
+:::
+
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
+
+```r
+tb %>%
+  dplyr::arrange(screen_name) %>%
+  dplyr::select(screen_name, retweet_count) %>%
+  head(n = 5)
+```
+
+```
+# A tibble: 5 x 2
+  screen_name     retweet_count
+  <chr>                   <dbl>
+1 5qxsN9lLdn1Nanl             0
+2 5qxsN9lLdn1Nanl            36
+3 5qxsN9lLdn1Nanl             0
+4 5qxsN9lLdn1Nanl            24
+5 5qxsN9lLdn1Nanl             0
+```
+:::
+:::
+
 You may reverse the order of the variables arranged.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 Set the `decreasing` argument to `TRUE`.
+
 
 ```r
 df[order(df$screen_name,
@@ -427,14 +601,14 @@ df[order(df$screen_name,
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 Include the `desc()` helper function.
+
 
 ```r
 tb %>%
@@ -443,40 +617,64 @@ tb %>%
 :::
 :::
 
-For a much clearer print out, combine the arranging techniques with the variable selection methods:
+Once again, for a much clearer print out, combine the arranging techniques with the
+variable selection methods.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
-df[order(df$screen_name), 
-   # Select 4th and 14th column.
-   c(4, 14)]
+head(
+  df[order(df$screen_name, decreasing = TRUE), 
+     c(4, 14)],
+  n = 5)
+```
+
+```
+       screen_name retweet_count
+4036 zaidaliallawi             0
+4037 zaidaliallawi             0
+4038 zaidaliallawi             0
+4039 zaidaliallawi             0
+4040 zaidaliallawi             0
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 tb %>%
-  dplyr::arrange(screen_name) %>%
-  dplyr::select(4, 14)
+  dplyr::arrange(desc(screen_name)) %>%
+  dplyr::select(4, 14) %>%
+  head(n = 5)
+```
+
+```
+# A tibble: 5 x 2
+  screen_name   retweet_count
+  <chr>                 <dbl>
+1 zaidaliallawi             0
+2 zaidaliallawi             0
+3 zaidaliallawi             0
+4 zaidaliallawi             0
+5 zaidaliallawi             0
 ```
 :::
 :::
 
-### Making a New Column/Variable
+## Making a New Column/Variable
 
-The new variable we will create here, `retweet_success`, is for demonstration purposes. The variable will be generated by dividing the `retweet_count` by the `followers_count`.
+The new variable we will create here, `retweet_success`, is for
+demonstration purposes. The variable will be generated by dividing the
+`retweet_count` by the `followers_count`.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 In base R, creating a new column requires using the `$` accessor.
 
 
@@ -487,13 +685,12 @@ df$retweet_success <- df$retweet_count/
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 To create a column in **dplyr** use the `mutate()` function.
 
 
@@ -508,54 +705,80 @@ tb %>%
 Once again, you may want to combine functions to get a clearer print out. Here, we will combine how to create and arrange a new variable, and select a handful of columns.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
+# Create new variable
 df$retweet_success <- df$retweet_count/
   df$followers_count
+# Rearrange, select, and return top 5
+head(
+  df[order(df$retweet_success, decreasing = TRUE),
+     c("screen_name", "retweet_success")],
+  n = 5)
+```
 
-df[order(df$retweet_success, decreasing = TRUE),
-   c("screen_name", "retweet_success")]
+```
+         screen_name retweet_success
+3930 MzcCY48mFeyS1ly             Inf
+2241 San_Patricio_BN        3342.643
+9591         M_ska98        1613.333
+4981          b76142         560.000
+4148 8KXS2Iq3JAPEDvi         245.500
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 tb %>%
+  # Create new variable
   dplyr::mutate(retweet_success = retweet_count/
                   followers_count) %>%
+  # Rearrange, select, and return top 5
   dplyr::arrange(desc(retweet_success)) %>%
-  dplyr::select(screen_name, retweet_success)
+  dplyr::select(screen_name, retweet_success) %>%
+  head(n = 5)
+```
+
+```
+# A tibble: 5 x 2
+  screen_name     retweet_success
+  <chr>                     <dbl>
+1 MzcCY48mFeyS1ly            Inf 
+2 San_Patricio_BN           3343.
+3 M_ska98                   1613.
+4 b76142                     560 
+5 8KXS2Iq3JAPEDvi            246.
 ```
 :::
 :::
 
-### Rename Variables
+## Rename Variables
 
-Let’s now explore how to rename variables. Begin by taking a look at the column names, a straightforward way of doing so is using the base R’s `colnames()` function.
+Let's now explore how to rename variables. Begin by taking a look at the
+column names, a straightforward way of doing so is using the base R's
+`colnames()` function.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 colnames(df)
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 tb %>% colnames()
@@ -566,77 +789,118 @@ tb %>% colnames()
 Now we will select several columns, and then rename them.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 names(df)[names(df) == "screen_name"] <- "Screen_Name"
 
 names(df)[names(df) == "retweet_count"] <- "N_Retweets"
 
-df[, c("Screen_Name","N_Retweets")]
+head(df[, c("Screen_Name","N_Retweets")], 
+     n = 5)
+```
+
+```
+   Screen_Name N_Retweets
+1 warmediateam          1
+2 warmediateam          2
+3 warmediateam          2
+4 warmediateam          3
+5 warmediateam          3
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 tb %>% 
   dplyr::select(screen_name, 
                 retweet_count) %>%
   dplyr::rename(Screen_Name = screen_name,
-                N_Retweets = retweet_count)
+                N_Retweets = retweet_count) %>%
+  head(n = 5)
+```
+
+```
+# A tibble: 5 x 2
+  Screen_Name  N_Retweets
+  <chr>             <dbl>
+1 warmediateam          1
+2 warmediateam          2
+3 warmediateam          2
+4 warmediateam          3
+5 warmediateam          3
 ```
 :::
 :::
 
-### Summarizing
+## Summarizing
 
-Summary statistics are really useful in describing your data. This can be done both in base R and in **dplyr**. Here we will explore how to execute simple summaries first; then, we will move on to calculate group summaries.
+Summary statistics are really useful in describing your data. This can
+be done both in base R and in **dplyr**. Here we will explore how to
+execute simple summaries first; then, we will move on to calculate group
+summaries.
 
-#### Simple Summary
+### Simple Summary
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
-To summarize in base R, you will need generic functions to calculate these statistics. For example, `mean()`, `median()`, `sum()`, etc.
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
+To summarize in base R, you will need generic functions to calculate
+these statistics. For example, `mean()`, `median()`, `sum()`, etc.
+
+
 
 
 ```r
 # Create a data frame with the summary.
 data.frame(rt_avg = mean(df$retweet_count))
 ```
+
+```
+    rt_avg
+1 245.2969
+```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
-To summarize data in **dplyr**, use the `summarize()` function to compute a requested summary (e.g., `mean()`, `median()`, `n()`, etc.).
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
+To summarize data in **dplyr**, use the `summarize()` function to
+compute a requested summary (e.g., `mean()`, `median()`, `n()`, etc.).
 
 
 ```r
 tb %>%
   dplyr::summarize(rt_avg = mean(retweet_count))
 ```
+
+```
+# A tibble: 1 x 1
+  rt_avg
+   <dbl>
+1   245.
+```
 :::
 :::
 
-#### Group Summary
+### Group Summary
 
-Summarizing can be expanded by computing the statistics by groups. For instance, here we will get the retweet count of each individual; thus, the group would be each `screen_name`
-.
+Summarizing can be expanded by computing the statistics by groups. For
+instance, here we will get the retweet count of each individual; thus,
+the group would be each `screen_name` .
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
-Use the `aggregate()` function to slip the data into subsets and then proceed to compute summary statistics for each.
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
+Use the `aggregate()` function to slip the data into subsets and then
+proceed to compute summary statistics for each.
 
 
 ```r
@@ -646,14 +910,14 @@ aggregate(x = df$retweet_count,
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
-Group a data frame with `group_by()` and perform group operations by adding the `summarize()` function.
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
+Group a data frame with `group_by()` and perform group operations by
+adding the `summarize()` function.
 
 
 ```r
@@ -664,59 +928,83 @@ tb %>%
 :::
 :::
 
-Once again, you may want to combine some functions to make your output more legible.
+Once again, you may want to combine some functions to make your output
+more legible.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 out <- aggregate(x = df$retweet_count,
                  by = list(screen_name=df$screen_name),
                  FUN = mean)
-out[order(out$x, decreasing = TRUE), ]
+head(out[order(out$x, decreasing = TRUE), ], 
+     n = 5)
+```
+
+```
+        screen_name        x
+102      TheEisaAli 4909.646
+43         EmmaDaly 4481.640
+36       DCrising21 2916.490
+97  San_Patricio_BN 1581.717
+74      MikeyKayNYC 1506.260
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 tb %>%
   dplyr::group_by(screen_name) %>%
   dplyr::summarize(rt_avg = mean(retweet_count)) %>%
-  arrange(desc(rt_avg))
+  arrange(desc(rt_avg)) %>%
+  head(n = 5)
+```
+
+```
+# A tibble: 5 x 2
+  screen_name     rt_avg
+  <chr>            <dbl>
+1 TheEisaAli       4910.
+2 EmmaDaly         4482.
+3 DCrising21       2916.
+4 San_Patricio_BN  1582.
+5 MikeyKayNYC      1506.
 ```
 :::
 :::
 
-### Combining Data
+## Combining Data
 
-Up to this point, we have only covered single table functions. However, when data arrives in many pieces you may need to combine these to complete your analysis. 
+Up to this point, we have only covered single table functions. However,
+when data arrives in many pieces you may need to combine these to
+complete your analysis.
 
-Here we will bring a second data set, which contains social network analysis metrics for each user account listed in the initial data set.
+Here we will bring a second data set, which contains social network
+analysis metrics for each user account listed in the initial data set.
 
 Once again, you can read the new data set with base R or **readr**.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 sna_df <- read.csv("data/SNA_Stats.csv")
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 sna_tb <- readr::read_csv("data/SNA_Stats.csv")
@@ -727,131 +1015,243 @@ sna_tb <- readr::read_csv("data/SNA_Stats.csv")
 Inspect both data sets:
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
-head(sna_df)
 dim(sna_df)
 ```
+
+```
+[1] 4146    7
+```
+
+
+```r
+colnames(sna_df)
+```
+
+```
+[1] "screen_name"                "componentnumber"           
+[3] "Eccentricity"               "closnesscentrality"        
+[5] "harmonicclosnesscentrality" "betweenesscentrality"      
+[7] "modularity_class"          
+```
+
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
-sna_tb %>% head()
 sna_tb %>% dplyr::dim_desc()
+```
+
+```
+[1] "[4,146 x 7]"
+```
+
+
+```r
+sna_tb %>% colnames()
+```
+
+```
+[1] "screen_name"                "componentnumber"           
+[3] "Eccentricity"               "closnesscentrality"        
+[5] "harmonicclosnesscentrality" "betweenesscentrality"      
+[7] "modularity_class"          
 ```
 :::
 :::
 
-
 ::: {.infobox data-latex=""}
-In order to connect the tables, a pair of variables called *keys* are required. One way to identify keys, is to seek for identically named variables in both data sets. This may not always be viable if the keys are named differently in each data set.
+In order to connect the tables, a pair of variables called *keys* are
+required. One way to identify keys, is to seek for identically named
+variables in both data sets. This may not always be viable if the keys
+are named differently in each data set.
 
 Matching data frame names can be accomplished as follows:
 
 ::: {.row data-latex=""}
-
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 intersect(names(df), names(sna_df))
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 
 ```r
 names(tb) %>% dplyr::intersect(names(sna_df))
 ```
 :::
-
+:::
 :::
 
-:::
-
-#### Left Join
+### Left Join
 
 What you see below is a join that retains all rows from the first table.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
-Use `merge()` to join. Note that `all.x = TRUE` tells R to keep all observations from the first table.
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
+Use `merge()` to join. Note that `all.x = TRUE` tells R to keep all
+observations from the first table.
 
 
 ```r
-merge(df, sna_df, by = "screen_name",
+merge(df, sna_df, 
+      by = "screen_name",
       all.x = TRUE)
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
-The `left_join()` function retains all rows from the `tb` data frame, while adding data from `sna_tb`.
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
+The `left_join()` function retains all rows from the `tb` data frame,
+while adding data from `sna_tb`.
 
 
 ```r
 tb %>%
-  dplyr::left_join(sna_tb, by = "screen_name")
+  dplyr::left_join(sna_tb,
+                   by = "screen_name")
 ```
 :::
 :::
 
-#### Right Join
+Take a look at the dimensions of the output.
+
+::: {.row data-latex=""}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
+
+```r
+dim(
+  merge(df, sna_df, 
+        by = "screen_name",
+        all.x = TRUE))
+```
+
+```
+[1] 10542   100
+```
+:::
+
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
+a column separator for tex -->
+:::
+
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
+
+```r
+tb %>%
+  dplyr::left_join(sna_tb,
+                   by = "screen_name") %>%
+  dplyr::dim_desc()
+```
+
+```
+[1] "[10,542 x 97]"
+```
+:::
+:::
+
+
+
+### Right Join
 
 A right join retains all rows from the second table.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
-Use `merge()` to join. Note that `all.y = TRUE` tells R to keep all observations from the second table.
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
+Use `merge()` to join. Note that `all.y = TRUE` tells R to keep all
+observations from the second table.
 
 
 ```r
-merge(df, sna_df, by = "screen_name",
+merge(df, sna_df,
+      by = "screen_name",
       all.y = TRUE)
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
-The `right_join()` function retains all rows from the `sna_tb` data frame, while adding data from `tb`.
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
+The `right_join()` function retains all rows from the `sna_tb` data
+frame, while adding `tb`.
 
 
 ```r
 tb %>%
-  dplyr::right_join(sna_tb, by = "screen_name")
+  dplyr::right_join(sna_tb, 
+                    by = "screen_name")
 ```
 :::
 :::
 
-#### Inner Join
-
-An inner join retain rows with matches in both tables. `SNA_Stats.csv`, for example, may not include isolates so we would expect fewer results after comparing dimensions. 
+Take a look at the dimensions of the output.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
+
+```r
+dim(
+  merge(df, sna_df,
+      by = "screen_name",
+      all.y = TRUE))
+```
+
+```
+[1] 14065   100
+```
+:::
+
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
+a column separator for tex -->
+:::
+
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
+
+```r
+tb %>%
+  dplyr::right_join(sna_tb, 
+                    by = "screen_name") %>%
+  dplyr::dim_desc()
+```
+
+```
+[1] "[14,065 x 97]"
+```
+:::
+:::
+
+### Inner Join
+
+An inner join retain rows with matches in both tables. `SNA_Stats.csv`,
+for example, may not include isolates so we would expect fewer results
+after comparing dimensions.
+
+::: {.row data-latex=""}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 Use the `merge()` function to inner join.
 
 
@@ -861,13 +1261,12 @@ merge(df, sna_df,
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 `inner_join()` merges based on `screen_name`.
 
 
@@ -878,64 +1277,182 @@ tb %>%
 :::
 :::
 
-#### Full Join
+Take a look at the dimensions of the output.
+
+::: {.row data-latex=""}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
+
+```r
+dim(
+  merge(df, sna_df,
+      by = "screen_name"))
+```
+
+```
+[1] 10027   100
+```
+:::
+
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
+a column separator for tex -->
+:::
+
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
+
+```r
+tb %>%
+  dplyr::inner_join(sna_tb, by = "screen_name") %>%
+  dplyr::dim_desc()
+```
+
+```
+[1] "[10,027 x 97]"
+```
+:::
+:::
+
+### Full Join
 
 A full join retains all rows in both data sets, regardless of matches.
 
 ::: {.row data-latex=""}
-::: {.lcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 Use the `merge()` function to full join. Note the `all = TRUE` argument.
 
 
 ```r
-merge(df, sna_df, by = "screen_name",
+merge(df, sna_df,
+      by = "screen_name",
       all = TRUE)
 ```
 :::
 
-::: {.col data-latex="{0.04\textwidth}"}
-\ 
-<!-- an empty Div (with a white space), serving as
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
 a column separator for tex -->
 :::
 
-::: {.rcolumn-50 data-latex="{0.48\textwidth}"}
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
 The `full_join()` function will merge based on shared `screen_name`.
 
 
 ```r
 tb %>%
-  dplyr::full_join(sna_tb, by = "screen_name")
+  dplyr::full_join(sna_tb,
+                   by = "screen_name")
 ```
 :::
 :::
 
+Take a look at the dimensions of the output.
 
-### Piping Multiple Variables
+::: {.row data-latex=""}
+::: {.lcolumn-50 data-latex="{0.48\\textwidth}"}
 
-As you can see, the `%>%` operator is a great way to execute multiple actions in a few lines of code. This last example is meant to show how much can be done by chaining multiple functions with `%>%`. For example, say we wanted to identify the most retweeted users in our original data set. To do so, we will have to group rows by `screen_name` using `group_by()`, then add the number of retweets per account, `filter()` by the average number of retweets (n = 245), `arrange()` the total, and finally rename the variables. 
+```r
+dim(
+  merge(df, sna_df,
+      by = "screen_name",
+      all = TRUE))
+```
+
+```
+[1] 14580   100
+```
+:::
+
+::: {.col data-latex="{0.04\\textwidth}"}
+  <!-- an empty Div (with a white space), serving as
+a column separator for tex -->
+:::
+
+::: {.rcolumn-50 data-latex="{0.48\\textwidth}"}
+
+```r
+tb %>%
+  dplyr::full_join(sna_tb,
+                   by = "screen_name") %>%
+  dplyr::dim_desc()
+```
+
+```
+[1] "[14,580 x 97]"
+```
+:::
+:::
+
+## Piping Multiple Variables
+
+As you can see, the `%>%` operator is a great way to execute multiple
+actions in a few lines of code. This last example is meant to show how
+much can be done by chaining multiple functions with `%>%`. For example,
+say we wanted to identify the most retweeted users in our original data
+set. To do so, we will have to group rows by `screen_name` using
+`group_by()`, then add the number of retweets per account, `filter()` by
+the average number of retweets (n = 245), `arrange()` the total, and
+finally rename the variables.
 
 
 ```r
 tb %>%
   dplyr::group_by(screen_name) %>%
   dplyr::summarise(retweet_total = sum(retweet_count)) %>%
-  dplyr::filter(retweet_count_total >= 245) %>%
-  dplyr::arrange(desc(retweet_count_total)) %>%
+  dplyr::filter(retweet_total >= 245) %>%
+  dplyr::arrange(desc(retweet_total)) %>%
   dplyr::rename(Screen_Name = screen_name,
-                N_Retweets = retweet_count_total)
+                N_Retweets = retweet_total)
 ```
 
-We can clean up the output to only present the top accounts by adding **dplyr**’s `top_n()` function. 
+```
+# A tibble: 89 x 2
+   Screen_Name     N_Retweets
+   <chr>                <dbl>
+ 1 TheEisaAli          486055
+ 2 EmmaDaly            448164
+ 3 DCrising21          291649
+ 4 MikeyKayNYC         150626
+ 5 realsohelbahjat     145546
+ 6 San_Patricio_BN     145518
+ 7 m_al_asiri           81549
+ 8 amnesty              80147
+ 9 Protectthenhs        72937
+10 YouTube              62145
+# ... with 79 more rows
+```
+
+We can clean up the output to only present the top accounts by adding
+**dplyr**'s `top_n()` function.
 
 
 ```r
 tb %>%
   dplyr::group_by(screen_name) %>%
   dplyr::summarise(retweet_total = sum(retweet_count)) %>%
-  dplyr::filter(retweet_count_total >= 245) %>%
-  dplyr::arrange(desc(retweet_count_total)) %>%
+  dplyr::filter(retweet_total >= 245) %>%
+  dplyr::arrange(desc(retweet_total)) %>%
   dplyr::rename(Screen_Name = screen_name,
-                N_Retweets = retweet_count_total) %>%
+                N_Retweets = retweet_total) %>%
   dplyr::top_n(15)
+```
+
+```
+# A tibble: 15 x 2
+   Screen_Name     N_Retweets
+   <chr>                <dbl>
+ 1 TheEisaAli          486055
+ 2 EmmaDaly            448164
+ 3 DCrising21          291649
+ 4 MikeyKayNYC         150626
+ 5 realsohelbahjat     145546
+ 6 San_Patricio_BN     145518
+ 7 m_al_asiri           81549
+ 8 amnesty              80147
+ 9 Protectthenhs        72937
+10 YouTube              62145
+11 nafarrao             44631
+12 SulomeAnderson       43000
+13 IraqiSecurity        38478
+14 USEmbBaghdad         28770
+15 The_H16              27462
 ```
