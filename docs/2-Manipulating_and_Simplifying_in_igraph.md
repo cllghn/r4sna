@@ -38,7 +38,6 @@ We need to load the libraries we plan to use. Here we will use **igraph**. Becau
 
 ```r
 library(igraph)
-Warning: package 'igraph' was built under R version 4.1.2
 ```
 
 ::: {.infobox data-latex=""}
@@ -512,9 +511,9 @@ anabaptist_ig
 ```
 
 ```
-IGRAPH 5c37b8e UNW- 67 183 -- 
+IGRAPH 168d34c UNW- 67 183 -- 
 + attr: id (v/c), name (v/c), x (v/n), y (v/n), z (v/n), weight (e/n)
-+ edges from 5c37b8e (vertex names):
++ edges from 168d34c (vertex names):
  [1] Martin Luther --Ulrich Zwingli      Martin Luther --Thomas Muntzer     
  [3] Martin Luther --Andreas Carlstadt   Martin Luther --Caspar Schwenckfeld
  [5] Martin Luther --Melchior Hofmann    Martin Luther --Philipp Melanchthon
@@ -669,9 +668,9 @@ anagroup_ig
 ```
 
 ```
-IGRAPH 5ca9b4c UNW- 3 183 -- 
+IGRAPH 16fc71a UNW- 3 183 -- 
 + attr: name (v/x), weight (e/n)
-+ edges from 5ca9b4c (vertex names):
++ edges from 16fc71a (vertex names):
 [1] Martin Luther      , John Calvin        , Ulrich Zwingli     , Joachim Vadian     , Leo Jud            , Henry Bullinger    , Thomas Muntzer     , Andreas Carlstadt  , Caspar Schwenckfeld, Philipp Melanchthon, Wolfgang Capito    , Martin Bucer       --Martin Luther      , John Calvin        , Ulrich Zwingli     , Joachim Vadian     , Leo Jud            , Henry Bullinger    , Thomas Muntzer     , Andreas Carlstadt  , Caspar Schwenckfeld, Philipp Melanchthon, Wolfgang Capito    , Martin Bucer       
 + ... omitted several edges
 ```
@@ -810,10 +809,10 @@ anabaptist2_ig
 ```
 
 ```
-IGRAPH 5d5f226 UNW- 55 131 -- 
+IGRAPH 17aef93 UNW- 55 131 -- 
 + attr: layout (g/n), id (v/c), name (v/c), x (v/n), y (v/n), z (v/n),
 | anabaptist (v/n), weight (e/n)
-+ edges from 5d5f226 (vertex names):
++ edges from 17aef93 (vertex names):
  [1] Conrad Grebel--Felix Manz              
  [2] Conrad Grebel--George Blaurock         
  [3] Conrad Grebel--Wilhelm Reublin         
@@ -908,9 +907,9 @@ samp_pos_ig
 ```
 
 ```
-IGRAPH 5dafb39 DN-- 18 202 -- 
+IGRAPH 17fc2f0 DN-- 18 202 -- 
 + attr: name (v/c), Weight (e/n), Relation (e/c)
-+ edges from 5dafb39 (vertex names):
++ edges from 17fc2f0 (vertex names):
  [1] ROMUALD    ->BONAVENTURE ROMUALD    ->AMBROSE     ROMUALD    ->PETER      
  [4] ROMUALD    ->AMAND       BONAVENTURE->AMBROSE     BONAVENTURE->PETER      
  [7] BONAVENTURE->LOUIS       AMBROSE    ->BONAVENTURE AMBROSE    ->VICTOR     

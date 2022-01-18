@@ -53,10 +53,6 @@ Assuming you have installed it already, we will load **igraph** first.
 library(igraph)
 ```
 
-```
-Warning: package 'igraph' was built under R version 4.1.2
-```
-
 ### Creating a graph object in **igraph**
 
 Importing either object requires functions designed to work with the object class. For importing `data.frame`'s you can use the aptly named `graph_from_data_frame()` function. Transforming a `matrix` into a graph object in **igraph** requires the `graph_from_adjacency_matrix()` function.
@@ -113,9 +109,9 @@ difference(g_from_el, g_from_mat)
 ```
 
 ```
-IGRAPH 22e5347 UN-- 83 0 -- 
+IGRAPH 3b91e6a UN-- 83 0 -- 
 + attr: name (v/c)
-+ edges from 22e5347 (vertex names):
++ edges from 3b91e6a (vertex names):
 ```
 
 
@@ -312,30 +308,6 @@ Assuming you have installed it already, we will load **statnet** first.
 
 ```r
 library(statnet)
-```
-
-```
-Warning: package 'statnet' was built under R version 4.1.2
-```
-
-```
-Warning: package 'tergm' was built under R version 4.1.2
-```
-
-```
-Warning: package 'ergm' was built under R version 4.1.2
-```
-
-```
-Warning: package 'networkDynamic' was built under R version 4.1.2
-```
-
-```
-Warning: package 'ergm.count' was built under R version 4.1.2
-```
-
-```
-Warning: package 'tsna' was built under R version 4.1.2
 ```
 
 ### Creating a graph object in **statnet**

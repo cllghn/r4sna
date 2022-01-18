@@ -11,5 +11,5 @@ knitr::opts_chunk$set(
   fig.show = "hold",
   message = FALSE,
   out.width = "70%",
-  warnings = FALSE
+  warning = FALSE
 )

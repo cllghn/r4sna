@@ -38,30 +38,6 @@ We need to load the libraries we plan to use. Here we will use **statnet**.
 library(statnet)
 ```
 
-```
-Warning: package 'statnet' was built under R version 4.1.2
-```
-
-```
-Warning: package 'tergm' was built under R version 4.1.2
-```
-
-```
-Warning: package 'ergm' was built under R version 4.1.2
-```
-
-```
-Warning: package 'networkDynamic' was built under R version 4.1.2
-```
-
-```
-Warning: package 'ergm.count' was built under R version 4.1.2
-```
-
-```
-Warning: package 'tsna' was built under R version 4.1.2
-```
-
 In addition to **statnet**, we will be introducing and using **backbone**. Since this may be the first time you are using this tool, please ensure you install it prior to loading it.
 
 
