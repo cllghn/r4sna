@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9 Detecting Subgroups in igraph | R for Social Network Analysis</title>
+  <meta name="description" content="TBD." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9 Detecting Subgroups in igraph | R for Social Network Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="TBD." />
+  <meta name="github-repo" content="cjcallag/r4sna" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9 Detecting Subgroups in igraph | R for Social Network Analysis" />
+  
+  <meta name="twitter:description" content="TBD." />
+  
+
+<meta name="author" content="CORE Lab" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="network-topography-in-statnet.html"/>
+<link rel="next" href="detecting-subgroups-in-statnet.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="my_style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Social Network Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instructors"><i class="fa fa-check"></i><b>1.1</b> Instructors</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="2" data-path="setting-up.html"><a href="setting-up.html"><i class="fa fa-check"></i><b>2</b> Setting Up</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setting-up.html"><a href="setting-up.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.1</b> R and RStudio Basics</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="setting-up.html"><a href="setting-up.html#basics-of-r-coding-in-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Basics of R Coding in RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="setting-up.html"><a href="setting-up.html#project-workflow"><i class="fa fa-check"></i><b>2.2</b> Project Workflow</a></li>
+</ul></li>
+<li class="part"><span><b>II Lab 1</b></span></li>
+<li class="chapter" data-level="3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
+<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Lab 2</b></span></li>
+<li class="chapter" data-level="5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>5</b> Manipulating and Simplifying Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#setup-2"><i class="fa fa-check"></i><b>5.1</b> Setup</a></li>
+<li class="chapter" data-level="5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-libraries-2"><i class="fa fa-check"></i><b>5.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-the-backbones-of-two-mode-network-projections"><i class="fa fa-check"></i><b>5.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-data"><i class="fa fa-check"></i><b>5.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#non-statistical-projections-of-the-co-sponsorhip-data"><i class="fa fa-check"></i><b>5.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="5.3.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-backbones"><i class="fa fa-check"></i><b>5.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#simplifying-networks-in-igraph-anabaptist-leadership-network"><i class="fa fa-check"></i><b>5.4</b> Simplifying Networks in <strong>igraph</strong>: Anabaptist Leadership Network</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-network-and-attribute-data"><i class="fa fa-check"></i><b>5.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-the-anabaptist-network"><i class="fa fa-check"></i><b>5.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="5.4.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#shrinking-collapsing-contracting-networks"><i class="fa fa-check"></i><b>5.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="5.4.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-subnetworks"><i class="fa fa-check"></i><b>5.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#multiple-stacked-networks-in-igraph-sampson-monastery"><i class="fa fa-check"></i><b>5.5</b> Multiple (Stacked) Networks in <strong>igraph</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-edge-list-network-data"><i class="fa fa-check"></i><b>5.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="5.5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-stacked-networks"><i class="fa fa-check"></i><b>5.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="5.5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-and-plotting-individual-networks"><i class="fa fa-check"></i><b>5.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>6</b> Manipulating and Simplifying Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#setup-3"><i class="fa fa-check"></i><b>6.1</b> Setup</a></li>
+<li class="chapter" data-level="6.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-libraries-3"><i class="fa fa-check"></i><b>6.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="6.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-the-backbones-of-two-mode-network-projections-1"><i class="fa fa-check"></i><b>6.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-data-1"><i class="fa fa-check"></i><b>6.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#non-statistical-projections-of-the-co-sponsorhip-data-1"><i class="fa fa-check"></i><b>6.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="6.3.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-backbones-1"><i class="fa fa-check"></i><b>6.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#simplifying-networks-in-statnet-anabaptist-network"><i class="fa fa-check"></i><b>6.4</b> Simplifying Networks in <strong>statnet</strong>: Anabaptist Network</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-network-and-attribute-data-1"><i class="fa fa-check"></i><b>6.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="6.4.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-the-anabaptist-network-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="6.4.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#shrinking-collapsing-contracting-networks-1"><i class="fa fa-check"></i><b>6.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="6.4.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-subnetworks-1"><i class="fa fa-check"></i><b>6.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#multiple-stacked-networks-in-statnet-sampson-monastery"><i class="fa fa-check"></i><b>6.5</b> Multiple (Stacked) Networks in <strong>statnet</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-edge-list-network-data-1"><i class="fa fa-check"></i><b>6.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="6.5.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-stacked-networks-1"><i class="fa fa-check"></i><b>6.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="6.5.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-and-plotting-individual-networks-1"><i class="fa fa-check"></i><b>6.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Lab 3</b></span></li>
+<li class="chapter" data-level="7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html"><i class="fa fa-check"></i><b>7</b> Network Topography in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#setup-4"><i class="fa fa-check"></i><b>7.1</b> Setup</a></li>
+<li class="chapter" data-level="7.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#load-libraries-4"><i class="fa fa-check"></i><b>7.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="7.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#import-data"><i class="fa fa-check"></i><b>7.3</b> Import Data</a></li>
+<li class="chapter" data-level="7.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size-and-interconnectedness"><i class="fa fa-check"></i><b>7.4</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size"><i class="fa fa-check"></i><b>7.4.1</b> Network Size</a></li>
+<li class="chapter" data-level="7.4.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#density-and-average-degree"><i class="fa fa-check"></i><b>7.4.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="7.4.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#clustering-coefficient-global-and-local"><i class="fa fa-check"></i><b>7.4.3</b> Clustering Coefficient (Global and Local)</a></li>
+<li class="chapter" data-level="7.4.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#cohesion-and-fragmentation"><i class="fa fa-check"></i><b>7.4.4</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="7.4.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#compactness-and-breadth"><i class="fa fa-check"></i><b>7.4.5</b> Compactness and Breadth</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization-and-related-measures-of-spread"><i class="fa fa-check"></i><b>7.5</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization"><i class="fa fa-check"></i><b>7.5.1</b> Centralization</a></li>
+<li class="chapter" data-level="7.5.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#variance-and-standard-deviation"><i class="fa fa-check"></i><b>7.5.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="7.5.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#diameter-and-average-path-distance"><i class="fa fa-check"></i><b>7.5.3</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#calculating-the-e-i-index-with-isnar"><i class="fa fa-check"></i><b>7.6</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+<li class="chapter" data-level="7.7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-level-measures-table"><i class="fa fa-check"></i><b>7.7</b> Network Level Measures Table</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html"><i class="fa fa-check"></i><b>8</b> Network Topography in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#setup-5"><i class="fa fa-check"></i><b>8.1</b> Setup</a></li>
+<li class="chapter" data-level="8.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#load-libraries-5"><i class="fa fa-check"></i><b>8.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="8.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#import-data-1"><i class="fa fa-check"></i><b>8.3</b> Import Data</a></li>
+<li class="chapter" data-level="8.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-and-interconnectedness-1"><i class="fa fa-check"></i><b>8.4</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-1"><i class="fa fa-check"></i><b>8.4.1</b> Network Size</a></li>
+<li class="chapter" data-level="8.4.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#density-and-average-degree-1"><i class="fa fa-check"></i><b>8.4.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="8.4.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#cohesion-and-fragmentation-1"><i class="fa fa-check"></i><b>8.4.3</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="8.4.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#compactness-and-breadth-1"><i class="fa fa-check"></i><b>8.4.4</b> Compactness and Breadth</a></li>
+<li class="chapter" data-level="8.4.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-interconnectedness-scores"><i class="fa fa-check"></i><b>8.4.5</b> Table of Interconnectedness Scores</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-and-related-measures-of-spread-1"><i class="fa fa-check"></i><b>8.5</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-1"><i class="fa fa-check"></i><b>8.5.1</b> Centralization</a></li>
+<li class="chapter" data-level="8.5.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#variance-and-standard-deviation-1"><i class="fa fa-check"></i><b>8.5.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="8.5.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-centralization-scores"><i class="fa fa-check"></i><b>8.5.3</b> Table of Centralization Scores</a></li>
+<li class="chapter" data-level="8.5.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#diameter-and-average-path-distance-1"><i class="fa fa-check"></i><b>8.5.4</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#calculating-the-e-i-index-with-isnar-1"><i class="fa fa-check"></i><b>8.6</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+</ul></li>
+<li class="part"><span><b>V Lab 4</b></span></li>
+<li class="chapter" data-level="9" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html"><i class="fa fa-check"></i><b>9</b> Detecting Subgroups in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#setup-6"><i class="fa fa-check"></i><b>9.1</b> Setup</a></li>
+<li class="chapter" data-level="9.2" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#load-library"><i class="fa fa-check"></i><b>9.2</b> Load Library</a></li>
+<li class="chapter" data-level="9.3" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#import-and-plot-network"><i class="fa fa-check"></i><b>9.3</b> Import and Plot Network</a></li>
+<li class="chapter" data-level="9.4" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#components-in-igraph"><i class="fa fa-check"></i><b>9.4</b> Components in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.5" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#cliques-in-igraph"><i class="fa fa-check"></i><b>9.5</b> Cliques in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.6" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#k-cores-in-igraph"><i class="fa fa-check"></i><b>9.6</b> K-Cores in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.7" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#community-detection-in-igraph"><i class="fa fa-check"></i><b>9.7</b> Community Detection in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#girvan-newman"><i class="fa fa-check"></i><b>9.7.1</b> Girvan-Newman</a></li>
+<li class="chapter" data-level="9.7.2" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#walktrap"><i class="fa fa-check"></i><b>9.7.2</b> Walktrap</a></li>
+<li class="chapter" data-level="9.7.3" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#spin-glass"><i class="fa fa-check"></i><b>9.7.3</b> Spin-Glass</a></li>
+<li class="chapter" data-level="9.7.4" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#louvain"><i class="fa fa-check"></i><b>9.7.4</b> Louvain</a></li>
+<li class="chapter" data-level="9.7.5" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#table-of-results"><i class="fa fa-check"></i><b>9.7.5</b> Table of Results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html"><i class="fa fa-check"></i><b>10</b> Detecting Subgroups in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#setup-7"><i class="fa fa-check"></i><b>10.1</b> Setup</a></li>
+<li class="chapter" data-level="10.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#load-libraries-6"><i class="fa fa-check"></i><b>10.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="10.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#import-and-plot-network-1"><i class="fa fa-check"></i><b>10.3</b> Import and Plot Network</a></li>
+<li class="chapter" data-level="10.4" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#components-in-statnet"><i class="fa fa-check"></i><b>10.4</b> Components in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.5" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#cliques-in-statnet"><i class="fa fa-check"></i><b>10.5</b> Cliques in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.6" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#k-cores-in-statnet"><i class="fa fa-check"></i><b>10.6</b> K-Cores in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.7" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#community-detection-in-statnet"><i class="fa fa-check"></i><b>10.7</b> Community Detection in <strong>statnet</strong></a></li>
+</ul></li>
+<li class="part"><span><b>VI Lab 5</b></span></li>
+<li class="part"><span><b>VII Lab 6</b></span></li>
+<li class="part"><span><b>VIII Lab 7</b></span></li>
+<li class="part"><span><b>IX Lab 8</b></span></li>
+<li class="part"><span><b>X Lab 9</b></span></li>
+<li class="part"><span><b>XI Lab 10</b></span></li>
+<li class="part"><span><b>XII Appendices</b></span></li>
+<li class="chapter" data-level="11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>11</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>11.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
+<li class="chapter" data-level="11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>11.2</b> Installation</a></li>
+<li class="chapter" data-level="11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>11.3</b> Loading</a></li>
+<li class="chapter" data-level="11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>11.4</b> Import and View Data</a></li>
+<li class="chapter" data-level="11.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>11.5</b> Extracting Variables/Columns</a></li>
+<li class="chapter" data-level="11.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>11.6</b> Creating Filters/Extracting Rows</a></li>
+<li class="chapter" data-level="11.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>11.7</b> Arrange Rows</a></li>
+<li class="chapter" data-level="11.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>11.8</b> Making a New Column/Variable</a></li>
+<li class="chapter" data-level="11.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>11.9</b> Rename Variables</a></li>
+<li class="chapter" data-level="11.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>11.10</b> Summarizing</a>
+<ul>
+<li class="chapter" data-level="11.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>11.10.1</b> Simple Summary</a></li>
+<li class="chapter" data-level="11.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>11.10.2</b> Group Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="11.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>11.11</b> Combining Data</a>
+<ul>
+<li class="chapter" data-level="11.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>11.11.1</b> Left Join</a></li>
+<li class="chapter" data-level="11.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>11.11.2</b> Right Join</a></li>
+<li class="chapter" data-level="11.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>11.11.3</b> Inner Join</a></li>
+<li class="chapter" data-level="11.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>11.11.4</b> Full Join</a></li>
+</ul></li>
+<li class="chapter" data-level="11.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>11.12</b> Piping Multiple Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>12</b> Key SNA Functions and Visualization Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>12.1</b> <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>12.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="12.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>12.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>12.2</b> <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>12.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="12.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>12.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>XIII References</b></span></li>
+<li class="chapter" data-level="13" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>13</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown">
+Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Social Network Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="detecting-subgroups-in-igraph" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Detecting Subgroups in <strong>igraph</strong></h1>
+<div id="setup-6" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Setup</h2>
+<p>Find and open your RStudio Project associated with this class. Begin by opening a new script. It’s generally a good idea to place a header at the top of your scripts that tell you what the script does, its name, etc.</p>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="detecting-subgroups-in-igraph.html#cb499-1" aria-hidden="true" tabindex="-1"></a><span class="do">#################################################</span></span>
+<span id="cb499-2"><a href="detecting-subgroups-in-igraph.html#cb499-2" aria-hidden="true" tabindex="-1"></a><span class="co"># What: Detecting Subgroups in R with igraph</span></span>
+<span id="cb499-3"><a href="detecting-subgroups-in-igraph.html#cb499-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Created: 02.28.14</span></span>
+<span id="cb499-4"><a href="detecting-subgroups-in-igraph.html#cb499-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Revised: 01.24.22</span></span>
+<span id="cb499-5"><a href="detecting-subgroups-in-igraph.html#cb499-5" aria-hidden="true" tabindex="-1"></a><span class="do">#################################################</span></span></code></pre></div>
+<p>If you have not set up your RStudio Project to clear the workspace on exit, your environment may contain the objects and functions from your prior session. To clear these before beginning use the following command.</p>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb500-1"><a href="detecting-subgroups-in-igraph.html#cb500-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span></code></pre></div>
+<p>Proceed to place the data required for this lab (<code>Troll_EL.csv</code>) also inside your R Project folder. We have placed it in a sub folder titled <code>data</code> for organizational purposes; however, this is not necessary.</p>
+<p>Social scientists generally assume that “social interaction is the basis for solidarity, shared norms, identity, and collective behavior, so people who interact intensively are likely to consider themselves a social group.” Thus, a major focus of social network analysis is to identify dense clusters of actors “among whom there are relatively strong, direct, intense, and/or positive ties.” These are typically referred to as “cohesive subgroups,” “subnetworks,” or “sub-clusters.” One way to cluster actors is based on shared attributes (e.g., race, gender, etc.). Another is to use the pattern of ties among actors. That is what this lab demonstrates. In an ideal world, there would be a single algorithm for identifying cohesive subgroups, but this is not an ideal world, so social network analysts have developed a variety of algorithms for identifying subnetworks.</p>
+<p>For this exercise, we’ll use a portion of the Twitter Russian Troll network that FiveThirtyEight released in mid-2018.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> This subset is comprised of retweet ties among approximately 1,700 Twitter handles connected to the Internet Research Agency (a Russian “troll factory”) that were active from at least May 2015 and up through the 2016 election. From the original data set, we’ve created an edge list for this subset that contains directed ties among the accounts.</p>
+</div>
+<div id="load-library" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> Load Library</h2>
+<p>Load the <strong>igraph</strong> library.</p>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="detecting-subgroups-in-igraph.html#cb501-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span></code></pre></div>
+<div class="infobox">
+<p><strong>Note</strong>: <strong>igraph</strong> imports the <code>%&gt;%</code> operator on load (<code>library(igraph)</code>). This series of exercises leverages the operator because we find it very useful in chaining functions.</p>
+</div>
+</div>
+<div id="import-and-plot-network" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> Import and Plot Network</h2>
+<p>Let’s read the data using the <code>read.csv</code>() function.</p>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="detecting-subgroups-in-igraph.html#cb502-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">&quot;data/Troll_EL.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb502-2"><a href="detecting-subgroups-in-igraph.html#cb502-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>      Source          Target     Type     Rel
+1 1d_nicole_      ina_malone Directed Retweet
+2 1d_nicole_     willie_bign Directed Retweet
+3  4ever1937        bydrbre_ Directed Retweet
+4  4ever1937   novostidamask Directed Retweet
+5  4ever1937       novostinn Directed Retweet
+6   4mysquad crystal1johnson Directed Retweet</code></pre>
+<p>Next, convert the file to an <code>igraph</code> object using the <code>graph_from_data_frame()</code>function. The <code>directed = TRUE</code> argument is a bit redundant here but it won’t hurt to ensure our ties are read as directed.</p>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="detecting-subgroups-in-igraph.html#cb504-1" aria-hidden="true" tabindex="-1"></a>troll_g <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Troll_EL.csv&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb504-2"><a href="detecting-subgroups-in-igraph.html#cb504-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">graph_from_data_frame</span>(<span class="at">directed =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
+<p>You can use the <code>is.directed()</code> function to double-check if you have a directed network or not (the answer is <code>TRUE</code> in this case).</p>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="detecting-subgroups-in-igraph.html#cb505-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.directed</span>(troll_g)</span></code></pre></div>
+<pre><code>[1] TRUE</code></pre>
+<p>Knowing the size of the network will be useful as we start looking at the distribution of nodes across various subgroups we detect throughout this lab.</p>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="detecting-subgroups-in-igraph.html#cb507-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vcount</span>(troll_g) </span></code></pre></div>
+<pre><code>[1] 1704</code></pre>
+<p>Let’s plot the network to see what it looks like. <strong>Since this is a larger network, it will take a little longer to plot it. Our recommendation is to be patient and avoid clicking on anything until the plot appears.</strong></p>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="detecting-subgroups-in-igraph.html#cb509-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(troll_g,</span>
+<span id="cb509-2"><a href="detecting-subgroups-in-igraph.html#cb509-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_with_graphopt,</span>
+<span id="cb509-3"><a href="detecting-subgroups-in-igraph.html#cb509-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Troll Network&quot;</span>,</span>
+<span id="cb509-4"><a href="detecting-subgroups-in-igraph.html#cb509-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">paste0</span>(<span class="st">&quot;Network size: &quot;</span>, <span class="fu">vcount</span>(troll_g)),</span>
+<span id="cb509-5"><a href="detecting-subgroups-in-igraph.html#cb509-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightblue&quot;</span>, </span>
+<span id="cb509-6"><a href="detecting-subgroups-in-igraph.html#cb509-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb509-7"><a href="detecting-subgroups-in-igraph.html#cb509-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">5</span>, </span>
+<span id="cb509-8"><a href="detecting-subgroups-in-igraph.html#cb509-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.1</span>)</span></code></pre></div>
+<p><img src="4-Detecting_Subgroups_in_igraph_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="components-in-igraph" class="section level2" number="9.4">
+<h2><span class="header-section-number">9.4</span> Components in <strong>igraph</strong></h2>
+<p>Identifying weakly and strongly connected components in <strong>igraph</strong> is relatively simple, but we will use different functions for each of these, which is not ideal. For weakly connected components, we’ll use <code>decompose()</code> function, which as its name implies, decomposes the network into a list of subnetworks that represent a network’s components. It is not an intuitive approach for identifying strongly connected components, however. For strong components, we’ll use the <code>clusters</code> function. Note you can use the <code>clusters</code> function to identify weakly connected components but this approach is a bit more tedious for extracting and manipulating your data later.</p>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="detecting-subgroups-in-igraph.html#cb510-1" aria-hidden="true" tabindex="-1"></a>w_comp <span class="ot">&lt;-</span> <span class="fu">decompose</span>(troll_g, <span class="at">mode =</span> <span class="st">&quot;weak&quot;</span>)</span></code></pre></div>
+<p>You can see that we have two weak components here.</p>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="detecting-subgroups-in-igraph.html#cb511-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(w_comp)</span></code></pre></div>
+<pre><code>[1] 2</code></pre>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="detecting-subgroups-in-igraph.html#cb513-1" aria-hidden="true" tabindex="-1"></a>w_comp</span></code></pre></div>
+<pre><code>[[1]]
+IGRAPH b68efa8 DN-- 1702 9824 -- 
++ attr: name (v/c), Type (e/c), Rel (e/c)
++ edges from b68efa8 (vertex names):
+ [1] 1d_nicole_     -&gt;ina_malone      1d_nicole_     -&gt;willie_bign    
+ [3] 4ever1937      -&gt;bydrbre_        4ever1937      -&gt;novostidamask  
+ [5] 4ever1937      -&gt;novostinn       4mysquad       -&gt;crystal1johnson
+ [7] jusslilstoner  -&gt;4mysquad        acejinev       -&gt;4mysquad       
+ [9] adrgreerr      -&gt;4mysquad        bigboyjasiah   -&gt;4mysquad       
+[11] blacknewsoutlet-&gt;4mysquad        camosaseko     -&gt;4mysquad       
+[13] cannonsher     -&gt;4mysquad        cliftonhughes_ -&gt;4mysquad       
+[15] cornellburchet -&gt;4mysquad        crystal1johnson-&gt;4mysquad       
++ ... omitted several edges
+
+[[2]]
+IGRAPH b68efa8 DN-- 2 1 -- 
++ attr: name (v/c), Type (e/c), Rel (e/c)
++ edge from b68efa8 (vertex names):
+[1] sto_christi-&gt;ingrkoch_koch</code></pre>
+<p>We don’t have any isolates in this example but if you don’t want to consider isolates as components in other data sets, you can modify the command using the <code>min.vertices = 2</code> argument.</p>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="detecting-subgroups-in-igraph.html#cb515-1" aria-hidden="true" tabindex="-1"></a><span class="fu">decompose</span>(troll_g, </span>
+<span id="cb515-2"><a href="detecting-subgroups-in-igraph.html#cb515-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">mode =</span> <span class="st">&quot;weak&quot;</span>, </span>
+<span id="cb515-3"><a href="detecting-subgroups-in-igraph.html#cb515-3" aria-hidden="true" tabindex="-1"></a>          <span class="co"># The minimum number of nodes a component should contain</span></span>
+<span id="cb515-4"><a href="detecting-subgroups-in-igraph.html#cb515-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">min.vertices =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>[[1]]
+IGRAPH b6a1712 DN-- 1702 9824 -- 
++ attr: name (v/c), Type (e/c), Rel (e/c)
++ edges from b6a1712 (vertex names):
+ [1] 1d_nicole_     -&gt;ina_malone      1d_nicole_     -&gt;willie_bign    
+ [3] 4ever1937      -&gt;bydrbre_        4ever1937      -&gt;novostidamask  
+ [5] 4ever1937      -&gt;novostinn       4mysquad       -&gt;crystal1johnson
+ [7] jusslilstoner  -&gt;4mysquad        acejinev       -&gt;4mysquad       
+ [9] adrgreerr      -&gt;4mysquad        bigboyjasiah   -&gt;4mysquad       
+[11] blacknewsoutlet-&gt;4mysquad        camosaseko     -&gt;4mysquad       
+[13] cannonsher     -&gt;4mysquad        cliftonhughes_ -&gt;4mysquad       
+[15] cornellburchet -&gt;4mysquad        crystal1johnson-&gt;4mysquad       
++ ... omitted several edges
+
+[[2]]
+IGRAPH b6a1712 DN-- 2 1 -- 
++ attr: name (v/c), Type (e/c), Rel (e/c)
++ edge from b6a1712 (vertex names):
+[1] sto_christi-&gt;ingrkoch_koch</code></pre>
+<p>The <code>decompose()</code> function produces a list of subnetworks. We can see from the output that the largest weak component (the “main” component) is the first component listed. If we want to extract it, we can use the <code>[[</code> accessor and tell R we want to extract the first item on the list.</p>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="detecting-subgroups-in-igraph.html#cb517-1" aria-hidden="true" tabindex="-1"></a>w_comp[[<span class="dv">1</span>]]</span></code></pre></div>
+<pre><code>IGRAPH b68efa8 DN-- 1702 9824 -- 
++ attr: name (v/c), Type (e/c), Rel (e/c)
++ edges from b68efa8 (vertex names):
+ [1] 1d_nicole_     -&gt;ina_malone      1d_nicole_     -&gt;willie_bign    
+ [3] 4ever1937      -&gt;bydrbre_        4ever1937      -&gt;novostidamask  
+ [5] 4ever1937      -&gt;novostinn       4mysquad       -&gt;crystal1johnson
+ [7] jusslilstoner  -&gt;4mysquad        acejinev       -&gt;4mysquad       
+ [9] adrgreerr      -&gt;4mysquad        bigboyjasiah   -&gt;4mysquad       
+[11] blacknewsoutlet-&gt;4mysquad        camosaseko     -&gt;4mysquad       
+[13] cannonsher     -&gt;4mysquad        cliftonhughes_ -&gt;4mysquad       
+[15] cornellburchet -&gt;4mysquad        crystal1johnson-&gt;4mysquad       
++ ... omitted several edges</code></pre>
+<p>You could proceed to run your analysis or plot the main component.</p>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="detecting-subgroups-in-igraph.html#cb519-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(w_comp[[<span class="dv">1</span>]],</span>
+<span id="cb519-2"><a href="detecting-subgroups-in-igraph.html#cb519-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_with_graphopt,</span>
+<span id="cb519-3"><a href="detecting-subgroups-in-igraph.html#cb519-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Troll Network&quot;</span>,</span>
+<span id="cb519-4"><a href="detecting-subgroups-in-igraph.html#cb519-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">sub =</span> <span class="fu">paste0</span>(<span class="st">&quot;Network size: &quot;</span>, <span class="fu">vcount</span>(w_comp[[<span class="dv">1</span>]])),</span>
+<span id="cb519-5"><a href="detecting-subgroups-in-igraph.html#cb519-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightblue&quot;</span>, </span>
+<span id="cb519-6"><a href="detecting-subgroups-in-igraph.html#cb519-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb519-7"><a href="detecting-subgroups-in-igraph.html#cb519-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">5</span>, </span>
+<span id="cb519-8"><a href="detecting-subgroups-in-igraph.html#cb519-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.1</span>)</span></code></pre></div>
+<p><img src="4-Detecting_Subgroups_in_igraph_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>As mentioned above, we will use the <code>clusters()</code> function to identify our strongly connected components.</p>
+<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb520-1"><a href="detecting-subgroups-in-igraph.html#cb520-1" aria-hidden="true" tabindex="-1"></a>s_comp <span class="ot">&lt;-</span> <span class="fu">clusters</span>(troll_g, <span class="at">mode =</span> <span class="st">&quot;strong&quot;</span>)</span></code></pre></div>
+<p>The <code>clusters()</code> function returns a named list with three components. Using the <code>names()</code> function, we can see the names of the components on the list.</p>
+<ul>
+<li><code>membership</code> is a numeric vector corresponding to the cluster id to which each vertex belongs</li>
+<li><code>csize</code> is a numeric vector denoting the size of each cluster</li>
+<li><code>no</code> is the number of clusters</li>
+</ul>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="detecting-subgroups-in-igraph.html#cb521-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(s_comp)</span></code></pre></div>
+<pre><code>[1] &quot;membership&quot; &quot;csize&quot;      &quot;no&quot;        </code></pre>
+<p>Feel free to call each one (<code>s_comp$size</code>, <code>s_comp$membership</code>), but the code below only calls for the number of clusters (n=1314).</p>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="detecting-subgroups-in-igraph.html#cb523-1" aria-hidden="true" tabindex="-1"></a>s_comp<span class="sc">$</span>no</span></code></pre></div>
+<pre><code>[1] 1314</code></pre>
+<p>Here, the largest strongly connected component is not listed first. To identify and extract the largest strongly connected component, we can use the following lines of code. Notice the largest component consists of 168 actors.</p>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="detecting-subgroups-in-igraph.html#cb525-1" aria-hidden="true" tabindex="-1"></a>lg_s_comp <span class="ot">&lt;-</span> <span class="fu">induced_subgraph</span>(troll_g,</span>
+<span id="cb525-2"><a href="detecting-subgroups-in-igraph.html#cb525-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">vids =</span> <span class="fu">V</span>(troll_g)[<span class="fu">which</span>(</span>
+<span id="cb525-3"><a href="detecting-subgroups-in-igraph.html#cb525-3" aria-hidden="true" tabindex="-1"></a>                                s_comp<span class="sc">$</span>membership <span class="sc">==</span> <span class="fu">which.max</span>(s_comp<span class="sc">$</span>csize))]</span>
+<span id="cb525-4"><a href="detecting-subgroups-in-igraph.html#cb525-4" aria-hidden="true" tabindex="-1"></a>                              )</span>
+<span id="cb525-5"><a href="detecting-subgroups-in-igraph.html#cb525-5" aria-hidden="true" tabindex="-1"></a>lg_s_comp</span></code></pre></div>
+<pre><code>IGRAPH bdc091a DN-- 168 974 -- 
++ attr: name (v/c), Type (e/c), Rel (e/c)
++ edges from bdc091a (vertex names):
+ [1] 4mysquad       -&gt;crystal1johnson acejinev       -&gt;4mysquad       
+ [3] acejinev       -&gt;blacknewsoutlet acejinev       -&gt;tessyelmore    
+ [5] acejinev       -&gt;wokefromday1    acejinev       -&gt;blacktolive    
+ [7] acejinev       -&gt;trayneshacole   acejinev       -&gt;randolphburrr  
+ [9] acejinev       -&gt;jenn_abrams     acejinev       -&gt;ten_gop        
+[11] blacknewsoutlet-&gt;4mysquad        blacknewsoutlet-&gt;crystal1johnson
+[13] blacknewsoutlet-&gt;blacktolive     blacknewsoutlet-&gt;nj_blacknews   
+[15] cornellburchet -&gt;4mysquad        cornellburchet -&gt;blacknewsoutlet
++ ... omitted several edges</code></pre>
+<p>Let’s plot the largest, strongly connected component.</p>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="detecting-subgroups-in-igraph.html#cb527-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lg_s_comp,</span>
+<span id="cb527-2"><a href="detecting-subgroups-in-igraph.html#cb527-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_with_graphopt, </span>
+<span id="cb527-3"><a href="detecting-subgroups-in-igraph.html#cb527-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Troll Network (Main Strong Comp)&quot;</span>,</span>
+<span id="cb527-4"><a href="detecting-subgroups-in-igraph.html#cb527-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightblue&quot;</span>,</span>
+<span id="cb527-5"><a href="detecting-subgroups-in-igraph.html#cb527-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb527-6"><a href="detecting-subgroups-in-igraph.html#cb527-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">5</span>, </span>
+<span id="cb527-7"><a href="detecting-subgroups-in-igraph.html#cb527-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> .<span class="dv">1</span>)</span></code></pre></div>
+<p><img src="4-Detecting_Subgroups_in_igraph_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cliques-in-igraph" class="section level2" number="9.5">
+<h2><span class="header-section-number">9.5</span> Cliques in <strong>igraph</strong></h2>
+<p>We can identify cliques in <strong>igraph</strong> with the following commands. First, we can ask for all cliques. The <code>cliques()</code> function returns a list containing all complete subgraphs in the input graph, which, is likely to be rather large on a network this size. Rather than print it to the console, store it into a new object and measure the length of the list to determine how many cliques are found in the graph.</p>
+<div class="sourceCode" id="cb528"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb528-1"><a href="detecting-subgroups-in-igraph.html#cb528-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the largest weak component</span></span>
+<span id="cb528-2"><a href="detecting-subgroups-in-igraph.html#cb528-2" aria-hidden="true" tabindex="-1"></a>w_comp_main <span class="ot">&lt;-</span> w_comp[[<span class="dv">1</span>]]</span>
+<span id="cb528-3"><a href="detecting-subgroups-in-igraph.html#cb528-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Find all cliques</span></span>
+<span id="cb528-4"><a href="detecting-subgroups-in-igraph.html#cb528-4" aria-hidden="true" tabindex="-1"></a>w_comp_main_cliques <span class="ot">&lt;-</span> <span class="fu">cliques</span>(w_comp_main)</span>
+<span id="cb528-5"><a href="detecting-subgroups-in-igraph.html#cb528-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Measure the output</span></span>
+<span id="cb528-6"><a href="detecting-subgroups-in-igraph.html#cb528-6" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(w_comp_main_cliques)</span></code></pre></div>
+<pre><code>[1] 29305</code></pre>
+<p>Typically, cliques contain 3 or more nodes, which we can achieve by adding an additional argument (<code>min = 3</code>).</p>
+<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb530-1"><a href="detecting-subgroups-in-igraph.html#cb530-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find all cliques</span></span>
+<span id="cb530-2"><a href="detecting-subgroups-in-igraph.html#cb530-2" aria-hidden="true" tabindex="-1"></a>w_comp_main_cliques <span class="ot">&lt;-</span> <span class="fu">cliques</span>(w_comp_main, <span class="at">min =</span> <span class="dv">3</span>)</span>
+<span id="cb530-3"><a href="detecting-subgroups-in-igraph.html#cb530-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Measure the output</span></span>
+<span id="cb530-4"><a href="detecting-subgroups-in-igraph.html#cb530-4" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(w_comp_main_cliques)</span></code></pre></div>
+<pre><code>[1] 17955</code></pre>
+<p>In addition to the <code>clique()</code> function, <strong>igraph</strong> includes a function to find maximal cliques, which are those that cannot be extended to a larger clique <span class="citation">(<a href="#ref-Csardi2006" role="doc-biblioref">Csardi and Nepusz 2006</a>)</span>. The function to identify maximal cliques is <code>max_cliques()</code>; however, rather than identifying the cliques let’s focus on counting how many are present in the input graph.</p>
+<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb532-1"><a href="detecting-subgroups-in-igraph.html#cb532-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_max_cliques</span>(w_comp_main)</span></code></pre></div>
+<pre><code>[1] 7252</code></pre>
+<p>Like before, we can specify the lower limit on the size of the cliques to find.</p>
+<div class="sourceCode" id="cb534"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb534-1"><a href="detecting-subgroups-in-igraph.html#cb534-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_max_cliques</span>(w_comp_main, <span class="at">min =</span> <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>[1] 5276</code></pre>
+<p>The <code>clique_num()</code> function tells us the size of the largest clique(s), which is 8 accounts.</p>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb536-1"><a href="detecting-subgroups-in-igraph.html#cb536-1" aria-hidden="true" tabindex="-1"></a><span class="fu">clique_num</span>(w_comp_main)</span></code></pre></div>
+<pre><code>[1] 8</code></pre>
+<p>Finally, identify how many cliques exist with 8 actors. How about 9?</p>
+<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb538-1"><a href="detecting-subgroups-in-igraph.html#cb538-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count_max_cliques</span>(w_comp_main, <span class="at">min =</span> <span class="dv">8</span>) </span></code></pre></div>
+<pre><code>[1] 2</code></pre>
+</div>
+<div id="k-cores-in-igraph" class="section level2" number="9.6">
+<h2><span class="header-section-number">9.6</span> K-Cores in <strong>igraph</strong></h2>
+<p>In <strong>igraph</strong> we identify k-cores with the following code. We will examine the original network that we imported at the beginning of the lab (i.e., <code>troll_g</code>). The <code>coreness()</code> function calculates the maximal subgraph in which each vertex has at least degree <em>k</em>. The output is a numeric named vector giving the coreness of each vertex. However, there are 1,704 nodes in this graph, so the vector length would be 1,704. Rather than printing all values, let’s return only the first five to examine the output.</p>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb540-1"><a href="detecting-subgroups-in-igraph.html#cb540-1" aria-hidden="true" tabindex="-1"></a>troll_kcore <span class="ot">&lt;-</span> <span class="fu">coreness</span>(troll_g)</span>
+<span id="cb540-2"><a href="detecting-subgroups-in-igraph.html#cb540-2" aria-hidden="true" tabindex="-1"></a>troll_kcore[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>   1d_nicole_     4ever1937      4mysquad jusslilstoner      acejinev 
+            2             3             8             1             8 </code></pre>
+<p>In case you’re having trouble understanding the output, we can summarize the output by building a contingency table of the counts of each <em>k</em> level. The first line of the output below tells us the k-core and the second tells us how many actors make up that core (e.g., 156 accounts are members of the 1-core and 177 in the 12-core).</p>
+<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb542-1"><a href="detecting-subgroups-in-igraph.html#cb542-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(troll_kcore)</span></code></pre></div>
+<pre><code>troll_kcore
+  1   2   3   4   5   6   7   8   9  10  11  12 
+156 145 146 173 158 153 167 173 149  55  52 177 </code></pre>
+<p>Since the output of the k-core contains a value for each vertex, we could use this as a vertex level attribute and use it to subset the graph. First, let’s assign the k-core values to the nodes.</p>
+<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb544-1"><a href="detecting-subgroups-in-igraph.html#cb544-1" aria-hidden="true" tabindex="-1"></a>troll_g <span class="ot">&lt;-</span> <span class="fu">set.vertex.attribute</span>(troll_g,</span>
+<span id="cb544-2"><a href="detecting-subgroups-in-igraph.html#cb544-2" aria-hidden="true" tabindex="-1"></a>                                <span class="co"># Name the vertex attribute</span></span>
+<span id="cb544-3"><a href="detecting-subgroups-in-igraph.html#cb544-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">name =</span> <span class="st">&quot;kcore&quot;</span>,</span>
+<span id="cb544-4"><a href="detecting-subgroups-in-igraph.html#cb544-4" aria-hidden="true" tabindex="-1"></a>                                <span class="co"># The values for all vertices</span></span>
+<span id="cb544-5"><a href="detecting-subgroups-in-igraph.html#cb544-5" aria-hidden="true" tabindex="-1"></a>                                <span class="at">value =</span> <span class="fu">coreness</span>(troll_g))</span>
+<span id="cb544-6"><a href="detecting-subgroups-in-igraph.html#cb544-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look at the graph with a new vertex attribute</span></span>
+<span id="cb544-7"><a href="detecting-subgroups-in-igraph.html#cb544-7" aria-hidden="true" tabindex="-1"></a>troll_g</span></code></pre></div>
+<pre><code>IGRAPH af724af DN-- 1704 9825 -- 
++ attr: name (v/c), kcore (v/n), Type (e/c), Rel (e/c)
++ edges from af724af (vertex names):
+ [1] 1d_nicole_     -&gt;ina_malone      1d_nicole_     -&gt;willie_bign    
+ [3] 4ever1937      -&gt;bydrbre_        4ever1937      -&gt;novostidamask  
+ [5] 4ever1937      -&gt;novostinn       4mysquad       -&gt;crystal1johnson
+ [7] jusslilstoner  -&gt;4mysquad        acejinev       -&gt;4mysquad       
+ [9] adrgreerr      -&gt;4mysquad        bigboyjasiah   -&gt;4mysquad       
+[11] blacknewsoutlet-&gt;4mysquad        camosaseko     -&gt;4mysquad       
+[13] cannonsher     -&gt;4mysquad        cliftonhughes_ -&gt;4mysquad       
+[15] cornellburchet -&gt;4mysquad        crystal1johnson-&gt;4mysquad       
++ ... omitted several edges</code></pre>
+<p>Let’s plot the graph depicting some of the larger k-cores. This can be accomplished using the <code>induced_subgraph()</code> function and specifying which vertices to keep.</p>
+<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb546-1"><a href="detecting-subgroups-in-igraph.html#cb546-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract 9-core</span></span>
+<span id="cb546-2"><a href="detecting-subgroups-in-igraph.html#cb546-2" aria-hidden="true" tabindex="-1"></a><span class="fu">induced_subgraph</span>(troll_g,</span>
+<span id="cb546-3"><a href="detecting-subgroups-in-igraph.html#cb546-3" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># Create a logical vector of which vertices to keep using the</span></span>
+<span id="cb546-4"><a href="detecting-subgroups-in-igraph.html#cb546-4" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># V() function and the $ accessor to set up a logical test</span></span>
+<span id="cb546-5"><a href="detecting-subgroups-in-igraph.html#cb546-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">vids =</span> <span class="fu">V</span>(troll_g)<span class="sc">$</span>kcore <span class="sc">==</span> <span class="dv">9</span>)</span></code></pre></div>
+<pre><code>IGRAPH c0fbc03 DN-- 149 412 -- 
++ attr: name (v/c), kcore (v/n), Type (e/c), Rel (e/c)
++ edges from c0fbc03 (vertex names):
+ [1] _nickluna_   -&gt;andyhashtagger _nickluna_   -&gt;danageezus    
+ [3] _nickluna_   -&gt;xdwillie       _nickluna_   -&gt;thefoundingson
+ [5] _nickluna_   -&gt;pamela_moore13 ameliebaldwin-&gt;_nickluna_    
+ [7] ameliebaldwin-&gt;andyhashtagger ameliebaldwin-&gt;danageezus    
+ [9] ameliebaldwin-&gt;pati_cooper    ameliebaldwin-&gt;tpartynews    
+[11] ameliebaldwin-&gt;matevidence    ameliebaldwin-&gt;usa_gunslinger
+[13] ameliebaldwin-&gt;pigeontoday    cassishere   -&gt;_nickluna_    
+[15] cassishere   -&gt;andyhashtagger cassishere   -&gt;evewebster373 
++ ... omitted several edges</code></pre>
+<p>Using this form, we can create 9, 10, 11 and 12 core subgraphs and plot them side-by-side.</p>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="detecting-subgroups-in-igraph.html#cb548-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb548-2"><a href="detecting-subgroups-in-igraph.html#cb548-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb548-3"><a href="detecting-subgroups-in-igraph.html#cb548-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the coordinates</span></span>
+<span id="cb548-4"><a href="detecting-subgroups-in-igraph.html#cb548-4" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">layout_with_graphopt</span>(troll_g)</span>
+<span id="cb548-5"><a href="detecting-subgroups-in-igraph.html#cb548-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb548-6"><a href="detecting-subgroups-in-igraph.html#cb548-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 9-core graph</span></span>
+<span id="cb548-7"><a href="detecting-subgroups-in-igraph.html#cb548-7" aria-hidden="true" tabindex="-1"></a><span class="fu">induced_subgraph</span>(troll_g,</span>
+<span id="cb548-8"><a href="detecting-subgroups-in-igraph.html#cb548-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">vids =</span> <span class="fu">V</span>(troll_g)<span class="sc">$</span>kcore <span class="sc">==</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb548-9"><a href="detecting-subgroups-in-igraph.html#cb548-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># &#39;and then&#39; plot it</span></span>
+<span id="cb548-10"><a href="detecting-subgroups-in-igraph.html#cb548-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">main =</span> <span class="st">&quot;9-Core&quot;</span>,</span>
+<span id="cb548-11"><a href="detecting-subgroups-in-igraph.html#cb548-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">sub =</span> <span class="fu">paste0</span>(<span class="st">&quot;Number of nodes: &quot;</span>, <span class="fu">vcount</span>(.)),</span>
+<span id="cb548-12"><a href="detecting-subgroups-in-igraph.html#cb548-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">layout =</span> coords,</span>
+<span id="cb548-13"><a href="detecting-subgroups-in-igraph.html#cb548-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb548-14"><a href="detecting-subgroups-in-igraph.html#cb548-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.size =</span> <span class="dv">5</span>,</span>
+<span id="cb548-15"><a href="detecting-subgroups-in-igraph.html#cb548-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.color =</span> <span class="st">&quot;lightblue&quot;</span>,</span>
+<span id="cb548-16"><a href="detecting-subgroups-in-igraph.html#cb548-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.arrow.size =</span> <span class="fl">0.1</span>)</span>
+<span id="cb548-17"><a href="detecting-subgroups-in-igraph.html#cb548-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb548-18"><a href="detecting-subgroups-in-igraph.html#cb548-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 10-core graph</span></span>
+<span id="cb548-19"><a href="detecting-subgroups-in-igraph.html#cb548-19" aria-hidden="true" tabindex="-1"></a><span class="fu">induced_subgraph</span>(troll_g,</span>
+<span id="cb548-20"><a href="detecting-subgroups-in-igraph.html#cb548-20" aria-hidden="true" tabindex="-1"></a>                 <span class="at">vids =</span> <span class="fu">V</span>(troll_g)<span class="sc">$</span>kcore <span class="sc">==</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb548-21"><a href="detecting-subgroups-in-igraph.html#cb548-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># &#39;and then&#39; plot it</span></span>
+<span id="cb548-22"><a href="detecting-subgroups-in-igraph.html#cb548-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">main =</span> <span class="st">&quot;10-Core&quot;</span>,</span>
+<span id="cb548-23"><a href="detecting-subgroups-in-igraph.html#cb548-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">sub =</span> <span class="fu">paste0</span>(<span class="st">&quot;Number of nodes: &quot;</span>, <span class="fu">vcount</span>(.)),</span>
+<span id="cb548-24"><a href="detecting-subgroups-in-igraph.html#cb548-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">layout =</span> coords,</span>
+<span id="cb548-25"><a href="detecting-subgroups-in-igraph.html#cb548-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb548-26"><a href="detecting-subgroups-in-igraph.html#cb548-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.size =</span> <span class="dv">5</span>,</span>
+<span id="cb548-27"><a href="detecting-subgroups-in-igraph.html#cb548-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.color =</span> <span class="st">&quot;lightblue&quot;</span>,</span>
+<span id="cb548-28"><a href="detecting-subgroups-in-igraph.html#cb548-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.arrow.size =</span> <span class="fl">0.1</span>)</span>
+<span id="cb548-29"><a href="detecting-subgroups-in-igraph.html#cb548-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb548-30"><a href="detecting-subgroups-in-igraph.html#cb548-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 11-core graph</span></span>
+<span id="cb548-31"><a href="detecting-subgroups-in-igraph.html#cb548-31" aria-hidden="true" tabindex="-1"></a><span class="fu">induced_subgraph</span>(troll_g,</span>
+<span id="cb548-32"><a href="detecting-subgroups-in-igraph.html#cb548-32" aria-hidden="true" tabindex="-1"></a>                 <span class="at">vids =</span> <span class="fu">V</span>(troll_g)<span class="sc">$</span>kcore <span class="sc">==</span> <span class="dv">11</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb548-33"><a href="detecting-subgroups-in-igraph.html#cb548-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># &#39;and then&#39; plot it</span></span>
+<span id="cb548-34"><a href="detecting-subgroups-in-igraph.html#cb548-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">main =</span> <span class="st">&quot;11-Core&quot;</span>,</span>
+<span id="cb548-35"><a href="detecting-subgroups-in-igraph.html#cb548-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">sub =</span> <span class="fu">paste0</span>(<span class="st">&quot;Number of nodes: &quot;</span>, <span class="fu">vcount</span>(.)),</span>
+<span id="cb548-36"><a href="detecting-subgroups-in-igraph.html#cb548-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">layout =</span> coords,</span>
+<span id="cb548-37"><a href="detecting-subgroups-in-igraph.html#cb548-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb548-38"><a href="detecting-subgroups-in-igraph.html#cb548-38" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.size =</span> <span class="dv">5</span>,</span>
+<span id="cb548-39"><a href="detecting-subgroups-in-igraph.html#cb548-39" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.color =</span> <span class="st">&quot;lightblue&quot;</span>,</span>
+<span id="cb548-40"><a href="detecting-subgroups-in-igraph.html#cb548-40" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.arrow.size =</span> <span class="fl">0.1</span>)</span>
+<span id="cb548-41"><a href="detecting-subgroups-in-igraph.html#cb548-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb548-42"><a href="detecting-subgroups-in-igraph.html#cb548-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a 12-core graph</span></span>
+<span id="cb548-43"><a href="detecting-subgroups-in-igraph.html#cb548-43" aria-hidden="true" tabindex="-1"></a><span class="fu">induced_subgraph</span>(troll_g,</span>
+<span id="cb548-44"><a href="detecting-subgroups-in-igraph.html#cb548-44" aria-hidden="true" tabindex="-1"></a>                 <span class="at">vids =</span> <span class="fu">V</span>(troll_g)<span class="sc">$</span>kcore <span class="sc">==</span> <span class="dv">12</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb548-45"><a href="detecting-subgroups-in-igraph.html#cb548-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># &#39;and then&#39; plot it</span></span>
+<span id="cb548-46"><a href="detecting-subgroups-in-igraph.html#cb548-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">main =</span> <span class="st">&quot;12-Core&quot;</span>,</span>
+<span id="cb548-47"><a href="detecting-subgroups-in-igraph.html#cb548-47" aria-hidden="true" tabindex="-1"></a>       <span class="at">sub =</span> <span class="fu">paste0</span>(<span class="st">&quot;Number of nodes: &quot;</span>, <span class="fu">vcount</span>(.)),</span>
+<span id="cb548-48"><a href="detecting-subgroups-in-igraph.html#cb548-48" aria-hidden="true" tabindex="-1"></a>       <span class="at">layout =</span> coords,</span>
+<span id="cb548-49"><a href="detecting-subgroups-in-igraph.html#cb548-49" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb548-50"><a href="detecting-subgroups-in-igraph.html#cb548-50" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.size =</span> <span class="dv">5</span>,</span>
+<span id="cb548-51"><a href="detecting-subgroups-in-igraph.html#cb548-51" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.color =</span> <span class="st">&quot;lightblue&quot;</span>,</span>
+<span id="cb548-52"><a href="detecting-subgroups-in-igraph.html#cb548-52" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.arrow.size =</span> <span class="fl">0.1</span>)</span>
+<span id="cb548-53"><a href="detecting-subgroups-in-igraph.html#cb548-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb548-54"><a href="detecting-subgroups-in-igraph.html#cb548-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Turn off the graphic devices</span></span>
+<span id="cb548-55"><a href="detecting-subgroups-in-igraph.html#cb548-55" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<pre><code>null device 
+          1 </code></pre>
+<p><img src="4-Detecting_Subgroups_in_igraph_files/figure-html/unnamed-chunk-29-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>The previous graphs are a little misleading, however, because the 12-core is part of the 11-core, and the 12- and 11-cores are part of the 10-core, and so on. In other words, the 9-core won’t have isolates if the 10, 11, and 12 cores are included.</p>
+<div class="sourceCode" id="cb550"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb550-1"><a href="detecting-subgroups-in-igraph.html#cb550-1" aria-hidden="true" tabindex="-1"></a><span class="fu">induced_subgraph</span>(troll_g, troll_kcore <span class="sc">&gt;=</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb550-2"><a href="detecting-subgroups-in-igraph.html#cb550-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">main =</span> <span class="st">&quot;9-12 Core&quot;</span>,</span>
+<span id="cb550-3"><a href="detecting-subgroups-in-igraph.html#cb550-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">sub =</span> <span class="fu">paste0</span>(<span class="st">&quot;Number of nodes: &quot;</span>, <span class="fu">vcount</span>(.)),</span>
+<span id="cb550-4"><a href="detecting-subgroups-in-igraph.html#cb550-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">layout =</span> coords,</span>
+<span id="cb550-5"><a href="detecting-subgroups-in-igraph.html#cb550-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb550-6"><a href="detecting-subgroups-in-igraph.html#cb550-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.size =</span> <span class="dv">5</span>,</span>
+<span id="cb550-7"><a href="detecting-subgroups-in-igraph.html#cb550-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">vertex.color =</span> <span class="st">&quot;lightblue&quot;</span>,</span>
+<span id="cb550-8"><a href="detecting-subgroups-in-igraph.html#cb550-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">edge.arrow.size =</span> <span class="fl">0.1</span>)</span></code></pre></div>
+<p><img src="4-Detecting_Subgroups_in_igraph_files/figure-html/unnamed-chunk-30-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>One last thing, working with directed and/or valued data will provide different results than working with symmetric and dichotomous data. For instance, UCINET <span class="citation">(<a href="#ref-ucinet" role="doc-biblioref">2002</a>)</span> defines a k-core as:</p>
+<blockquote>
+<p>A k-core in an undirected graph is a connected maximal induced subgraph which has minimum degree greater than or equal to k. For a valued graph we require the sum of all the edges incident with a vertex is greater than k.</p>
+</blockquote>
+<p>Please keep that in mind as you move forward.</p>
+</div>
+<div id="community-detection-in-igraph" class="section level2" number="9.7">
+<h2><span class="header-section-number">9.7</span> Community Detection in <strong>igraph</strong></h2>
+<p>We’ll use the largest, strongly connected component for this section but we will symmetrize it for demonstration purposes and because some of these algorithms (e.g., Girvan-Newman) work for undirected networks only.</p>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="detecting-subgroups-in-igraph.html#cb551-1" aria-hidden="true" tabindex="-1"></a>lg_s_comp_simp <span class="ot">&lt;-</span> lg_s_comp <span class="sc">%&gt;%</span></span>
+<span id="cb551-2"><a href="detecting-subgroups-in-igraph.html#cb551-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.undirected</span>()</span>
+<span id="cb551-3"><a href="detecting-subgroups-in-igraph.html#cb551-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb551-4"><a href="detecting-subgroups-in-igraph.html#cb551-4" aria-hidden="true" tabindex="-1"></a>lg_s_comp_simp</span></code></pre></div>
+<pre><code>IGRAPH c7f9f1b UN-- 168 922 -- 
++ attr: name (v/c)
++ edges from c7f9f1b (vertex names):
+ [1] 4mysquad       --acejinev        4mysquad       --blacknewsoutlet
+ [3] acejinev       --blacknewsoutlet 4mysquad       --cornellburchet 
+ [5] blacknewsoutlet--cornellburchet  4mysquad       --crystal1johnson
+ [7] blacknewsoutlet--crystal1johnson 4mysquad       --errivvvvers    
+ [9] blacknewsoutlet--errivvvvers     4mysquad       --jaedenmassey   
+[11] 4mysquad       --kaydenmelton    crystal1johnson--kaydenmelton   
+[13] 4mysquad       --ramonasnails    cornellburchet --ramonasnails   
+[15] 4mysquad       --sadieeatonn     4mysquad       --sincerepruitt  
++ ... omitted several edges</code></pre>
+<div id="girvan-newman" class="section level3" number="9.7.1">
+<h3><span class="header-section-number">9.7.1</span> Girvan-Newman</h3>
+<p>Now, let’s look at a few community detection algorithms. We’ll begin with Girvan-Newman, which in <strong>igraph</strong> is called edge betweenness. To do so, use the <code>cluster_edge_betweenness()</code> function, which returns a <code>communities</code> object. In order to take a closer look at the <code>communities</code> object, we will store the output in a new object to further analyze it.</p>
+<div class="infobox">
+<p>This first line of code will take a few minutes, so please be patient and save your work before running it.</p>
+</div>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="detecting-subgroups-in-igraph.html#cb553-1" aria-hidden="true" tabindex="-1"></a>gn <span class="ot">&lt;-</span> <span class="fu">cluster_edge_betweenness</span>(lg_s_comp_simp)</span>
+<span id="cb553-2"><a href="detecting-subgroups-in-igraph.html#cb553-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look at the object</span></span>
+<span id="cb553-3"><a href="detecting-subgroups-in-igraph.html#cb553-3" aria-hidden="true" tabindex="-1"></a>gn</span></code></pre></div>
+<pre><code>IGRAPH clustering edge betweenness, groups: 5, mod: 0.54
++ groups:
+  $`1`
+   [1] &quot;4mysquad&quot;        &quot;acejinev&quot;        &quot;blacknewsoutlet&quot; &quot;cornellburchet&quot; 
+   [5] &quot;crystal1johnson&quot; &quot;errivvvvers&quot;     &quot;jaedenmassey&quot;    &quot;kaydenmelton&quot;   
+   [9] &quot;ramonasnails&quot;    &quot;sadieeatonn&quot;     &quot;sincerepruitt&quot;   &quot;willisbonnerr&quot;  
+  [13] &quot;bricegeller&quot;     &quot;lagonehoe&quot;       &quot;adamchapmanjr&quot;   &quot;imapharrelfake&quot; 
+  [17] &quot;tessyelmore&quot;     &quot;youjustctrlc&quot;    &quot;baltimore0nline&quot; &quot;bleepthepolice&quot; 
+  [21] &quot;nojonathonno&quot;    &quot;baobaeham&quot;       &quot;bigboysneed&quot;     &quot;missourinewsus&quot; 
+  [25] &quot;blackmattersus&quot;  &quot;chadsloyer&quot;      &quot;drmichaelgarcia&quot; &quot;ilovesarahrich&quot; 
+  [29] &quot;mrclydepratt&quot;    &quot;peytoncashout&quot;   &quot;gwennythot&quot;      &quot;jani_s_jac&quot;     
+  [33] &quot;javonhidp&quot;       &quot;pamblmdaniels&quot;   &quot;robertebonyking&quot; &quot;siccerthanyou&quot;  
+  + ... omitted several groups/vertices</code></pre>
+<p>As in the previous section, the <code>names()</code> function tells us the various types of information that <strong>igraph</strong> calculated.</p>
+<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="detecting-subgroups-in-igraph.html#cb555-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(gn)</span></code></pre></div>
+<pre><code>[1] &quot;removed.edges&quot;    &quot;edge.betweenness&quot; &quot;merges&quot;           &quot;bridges&quot;         
+[5] &quot;modularity&quot;       &quot;membership&quot;       &quot;names&quot;            &quot;vcount&quot;          
+[9] &quot;algorithm&quot;       </code></pre>
+<p>We can access this information using <strong>igraph</strong> functions. For example, let’s take a look at the modularity score and the number of groups the algorithm identified.</p>
+<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="detecting-subgroups-in-igraph.html#cb557-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print modularity score</span></span>
+<span id="cb557-2"><a href="detecting-subgroups-in-igraph.html#cb557-2" aria-hidden="true" tabindex="-1"></a><span class="fu">modularity</span>(gn)</span></code></pre></div>
+<pre><code>[1] 0.5350271</code></pre>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="detecting-subgroups-in-igraph.html#cb559-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the number of identified communities</span></span>
+<span id="cb559-2"><a href="detecting-subgroups-in-igraph.html#cb559-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(gn)</span></code></pre></div>
+<pre><code>[1] 5</code></pre>
+<p>This information can help us to calculate normalized modularity as well. Why are we interested in normalized modularity? Because there is an upper limit to the modularity score, which is a function of how many communities (subgroups) the algorithm identifies.</p>
+<p>With a large number of groups (communities), the normalized score differs little from the regular score. However, with a small number of groups, it can vary considerably. The following commands demonstrates how to calculate normalized modularity.</p>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="detecting-subgroups-in-igraph.html#cb561-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate normalized modularity (qprime) by dividing the modularity by the </span></span>
+<span id="cb561-2"><a href="detecting-subgroups-in-igraph.html#cb561-2" aria-hidden="true" tabindex="-1"></a><span class="co"># product of 1 minus the inverse of the number of communities. </span></span>
+<span id="cb561-3"><a href="detecting-subgroups-in-igraph.html#cb561-3" aria-hidden="true" tabindex="-1"></a>qprime_gn <span class="ot">&lt;-</span> <span class="fu">modularity</span>(gn)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(gn)))</span>
+<span id="cb561-4"><a href="detecting-subgroups-in-igraph.html#cb561-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look</span></span>
+<span id="cb561-5"><a href="detecting-subgroups-in-igraph.html#cb561-5" aria-hidden="true" tabindex="-1"></a>qprime_gn</span></code></pre></div>
+<pre><code>[1] 0.6687839</code></pre>
+<p>The <code>communities</code> object generated by the <code>cluster_edge_betweenness()</code> command also generates a vector that identifies which communities each actor belongs to. Like before, we can extract this vector with a function (here <code>membership()</code>), assign it as an attribute to the vertices of the graph, and use these to color the nodes.</p>
+<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="detecting-subgroups-in-igraph.html#cb563-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add membership attribute to graph</span></span>
+<span id="cb563-2"><a href="detecting-subgroups-in-igraph.html#cb563-2" aria-hidden="true" tabindex="-1"></a>lg_s_comp_simp <span class="ot">&lt;-</span> <span class="fu">set.vertex.attribute</span>(lg_s_comp_simp,</span>
+<span id="cb563-3"><a href="detecting-subgroups-in-igraph.html#cb563-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">name =</span> <span class="st">&quot;gn_membership&quot;</span>,</span>
+<span id="cb563-4"><a href="detecting-subgroups-in-igraph.html#cb563-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">value =</span> <span class="fu">membership</span>(gn))</span>
+<span id="cb563-5"><a href="detecting-subgroups-in-igraph.html#cb563-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb563-6"><a href="detecting-subgroups-in-igraph.html#cb563-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Store coordinates to use later</span></span>
+<span id="cb563-7"><a href="detecting-subgroups-in-igraph.html#cb563-7" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">layout_with_fr</span>(lg_s_comp_simp)</span>
+<span id="cb563-8"><a href="detecting-subgroups-in-igraph.html#cb563-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb563-9"><a href="detecting-subgroups-in-igraph.html#cb563-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb563-10"><a href="detecting-subgroups-in-igraph.html#cb563-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lg_s_comp_simp,</span>
+<span id="cb563-11"><a href="detecting-subgroups-in-igraph.html#cb563-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb563-12"><a href="detecting-subgroups-in-igraph.html#cb563-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Girvan-Newman Communities&quot;</span>,</span>
+<span id="cb563-13"><a href="detecting-subgroups-in-igraph.html#cb563-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb563-14"><a href="detecting-subgroups-in-igraph.html#cb563-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">5</span>,</span>
+<span id="cb563-15"><a href="detecting-subgroups-in-igraph.html#cb563-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="fu">get.vertex.attribute</span>(lg_s_comp_simp, <span class="st">&quot;gn_membership&quot;</span>)</span>
+<span id="cb563-16"><a href="detecting-subgroups-in-igraph.html#cb563-16" aria-hidden="true" tabindex="-1"></a>     )</span></code></pre></div>
+<p><img src="4-Detecting_Subgroups_in_igraph_files/figure-html/unnamed-chunk-36-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>We can place convex hulls around the various communities by placing the <code>gn</code> object at the beginning of the plot command.</p>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb564-1"><a href="detecting-subgroups-in-igraph.html#cb564-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gn,</span>
+<span id="cb564-2"><a href="detecting-subgroups-in-igraph.html#cb564-2" aria-hidden="true" tabindex="-1"></a>     lg_s_comp_simp,</span>
+<span id="cb564-3"><a href="detecting-subgroups-in-igraph.html#cb564-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb564-4"><a href="detecting-subgroups-in-igraph.html#cb564-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Girvan-Newman Communities (w/Convex Hulls)&quot;</span>,</span>
+<span id="cb564-5"><a href="detecting-subgroups-in-igraph.html#cb564-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb564-6"><a href="detecting-subgroups-in-igraph.html#cb564-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">5</span>,</span>
+<span id="cb564-7"><a href="detecting-subgroups-in-igraph.html#cb564-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="fu">get.vertex.attribute</span>(lg_s_comp_simp, <span class="st">&quot;gn_membership&quot;</span>)</span>
+<span id="cb564-8"><a href="detecting-subgroups-in-igraph.html#cb564-8" aria-hidden="true" tabindex="-1"></a>     )</span></code></pre></div>
+<p><img src="4-Detecting_Subgroups_in_igraph_files/figure-html/unnamed-chunk-37-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>We can do so with and without coloring the individual nodes. In fact, if you compare the two graphs, you’ll see that they are almost identical, so telling <strong>igraph</strong> what color to color the nodes is unnecessary; <strong>igraph</strong> chooses its own colors based on the convex hulls.</p>
+<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="detecting-subgroups-in-igraph.html#cb565-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gn,</span>
+<span id="cb565-2"><a href="detecting-subgroups-in-igraph.html#cb565-2" aria-hidden="true" tabindex="-1"></a>     lg_s_comp_simp,</span>
+<span id="cb565-3"><a href="detecting-subgroups-in-igraph.html#cb565-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb565-4"><a href="detecting-subgroups-in-igraph.html#cb565-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Girvan-Newman Communities (w/Convex Hulls) #2&quot;</span>,</span>
+<span id="cb565-5"><a href="detecting-subgroups-in-igraph.html#cb565-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb565-6"><a href="detecting-subgroups-in-igraph.html#cb565-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">5</span>)</span></code></pre></div>
+<p><img src="4-Detecting_Subgroups_in_igraph_files/figure-html/unnamed-chunk-38-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="walktrap" class="section level3" number="9.7.2">
+<h3><span class="header-section-number">9.7.2</span> Walktrap</h3>
+<p>There are numerous other community detection algorithms included in <strong>igraph</strong>, such as Walktrap, Spin Glass, and Louvain. We briefly compare and contrast them below.</p>
+<p>Let’s begin with Walktrap, which tries to identify subgraphs via random walks. The ideas is that short random walks tend to stay in the same community.</p>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="detecting-subgroups-in-igraph.html#cb566-1" aria-hidden="true" tabindex="-1"></a>wt <span class="ot">&lt;-</span> <span class="fu">cluster_walktrap</span>(lg_s_comp_simp)</span></code></pre></div>
+<p>Calculate modularity, normalized modularity, and identify the number of communities.</p>
+<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb567-1"><a href="detecting-subgroups-in-igraph.html#cb567-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb567-2"><a href="detecting-subgroups-in-igraph.html#cb567-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;modularity&quot;</span> <span class="ot">=</span> <span class="fu">modularity</span>(wt),</span>
+<span id="cb567-3"><a href="detecting-subgroups-in-igraph.html#cb567-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;normalized modularity&quot;</span> <span class="ot">=</span> <span class="fu">modularity</span>(wt)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(wt))),</span>
+<span id="cb567-4"><a href="detecting-subgroups-in-igraph.html#cb567-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;communities&quot;</span> <span class="ot">=</span> <span class="fu">length</span>(wt)</span>
+<span id="cb567-5"><a href="detecting-subgroups-in-igraph.html#cb567-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>  modularity normalized.modularity communities
+1  0.5365493              0.804824           3</code></pre>
+<p>Now plot it.</p>
+<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb569-1"><a href="detecting-subgroups-in-igraph.html#cb569-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(wt,</span>
+<span id="cb569-2"><a href="detecting-subgroups-in-igraph.html#cb569-2" aria-hidden="true" tabindex="-1"></a>     lg_s_comp_simp,</span>
+<span id="cb569-3"><a href="detecting-subgroups-in-igraph.html#cb569-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb569-4"><a href="detecting-subgroups-in-igraph.html#cb569-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Walktrap (w/ Convex Hulls)&quot;</span>,</span>
+<span id="cb569-5"><a href="detecting-subgroups-in-igraph.html#cb569-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb569-6"><a href="detecting-subgroups-in-igraph.html#cb569-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">5</span>)</span></code></pre></div>
+<p><img src="4-Detecting_Subgroups_in_igraph_files/figure-html/unnamed-chunk-41-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="spin-glass" class="section level3" number="9.7.3">
+<h3><span class="header-section-number">9.7.3</span> Spin-Glass</h3>
+<p>Now take a look at the spin-glass community detection algorithm. This function tries to identify communities via a spin-glass model and simulated annealing <span class="citation">(<a href="#ref-Csardi2006" role="doc-biblioref">Csardi and Nepusz 2006</a>)</span>. First, create the <code>communities</code> object.</p>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="detecting-subgroups-in-igraph.html#cb570-1" aria-hidden="true" tabindex="-1"></a>sg <span class="ot">&lt;-</span> <span class="fu">cluster_spinglass</span>(lg_s_comp_simp)</span></code></pre></div>
+<p>Calculate modularity, normalized modularity, and identify the number of communities.</p>
+<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb571-1"><a href="detecting-subgroups-in-igraph.html#cb571-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb571-2"><a href="detecting-subgroups-in-igraph.html#cb571-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;modularity&quot;</span> <span class="ot">=</span> <span class="fu">modularity</span>(sg),</span>
+<span id="cb571-3"><a href="detecting-subgroups-in-igraph.html#cb571-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;normalized modularity&quot;</span> <span class="ot">=</span> <span class="fu">modularity</span>(sg)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(sg))),</span>
+<span id="cb571-4"><a href="detecting-subgroups-in-igraph.html#cb571-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;communities&quot;</span> <span class="ot">=</span> <span class="fu">length</span>(sg)</span>
+<span id="cb571-5"><a href="detecting-subgroups-in-igraph.html#cb571-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>  modularity normalized.modularity communities
+1   0.537671             0.6720887           5</code></pre>
+<p>Now plot it.</p>
+<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb573-1"><a href="detecting-subgroups-in-igraph.html#cb573-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sg,</span>
+<span id="cb573-2"><a href="detecting-subgroups-in-igraph.html#cb573-2" aria-hidden="true" tabindex="-1"></a>     lg_s_comp_simp,</span>
+<span id="cb573-3"><a href="detecting-subgroups-in-igraph.html#cb573-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb573-4"><a href="detecting-subgroups-in-igraph.html#cb573-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Spin-Glass (w/ Convex Hulls)&quot;</span>,</span>
+<span id="cb573-5"><a href="detecting-subgroups-in-igraph.html#cb573-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb573-6"><a href="detecting-subgroups-in-igraph.html#cb573-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">5</span>)</span></code></pre></div>
+<p><img src="4-Detecting_Subgroups_in_igraph_files/figure-html/unnamed-chunk-44-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="louvain" class="section level3" number="9.7.4">
+<h3><span class="header-section-number">9.7.4</span> Louvain</h3>
+<p>And finally, Louvain, which implements the multi-level modularity optimization algorithm.</p>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="detecting-subgroups-in-igraph.html#cb574-1" aria-hidden="true" tabindex="-1"></a>lo <span class="ot">&lt;-</span> <span class="fu">cluster_louvain</span>(lg_s_comp_simp)</span></code></pre></div>
+<p>Calculate modularity, normalized modularity, and identify the number of communities.</p>
+<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb575-1"><a href="detecting-subgroups-in-igraph.html#cb575-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb575-2"><a href="detecting-subgroups-in-igraph.html#cb575-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;modularity&quot;</span> <span class="ot">=</span> <span class="fu">modularity</span>(lo),</span>
+<span id="cb575-3"><a href="detecting-subgroups-in-igraph.html#cb575-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;normalized modularity&quot;</span> <span class="ot">=</span> <span class="fu">modularity</span>(lo)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(lo))),</span>
+<span id="cb575-4"><a href="detecting-subgroups-in-igraph.html#cb575-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;communities&quot;</span> <span class="ot">=</span> <span class="fu">length</span>(lo)</span>
+<span id="cb575-5"><a href="detecting-subgroups-in-igraph.html#cb575-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>  modularity normalized.modularity communities
+1  0.5385144             0.8077716           3</code></pre>
+<p>Now plot it.</p>
+<div class="sourceCode" id="cb577"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb577-1"><a href="detecting-subgroups-in-igraph.html#cb577-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lo,</span>
+<span id="cb577-2"><a href="detecting-subgroups-in-igraph.html#cb577-2" aria-hidden="true" tabindex="-1"></a>     lg_s_comp_simp,</span>
+<span id="cb577-3"><a href="detecting-subgroups-in-igraph.html#cb577-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb577-4"><a href="detecting-subgroups-in-igraph.html#cb577-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Louvain (w/ Convex Hulls)&quot;</span>,</span>
+<span id="cb577-5"><a href="detecting-subgroups-in-igraph.html#cb577-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>,</span>
+<span id="cb577-6"><a href="detecting-subgroups-in-igraph.html#cb577-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">5</span>)</span></code></pre></div>
+<p><img src="4-Detecting_Subgroups_in_igraph_files/figure-html/unnamed-chunk-47-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="table-of-results" class="section level3" number="9.7.5">
+<h3><span class="header-section-number">9.7.5</span> Table of Results</h3>
+<p>Let’s compare community detection algorithms by putting them all in a table.</p>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="detecting-subgroups-in-igraph.html#cb578-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the data.frame</span></span>
+<span id="cb578-2"><a href="detecting-subgroups-in-igraph.html#cb578-2" aria-hidden="true" tabindex="-1"></a>community <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;Algorithm&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Girvan-Newman&quot;</span>, <span class="st">&quot;Walktrap&quot;</span>,</span>
+<span id="cb578-3"><a href="detecting-subgroups-in-igraph.html#cb578-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Spin Glass&quot;</span>, <span class="st">&quot;Louvain&quot;</span>),</span>
+<span id="cb578-4"><a href="detecting-subgroups-in-igraph.html#cb578-4" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;Number of Groups&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">length</span>(gn), <span class="fu">length</span>(wt),</span>
+<span id="cb578-5"><a href="detecting-subgroups-in-igraph.html#cb578-5" aria-hidden="true" tabindex="-1"></a>                                               <span class="fu">length</span>(sg), <span class="fu">length</span>(lo)),</span>
+<span id="cb578-6"><a href="detecting-subgroups-in-igraph.html#cb578-6" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;Modularity&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">modularity</span>(gn), <span class="fu">modularity</span>(wt),</span>
+<span id="cb578-7"><a href="detecting-subgroups-in-igraph.html#cb578-7" aria-hidden="true" tabindex="-1"></a>                                         <span class="fu">modularity</span>(sg), <span class="fu">modularity</span>(lo)),</span>
+<span id="cb578-8"><a href="detecting-subgroups-in-igraph.html#cb578-8" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;Normalized Modularity&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb578-9"><a href="detecting-subgroups-in-igraph.html#cb578-9" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">modularity</span>(gn)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(gn))),</span>
+<span id="cb578-10"><a href="detecting-subgroups-in-igraph.html#cb578-10" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">modularity</span>(wt)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(wt))),</span>
+<span id="cb578-11"><a href="detecting-subgroups-in-igraph.html#cb578-11" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">modularity</span>(sg)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(sg))),</span>
+<span id="cb578-12"><a href="detecting-subgroups-in-igraph.html#cb578-12" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">modularity</span>(lo)<span class="sc">/</span>(<span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span><span class="sc">/</span><span class="fu">length</span>(lo)))</span>
+<span id="cb578-13"><a href="detecting-subgroups-in-igraph.html#cb578-13" aria-hidden="true" tabindex="-1"></a>                          ))</span>
+<span id="cb578-14"><a href="detecting-subgroups-in-igraph.html#cb578-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb578-15"><a href="detecting-subgroups-in-igraph.html#cb578-15" aria-hidden="true" tabindex="-1"></a>community</span></code></pre></div>
+<pre><code>      Algorithm Number.of.Groups Modularity Normalized.Modularity
+1 Girvan-Newman                5  0.5350271             0.6687839
+2      Walktrap                3  0.5365493             0.8048240
+3    Spin Glass                5  0.5376710             0.6720887
+4       Louvain                3  0.5385144             0.8077716</code></pre>
+<p>If we were to base our analysis strictly on normalized modularity where a higher score is generally understood to indicate a better fit, then we’d go with the Louvain algorithm’s community detection results (or Walktrap’s).</p>
+<p>That’s all for <strong>igraph</strong> now.</p>
+
+</div>
+</div>
+</div>
+<h3> References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-ucinet" class="csl-entry">
+Borgatti, S., M. Everett, and L. Freeman. 2002. <em>Ucinet for Windows: Software for Social Network Analysis</em>. Harvard, MA: Analytic Technologies.
+</div>
+<div id="ref-Csardi2006" class="csl-entry">
+Csardi, Gabor, and Tamas Nepusz. 2006. <span>“The Igraph Software Package for Complex Network Research.”</span> <em>InterJournal</em> Complex Systems: 1695. <a href="https://igraph.org">https://igraph.org</a>.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>See FiveThirtyEight’s website, <a href="https://fivethirtyeight.com/features/why-were-sharing-3-million-russian-troll-tweets/" class="uri">https://fivethirtyeight.com/features/why-were-sharing-3-million-russian-troll-tweets/</a>. You can locate the raw data on their GitHub site, <a href="https://github.com/fivethirtyeight/russian-troll-tweets" class="uri">https://github.com/fivethirtyeight/russian-troll-tweets</a>.<a href="detecting-subgroups-in-igraph.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="network-topography-in-statnet.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="detecting-subgroups-in-statnet.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjcallag/r4ds/edit/editing/4-Detecting_Subgroups_in_igraph.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"font_settings": {
+"family": "sans",
+"theme": "white",
+"size": 2
+},
+"info": true,
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -109,9 +109,9 @@ difference(g_from_el, g_from_mat)
 ```
 
 ```
-IGRAPH 3b91e6a UN-- 83 0 -- 
+IGRAPH d047084 UN-- 83 0 -- 
 + attr: name (v/c)
-+ edges from 3b91e6a (vertex names):
++ edges from d047084 (vertex names):
 ```
 
 
