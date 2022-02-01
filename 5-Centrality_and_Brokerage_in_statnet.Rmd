@@ -1,0 +1,736 @@
+---
+output: html_document
+---
+
+# Centrality and Brokerage in **statnet**
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo       = TRUE,
+                      collapse   = FALSE,
+                      fig.align  = "center",
+                      fig.height = 6, 
+                      fig.width  = 6,
+                      message    = FALSE, 
+                      warning    = FALSE)
+```
+
+## Setup
+
+Find and open your RStudio Project associated with this class. Begin by opening a new script. It's generally a good idea to place a header at the top of your scripts that tell you what the script does, its name, etc. 
+
+```{r, include = TRUE, eval = FALSE}
+#################################################
+# What: Centrality and Brokerage in statnet
+# Created: 02.28.14
+# Revised: 01.31.22
+#################################################
+```
+
+If you have not set up your RStudio Project to clear the workspace on exit, your environment may contain the objects and functions from your prior session. To clear these before beginning use the following command.
+
+```{r, eval = FALSE}
+rm(list = ls())
+```
+
+Proceed to place the data required for this lab (`SouthFront_EL.csv`, `SouthFront_NL.csv`, `Strike.net`, and `Strikegroups.csv`) also inside your R Project folder. We have placed it in a sub folder titled `data` for organizational purposes; however, this is not necessary.
+
+In this lab we will consider a handful of actor-level measures. Specifically, we will walk through the concepts of centrality and brokerage on two different networks.  
+
+Centrality is one of SNA’s oldest concepts. When working with undirected data, a central actor can be someone who has numerous ties to other actors (degree), someone who is closer (in terms of path distance) to all other actors (closeness), someone who lies on the shortest path (geodesic) between any two actors (betweenness), or someone who has ties to other highly central actors (eigenvector). In some networks, the same actors will score high on all four measures. In others, they won’t. There are, of course, more than four measures of centrality.
+
+For the centrality portion of this exercise, we'll look at a subset of South Front's YouTube network that we've collected using YouTube's open API. Specifically, we will examine subscription-based ties among accounts (note the names are a string of what appears to be random combinations of letters and numbers) within South Front's ego network (excluding South Front), which leaves us with a network of 310 subscriptions among 236 accounts. We will consider this network undirected for the "Centrality and Power" section, but directed for the "Centrality and Prestige" portion of this lab. 
+
+Next, we will turn to measures that operationalize various aspects of brokerage. For that section, we will demonstrate the concept of brokerage by looking at a communication network of a wood-processing facility where workers rejected a new compensation package and eventually went on strike. Management then brought in an outside consultant to analyze the employee’s communication structure because it felt that information about the package was not being effectively communicated to all employees by the union negotiators. The outside consultant asked all employees to indicate, on a 5-point scale, the frequency that they discussed the strike with each of their colleagues, ranging from ‘almost never’ (less than once per week) to ‘very often’ (several times per day). The consultant used 3 as a cut-off value in order to identify a tie between two employees. If at least one of two persons indicated they discussed work with a frequency of three or more, a tie between them was included in the network. The data accompany the book, "Exploratory Social Network Analysis with Pajek," also published by Cambridge. Hence, we've shared the data with you as a Pajek file. 
+
+## Libraries
+
+Load the **statnet** library.
+
+```{r}
+library(statnet)
+```
+
+We will also be using other libraries in this exercise such as **DT**, **keyplayer**, **scales**, and **psych**. This might be the first time you use these, so you may need to install them.
+
+```{r, eval = FALSE}
+to_install <- c("DT","keyplayer", "psych", "scales")
+install.packages(to_install)
+```
+
+If you have installed these, proceed to load **CINNA**, **keyplayer**, and **psych**. We will namespace functions from **DT**, and **scales** libraries (e.g., `scales::rescale()`) as these have functions that mask others from **statnet**.
+
+```{r}
+library(CINNA)
+library(keyplayer)
+library(psych)
+```
+
+## Load Data
+
+We’ve stored South Front’s YouTube network as an edge list. Go ahead and import it with the `read.csv()` function, convert it to a `network` object, and visualize it. For now we will import it as an undirected network.
+
+```{r}
+# Read data
+sf_el <- read.csv("data/SouthFront_EL.csv",
+                  header = TRUE)
+
+# Remove parallel edges
+sf_el <- sf_el[!duplicated(cbind(pmin(sf_el$Source, sf_el$Target),
+                                 pmax(sf_el$Source, sf_el$Target))), ]
+
+# Create graph with edge list
+sf_net <- as.network(sf_el,
+                     directed = FALSE,
+                     loops = FALSE,
+                     multiple = FALSE,
+                     matrix.type = "edgelist")
+
+# Take a look at it
+sf_net
+```
+
+Plot it.
+
+```{r}
+gplot(sf_net,
+      gmode = "graph",
+      mode = "kamadakawai",
+      vertex.col = "lightblue",
+      usearrows = FALSE,
+      main = "South Front")
+```
+
+Next, load the `Stike.net` file and `Strikegroups.csv`, convert the relational data to an `network` object and add the node attributes to this graph. 
+
+```{r}
+# Read graph
+strike_net <- as.network(
+  x = read.paj(file = "data/Strike.net"),
+  directed = FALSE
+)
+
+# Read attributes
+strike_attrs <- read.csv("data/Strikegroups.csv",
+                         col.names = c("Name", "Group"))
+
+# Add vertex attributes
+strike_net <- set.vertex.attribute(strike_net, 
+                                 attrname = "Group",
+                                 value = strike_attrs[["Group"]])
+
+# Take a look at the graph object
+strike_net
+```
+
+Lastly, plot the new network.
+
+```{r}
+gplot(strike_net, 
+      gmode = "graph", 
+      mode = "kamadakawai",
+      main = "Strike Network",
+      label = network.vertex.names(strike_net),
+      label.col = "black",
+      label.cex = 0.6,
+      label.pos = 5,
+      vertex.col = strike_net %v% "Group")
+```
+
+## Centrality and Power (Undirected Networks)
+
+### Degree, Closeness, Betweenness and Eigenvector Centrality
+
+We will begin by calculating the four primary measures of centrality for undirected networks. Note that there are two closeness commands. The first is the standard measure of closeness (Freeman). Unfortunately, it doesn't handle infinite distances, so we show how to calculate an alternative (ARD) that does. Note that our use of both closeness scores is for demonstration purposes because our network is a connected graph with a single component. 
+
+```{r}
+# Add centrality metrics as vertex attributes
+sf_net <- set.vertex.attribute(sf_net, attrname = "degree", 
+                               value = degree(sf_net,
+                                              gmode = "graph",
+                                              ignore.eval = FALSE))
+sf_net <- set.vertex.attribute(sf_net, attrname = "closeness", 
+                               value = closeness(sf_net,
+                                                 gmode = "graph"))
+sf_net <- set.vertex.attribute(sf_net, attrname = "ard", 
+                               value = closeness(sf_net,
+                                                 gmode = "graph",
+                                                 # the cmode="suminvundir" gives
+                                                 # us ARD, which works with 
+                                                 # disconnected networks. 
+                                                 cmode = "suminvundir"))
+sf_net <- set.vertex.attribute(sf_net, attrname = "betweenness", 
+                               value = betweenness(sf_net,
+                                                   gmode = "graph"))
+sf_net <- set.vertex.attribute(sf_net, attrname = "eigenvector", 
+                               value = evcent(sf_net,
+                                              # use.eigen = TRUE is not always
+                                              # necessary; we've included it
+                                              # here to get more "robust"
+                                              # results.
+                                              use.eigen = FALSE))
+
+# Take a look at the graph object
+sf_net
+```
+
+### Correlations
+
+Let's create a `data.frame` with vertex centralities. 
+
+```{r}
+centrality <- data.frame("Channel" = network.vertex.names(sf_net),
+                         "Degree" = sf_net %v% "degree",
+                         "Closeness (Freeman)" = sf_net %v% "closeness",
+                         "Closeness (ARD)" = sf_net %v% "ard",
+                         "Betweenness" = sf_net %v% "betweenness",
+                         "Eigenvector" = sf_net %v% "eigenvector")
+
+head(centrality, n = 5)
+```
+
+To run a correlation between variables, use the `cor()` function. Note our `data.frame` (i.e., `centrality`) has six columns, including the first column containing channel names, which means we want to correlate the columns containing centrality scores only (i.e., columns 2-6).
+
+```{r}
+cor(centrality[, 2:6])
+```
+
+
+Note that, for the most part, the centrality measures correlate highly with degree, especially betweenness. The two closeness measures correlate very high with each other as well, which is a good sign that they're tapping into the same phenomenon. 
+
+Here's a really nice correlation function (i.e., `pairs.panels()`) associated with the **psych** package, which you may need to install first.
+
+```{r}
+pairs.panels(centrality[, 2:6])
+```
+
+Let's plot the network where we vary node size by the centrality measures; note that we've rescaled them so that the nodes don't get overwhelmingly big or way too small. We've turned off the labels, which are YouTube Channel IDs (i.e., really long), so you can see the results clearly.
+
+```{r}
+par(mfrow = c(2, 3))
+
+# Save the coordinates
+coords <- gplot.layout.kamadakawai(sf_net,
+                                   layout.par = NULL)
+
+# Plot graph with rescaled nodes
+gplot(sf_net,
+      main = "South Front Degree",
+      coord = coords,
+      displaylabels = FALSE, 
+      vertex.col = "lightblue",
+      vertex.cex = scales::rescale(sf_net %v% "degree", to = c(1, 5)),
+      usearrows = FALSE)
+
+gplot(sf_net,
+      main = "South Front Closeness",
+      coord = coords,
+      displaylabels = FALSE, 
+      vertex.col = "lightblue",
+      vertex.cex = scales::rescale(sf_net %v% "closeness", to = c(1, 5)),
+      usearrows = FALSE)
+
+gplot(sf_net,
+      main = "South Front ARD",
+      coord = coords,
+      displaylabels = FALSE, 
+      vertex.col = "lightblue",
+      vertex.cex = scales::rescale(sf_net %v% "ard", to = c(1, 5)),
+      usearrows = FALSE)
+
+gplot(sf_net,
+      main = "South Front Betweenness",
+      coord = coords,
+      displaylabels = FALSE, 
+      vertex.col = "lightblue",
+      vertex.cex = scales::rescale(sf_net %v% "betweenness", to = c(1, 5)),
+      usearrows = FALSE)
+
+gplot(sf_net,
+      main = "South Front Eigenvector",
+      coord = coords,
+      displaylabels = FALSE, 
+      vertex.col = "lightblue",
+      vertex.cex = scales::rescale(sf_net %v% "eigenvector", to = c(1, 5)),
+      usearrows = FALSE)
+```
+
+### Interactive Table 
+
+The R package **DT** provides an R interface to the JavaScript library **DataTables**. R data objects (matrices or data frames) can be displayed as HTML table widgets. The interactive widgets provide filtering, pagination, sorting, and many other features for the tables. 
+
+We will namespace the `datatable()` function from library and provide it the `centrality` node table we created for the `sf_net` graph.
+
+```{r}
+DT::datatable(centrality, rownames = FALSE)
+```
+
+Modify the numeric variables, rounding them to 3 decimal places.
+
+```{r}
+centrality <- as.data.frame(
+  sapply(names(centrality), function(s) {
+    centrality[[s]] <- ifelse(is.numeric(centrality[[s]]),
+                              yes = round(centrality[s], digits = 3),
+                              no = centrality[s])
+    })
+  )
+```
+
+Take a look at the table:
+
+```{r}
+DT::datatable(centrality, rownames = FALSE)
+```
+You may want to "clean up" this table. Begin by looking at the `datatable` arguments by reading the documentation `?DT::datatable`. Here we clean it the data in base R, then modify the HTML widget parameters.
+
+```{r}
+# Order the data.frame by decreasing degree value
+centrality <- centrality[order(centrality$Degree, decreasing = TRUE), ]
+# Change column names for the data.frame
+colnames(centrality) <- c("Channel", "Degree", "Closeness", "ARD", 
+                          "Betweenness", "Eigenvector")
+# Create and HTML widget table
+DT::datatable(centrality,
+  # The table caption
+  caption = "Table 1: South Front - Centrality and Power", 
+  # Select the CSS class: https://datatables.net/manual/styling/classes
+  class = 'cell-border stripe',
+  # Show rownames?
+  rownames = FALSE,
+  # Whether/where to use/put column filters
+  filter = "top",
+  # The row/column selection mode
+  selection = "multiple",
+  # Pass along a list of initialization options
+  # Details here: https://datatables.net/reference/option/
+  options = list(
+    # Is the x-axis (horizontal) scrollable?
+    scrollX = TRUE,
+    # How many rows returned in a page?
+    pageLength = 10,
+    # Where in the DOM you want the table to inject various controls?
+    # Details here: https://legacy.datatables.net/ref#sDom
+    sDom = '<"top">lrt<"bottom">ip')
+)
+```
+
+## Centrality and Prestige (Directed Networks)
+
+We will re-import the South Front data set one more time but consider it a directed network this time to look at the concepts of centrality and prestige. Specifically, make sure you use the `directed = TRUE` parameter within the `as.network()` function.
+
+```{r}
+sf_net_d <- as.network(sf_el, 
+                       directed = TRUE, 
+                       loops = FALSE, 
+                       matrix.type = "edgelist")
+```
+
+Take a look at the new `network` object.
+
+```{r}
+sf_net_d
+```
+
+### In-N-Out Degree, Input Domain, and Proximity Prestige
+
+Let's first calculate in-degree and out-degree for the network. Note that **statnet** also has a "prestige" function, which allows you to access a variety of prestige measures (including in and out-degree). We will focus on the former for this exercise.
+
+```{r}
+sf_net_d <- set.vertex.attribute(sf_net_d, attrname = "indeg",
+                                 value = degree(sf_net_d,
+                                                gmode = "digraph",
+                                                cmode = "indegree"))
+sf_net_d <- set.vertex.attribute(sf_net_d, attrname = "outdeg",
+                                 value = degree(sf_net_d,
+                                                gmode = "digraph",
+                                                cmode = "outdegree"))
+
+sf_net_d
+```
+
+Now, let's vary node size of plots by in-degree and out-degree. Again, we will hide the labels so you can see patterns more clearly.
+
+```{r} 
+par(mfrow = c(1, 2))
+
+# Save the coordinates
+coords <- gplot.layout.kamadakawai(sf_net_d, layout.par = NULL)
+
+# Plot graph with rescaled nodes
+gplot(sf_net_d,
+      main = "South Front In-Degree",
+      coord = coords,
+      displaylabels = FALSE, 
+      vertex.col = "lightblue",
+      vertex.cex = scales::rescale(sf_net_d %v% "indeg", to = c(1, 5)),
+      usearrows = TRUE)
+
+gplot(sf_net_d,
+      main = "South Front Out-Degree",
+      coord = coords,
+      displaylabels = FALSE, 
+      vertex.col = "lightblue",
+      vertex.cex = scales::rescale(sf_net_d %v% "outdeg", to = c(1, 5)),
+      usearrows = TRUE)
+```
+
+We can correlate the two measures if we want. The negative correlation makes sense when we look at the in-degree and out-degree plots.
+
+```{r}
+cor(sf_net_d %v% "indeg", sf_net_d %v% "outdeg")
+```
+
+The `prestige()` function, which we will now use, can estimate more than in- and out-degree, such as eigenvector, input domain, and proximity prestige. We will stick with the latter two for now.
+
+```{r}
+# Input Domain
+sf_net_d <- set.vertex.attribute(sf_net_d, attrname = "domain",
+                                 value = prestige(sf_net_d, cmode = "domain"))
+# Proximity Prestige
+sf_net_d <- set.vertex.attribute(sf_net_d, attrname = "domain.proximity",
+                                 value = prestige(sf_net_d,
+                                                  cmode = "domain.proximity"))
+```
+
+Take a look at the count of values in each vector:
+
+```{r}
+table(sf_net_d %v% "domain")
+table(sf_net_d %v% "domain.proximity")
+```
+
+As we can see, however, the proximity command returns almost all 0s for input domain, and all 0s for proximity prestige.
+
+### Correlations
+
+Create a data frame to display the prestige scores South Front's YouTube network (we'll add authorities once we move to **igraph**).
+
+```{r}
+centrality_d <- data.frame("Channel" = network.vertex.names(sf_net_d),
+                           "Indegree" = sf_net_d %v% "indeg",
+                           "Outdegree" = sf_net_d %v% "outdeg",
+                           "Input Domain" = sf_net_d %v% "domain",
+                           "Proximity Prestige" = sf_net_d %v% "domain.proximity")
+head(centrality_d)
+```
+Take a look at the `pairs.panels()` output.
+
+```{r}
+pairs.panels(centrality_d[, 2:5])
+```
+
+### Interactive Table
+
+Let's create another interactive table for our prestige-based centrality measures. Again, let's extract the nodes `data.frame` from the graph and then recode numeric variables to clean up the table.
+
+```{r}
+# Round up numeric values
+centrality_d <- as.data.frame(
+  sapply(names(centrality_d), function(s) {
+    centrality_d[[s]] <- ifelse(is.numeric(centrality_d[[s]]),
+                                yes = round(centrality_d[s], digits = 3),
+                                no = centrality_d[s])
+    })
+  )
+```
+
+Use `datatable` and some base R to clean up the `data.frame` and create a good looking widget.
+
+```{r}
+centrality_d <- centrality_d[order(centrality_d$Indegree, decreasing = TRUE), ]
+DT::datatable(centrality_d,
+  caption = "Table 2: South Front - Centrality and Prestige", 
+  class = 'cell-border stripe',
+  rownames = FALSE,
+  filter = "top",
+  selection = "multiple",
+  options = list(
+    scrollX = TRUE,
+    pageLength = 10,
+    sDom = '<"top">lrt<"bottom">ip')
+)
+```
+
+## Brokerage 
+
+For this section, we will use the `strike_net` object. Begin by plotting the network side-by-side. The initial plot is without group membership but the second highlights the groups.
+
+```{r}
+par(mfrow = c(1, 2))
+
+# Save coordinates
+coords <- gplot.layout.kamadakawai(strike_net, layout.par = NULL)
+
+# Plot them
+gplot(strike_net, 
+      gmode = "graph", 
+      coord = coords,
+      main = "Strike Network",
+      label = network.vertex.names(strike_net),
+      label.col = "black",
+      label.cex = 0.6,
+      label.pos = 5)
+gplot(strike_net, 
+      main = "Strike Network (Groups)",
+      gmode = "graph", 
+      coord = coords,
+      label = network.vertex.names(strike_net),
+      label.col = "black",
+      label.cex = 0.6,
+      label.pos = 5,
+      vertex.col = strike_net %v% "Group")
+```
+
+### Cutpoints
+
+Next, identify cutpoints and the plot the graph with the cutpoints given a different color. The `cutpoints()` function identifies the cutpoints in a graph; however, keep in mind that these may vary based on the `mode` as either directed (`digraph`) or undirected (`graph`). The output is a `logical` vector indicating cutpoint status if `return.indicator = TRUE` for each vertex (`TRUE` if cutpoint and `FALSE` otherwise). Like before, we can assing this output vector to the graph vertices as an attribute.
+
+```{r,include=TRUE}
+strike_net <- set.vertex.attribute(strike_net, attrname = "cutpoint",
+                                   value = cutpoints(strike_net,
+                                                     mode = "graph",
+                                                     return.indicator = TRUE))
+strike_net
+```
+
+Now plot it.
+
+```{r}
+gplot(strike_net, 
+      main = "Strike Network (Cutpoints)",
+      gmode = "graph", 
+      coord = coords,
+      label = network.vertex.names(strike_net),
+      label.col = "black",
+      label.cex = 0.6,
+      label.pos = 5,
+      vertex.col = strike_net %v% "cutpoint")
+```
+
+Let's change-up the color a bit using an `ifelse()` evaluation. If the vertex is a cutpoint, we will make it `"red"`; otherwise, `"lightblue"`.
+
+```{r,include=TRUE}
+gplot(strike_net, 
+      main = "Strike Network (Cutpoints)",
+      gmode = "graph", 
+      coord = coords,
+      label = network.vertex.names(strike_net),
+      label.col = "black",
+      label.cex = 0.6,
+      label.pos = 5,
+      vertex.col = ifelse(strike_net %v% "cutpoint", yes = "red", no = "lightblue"))
+```
+
+If we vary node size by betweenness centrality, we can see that a correlation exists between cutpoints and betweenness. It isn't perfect, however.
+
+```{r}
+gplot(strike_net, 
+      main = "Strike Network (Cutpoints + Betweenness)",
+      gmode = "graph", 
+      coord = coords,
+      label = network.vertex.names(strike_net),
+      label.col = "black",
+      label.cex = 0.6,
+      label.pos = 5,
+      vertex.col = ifelse(strike_net %v% "cutpoint", yes = "red", no = "lightblue"),
+      vertex.cex = scales::rescale(betweenness(strike_net), to = c(0.5, 3)))
+```
+
+In order to locate the graph bicomponents, we can use the `bicomponent.dist()` function, which returns a named list containing multiple elements. After we identify bicomponents, we can use the `names()` function to see the items the function generates.
+
+```{r,include=TRUE}
+strike_bc <- bicomponent.dist(strike_net)
+names(strike_bc)
+```
+
+The command only identifies bicomponents of size 3 or greater, which you can see by typing, `strike_bc$csize`. Typing `strike_bc$membership` produces the group membership. You'll also note that when a node belongs to more than one bicomponent, the command randomly assigns it to one of the bicomponents.
+
+```{r}
+strike_bc$csize
+strike_bc$membership
+```
+
+You can use the `$membership` element to color nodes in the graph.
+
+```{r}
+gplot(strike_net, 
+      main = "Strike Network (Bicomponents Membership)",
+      gmode = "graph", 
+      coord = coords,
+      label = network.vertex.names(strike_net),
+      label.col = "black",
+      label.cex = 0.6,
+      label.pos = 5,
+      vertex.col = strike_bc$membership,
+      vertex.cex = scales::rescale(betweenness(strike_net), to = c(0.5, 3)))
+```
+
+### Cutsets (Key Player)
+
+Here we will use the **keyplayer** package to identify a cutset of three because the strike network is such a small one. If you run this repeatedly, you'll notice that it will return different solutions. That's because there are multiple solutions.
+
+As seen in the **igraph** version of this lab, the **influenceR** package works well with `igraph` objects. However, it does not work well with `network` objects, which means we'd have to convert our data first using `intergraph`. We'll skip that step here and use the `keyplayer` package only.  
+
+In any case, the **keyplayer** package offers more flexibility than the **influenceR** package in the sense that you can choose what centrality measure you want to use. Here we'll use fragmentation centrality, which is what Steve Borgatti uses in the standalone program, **keyplayer**. We didn't discuss fragmentation centrality above, but it measures the extent to which an individual node fragments the network if it's removed.
+
+To identify the key player set in **keyplayer** use the `kpset()` function, which identifies the most central group of players in a social network based on a specified centrality measure and a target group size. The output of this function, like with many other functions, is a named list with two entries. The first, `keyplayers`, provides the indices of the nodes identified as key players, which is the relevant output here.
+
+First, take a look at the vector of indices.
+
+```{r}
+
+strike.adj <- as.matrix.network(strike_net)
+
+keyplayer::kpset(strike.adj, 
+                 3, 
+                 type = "fragment")$keyplayers
+```
+
+The output tells us which actors make up the cutset. For example, an output vector with "5, 9, 17" would indicate that actors 5, 9, and 17 make up our cutset. To access the node names, you can use the `get.vertex.attitute()` function paired with the `[` accessor and the appropriate index.
+
+```{r}
+get.vertex.attribute(strike_net, "vertex.names")[5]
+```
+
+This can be further expanded to include multiple indexes at once through the `c()` function.
+
+```{r}
+my_cutset <- get.vertex.attribute(strike_net, "vertex.names")[c(5, 9, 17)]
+my_cutset
+```
+
+Using the indexes one could create a logical vertex attribute for the cutset.
+
+```{r}
+strike_net %v% "cutset" <- ifelse(get.vertex.attribute(strike_net,
+                                                       "vertex.names") %in% my_cutset,
+                                  TRUE, FALSE)
+# Take a look a new vertex attribute
+strike_net
+
+get.vertex.attribute(strike_net, "cutset")
+```
+
+Once we've done that, we can plot the strike network with cutsets.
+
+```{r}
+gplot(strike_net,
+     mode = "kamadakawai",
+     displaylabels = TRUE,
+     label.cex = 0.7,
+     label.pos = 5,
+     label.col = "black",
+     vertex.col = get.vertex.attribute(strike_net, "cutset"),
+     usearrows = FALSE,
+     main = "Strike Network (Cutset = 3)")
+```
+
+You could always recode the colors based on this logical vertex attribute.
+
+```{r}
+gplot(strike_net,
+     mode = "kamadakawai",
+     displaylabels = TRUE,
+     label.cex = 0.7,
+     label.pos = 5,
+     label.col = "black",
+     vertex.col = ifelse(get.vertex.attribute(strike_net, "cutset"),
+                         "red", "lightblue"),
+     usearrows = FALSE,
+     main = "Strike Network (Cutset = 3)")
+```
+
+Let's calculate the increase in fragmentation after the cutset's removal.
+
+```{r}
+strike2_net <- get.inducedSubgraph(strike_net,
+                                   v = which(
+                                     strike_net %v% "cutset" == FALSE))
+
+frag_before <- 1 - connectedness(strike_net)
+frag_before
+
+frag_after <- 1 - connectedness(strike2_net)
+frag_after
+
+frag_after - frag_before
+```
+
+Finally plot the fragmented network.
+
+```{r}
+gplot(strike2_net,
+     mode = "kamadakawai",
+     displaylabels = TRUE,
+     label.cex = 0.7,
+     label.pos = 5,
+     label.col = "black",
+     vertex.col = "lightblue",
+     usearrows = FALSE,
+     main = "Fragmented Strike Network")
+
+```
+
+### Gould and Fernandez
+
+For the Gould and Fernandez algorithm, we need the strike group's membership data, which we've provided you as an attribute file (`Strikegroups.csv`) and previously imported. The `brokerage()` function calculates the brokerage analysis of Gould and Fernandez on an input graph given a partition (e.g.,  membership) vector. Because the output is a named list, we will store it in a separate object.
+
+```{r}
+strike_gf <- brokerage(strike_net,
+                       # Pass the Group vector
+                       strike_attrs[["Group"]])
+
+```
+
+Take a look at the output elements.
+
+```{r}
+ls(strike_gf)
+```
+
+For a more detailed description of these elements, take a look at the documentation `??brokerage`. The relevant element in this list is `raw.nli`, which includes a matrix of observed brokerage scores by vertex. Access it with the `$` accessor and examine the matrix.
+
+```{r}
+strike_gf$raw.nli
+```
+
+
+The types of brokerage roles are defined (and codified above) in terms of group membership as follows:
+
+  - `w_I`: Coordinator role
+  - `w_O`: Itinerant broker role
+  - `b_IO`: Gatekeeper role
+  - `b_OI`: Representative role
+  - `b_O`: Liason role
+  - `t`: Total (cumulative) role occupancy
+  
+```{r}
+strike_gf$raw.nli
+```
+
+Next, we will get the total brokerage score but only count representative/gatekeeper once since it is undirected network (the total score is in the 6th column, while the gatekeeper score is in the fourth).
+
+```{r}
+strike_gf$raw.nli[, 6] - strike_gf$raw.nli[, 4]
+```
+
+Now, visualize the network sizing the nodes by total brokerage score.
+
+```{r,include=TRUE}
+gplot(strike_net,
+      gmode = "graph",
+      label = network.vertex.names(strike_net),
+      coord = coords,
+      label.col = "black",
+      label.cex = 0.6,
+      vertex.col = strike_attrs[["Group"]],
+      label.pos = 5,
+      vertex.cex = scales::rescale(strike_gf$raw.nli[, 6] - strike_gf$raw.nli[, 4],
+                                   to = c(1, 5)), 
+      main = "Gould & Fernandez (Total Brokerage)")
+```
+
+We will hold off for now on creating an interactive table for brokerage but feel free to give it a shot on your own.
+
+That's all for **statnet** for now.
