@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>13 Basic Base R and Tidyverse Data Manipulation Cheat Sheet | R for Social Network Analysis</title>
+  <title>14 Basic Base R and Tidyverse Data Manipulation Cheat Sheet | R for Social Network Analysis</title>
   <meta name="description" content="TBD." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="13 Basic Base R and Tidyverse Data Manipulation Cheat Sheet | R for Social Network Analysis" />
+  <meta property="og:title" content="14 Basic Base R and Tidyverse Data Manipulation Cheat Sheet | R for Social Network Analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="cjcallag/r4sna" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="13 Basic Base R and Tidyverse Data Manipulation Cheat Sheet | R for Social Network Analysis" />
+  <meta name="twitter:title" content="14 Basic Base R and Tidyverse Data Manipulation Cheat Sheet | R for Social Network Analysis" />
   
   <meta name="twitter:description" content="TBD." />
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="centrality-and-brokerage-in-statnet.html"/>
+<link rel="prev" href="hypothesis-testing-qap-and-cug.html"/>
 <link rel="next" href="key-sna-functions-and-visualization-cheat-sheet.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -65,6 +65,8 @@
 <script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
 <link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
 <script src="libs/selectize-0.12.0/selectize.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -400,51 +402,71 @@ div.csl-indent {
 </ul></li>
 </ul></li>
 <li class="part"><span><b>VII Lab 6</b></span></li>
+<li class="chapter" data-level="13" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html"><i class="fa fa-check"></i><b>13</b> Hypothesis Testing (QAP and CUG)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#introduction-1"><i class="fa fa-check"></i><b>13.1</b> Introduction</a></li>
+<li class="chapter" data-level="13.2" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#developing-and-testing-working-hypotheses"><i class="fa fa-check"></i><b>13.2</b> Developing and Testing Working Hypotheses</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#univariate-bivariate-and-multivariate-statistical-tests"><i class="fa fa-check"></i><b>13.2.1</b> Univariate, Bivariate, and Multivariate Statistical Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#challenging-expectations-with-conditional-uniform-graphs-cugs"><i class="fa fa-check"></i><b>13.3</b> Challenging Expectations with Conditional Uniform Graphs (CUGs)</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#univariate-cug-tests-in-statnet"><i class="fa fa-check"></i><b>13.3.1</b> Univariate CUG Tests in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="13.3.2" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#bivariate-tests-using-cug"><i class="fa fa-check"></i><b>13.3.2</b> Bivariate Tests Using CUG</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#quadratic-assignment-procedure-qap"><i class="fa fa-check"></i><b>13.4</b> Quadratic Assignment Procedure (QAP)</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#bivariate-tests-using-qap-correlation"><i class="fa fa-check"></i><b>13.4.1</b> Bivariate Tests Using QAP: Correlation</a></li>
+<li class="chapter" data-level="13.4.2" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#multivariate-models-using-qap"><i class="fa fa-check"></i><b>13.4.2</b> Multivariate Models using QAP</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#a-note-on-interpretation-causality-in-networks"><i class="fa fa-check"></i><b>13.5</b> A Note on interpretation: Causality in Networks</a></li>
+<li class="chapter" data-level="13.6" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#summary-lessons-learned"><i class="fa fa-check"></i><b>13.6</b> Summary: Lessons Learned</a></li>
+</ul></li>
 <li class="part"><span><b>VIII Lab 7</b></span></li>
 <li class="part"><span><b>IX Lab 8</b></span></li>
 <li class="part"><span><b>X Lab 9</b></span></li>
 <li class="part"><span><b>XI Lab 10</b></span></li>
 <li class="part"><span><b>XII Appendices</b></span></li>
-<li class="chapter" data-level="13" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>13</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
+<li class="chapter" data-level="14" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>14</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>13.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
-<li class="chapter" data-level="13.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>13.2</b> Installation</a></li>
-<li class="chapter" data-level="13.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>13.3</b> Loading</a></li>
-<li class="chapter" data-level="13.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>13.4</b> Import and View Data</a></li>
-<li class="chapter" data-level="13.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>13.5</b> Extracting Variables/Columns</a></li>
-<li class="chapter" data-level="13.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>13.6</b> Creating Filters/Extracting Rows</a></li>
-<li class="chapter" data-level="13.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>13.7</b> Arrange Rows</a></li>
-<li class="chapter" data-level="13.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>13.8</b> Making a New Column/Variable</a></li>
-<li class="chapter" data-level="13.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>13.9</b> Rename Variables</a></li>
-<li class="chapter" data-level="13.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>13.10</b> Summarizing</a>
+<li class="chapter" data-level="14.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>14.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
+<li class="chapter" data-level="14.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>14.2</b> Installation</a></li>
+<li class="chapter" data-level="14.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>14.3</b> Loading</a></li>
+<li class="chapter" data-level="14.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>14.4</b> Import and View Data</a></li>
+<li class="chapter" data-level="14.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>14.5</b> Extracting Variables/Columns</a></li>
+<li class="chapter" data-level="14.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>14.6</b> Creating Filters/Extracting Rows</a></li>
+<li class="chapter" data-level="14.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>14.7</b> Arrange Rows</a></li>
+<li class="chapter" data-level="14.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>14.8</b> Making a New Column/Variable</a></li>
+<li class="chapter" data-level="14.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>14.9</b> Rename Variables</a></li>
+<li class="chapter" data-level="14.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>14.10</b> Summarizing</a>
 <ul>
-<li class="chapter" data-level="13.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>13.10.1</b> Simple Summary</a></li>
-<li class="chapter" data-level="13.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>13.10.2</b> Group Summary</a></li>
+<li class="chapter" data-level="14.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>14.10.1</b> Simple Summary</a></li>
+<li class="chapter" data-level="14.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>14.10.2</b> Group Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="13.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>13.11</b> Combining Data</a>
+<li class="chapter" data-level="14.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>14.11</b> Combining Data</a>
 <ul>
-<li class="chapter" data-level="13.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>13.11.1</b> Left Join</a></li>
-<li class="chapter" data-level="13.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>13.11.2</b> Right Join</a></li>
-<li class="chapter" data-level="13.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>13.11.3</b> Inner Join</a></li>
-<li class="chapter" data-level="13.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>13.11.4</b> Full Join</a></li>
+<li class="chapter" data-level="14.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>14.11.1</b> Left Join</a></li>
+<li class="chapter" data-level="14.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>14.11.2</b> Right Join</a></li>
+<li class="chapter" data-level="14.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>14.11.3</b> Inner Join</a></li>
+<li class="chapter" data-level="14.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>14.11.4</b> Full Join</a></li>
 </ul></li>
-<li class="chapter" data-level="13.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>13.12</b> Piping Multiple Variables</a></li>
+<li class="chapter" data-level="14.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>14.12</b> Piping Multiple Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>14</b> Key SNA Functions and Visualization Cheat Sheet</a>
+<li class="chapter" data-level="15" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>15</b> Key SNA Functions and Visualization Cheat Sheet</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>14.1</b> <strong>igraph</strong></a>
+<li class="chapter" data-level="15.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>15.1</b> <strong>igraph</strong></a>
 <ul>
-<li class="chapter" data-level="14.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>14.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
-<li class="chapter" data-level="14.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>14.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="15.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>15.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="15.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>15.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
 </ul></li>
-<li class="chapter" data-level="14.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>14.2</b> <strong>statnet</strong></a>
+<li class="chapter" data-level="15.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>15.2</b> <strong>statnet</strong></a>
 <ul>
-<li class="chapter" data-level="14.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>14.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
-<li class="chapter" data-level="14.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>14.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="15.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>15.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="15.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>15.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>XIII References</b></span></li>
-<li class="chapter" data-level="15" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>15</b> References</a></li>
+<li class="chapter" data-level="16" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>16</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown">
 Published with bookdown</a></li>
@@ -466,8 +488,8 @@ Published with bookdown</a></li>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet" class="section level1" number="13">
-<h1><span class="header-section-number">13</span> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</h1>
+<div id="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet" class="section level1" number="14">
+<h1><span class="header-section-number">14</span> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</h1>
 <p>This document’s purpose is to serve as a simple reference guide
 comparing a handful of basic functions in base R and the <strong>dplyr</strong>
 package, which is part of the <strong>tidyverse</strong>. It is designed to help you
@@ -485,8 +507,8 @@ references for a variety of topics.</p>
 <p>Finally, you can switch back and forth between base R and <strong>tidyverse</strong>
 in your analysis; they are not mutually exclusive. However, several
 advantages exist in staying consistent in your code.</p>
-<div id="basic-base-r-and-dplyr-functions" class="section level2" number="13.1">
-<h2><span class="header-section-number">13.1</span> Basic Base R and <strong>dplyr</strong> Functions</h2>
+<div id="basic-base-r-and-dplyr-functions" class="section level2" number="14.1">
+<h2><span class="header-section-number">14.1</span> Basic Base R and <strong>dplyr</strong> Functions</h2>
 <div class="row">
 <div class="lcolumn-50">
 <p><img src="imgs/Rlogo.png" width="50%" angle=0 style="display: block; margin: auto;" /></p>
@@ -500,29 +522,29 @@ a column separator for tex --></p>
 </div>
 </div>
 </div>
-<div id="installation" class="section level2" number="13.2">
-<h2><span class="header-section-number">13.2</span> Installation</h2>
+<div id="installation" class="section level2" number="14.2">
+<h2><span class="header-section-number">14.2</span> Installation</h2>
 <p>The first step is to make sure that you have installed and loaded the
 necessary packages.</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb778-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No installation required</span></span></code></pre></div>
+<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb804-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb804-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No installation required</span></span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb779-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb779-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span>
-<span id="cb779-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb779-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb779-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb779-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively, only install dplyr and readr</span></span>
-<span id="cb779-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb779-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span>
-<span id="cb779-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb779-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;readr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb805-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb805-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</span>
+<span id="cb805-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb805-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb805-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb805-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively, only install dplyr and readr</span></span>
+<span id="cb805-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb805-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span>
+<span id="cb805-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb805-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;readr&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 </div>
-<div id="loading" class="section level2" number="13.3">
-<h2><span class="header-section-number">13.3</span> Loading</h2>
+<div id="loading" class="section level2" number="14.3">
+<h2><span class="header-section-number">14.3</span> Loading</h2>
 <p>You can either install and load <strong>tidyverse</strong>, or you can load specific
 packages within it, such as <strong>dplyr</strong>. Though it is not required for
 this demonstration, we will use <code>::</code> to call <strong>dplyr</strong> before using one
@@ -532,19 +554,19 @@ multiple packages during an analysis, which will be the case most of
 time.</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb780-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No loading required.</span></span></code></pre></div>
+<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb806-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb806-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No loading required.</span></span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb781"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb781-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb781-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You may load the whole tidyverse</span></span>
-<span id="cb781-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb781-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb781-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb781-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb781-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb781-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively load packages from the tidyverse</span></span>
-<span id="cb781-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb781-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb781-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb781-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code></pre></div>
+<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb807-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb807-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You may load the whole tidyverse</span></span>
+<span id="cb807-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb807-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb807-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb807-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb807-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb807-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively load packages from the tidyverse</span></span>
+<span id="cb807-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb807-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb807-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb807-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span></code></pre></div>
 </div>
 </div>
 <div class="infobox">
@@ -558,26 +580,26 @@ routines to see the advantages of using <code>%&gt;%</code>to write programming
 instructions:</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb782-1" aria-hidden="true" tabindex="-1"></a><span class="fu">go_work</span>(<span class="fu">get_ready</span>(<span class="fu">eat</span>(<span class="fu">wake_up</span>(you))))</span></code></pre></div>
+<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb808-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb808-1" aria-hidden="true" tabindex="-1"></a><span class="fu">go_work</span>(<span class="fu">get_ready</span>(<span class="fu">eat</span>(<span class="fu">wake_up</span>(you))))</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb783"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb783-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb783-1" aria-hidden="true" tabindex="-1"></a>you <span class="sc">%&gt;%</span> <span class="co"># &#39;and then...&#39;</span></span>
-<span id="cb783-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb783-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wake_up</span>() <span class="sc">%&gt;%</span> <span class="co"># &#39;and then...&#39;</span></span>
-<span id="cb783-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb783-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eat</span>() <span class="sc">%&gt;%</span> <span class="co"># &#39;and then...&#39;</span></span>
-<span id="cb783-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb783-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_ready</span>() <span class="sc">%&gt;%</span> <span class="co"># &#39;and then...&#39;</span></span>
-<span id="cb783-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb783-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">go_work</span>() <span class="co"># &#39;and then...&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb809-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb809-1" aria-hidden="true" tabindex="-1"></a>you <span class="sc">%&gt;%</span> <span class="co"># &#39;and then...&#39;</span></span>
+<span id="cb809-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb809-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wake_up</span>() <span class="sc">%&gt;%</span> <span class="co"># &#39;and then...&#39;</span></span>
+<span id="cb809-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb809-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">eat</span>() <span class="sc">%&gt;%</span> <span class="co"># &#39;and then...&#39;</span></span>
+<span id="cb809-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb809-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_ready</span>() <span class="sc">%&gt;%</span> <span class="co"># &#39;and then...&#39;</span></span>
+<span id="cb809-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb809-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">go_work</span>() <span class="co"># &#39;and then...&#39;</span></span></code></pre></div>
 </div>
 </div>
 <p>Which “sentence” makes more sense in understanding the sequence of
 events? Some prefer the syntax on the right as it improves readability.</p>
 </div>
 </div>
-<div id="import-and-view-data" class="section level2" number="13.4">
-<h2><span class="header-section-number">13.4</span> Import and View Data</h2>
+<div id="import-and-view-data" class="section level2" number="14.4">
+<h2><span class="header-section-number">14.4</span> Import and View Data</h2>
 <p>Go ahead and load the data set for this walk through, which is a Twitter
 data set pulled from Twitter’s open API that focuses on the Popular
 Mobilization Forces (PMF) in Iraq.</p>
@@ -585,24 +607,24 @@ Mobilization Forces (PMF) in Iraq.</p>
 <div class="lcolumn-50">
 <p>Some people feel more comfortable using base R functions to import data
 with <code>read.csv()</code>.</p>
-<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb784-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb784-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/twitter_pmf.csv&quot;</span>,</span>
-<span id="cb784-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb784-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">header =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb810-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb810-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/twitter_pmf.csv&quot;</span>,</span>
+<span id="cb810-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb810-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">header =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
 <p>Here are some simple functions to view your data.</p>
-<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb785-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb785-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the dimensions of a data frame.</span></span>
-<span id="cb785-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb785-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df)  </span>
-<span id="cb785-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb785-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb785-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb785-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print column names in your data set.</span></span>
-<span id="cb785-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb785-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df)</span>
-<span id="cb785-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb785-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb785-7"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb785-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a few rows of your data set.</span></span>
-<span id="cb785-8"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb785-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df) <span class="co"># Top rows</span></span>
-<span id="cb785-9"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb785-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(df) <span class="co"># Bottom rows</span></span>
-<span id="cb785-10"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb785-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb785-11"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb785-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Get an object summary</span></span>
-<span id="cb785-12"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb785-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
-<span id="cb785-13"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb785-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb785-14"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb785-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Observe your data set in a separate window.</span></span>
-<span id="cb785-15"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb785-15" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(df) </span></code></pre></div>
+<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb811-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the dimensions of a data frame.</span></span>
+<span id="cb811-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df)  </span>
+<span id="cb811-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb811-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print column names in your data set.</span></span>
+<span id="cb811-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df)</span>
+<span id="cb811-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb811-7"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Print a few rows of your data set.</span></span>
+<span id="cb811-8"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df) <span class="co"># Top rows</span></span>
+<span id="cb811-9"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(df) <span class="co"># Bottom rows</span></span>
+<span id="cb811-10"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb811-11"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Get an object summary</span></span>
+<span id="cb811-12"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span>
+<span id="cb811-13"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb811-14"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Observe your data set in a separate window.</span></span>
+<span id="cb811-15"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-15" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(df) </span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
@@ -611,24 +633,24 @@ a column separator for tex --></p>
 <div class="rcolumn-50">
 <p>To import csv files using the tidy framework, use the <strong>readr</strong>
 package’s <code>read_csv()</code> function.</p>
-<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb786-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb786-1" aria-hidden="true" tabindex="-1"></a>tb <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;data/twitter_pmf.csv&quot;</span>,</span>
-<span id="cb786-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb786-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">col_names =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb812-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb812-1" aria-hidden="true" tabindex="-1"></a>tb <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;data/twitter_pmf.csv&quot;</span>,</span>
+<span id="cb812-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb812-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">col_names =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
 <p>Inspect you data with <code>glimpse()</code> and others.</p>
-<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb787-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb787-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View the data in the console.</span></span>
-<span id="cb787-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb787-2" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span> </span>
-<span id="cb787-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb787-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">glimpse</span>()</span>
-<span id="cb787-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb787-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb787-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb787-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Describe dimensions.</span></span>
-<span id="cb787-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb787-6" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span> </span>
-<span id="cb787-7"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb787-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">dim_desc</span>()</span>
-<span id="cb787-8"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb787-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb787-9"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb787-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Use base R descriptive functions.</span></span>
-<span id="cb787-10"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb787-10" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb787-11"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb787-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span>
-<span id="cb787-12"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb787-12" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span> </span>
-<span id="cb787-13"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb787-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>()</span>
-<span id="cb787-14"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb787-14" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span> </span>
-<span id="cb787-15"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb787-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb813"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb813-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View the data in the console.</span></span>
+<span id="cb813-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-2" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span> </span>
+<span id="cb813-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">glimpse</span>()</span>
+<span id="cb813-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb813-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Describe dimensions.</span></span>
+<span id="cb813-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-6" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span> </span>
+<span id="cb813-7"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">dim_desc</span>()</span>
+<span id="cb813-8"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb813-9"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Use base R descriptive functions.</span></span>
+<span id="cb813-10"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-10" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb813-11"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span>
+<span id="cb813-12"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-12" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span> </span>
+<span id="cb813-13"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>()</span>
+<span id="cb813-14"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-14" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span> </span>
+<span id="cb813-15"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
 </div>
 </div>
 <div class="infobox">
@@ -639,35 +661,35 @@ you may want to assign the output to new objects and inspect it in the
 viewer like so:</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb788-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb788-1" aria-hidden="true" tabindex="-1"></a>my_df_head <span class="ot">&lt;-</span> <span class="fu">head</span>(df)</span>
-<span id="cb788-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb788-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb788-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb788-3" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(my_df_head)</span></code></pre></div>
+<div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb814-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb814-1" aria-hidden="true" tabindex="-1"></a>my_df_head <span class="ot">&lt;-</span> <span class="fu">head</span>(df)</span>
+<span id="cb814-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb814-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb814-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb814-3" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(my_df_head)</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb789-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb789-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb789-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb789-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb789-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb789-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">View</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb815"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb815-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb815-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb815-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb815-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb815-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb815-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">View</span>()</span></code></pre></div>
 </div>
 </div>
 </div>
 </div>
-<div id="extracting-variablescolumns" class="section level2" number="13.5">
-<h2><span class="header-section-number">13.5</span> Extracting Variables/Columns</h2>
+<div id="extracting-variablescolumns" class="section level2" number="14.5">
+<h2><span class="header-section-number">14.5</span> Extracting Variables/Columns</h2>
 <div class="row">
 <div class="lcolumn-50">
 <p>Extracting variables in base R uses the <code>[</code> accessor in combination with
 <code>c()</code> to extract the desired columns.</p>
-<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb790-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb790-1" aria-hidden="true" tabindex="-1"></a>df[, <span class="fu">c</span>(<span class="st">&quot;screen_name&quot;</span>,</span>
-<span id="cb790-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb790-2" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;retweet_count&quot;</span>,</span>
-<span id="cb790-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb790-3" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;location&quot;</span>, <span class="st">&quot;followers_count&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb816"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb816-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb816-1" aria-hidden="true" tabindex="-1"></a>df[, <span class="fu">c</span>(<span class="st">&quot;screen_name&quot;</span>,</span>
+<span id="cb816-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb816-2" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;retweet_count&quot;</span>,</span>
+<span id="cb816-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb816-3" aria-hidden="true" tabindex="-1"></a>       <span class="st">&quot;location&quot;</span>, <span class="st">&quot;followers_count&quot;</span>)]</span></code></pre></div>
 <p>You can extract by column index in base R. The numbers indicate the
 column numbers (e.g., <code>screen_name</code> is column 4 in our data).</p>
-<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb791-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb791-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine indexes with c()</span></span>
-<span id="cb791-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb791-2" aria-hidden="true" tabindex="-1"></a>df[, <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">74</span>, <span class="dv">78</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb817-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb817-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine indexes with c()</span></span>
+<span id="cb817-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb817-2" aria-hidden="true" tabindex="-1"></a>df[, <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">74</span>, <span class="dv">78</span>)]</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
@@ -676,22 +698,22 @@ a column separator for tex --></p>
 <div class="rcolumn-50">
 <p>Use <strong>dplyr’s</strong> <code>select()</code> function to extract a handful of columns of
 interest. Note that variable names are unquoted and separated by commas.</p>
-<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb792-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb792-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb792-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb792-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(screen_name,  retweet_count, </span>
-<span id="cb792-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb792-3" aria-hidden="true" tabindex="-1"></a>         location, followers_count)</span></code></pre></div>
+<div class="sourceCode" id="cb818"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb818-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb818-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb818-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb818-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(screen_name,  retweet_count, </span>
+<span id="cb818-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb818-3" aria-hidden="true" tabindex="-1"></a>         location, followers_count)</span></code></pre></div>
 <p>You can use a column index as well. Note you can just declare the column
 indexes inside the <code>select()</code> function.</p>
-<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb793-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb793-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb793-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb793-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">74</span>, <span class="dv">78</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb819"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb819-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb819-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb819-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb819-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">74</span>, <span class="dv">78</span>)</span></code></pre></div>
 </div>
 </div>
 <p>You could take a look at the top 5 rows of the selected variables by
 combining functions.</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb794-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb794-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine indexes with c()</span></span>
-<span id="cb794-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb794-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df[, <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">78</span>)],</span>
-<span id="cb794-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb794-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb820-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb820-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine indexes with c()</span></span>
+<span id="cb820-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb820-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df[, <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">78</span>)],</span>
+<span id="cb820-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb820-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>   screen_name retweet_count followers_count
 1 warmediateam             1            3073
 2 warmediateam             2            3073
@@ -704,9 +726,9 @@ combining functions.</p>
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb796-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb796-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb796-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb796-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">78</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb796-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb796-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb822"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb822-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb822-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb822-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb822-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">78</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb822-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb822-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code># A tibble: 5 x 3
   screen_name  retweet_count followers_count
   &lt;chr&gt;                &lt;dbl&gt;           &lt;dbl&gt;
@@ -718,17 +740,17 @@ a column separator for tex --></p>
 </div>
 </div>
 </div>
-<div id="creating-filtersextracting-rows" class="section level2" number="13.6">
-<h2><span class="header-section-number">13.6</span> Creating Filters/Extracting Rows</h2>
+<div id="creating-filtersextracting-rows" class="section level2" number="14.6">
+<h2><span class="header-section-number">14.6</span> Creating Filters/Extracting Rows</h2>
 <p>Here we will create a filter for all tweets that have been retweeted 10
 or more times.</p>
 <div class="row">
 <div class="lcolumn-50">
 <p>Filtering in base R requires the <code>[</code> accessor.</p>
-<div class="sourceCode" id="cb798"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb798-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb798-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The $ accessor to gets the vector.</span></span>
-<span id="cb798-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb798-2" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span>, ]</span></code></pre></div>
+<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb824-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb824-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The $ accessor to gets the vector.</span></span>
+<span id="cb824-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb824-2" aria-hidden="true" tabindex="-1"></a>df[df<span class="sc">$</span>retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span>, ]</span></code></pre></div>
 <p>Additionally, the <code>subset()</code> function produces the same results.</p>
-<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb799-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb799-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(df, retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb825"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb825-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb825-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(df, retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span>)</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
@@ -736,8 +758,8 @@ a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
 <p>Create filters using the <code>filter()</code> function.</p>
-<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb800-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb800-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb800-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb800-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb826-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb826-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb826-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span>)</span></code></pre></div>
 </div>
 </div>
 <p>You may use multiple filtering criteria by chaining the arguments with
@@ -745,49 +767,49 @@ the <code>|</code> (or) and <code>&amp;</code> (and) operators. For instance, ad
 to return only tweets from the account “warmediateam.”</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb801-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb801-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(df, </span>
-<span id="cb801-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb801-2" aria-hidden="true" tabindex="-1"></a>       retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span></span>
-<span id="cb801-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb801-3" aria-hidden="true" tabindex="-1"></a>       screen_name <span class="sc">==</span> <span class="st">&quot;warmediateam&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb827"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb827-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb827-1" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(df, </span>
+<span id="cb827-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb827-2" aria-hidden="true" tabindex="-1"></a>       retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span></span>
+<span id="cb827-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb827-3" aria-hidden="true" tabindex="-1"></a>       screen_name <span class="sc">==</span> <span class="st">&quot;warmediateam&quot;</span>)</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb802-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb802-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb802-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb802-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span></span>
-<span id="cb802-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb802-3" aria-hidden="true" tabindex="-1"></a>           screen_name <span class="sc">==</span> <span class="st">&quot;warmediateam&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb828"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb828-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb828-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb828-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb828-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span></span>
+<span id="cb828-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb828-3" aria-hidden="true" tabindex="-1"></a>           screen_name <span class="sc">==</span> <span class="st">&quot;warmediateam&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <p>For a much clearer print out, combine the filtering techniques with the
 variable selection methods:</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb803-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pass limited data frame to subset().</span></span>
-<span id="cb803-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb803-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(df[, <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">74</span>, <span class="dv">78</span>)], </span>
-<span id="cb803-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb803-3" aria-hidden="true" tabindex="-1"></a>       retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span></span>
-<span id="cb803-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb803-4" aria-hidden="true" tabindex="-1"></a>       screen_name <span class="sc">==</span> <span class="st">&quot;warmediateam&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb829"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb829-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb829-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pass limited data frame to subset().</span></span>
+<span id="cb829-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb829-2" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(df[, <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">74</span>, <span class="dv">78</span>)], </span>
+<span id="cb829-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb829-3" aria-hidden="true" tabindex="-1"></a>       retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span></span>
+<span id="cb829-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb829-4" aria-hidden="true" tabindex="-1"></a>       screen_name <span class="sc">==</span> <span class="st">&quot;warmediateam&quot;</span>)</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb804-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb804-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb804-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb804-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span></span>
-<span id="cb804-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb804-3" aria-hidden="true" tabindex="-1"></a>           screen_name <span class="sc">==</span> <span class="st">&quot;warmediateam&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb804-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb804-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">74</span>, <span class="dv">78</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb830"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb830-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb830-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb830-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb830-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span></span>
+<span id="cb830-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb830-3" aria-hidden="true" tabindex="-1"></a>           screen_name <span class="sc">==</span> <span class="st">&quot;warmediateam&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb830-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb830-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">74</span>, <span class="dv">78</span>)</span></code></pre></div>
 </div>
 </div>
 <p>You could take a look at the top rows of the filtered output combining
 functions.</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb805-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb805-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
-<span id="cb805-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb805-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(df[, <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">78</span>)], </span>
-<span id="cb805-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb805-3" aria-hidden="true" tabindex="-1"></a>         retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span></span>
-<span id="cb805-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb805-4" aria-hidden="true" tabindex="-1"></a>        screen_name <span class="sc">==</span> <span class="st">&quot;warmediateam&quot;</span>),</span>
-<span id="cb805-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb805-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb831-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb831-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb831-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb831-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(df[, <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">78</span>)], </span>
+<span id="cb831-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb831-3" aria-hidden="true" tabindex="-1"></a>         retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span></span>
+<span id="cb831-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb831-4" aria-hidden="true" tabindex="-1"></a>        screen_name <span class="sc">==</span> <span class="st">&quot;warmediateam&quot;</span>),</span>
+<span id="cb831-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb831-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>    screen_name retweet_count followers_count
 17 warmediateam            22            3073
 31 warmediateam            13            3073
@@ -800,11 +822,11 @@ functions.</p>
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb807-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb807-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb807-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb807-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span></span>
-<span id="cb807-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb807-3" aria-hidden="true" tabindex="-1"></a>           screen_name <span class="sc">==</span> <span class="st">&quot;warmediateam&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb807-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb807-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">78</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb807-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb807-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb833"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb833-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb833-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb833-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb833-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(retweet_count <span class="sc">&gt;=</span> <span class="dv">10</span> <span class="sc">&amp;</span></span>
+<span id="cb833-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb833-3" aria-hidden="true" tabindex="-1"></a>           screen_name <span class="sc">==</span> <span class="st">&quot;warmediateam&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb833-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb833-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">4</span>, <span class="dv">14</span>, <span class="dv">78</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb833-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb833-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code># A tibble: 5 x 3
   screen_name  retweet_count followers_count
   &lt;chr&gt;                &lt;dbl&gt;           &lt;dbl&gt;
@@ -816,15 +838,15 @@ a column separator for tex --></p>
 </div>
 </div>
 </div>
-<div id="arrange-rows" class="section level2" number="13.7">
-<h2><span class="header-section-number">13.7</span> Arrange Rows</h2>
+<div id="arrange-rows" class="section level2" number="14.7">
+<h2><span class="header-section-number">14.7</span> Arrange Rows</h2>
 <p>Here we will arrange that data frame alphabetically by <code>screen_name</code>.</p>
 <div class="row">
 <div class="lcolumn-50">
 <p>Arranging in base R requires the <code>[</code> accessor and the <code>order()</code>
 function.</p>
-<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb809-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb809-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use of the $ accessor to order a variable.</span></span>
-<span id="cb809-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb809-2" aria-hidden="true" tabindex="-1"></a>df[<span class="fu">order</span>(df<span class="sc">$</span>screen_name), ]</span></code></pre></div>
+<div class="sourceCode" id="cb835"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb835-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb835-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use of the $ accessor to order a variable.</span></span>
+<span id="cb835-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb835-2" aria-hidden="true" tabindex="-1"></a>df[<span class="fu">order</span>(df<span class="sc">$</span>screen_name), ]</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
@@ -832,17 +854,17 @@ a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
 <p>In <strong>dplyr</strong> use the <code>arrange()</code> function to sort in ascending order.</p>
-<div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb810-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb810-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb810-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb810-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(screen_name)</span></code></pre></div>
+<div class="sourceCode" id="cb836"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb836-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb836-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb836-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb836-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(screen_name)</span></code></pre></div>
 </div>
 </div>
 <p>You can clean up the printout by combining functions to select relevant variables and examine the top 5 rows.</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb811-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
-<span id="cb811-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-2" aria-hidden="true" tabindex="-1"></a>  df[<span class="fu">order</span>(df<span class="sc">$</span>screen_name), </span>
-<span id="cb811-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">c</span>(<span class="st">&quot;screen_name&quot;</span>, <span class="st">&quot;retweet_count&quot;</span>)],</span>
-<span id="cb811-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb811-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb837"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb837-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb837-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb837-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb837-2" aria-hidden="true" tabindex="-1"></a>  df[<span class="fu">order</span>(df<span class="sc">$</span>screen_name), </span>
+<span id="cb837-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb837-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">c</span>(<span class="st">&quot;screen_name&quot;</span>, <span class="st">&quot;retweet_count&quot;</span>)],</span>
+<span id="cb837-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb837-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>         screen_name retweet_count
 3729 5qxsN9lLdn1Nanl             0
 3730 5qxsN9lLdn1Nanl            36
@@ -855,10 +877,10 @@ a column separator for tex --></p>
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb813"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb813-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb813-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(screen_name) <span class="sc">%&gt;%</span></span>
-<span id="cb813-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(screen_name, retweet_count) <span class="sc">%&gt;%</span></span>
-<span id="cb813-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb813-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb839"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb839-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb839-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb839-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb839-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(screen_name) <span class="sc">%&gt;%</span></span>
+<span id="cb839-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb839-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(screen_name, retweet_count) <span class="sc">%&gt;%</span></span>
+<span id="cb839-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb839-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code># A tibble: 5 x 2
   screen_name     retweet_count
   &lt;chr&gt;                   &lt;dbl&gt;
@@ -873,8 +895,8 @@ a column separator for tex --></p>
 <div class="row">
 <div class="lcolumn-50">
 <p>Set the <code>decreasing</code> argument to <code>TRUE</code>.</p>
-<div class="sourceCode" id="cb815"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb815-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb815-1" aria-hidden="true" tabindex="-1"></a>df[<span class="fu">order</span>(df<span class="sc">$</span>screen_name,</span>
-<span id="cb815-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb815-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ]</span></code></pre></div>
+<div class="sourceCode" id="cb841"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb841-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb841-1" aria-hidden="true" tabindex="-1"></a>df[<span class="fu">order</span>(df<span class="sc">$</span>screen_name,</span>
+<span id="cb841-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb841-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ]</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
@@ -882,18 +904,18 @@ a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
 <p>Include the <code>desc()</code> helper function.</p>
-<div class="sourceCode" id="cb816"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb816-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb816-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb816-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb816-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(screen_name))</span></code></pre></div>
+<div class="sourceCode" id="cb842"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb842-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb842-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb842-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb842-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(screen_name))</span></code></pre></div>
 </div>
 </div>
 <p>Once again, for a much clearer print out, combine the arranging techniques with the
 variable selection methods.</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb817-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb817-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
-<span id="cb817-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb817-2" aria-hidden="true" tabindex="-1"></a>  df[<span class="fu">order</span>(df<span class="sc">$</span>screen_name, <span class="at">decreasing =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb817-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb817-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">14</span>)],</span>
-<span id="cb817-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb817-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb843"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb843-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb843-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb843-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb843-2" aria-hidden="true" tabindex="-1"></a>  df[<span class="fu">order</span>(df<span class="sc">$</span>screen_name, <span class="at">decreasing =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb843-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb843-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">14</span>)],</span>
+<span id="cb843-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb843-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>       screen_name retweet_count
 4036 zaidaliallawi             0
 4037 zaidaliallawi             0
@@ -906,10 +928,10 @@ variable selection methods.</p>
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb819"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb819-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb819-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb819-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb819-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(screen_name)) <span class="sc">%&gt;%</span></span>
-<span id="cb819-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb819-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">4</span>, <span class="dv">14</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb819-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb819-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb845"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb845-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb845-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb845-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb845-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(screen_name)) <span class="sc">%&gt;%</span></span>
+<span id="cb845-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb845-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="dv">4</span>, <span class="dv">14</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb845-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb845-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code># A tibble: 5 x 2
   screen_name   retweet_count
   &lt;chr&gt;                 &lt;dbl&gt;
@@ -921,17 +943,17 @@ a column separator for tex --></p>
 </div>
 </div>
 </div>
-<div id="making-a-new-columnvariable" class="section level2" number="13.8">
-<h2><span class="header-section-number">13.8</span> Making a New Column/Variable</h2>
+<div id="making-a-new-columnvariable" class="section level2" number="14.8">
+<h2><span class="header-section-number">14.8</span> Making a New Column/Variable</h2>
 <p>The new variable we will create here, <code>retweet_success</code>, is for
 demonstration purposes. The variable will be generated by dividing the
 <code>retweet_count</code> by the <code>followers_count</code>.</p>
 <div class="row">
 <div class="lcolumn-50">
 <p>In base R, creating a new column requires using the <code>$</code> accessor.</p>
-<div class="sourceCode" id="cb821"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb821-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb821-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign the new variable into a data frame</span></span>
-<span id="cb821-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb821-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>retweet_success <span class="ot">&lt;-</span> df<span class="sc">$</span>retweet_count<span class="sc">/</span></span>
-<span id="cb821-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb821-3" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>followers_count</span></code></pre></div>
+<div class="sourceCode" id="cb847"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb847-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb847-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign the new variable into a data frame</span></span>
+<span id="cb847-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb847-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>retweet_success <span class="ot">&lt;-</span> df<span class="sc">$</span>retweet_count<span class="sc">/</span></span>
+<span id="cb847-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb847-3" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>followers_count</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
@@ -939,22 +961,22 @@ a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
 <p>To create a column in <strong>dplyr</strong> use the <code>mutate()</code> function.</p>
-<div class="sourceCode" id="cb822"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb822-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb822-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb822-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb822-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">retweet_success =</span> retweet_count<span class="sc">/</span></span>
-<span id="cb822-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb822-3" aria-hidden="true" tabindex="-1"></a>                  followers_count)</span></code></pre></div>
+<div class="sourceCode" id="cb848"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb848-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb848-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb848-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb848-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">retweet_success =</span> retweet_count<span class="sc">/</span></span>
+<span id="cb848-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb848-3" aria-hidden="true" tabindex="-1"></a>                  followers_count)</span></code></pre></div>
 </div>
 </div>
 <p>Once again, you may want to combine functions to get a clearer print out. Here, we will combine how to create and arrange a new variable, and select a handful of columns.</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb823-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb823-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new variable</span></span>
-<span id="cb823-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb823-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>retweet_success <span class="ot">&lt;-</span> df<span class="sc">$</span>retweet_count<span class="sc">/</span></span>
-<span id="cb823-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb823-3" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>followers_count</span>
-<span id="cb823-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb823-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rearrange, select, and return top 5</span></span>
-<span id="cb823-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb823-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
-<span id="cb823-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb823-6" aria-hidden="true" tabindex="-1"></a>  df[<span class="fu">order</span>(df<span class="sc">$</span>retweet_success, <span class="at">decreasing =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb823-7"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb823-7" aria-hidden="true" tabindex="-1"></a>     <span class="fu">c</span>(<span class="st">&quot;screen_name&quot;</span>, <span class="st">&quot;retweet_success&quot;</span>)],</span>
-<span id="cb823-8"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb823-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb849"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb849-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb849-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create new variable</span></span>
+<span id="cb849-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb849-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>retweet_success <span class="ot">&lt;-</span> df<span class="sc">$</span>retweet_count<span class="sc">/</span></span>
+<span id="cb849-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb849-3" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>followers_count</span>
+<span id="cb849-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb849-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rearrange, select, and return top 5</span></span>
+<span id="cb849-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb849-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(</span>
+<span id="cb849-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb849-6" aria-hidden="true" tabindex="-1"></a>  df[<span class="fu">order</span>(df<span class="sc">$</span>retweet_success, <span class="at">decreasing =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb849-7"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb849-7" aria-hidden="true" tabindex="-1"></a>     <span class="fu">c</span>(<span class="st">&quot;screen_name&quot;</span>, <span class="st">&quot;retweet_success&quot;</span>)],</span>
+<span id="cb849-8"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb849-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>         screen_name retweet_success
 3930 MzcCY48mFeyS1ly             Inf
 2241 San_Patricio_BN        3342.643
@@ -967,14 +989,14 @@ a column separator for tex --></p>
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb825"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb825-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb825-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb825-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb825-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create new variable</span></span>
-<span id="cb825-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb825-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">retweet_success =</span> retweet_count<span class="sc">/</span></span>
-<span id="cb825-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb825-4" aria-hidden="true" tabindex="-1"></a>                  followers_count) <span class="sc">%&gt;%</span></span>
-<span id="cb825-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb825-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Rearrange, select, and return top 5</span></span>
-<span id="cb825-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb825-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(retweet_success)) <span class="sc">%&gt;%</span></span>
-<span id="cb825-7"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb825-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(screen_name, retweet_success) <span class="sc">%&gt;%</span></span>
-<span id="cb825-8"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb825-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb851"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb851-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb851-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb851-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb851-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create new variable</span></span>
+<span id="cb851-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb851-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">retweet_success =</span> retweet_count<span class="sc">/</span></span>
+<span id="cb851-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb851-4" aria-hidden="true" tabindex="-1"></a>                  followers_count) <span class="sc">%&gt;%</span></span>
+<span id="cb851-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb851-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Rearrange, select, and return top 5</span></span>
+<span id="cb851-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb851-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(retweet_success)) <span class="sc">%&gt;%</span></span>
+<span id="cb851-7"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb851-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(screen_name, retweet_success) <span class="sc">%&gt;%</span></span>
+<span id="cb851-8"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb851-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code># A tibble: 5 x 2
   screen_name     retweet_success
   &lt;chr&gt;                     &lt;dbl&gt;
@@ -986,32 +1008,32 @@ a column separator for tex --></p>
 </div>
 </div>
 </div>
-<div id="rename-variables" class="section level2" number="13.9">
-<h2><span class="header-section-number">13.9</span> Rename Variables</h2>
+<div id="rename-variables" class="section level2" number="14.9">
+<h2><span class="header-section-number">14.9</span> Rename Variables</h2>
 <p>Let’s now explore how to rename variables. Begin by taking a look at the
 column names, a straightforward way of doing so is using the base R’s
 <code>colnames()</code> function.</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb827"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb827-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb827-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb853"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb853-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb853-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df)</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb828"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb828-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb828-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span> <span class="fu">colnames</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb854"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb854-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb854-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span> <span class="fu">colnames</span>()</span></code></pre></div>
 </div>
 </div>
 <p>Now we will select several columns, and then rename them.</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb829"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb829-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb829-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)[<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">&quot;screen_name&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Screen_Name&quot;</span></span>
-<span id="cb829-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb829-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb829-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb829-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)[<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">&quot;retweet_count&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;N_Retweets&quot;</span></span>
-<span id="cb829-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb829-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb829-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb829-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df[, <span class="fu">c</span>(<span class="st">&quot;Screen_Name&quot;</span>,<span class="st">&quot;N_Retweets&quot;</span>)], </span>
-<span id="cb829-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb829-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb855"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb855-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb855-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)[<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">&quot;screen_name&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Screen_Name&quot;</span></span>
+<span id="cb855-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb855-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb855-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb855-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)[<span class="fu">names</span>(df) <span class="sc">==</span> <span class="st">&quot;retweet_count&quot;</span>] <span class="ot">&lt;-</span> <span class="st">&quot;N_Retweets&quot;</span></span>
+<span id="cb855-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb855-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb855-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb855-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df[, <span class="fu">c</span>(<span class="st">&quot;Screen_Name&quot;</span>,<span class="st">&quot;N_Retweets&quot;</span>)], </span>
+<span id="cb855-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb855-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>   Screen_Name N_Retweets
 1 warmediateam          1
 2 warmediateam          2
@@ -1024,12 +1046,12 @@ a column separator for tex --></p>
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb831-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb831-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span> </span>
-<span id="cb831-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb831-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(screen_name, </span>
-<span id="cb831-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb831-3" aria-hidden="true" tabindex="-1"></a>                retweet_count) <span class="sc">%&gt;%</span></span>
-<span id="cb831-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb831-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Screen_Name =</span> screen_name,</span>
-<span id="cb831-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb831-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">N_Retweets =</span> retweet_count) <span class="sc">%&gt;%</span></span>
-<span id="cb831-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb831-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb857"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb857-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb857-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span> </span>
+<span id="cb857-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb857-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(screen_name, </span>
+<span id="cb857-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb857-3" aria-hidden="true" tabindex="-1"></a>                retweet_count) <span class="sc">%&gt;%</span></span>
+<span id="cb857-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb857-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Screen_Name =</span> screen_name,</span>
+<span id="cb857-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb857-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">N_Retweets =</span> retweet_count) <span class="sc">%&gt;%</span></span>
+<span id="cb857-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb857-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code># A tibble: 5 x 2
   Screen_Name  N_Retweets
   &lt;chr&gt;             &lt;dbl&gt;
@@ -1041,20 +1063,20 @@ a column separator for tex --></p>
 </div>
 </div>
 </div>
-<div id="summarizing" class="section level2" number="13.10">
-<h2><span class="header-section-number">13.10</span> Summarizing</h2>
+<div id="summarizing" class="section level2" number="14.10">
+<h2><span class="header-section-number">14.10</span> Summarizing</h2>
 <p>Summary statistics are really useful in describing your data. This can
 be done both in base R and in <strong>dplyr</strong>. Here we will explore how to
 execute simple summaries first; then, we will move on to calculate group
 summaries.</p>
-<div id="simple-summary" class="section level3" number="13.10.1">
-<h3><span class="header-section-number">13.10.1</span> Simple Summary</h3>
+<div id="simple-summary" class="section level3" number="14.10.1">
+<h3><span class="header-section-number">14.10.1</span> Simple Summary</h3>
 <div class="row">
 <div class="lcolumn-50">
 <p>To summarize in base R, you will need generic functions to calculate
 these statistics. For example, <code>mean()</code>, <code>median()</code>, <code>sum()</code>, etc.</p>
-<div class="sourceCode" id="cb833"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb833-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb833-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame with the summary.</span></span>
-<span id="cb833-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb833-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">rt_avg =</span> <span class="fu">mean</span>(df<span class="sc">$</span>retweet_count))</span></code></pre></div>
+<div class="sourceCode" id="cb859"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb859-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb859-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame with the summary.</span></span>
+<span id="cb859-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb859-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">rt_avg =</span> <span class="fu">mean</span>(df<span class="sc">$</span>retweet_count))</span></code></pre></div>
 <pre><code>    rt_avg
 1 245.2969</code></pre>
 </div>
@@ -1065,8 +1087,8 @@ a column separator for tex --></p>
 <div class="rcolumn-50">
 <p>To summarize data in <strong>dplyr</strong>, use the <code>summarize()</code> function to
 compute a requested summary (e.g., <code>mean()</code>, <code>median()</code>, <code>n()</code>, etc.).</p>
-<div class="sourceCode" id="cb835"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb835-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb835-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb835-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb835-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">rt_avg =</span> <span class="fu">mean</span>(retweet_count))</span></code></pre></div>
+<div class="sourceCode" id="cb861"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb861-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb861-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb861-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb861-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">rt_avg =</span> <span class="fu">mean</span>(retweet_count))</span></code></pre></div>
 <pre><code># A tibble: 1 x 1
   rt_avg
    &lt;dbl&gt;
@@ -1074,8 +1096,8 @@ compute a requested summary (e.g., <code>mean()</code>, <code>median()</code>, <
 </div>
 </div>
 </div>
-<div id="group-summary" class="section level3" number="13.10.2">
-<h3><span class="header-section-number">13.10.2</span> Group Summary</h3>
+<div id="group-summary" class="section level3" number="14.10.2">
+<h3><span class="header-section-number">14.10.2</span> Group Summary</h3>
 <p>Summarizing can be expanded by computing the statistics by groups. For
 instance, here we will get the retweet count of each individual; thus,
 the group would be each <code>screen_name</code> .</p>
@@ -1083,9 +1105,9 @@ the group would be each <code>screen_name</code> .</p>
 <div class="lcolumn-50">
 <p>Use the <code>aggregate()</code> function to slip the data into subsets and then
 proceed to compute summary statistics for each.</p>
-<div class="sourceCode" id="cb837"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb837-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb837-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="at">x =</span> df<span class="sc">$</span>retweet_count,</span>
-<span id="cb837-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb837-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">by =</span> <span class="fu">list</span>(<span class="at">screen_name =</span> df<span class="sc">$</span>screen_name),</span>
-<span id="cb837-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb837-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">FUN =</span> mean)</span></code></pre></div>
+<div class="sourceCode" id="cb863"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb863-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb863-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="at">x =</span> df<span class="sc">$</span>retweet_count,</span>
+<span id="cb863-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb863-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">by =</span> <span class="fu">list</span>(<span class="at">screen_name =</span> df<span class="sc">$</span>screen_name),</span>
+<span id="cb863-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb863-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">FUN =</span> mean)</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
@@ -1094,20 +1116,20 @@ a column separator for tex --></p>
 <div class="rcolumn-50">
 <p>Group a data frame with <code>group_by()</code> and perform group operations by
 adding the <code>summarize()</code> function.</p>
-<div class="sourceCode" id="cb838"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb838-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb838-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb838-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb838-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(screen_name) <span class="sc">%&gt;%</span></span>
-<span id="cb838-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb838-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">rt_avg =</span> <span class="fu">mean</span>(retweet_count))</span></code></pre></div>
+<div class="sourceCode" id="cb864"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb864-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb864-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb864-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb864-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(screen_name) <span class="sc">%&gt;%</span></span>
+<span id="cb864-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb864-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">rt_avg =</span> <span class="fu">mean</span>(retweet_count))</span></code></pre></div>
 </div>
 </div>
 <p>Once again, you may want to combine some functions to make your output
 more legible.</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb839"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb839-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb839-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(<span class="at">x =</span> df<span class="sc">$</span>retweet_count,</span>
-<span id="cb839-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb839-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">by =</span> <span class="fu">list</span>(<span class="at">screen_name=</span>df<span class="sc">$</span>screen_name),</span>
-<span id="cb839-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb839-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">FUN =</span> mean)</span>
-<span id="cb839-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb839-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(out[<span class="fu">order</span>(out<span class="sc">$</span>x, <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ], </span>
-<span id="cb839-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb839-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb865"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb865-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb865-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(<span class="at">x =</span> df<span class="sc">$</span>retweet_count,</span>
+<span id="cb865-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb865-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">by =</span> <span class="fu">list</span>(<span class="at">screen_name=</span>df<span class="sc">$</span>screen_name),</span>
+<span id="cb865-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb865-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">FUN =</span> mean)</span>
+<span id="cb865-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb865-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(out[<span class="fu">order</span>(out<span class="sc">$</span>x, <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ], </span>
+<span id="cb865-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb865-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>        screen_name        x
 102      TheEisaAli 4909.646
 43         EmmaDaly 4481.640
@@ -1120,11 +1142,11 @@ more legible.</p>
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb841"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb841-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb841-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb841-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb841-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(screen_name) <span class="sc">%&gt;%</span></span>
-<span id="cb841-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb841-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">rt_avg =</span> <span class="fu">mean</span>(retweet_count)) <span class="sc">%&gt;%</span></span>
-<span id="cb841-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb841-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(rt_avg)) <span class="sc">%&gt;%</span></span>
-<span id="cb841-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb841-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb867"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb867-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb867-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb867-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb867-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(screen_name) <span class="sc">%&gt;%</span></span>
+<span id="cb867-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb867-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">rt_avg =</span> <span class="fu">mean</span>(retweet_count)) <span class="sc">%&gt;%</span></span>
+<span id="cb867-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb867-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(rt_avg)) <span class="sc">%&gt;%</span></span>
+<span id="cb867-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb867-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code># A tibble: 5 x 2
   screen_name     rt_avg
   &lt;chr&gt;            &lt;dbl&gt;
@@ -1137,8 +1159,8 @@ a column separator for tex --></p>
 </div>
 </div>
 </div>
-<div id="combining-data" class="section level2" number="13.11">
-<h2><span class="header-section-number">13.11</span> Combining Data</h2>
+<div id="combining-data" class="section level2" number="14.11">
+<h2><span class="header-section-number">14.11</span> Combining Data</h2>
 <p>Up to this point, we have only covered single table functions. However,
 when data arrives in many pieces you may need to combine these to
 complete your analysis.</p>
@@ -1147,22 +1169,22 @@ analysis metrics for each user account listed in the initial data set.</p>
 <p>Once again, you can read the new data set with base R or <strong>readr</strong>.</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb843"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb843-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb843-1" aria-hidden="true" tabindex="-1"></a>sna_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/SNA_Stats.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb869"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb869-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb869-1" aria-hidden="true" tabindex="-1"></a>sna_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/SNA_Stats.csv&quot;</span>)</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb844"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb844-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb844-1" aria-hidden="true" tabindex="-1"></a>sna_tb <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;data/SNA_Stats.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb870"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb870-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb870-1" aria-hidden="true" tabindex="-1"></a>sna_tb <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">&quot;data/SNA_Stats.csv&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <p>Inspect both data sets:</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb845"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb845-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb845-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(sna_df)</span></code></pre></div>
+<div class="sourceCode" id="cb871"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb871-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb871-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(sna_df)</span></code></pre></div>
 <pre><code>[1] 4146    7</code></pre>
-<div class="sourceCode" id="cb847"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb847-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb847-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sna_df)</span></code></pre></div>
+<div class="sourceCode" id="cb873"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb873-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb873-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sna_df)</span></code></pre></div>
 <pre><code>[1] &quot;screen_name&quot;                &quot;componentnumber&quot;           
 [3] &quot;Eccentricity&quot;               &quot;closnesscentrality&quot;        
 [5] &quot;harmonicclosnesscentrality&quot; &quot;betweenesscentrality&quot;      
@@ -1173,9 +1195,9 @@ a column separator for tex --></p>
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb849"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb849-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb849-1" aria-hidden="true" tabindex="-1"></a>sna_tb <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">dim_desc</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb875"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb875-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb875-1" aria-hidden="true" tabindex="-1"></a>sna_tb <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">dim_desc</span>()</span></code></pre></div>
 <pre><code>[1] &quot;[4,146 x 7]&quot;</code></pre>
-<div class="sourceCode" id="cb851"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb851-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb851-1" aria-hidden="true" tabindex="-1"></a>sna_tb <span class="sc">%&gt;%</span> <span class="fu">colnames</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb877"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb877-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb877-1" aria-hidden="true" tabindex="-1"></a>sna_tb <span class="sc">%&gt;%</span> <span class="fu">colnames</span>()</span></code></pre></div>
 <pre><code>[1] &quot;screen_name&quot;                &quot;componentnumber&quot;           
 [3] &quot;Eccentricity&quot;               &quot;closnesscentrality&quot;        
 [5] &quot;harmonicclosnesscentrality&quot; &quot;betweenesscentrality&quot;      
@@ -1190,27 +1212,27 @@ are named differently in each data set.</p>
 <p>Matching data frame names can be accomplished as follows:</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb853"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb853-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb853-1" aria-hidden="true" tabindex="-1"></a><span class="fu">intersect</span>(<span class="fu">names</span>(df), <span class="fu">names</span>(sna_df))</span></code></pre></div>
+<div class="sourceCode" id="cb879"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb879-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb879-1" aria-hidden="true" tabindex="-1"></a><span class="fu">intersect</span>(<span class="fu">names</span>(df), <span class="fu">names</span>(sna_df))</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb854"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb854-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb854-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tb) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">intersect</span>(<span class="fu">names</span>(sna_df))</span></code></pre></div>
+<div class="sourceCode" id="cb880"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb880-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb880-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tb) <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">intersect</span>(<span class="fu">names</span>(sna_df))</span></code></pre></div>
 </div>
 </div>
 </div>
-<div id="left-join" class="section level3" number="13.11.1">
-<h3><span class="header-section-number">13.11.1</span> Left Join</h3>
+<div id="left-join" class="section level3" number="14.11.1">
+<h3><span class="header-section-number">14.11.1</span> Left Join</h3>
 <p>What you see below is a join that retains all rows from the first table.</p>
 <div class="row">
 <div class="lcolumn-50">
 <p>Use <code>merge()</code> to join. Note that <code>all.x = TRUE</code> tells R to keep all
 observations from the first table.</p>
-<div class="sourceCode" id="cb855"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb855-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb855-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(df, sna_df, </span>
-<span id="cb855-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb855-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>,</span>
-<span id="cb855-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb855-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb881"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb881-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb881-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(df, sna_df, </span>
+<span id="cb881-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb881-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>,</span>
+<span id="cb881-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb881-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
@@ -1219,18 +1241,18 @@ a column separator for tex --></p>
 <div class="rcolumn-50">
 <p>The <code>left_join()</code> function retains all rows from the <code>tb</code> data frame,
 while adding data from <code>sna_tb</code>.</p>
-<div class="sourceCode" id="cb856"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb856-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb856-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb856-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb856-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(sna_tb,</span>
-<span id="cb856-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb856-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb882"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb882-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb882-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb882-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb882-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(sna_tb,</span>
+<span id="cb882-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb882-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <p>Take a look at the dimensions of the output.</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb857"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb857-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb857-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(</span>
-<span id="cb857-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb857-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(df, sna_df, </span>
-<span id="cb857-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb857-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>,</span>
-<span id="cb857-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb857-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">all.x =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb883"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb883-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb883-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(</span>
+<span id="cb883-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb883-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(df, sna_df, </span>
+<span id="cb883-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb883-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>,</span>
+<span id="cb883-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb883-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">all.x =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>[1] 10542   100</code></pre>
 </div>
 <div class="col">
@@ -1238,24 +1260,24 @@ while adding data from <code>sna_tb</code>.</p>
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb859"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb859-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb859-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb859-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb859-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(sna_tb,</span>
-<span id="cb859-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb859-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb859-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb859-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">dim_desc</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb885"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb885-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb885-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb885-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb885-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(sna_tb,</span>
+<span id="cb885-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb885-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb885-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb885-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">dim_desc</span>()</span></code></pre></div>
 <pre><code>[1] &quot;[10,542 x 97]&quot;</code></pre>
 </div>
 </div>
 </div>
-<div id="right-join" class="section level3" number="13.11.2">
-<h3><span class="header-section-number">13.11.2</span> Right Join</h3>
+<div id="right-join" class="section level3" number="14.11.2">
+<h3><span class="header-section-number">14.11.2</span> Right Join</h3>
 <p>A right join retains all rows from the second table.</p>
 <div class="row">
 <div class="lcolumn-50">
 <p>Use <code>merge()</code> to join. Note that <code>all.y = TRUE</code> tells R to keep all
 observations from the second table.</p>
-<div class="sourceCode" id="cb861"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb861-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb861-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(df, sna_df,</span>
-<span id="cb861-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb861-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>,</span>
-<span id="cb861-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb861-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">all.y =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb887"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb887-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb887-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(df, sna_df,</span>
+<span id="cb887-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb887-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>,</span>
+<span id="cb887-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb887-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">all.y =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
@@ -1264,18 +1286,18 @@ a column separator for tex --></p>
 <div class="rcolumn-50">
 <p>The <code>right_join()</code> function retains all rows from the <code>sna_tb</code> data
 frame, while adding <code>tb</code>.</p>
-<div class="sourceCode" id="cb862"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb862-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb862-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb862-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb862-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">right_join</span>(sna_tb, </span>
-<span id="cb862-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb862-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb888"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb888-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb888-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb888-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb888-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">right_join</span>(sna_tb, </span>
+<span id="cb888-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb888-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <p>Take a look at the dimensions of the output.</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb863"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb863-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb863-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(</span>
-<span id="cb863-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb863-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(df, sna_df,</span>
-<span id="cb863-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb863-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>,</span>
-<span id="cb863-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb863-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">all.y =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb889"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb889-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb889-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(</span>
+<span id="cb889-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb889-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(df, sna_df,</span>
+<span id="cb889-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb889-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>,</span>
+<span id="cb889-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb889-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">all.y =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>[1] 14065   100</code></pre>
 </div>
 <div class="col">
@@ -1283,24 +1305,24 @@ frame, while adding <code>tb</code>.</p>
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb865"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb865-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb865-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb865-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb865-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">right_join</span>(sna_tb, </span>
-<span id="cb865-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb865-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb865-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb865-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">dim_desc</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb891"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb891-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb891-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb891-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb891-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">right_join</span>(sna_tb, </span>
+<span id="cb891-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb891-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb891-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb891-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">dim_desc</span>()</span></code></pre></div>
 <pre><code>[1] &quot;[14,065 x 97]&quot;</code></pre>
 </div>
 </div>
 </div>
-<div id="inner-join" class="section level3" number="13.11.3">
-<h3><span class="header-section-number">13.11.3</span> Inner Join</h3>
+<div id="inner-join" class="section level3" number="14.11.3">
+<h3><span class="header-section-number">14.11.3</span> Inner Join</h3>
 <p>An inner join retain rows with matches in both tables. <code>SNA_Stats.csv</code>,
 for example, may not include isolates so we would expect fewer results
 after comparing dimensions.</p>
 <div class="row">
 <div class="lcolumn-50">
 <p>Use the <code>merge()</code> function to inner join.</p>
-<div class="sourceCode" id="cb867"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb867-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb867-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(df, sna_df,</span>
-<span id="cb867-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb867-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb893"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb893-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb893-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(df, sna_df,</span>
+<span id="cb893-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb893-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>)</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
@@ -1308,16 +1330,16 @@ a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
 <p><code>inner_join()</code> merges based on <code>screen_name</code>.</p>
-<div class="sourceCode" id="cb868"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb868-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb868-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb868-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb868-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">inner_join</span>(sna_tb, <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb894"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb894-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb894-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb894-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb894-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">inner_join</span>(sna_tb, <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <p>Take a look at the dimensions of the output.</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb869"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb869-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb869-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(</span>
-<span id="cb869-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb869-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(df, sna_df,</span>
-<span id="cb869-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb869-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb895"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb895-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb895-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(</span>
+<span id="cb895-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb895-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(df, sna_df,</span>
+<span id="cb895-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb895-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>))</span></code></pre></div>
 <pre><code>[1] 10027   100</code></pre>
 </div>
 <div class="col">
@@ -1325,22 +1347,22 @@ a column separator for tex --></p>
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb871"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb871-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb871-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb871-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb871-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">inner_join</span>(sna_tb, <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb871-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb871-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">dim_desc</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb897"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb897-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb897-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb897-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb897-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">inner_join</span>(sna_tb, <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb897-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb897-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">dim_desc</span>()</span></code></pre></div>
 <pre><code>[1] &quot;[10,027 x 97]&quot;</code></pre>
 </div>
 </div>
 </div>
-<div id="full-join" class="section level3" number="13.11.4">
-<h3><span class="header-section-number">13.11.4</span> Full Join</h3>
+<div id="full-join" class="section level3" number="14.11.4">
+<h3><span class="header-section-number">14.11.4</span> Full Join</h3>
 <p>A full join retains all rows in both data sets, regardless of matches.</p>
 <div class="row">
 <div class="lcolumn-50">
 <p>Use the <code>merge()</code> function to full join. Note the <code>all = TRUE</code> argument.</p>
-<div class="sourceCode" id="cb873"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb873-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb873-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(df, sna_df,</span>
-<span id="cb873-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb873-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>,</span>
-<span id="cb873-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb873-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">all =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb899"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb899-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb899-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(df, sna_df,</span>
+<span id="cb899-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb899-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>,</span>
+<span id="cb899-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb899-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">all =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div class="col">
 <p>  <!-- an empty Div (with a white space), serving as
@@ -1348,18 +1370,18 @@ a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
 <p>The <code>full_join()</code> function will merge based on shared <code>screen_name</code>.</p>
-<div class="sourceCode" id="cb874"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb874-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb874-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb874-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb874-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">full_join</span>(sna_tb,</span>
-<span id="cb874-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb874-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb900"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb900-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb900-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb900-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb900-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">full_join</span>(sna_tb,</span>
+<span id="cb900-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb900-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <p>Take a look at the dimensions of the output.</p>
 <div class="row">
 <div class="lcolumn-50">
-<div class="sourceCode" id="cb875"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb875-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb875-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(</span>
-<span id="cb875-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb875-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(df, sna_df,</span>
-<span id="cb875-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb875-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>,</span>
-<span id="cb875-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb875-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">all =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb901"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb901-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb901-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(</span>
+<span id="cb901-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb901-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(df, sna_df,</span>
+<span id="cb901-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb901-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>,</span>
+<span id="cb901-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb901-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">all =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <pre><code>[1] 14580   100</code></pre>
 </div>
 <div class="col">
@@ -1367,17 +1389,17 @@ a column separator for tex --></p>
 a column separator for tex --></p>
 </div>
 <div class="rcolumn-50">
-<div class="sourceCode" id="cb877"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb877-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb877-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb877-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb877-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">full_join</span>(sna_tb,</span>
-<span id="cb877-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb877-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb877-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb877-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">dim_desc</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb903"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb903-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb903-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb903-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb903-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">full_join</span>(sna_tb,</span>
+<span id="cb903-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb903-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb903-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb903-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">dim_desc</span>()</span></code></pre></div>
 <pre><code>[1] &quot;[14,580 x 97]&quot;</code></pre>
 </div>
 </div>
 </div>
 </div>
-<div id="piping-multiple-variables" class="section level2" number="13.12">
-<h2><span class="header-section-number">13.12</span> Piping Multiple Variables</h2>
+<div id="piping-multiple-variables" class="section level2" number="14.12">
+<h2><span class="header-section-number">14.12</span> Piping Multiple Variables</h2>
 <p>As you can see, the <code>%&gt;%</code> operator is a great way to execute multiple
 actions in a few lines of code. This last example is meant to show how
 much can be done by chaining multiple functions with <code>%&gt;%</code>. For example,
@@ -1386,13 +1408,13 @@ set. To do so, we will have to group rows by <code>screen_name</code> using
 <code>group_by()</code>, then add the number of retweets per account, <code>filter()</code> by
 the average number of retweets (n = 245), <code>arrange()</code> the total, and
 finally rename the variables.</p>
-<div class="sourceCode" id="cb879"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb879-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb879-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb879-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb879-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(screen_name) <span class="sc">%&gt;%</span></span>
-<span id="cb879-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb879-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">retweet_total =</span> <span class="fu">sum</span>(retweet_count)) <span class="sc">%&gt;%</span></span>
-<span id="cb879-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb879-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(retweet_total <span class="sc">&gt;=</span> <span class="dv">245</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb879-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb879-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(retweet_total)) <span class="sc">%&gt;%</span></span>
-<span id="cb879-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb879-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Screen_Name =</span> screen_name,</span>
-<span id="cb879-7"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb879-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">N_Retweets =</span> retweet_total)</span></code></pre></div>
+<div class="sourceCode" id="cb905"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb905-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb905-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb905-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb905-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(screen_name) <span class="sc">%&gt;%</span></span>
+<span id="cb905-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb905-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">retweet_total =</span> <span class="fu">sum</span>(retweet_count)) <span class="sc">%&gt;%</span></span>
+<span id="cb905-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb905-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(retweet_total <span class="sc">&gt;=</span> <span class="dv">245</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb905-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb905-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(retweet_total)) <span class="sc">%&gt;%</span></span>
+<span id="cb905-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb905-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Screen_Name =</span> screen_name,</span>
+<span id="cb905-7"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb905-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">N_Retweets =</span> retweet_total)</span></code></pre></div>
 <pre><code># A tibble: 89 x 2
    Screen_Name     N_Retweets
    &lt;chr&gt;                &lt;dbl&gt;
@@ -1409,14 +1431,14 @@ finally rename the variables.</p>
 # ... with 79 more rows</code></pre>
 <p>We can clean up the output to only present the top accounts by adding
 <strong>dplyr</strong>’s <code>top_n()</code> function.</p>
-<div class="sourceCode" id="cb881"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb881-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb881-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
-<span id="cb881-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb881-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(screen_name) <span class="sc">%&gt;%</span></span>
-<span id="cb881-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb881-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">retweet_total =</span> <span class="fu">sum</span>(retweet_count)) <span class="sc">%&gt;%</span></span>
-<span id="cb881-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb881-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(retweet_total <span class="sc">&gt;=</span> <span class="dv">245</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb881-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb881-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(retweet_total)) <span class="sc">%&gt;%</span></span>
-<span id="cb881-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb881-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Screen_Name =</span> screen_name,</span>
-<span id="cb881-7"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb881-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">N_Retweets =</span> retweet_total) <span class="sc">%&gt;%</span></span>
-<span id="cb881-8"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb881-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">top_n</span>(<span class="dv">15</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb907"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb907-1"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb907-1" aria-hidden="true" tabindex="-1"></a>tb <span class="sc">%&gt;%</span></span>
+<span id="cb907-2"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb907-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(screen_name) <span class="sc">%&gt;%</span></span>
+<span id="cb907-3"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb907-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">retweet_total =</span> <span class="fu">sum</span>(retweet_count)) <span class="sc">%&gt;%</span></span>
+<span id="cb907-4"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb907-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(retweet_total <span class="sc">&gt;=</span> <span class="dv">245</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb907-5"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb907-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(retweet_total)) <span class="sc">%&gt;%</span></span>
+<span id="cb907-6"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb907-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Screen_Name =</span> screen_name,</span>
+<span id="cb907-7"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb907-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">N_Retweets =</span> retweet_total) <span class="sc">%&gt;%</span></span>
+<span id="cb907-8"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#cb907-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">top_n</span>(<span class="dv">15</span>)</span></code></pre></div>
 <pre><code># A tibble: 15 x 2
    Screen_Name     N_Retweets
    &lt;chr&gt;                &lt;dbl&gt;
@@ -1443,7 +1465,7 @@ finally rename the variables.</p>
           </div>
         </div>
       </div>
-<a href="centrality-and-brokerage-in-statnet.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="hypothesis-testing-qap-and-cug.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="key-sna-functions-and-visualization-cheat-sheet.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -1499,6 +1521,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

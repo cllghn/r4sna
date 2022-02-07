@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>16 Quadratic Assignment Procedure (QAP) | R for Social Network Analysis</title>
+  <meta name="description" content="TBD." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="16 Quadratic Assignment Procedure (QAP) | R for Social Network Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="TBD." />
+  <meta name="github-repo" content="cjcallag/r4sna" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="16 Quadratic Assignment Procedure (QAP) | R for Social Network Analysis" />
+  
+  <meta name="twitter:description" content="TBD." />
+  
+
+<meta name="author" content="CORE Lab" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="challenging-expectations-with-conditional-uniform-graphs-cugs.html"/>
+<link rel="next" href="a-note-on-interpretation-causality-in-networks.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.20/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="libs/selectize-0.12.0/selectize.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="my_style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Social Network Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instructors"><i class="fa fa-check"></i><b>1.1</b> Instructors</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="2" data-path="setting-up.html"><a href="setting-up.html"><i class="fa fa-check"></i><b>2</b> Setting Up</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setting-up.html"><a href="setting-up.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.1</b> R and RStudio Basics</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="setting-up.html"><a href="setting-up.html#basics-of-r-coding-in-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Basics of R Coding in RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="setting-up.html"><a href="setting-up.html#project-workflow"><i class="fa fa-check"></i><b>2.2</b> Project Workflow</a></li>
+</ul></li>
+<li class="part"><span><b>II Lab 1</b></span></li>
+<li class="chapter" data-level="3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
+<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Lab 2</b></span></li>
+<li class="chapter" data-level="5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>5</b> Manipulating and Simplifying Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#setup-2"><i class="fa fa-check"></i><b>5.1</b> Setup</a></li>
+<li class="chapter" data-level="5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-libraries-2"><i class="fa fa-check"></i><b>5.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-the-backbones-of-two-mode-network-projections"><i class="fa fa-check"></i><b>5.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-data"><i class="fa fa-check"></i><b>5.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#non-statistical-projections-of-the-co-sponsorhip-data"><i class="fa fa-check"></i><b>5.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="5.3.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-backbones"><i class="fa fa-check"></i><b>5.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#simplifying-networks-in-igraph-anabaptist-leadership-network"><i class="fa fa-check"></i><b>5.4</b> Simplifying Networks in <strong>igraph</strong>: Anabaptist Leadership Network</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-network-and-attribute-data"><i class="fa fa-check"></i><b>5.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-the-anabaptist-network"><i class="fa fa-check"></i><b>5.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="5.4.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#shrinking-collapsing-contracting-networks"><i class="fa fa-check"></i><b>5.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="5.4.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-subnetworks"><i class="fa fa-check"></i><b>5.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#multiple-stacked-networks-in-igraph-sampson-monastery"><i class="fa fa-check"></i><b>5.5</b> Multiple (Stacked) Networks in <strong>igraph</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-edge-list-network-data"><i class="fa fa-check"></i><b>5.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="5.5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-stacked-networks"><i class="fa fa-check"></i><b>5.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="5.5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-and-plotting-individual-networks"><i class="fa fa-check"></i><b>5.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>6</b> Manipulating and Simplifying Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#setup-3"><i class="fa fa-check"></i><b>6.1</b> Setup</a></li>
+<li class="chapter" data-level="6.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-libraries-3"><i class="fa fa-check"></i><b>6.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="6.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-the-backbones-of-two-mode-network-projections-1"><i class="fa fa-check"></i><b>6.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-data-1"><i class="fa fa-check"></i><b>6.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#non-statistical-projections-of-the-co-sponsorhip-data-1"><i class="fa fa-check"></i><b>6.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="6.3.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-backbones-1"><i class="fa fa-check"></i><b>6.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#simplifying-networks-in-statnet-anabaptist-network"><i class="fa fa-check"></i><b>6.4</b> Simplifying Networks in <strong>statnet</strong>: Anabaptist Network</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-network-and-attribute-data-1"><i class="fa fa-check"></i><b>6.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="6.4.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-the-anabaptist-network-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="6.4.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#shrinking-collapsing-contracting-networks-1"><i class="fa fa-check"></i><b>6.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="6.4.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-subnetworks-1"><i class="fa fa-check"></i><b>6.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#multiple-stacked-networks-in-statnet-sampson-monastery"><i class="fa fa-check"></i><b>6.5</b> Multiple (Stacked) Networks in <strong>statnet</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-edge-list-network-data-1"><i class="fa fa-check"></i><b>6.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="6.5.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-stacked-networks-1"><i class="fa fa-check"></i><b>6.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="6.5.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-and-plotting-individual-networks-1"><i class="fa fa-check"></i><b>6.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Lab 3</b></span></li>
+<li class="chapter" data-level="7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html"><i class="fa fa-check"></i><b>7</b> Network Topography in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#setup-4"><i class="fa fa-check"></i><b>7.1</b> Setup</a></li>
+<li class="chapter" data-level="7.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#load-libraries-4"><i class="fa fa-check"></i><b>7.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="7.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#import-data"><i class="fa fa-check"></i><b>7.3</b> Import Data</a></li>
+<li class="chapter" data-level="7.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size-and-interconnectedness"><i class="fa fa-check"></i><b>7.4</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size"><i class="fa fa-check"></i><b>7.4.1</b> Network Size</a></li>
+<li class="chapter" data-level="7.4.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#density-and-average-degree"><i class="fa fa-check"></i><b>7.4.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="7.4.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#clustering-coefficient-global-and-local"><i class="fa fa-check"></i><b>7.4.3</b> Clustering Coefficient (Global and Local)</a></li>
+<li class="chapter" data-level="7.4.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#cohesion-and-fragmentation"><i class="fa fa-check"></i><b>7.4.4</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="7.4.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#compactness-and-breadth"><i class="fa fa-check"></i><b>7.4.5</b> Compactness and Breadth</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization-and-related-measures-of-spread"><i class="fa fa-check"></i><b>7.5</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization"><i class="fa fa-check"></i><b>7.5.1</b> Centralization</a></li>
+<li class="chapter" data-level="7.5.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#variance-and-standard-deviation"><i class="fa fa-check"></i><b>7.5.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="7.5.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#diameter-and-average-path-distance"><i class="fa fa-check"></i><b>7.5.3</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#calculating-the-e-i-index-with-isnar"><i class="fa fa-check"></i><b>7.6</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+<li class="chapter" data-level="7.7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-level-measures-table"><i class="fa fa-check"></i><b>7.7</b> Network Level Measures Table</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html"><i class="fa fa-check"></i><b>8</b> Network Topography in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#setup-5"><i class="fa fa-check"></i><b>8.1</b> Setup</a></li>
+<li class="chapter" data-level="8.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#load-libraries-5"><i class="fa fa-check"></i><b>8.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="8.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#import-data-1"><i class="fa fa-check"></i><b>8.3</b> Import Data</a></li>
+<li class="chapter" data-level="8.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-and-interconnectedness-1"><i class="fa fa-check"></i><b>8.4</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-1"><i class="fa fa-check"></i><b>8.4.1</b> Network Size</a></li>
+<li class="chapter" data-level="8.4.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#density-and-average-degree-1"><i class="fa fa-check"></i><b>8.4.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="8.4.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#cohesion-and-fragmentation-1"><i class="fa fa-check"></i><b>8.4.3</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="8.4.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#compactness-and-breadth-1"><i class="fa fa-check"></i><b>8.4.4</b> Compactness and Breadth</a></li>
+<li class="chapter" data-level="8.4.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-interconnectedness-scores"><i class="fa fa-check"></i><b>8.4.5</b> Table of Interconnectedness Scores</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-and-related-measures-of-spread-1"><i class="fa fa-check"></i><b>8.5</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-1"><i class="fa fa-check"></i><b>8.5.1</b> Centralization</a></li>
+<li class="chapter" data-level="8.5.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#variance-and-standard-deviation-1"><i class="fa fa-check"></i><b>8.5.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="8.5.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-centralization-scores"><i class="fa fa-check"></i><b>8.5.3</b> Table of Centralization Scores</a></li>
+<li class="chapter" data-level="8.5.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#diameter-and-average-path-distance-1"><i class="fa fa-check"></i><b>8.5.4</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#calculating-the-e-i-index-with-isnar-1"><i class="fa fa-check"></i><b>8.6</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+</ul></li>
+<li class="part"><span><b>V Lab 4</b></span></li>
+<li class="chapter" data-level="9" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html"><i class="fa fa-check"></i><b>9</b> Detecting Subgroups in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#setup-6"><i class="fa fa-check"></i><b>9.1</b> Setup</a></li>
+<li class="chapter" data-level="9.2" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#load-library"><i class="fa fa-check"></i><b>9.2</b> Load Library</a></li>
+<li class="chapter" data-level="9.3" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#import-and-plot-network"><i class="fa fa-check"></i><b>9.3</b> Import and Plot Network</a></li>
+<li class="chapter" data-level="9.4" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#components-in-igraph"><i class="fa fa-check"></i><b>9.4</b> Components in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.5" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#cliques-in-igraph"><i class="fa fa-check"></i><b>9.5</b> Cliques in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.6" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#k-cores-in-igraph"><i class="fa fa-check"></i><b>9.6</b> K-Cores in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.7" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#community-detection-in-igraph"><i class="fa fa-check"></i><b>9.7</b> Community Detection in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#girvan-newman"><i class="fa fa-check"></i><b>9.7.1</b> Girvan-Newman</a></li>
+<li class="chapter" data-level="9.7.2" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#walktrap"><i class="fa fa-check"></i><b>9.7.2</b> Walktrap</a></li>
+<li class="chapter" data-level="9.7.3" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#spin-glass"><i class="fa fa-check"></i><b>9.7.3</b> Spin-Glass</a></li>
+<li class="chapter" data-level="9.7.4" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#louvain"><i class="fa fa-check"></i><b>9.7.4</b> Louvain</a></li>
+<li class="chapter" data-level="9.7.5" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#table-of-results"><i class="fa fa-check"></i><b>9.7.5</b> Table of Results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html"><i class="fa fa-check"></i><b>10</b> Detecting Subgroups in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#setup-7"><i class="fa fa-check"></i><b>10.1</b> Setup</a></li>
+<li class="chapter" data-level="10.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#load-libraries-6"><i class="fa fa-check"></i><b>10.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="10.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#import-and-plot-network-1"><i class="fa fa-check"></i><b>10.3</b> Import and Plot Network</a></li>
+<li class="chapter" data-level="10.4" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#components-in-statnet"><i class="fa fa-check"></i><b>10.4</b> Components in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.5" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#cliques-in-statnet"><i class="fa fa-check"></i><b>10.5</b> Cliques in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.6" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#k-cores-in-statnet"><i class="fa fa-check"></i><b>10.6</b> K-Cores in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.7" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#community-detection-in-statnet"><i class="fa fa-check"></i><b>10.7</b> Community Detection in <strong>statnet</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path=""><a href="#part-lab-5"><i class="fa fa-check"></i>(PART) Lab 5</a>
+<ul>
+<li class="chapter" data-level="10.8" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#setup-8"><i class="fa fa-check"></i><b>10.8</b> Setup</a></li>
+<li class="chapter" data-level="10.9" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#load-libraries-7"><i class="fa fa-check"></i><b>10.9</b> Load Libraries</a></li>
+<li class="chapter" data-level="10.10" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#load-data-2"><i class="fa fa-check"></i><b>10.10</b> Load Data</a></li>
+<li class="chapter" data-level="10.11" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#centrality-and-power-undirected-networks"><i class="fa fa-check"></i><b>10.11</b> Centrality and Power (Undirected Networks)</a>
+<ul>
+<li class="chapter" data-level="10.11.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#degree-closeness-betweenness-and-eigenvector"><i class="fa fa-check"></i><b>10.11.1</b> Degree, Closeness, Betweenness, and Eigenvector</a></li>
+<li class="chapter" data-level="10.11.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#correlations"><i class="fa fa-check"></i><b>10.11.2</b> Correlations</a></li>
+<li class="chapter" data-level="10.11.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#interactive-table"><i class="fa fa-check"></i><b>10.11.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="10.12" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#centrality-and-prestige-directed-networks"><i class="fa fa-check"></i><b>10.12</b> Centrality and Prestige (Directed Networks)</a>
+<ul>
+<li class="chapter" data-level="10.12.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#in-n-out-degree-hubs-and-authorities"><i class="fa fa-check"></i><b>10.12.1</b> In-N-Out Degree, Hubs and Authorities</a></li>
+<li class="chapter" data-level="10.12.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#correlations-1"><i class="fa fa-check"></i><b>10.12.2</b> Correlations</a></li>
+<li class="chapter" data-level="10.12.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#interactive-table-1"><i class="fa fa-check"></i><b>10.12.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="10.13" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#brokerage"><i class="fa fa-check"></i><b>10.13</b> Brokerage</a>
+<ul>
+<li class="chapter" data-level="10.13.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#cutpoints"><i class="fa fa-check"></i><b>10.13.1</b> Cutpoints</a></li>
+<li class="chapter" data-level="10.13.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#cutsets-key-player"><i class="fa fa-check"></i><b>10.13.2</b> Cutsets (Key Player)</a></li>
+<li class="chapter" data-level="10.13.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#burts-constraint"><i class="fa fa-check"></i><b>10.13.3</b> Burt’s Constraint</a></li>
+<li class="chapter" data-level="10.13.4" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#bridges-edge-betweenness"><i class="fa fa-check"></i><b>10.13.4</b> Bridges: Edge Betweenness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html"><i class="fa fa-check"></i><b>11</b> Centrality and Brokerage in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#setup-9"><i class="fa fa-check"></i><b>11.1</b> Setup</a></li>
+<li class="chapter" data-level="11.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#libraries"><i class="fa fa-check"></i><b>11.2</b> Libraries</a></li>
+<li class="chapter" data-level="11.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#load-data-3"><i class="fa fa-check"></i><b>11.3</b> Load Data</a></li>
+<li class="chapter" data-level="11.4" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#centrality-and-power-undirected-networks-1"><i class="fa fa-check"></i><b>11.4</b> Centrality and Power (Undirected Networks)</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#degree-closeness-betweenness-and-eigenvector-centrality"><i class="fa fa-check"></i><b>11.4.1</b> Degree, Closeness, Betweenness and Eigenvector Centrality</a></li>
+<li class="chapter" data-level="11.4.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#correlations-2"><i class="fa fa-check"></i><b>11.4.2</b> Correlations</a></li>
+<li class="chapter" data-level="11.4.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#interactive-table-2"><i class="fa fa-check"></i><b>11.4.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#centrality-and-prestige-directed-networks-1"><i class="fa fa-check"></i><b>11.5</b> Centrality and Prestige (Directed Networks)</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#in-n-out-degree-input-domain-and-proximity-prestige"><i class="fa fa-check"></i><b>11.5.1</b> In-N-Out Degree, Input Domain, and Proximity Prestige</a></li>
+<li class="chapter" data-level="11.5.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#correlations-3"><i class="fa fa-check"></i><b>11.5.2</b> Correlations</a></li>
+<li class="chapter" data-level="11.5.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#interactive-table-3"><i class="fa fa-check"></i><b>11.5.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#brokerage-1"><i class="fa fa-check"></i><b>11.6</b> Brokerage</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#cutpoints-1"><i class="fa fa-check"></i><b>11.6.1</b> Cutpoints</a></li>
+<li class="chapter" data-level="11.6.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#cutsets-key-player-1"><i class="fa fa-check"></i><b>11.6.2</b> Cutsets (Key Player)</a></li>
+<li class="chapter" data-level="11.6.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#gould-and-fernandez"><i class="fa fa-check"></i><b>11.6.3</b> Gould and Fernandez</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VI Lab 6</b></span></li>
+<li class="chapter" data-level="12" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html"><i class="fa fa-check"></i><b>12</b> Hypothesis Testing (QAP and CUG)</a></li>
+<li class="chapter" data-level="13" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
+<li class="chapter" data-level="14" data-path="developing-and-testing-working-hypotheses.html"><a href="developing-and-testing-working-hypotheses.html"><i class="fa fa-check"></i><b>14</b> Developing and Testing Working Hypotheses</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="developing-and-testing-working-hypotheses.html"><a href="developing-and-testing-working-hypotheses.html#univariate-bivariate-and-multivariate-statistical-tests"><i class="fa fa-check"></i><b>14.1</b> Univariate, Bivariate, and Multivariate Statistical Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="challenging-expectations-with-conditional-uniform-graphs-cugs.html"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html"><i class="fa fa-check"></i><b>15</b> Challenging Expectations with Conditional Uniform Graphs (CUGs)</a>
+<ul>
+<li class="chapter" data-level="15.0.1" data-path="challenging-expectations-with-conditional-uniform-graphs-cugs.html"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#example-data"><i class="fa fa-check"></i><b>15.0.1</b> Example Data</a></li>
+<li class="chapter" data-level="15.1" data-path="challenging-expectations-with-conditional-uniform-graphs-cugs.html"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#univariate-cug-tests-in-statnet"><i class="fa fa-check"></i><b>15.1</b> Univariate CUG Tests in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="15.2" data-path="challenging-expectations-with-conditional-uniform-graphs-cugs.html"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#bivariate-tests-using-cug"><i class="fa fa-check"></i><b>15.2</b> Bivariate Tests Using CUG</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html"><i class="fa fa-check"></i><b>16</b> Quadratic Assignment Procedure (QAP)</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#bivariate-tests-using-qap-correlation"><i class="fa fa-check"></i><b>16.1</b> Bivariate Tests Using QAP: Correlation</a></li>
+<li class="chapter" data-level="16.2" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#multivariate-models-using-qap"><i class="fa fa-check"></i><b>16.2</b> Multivariate Models using QAP</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#multiple-ols-regression---basics"><i class="fa fa-check"></i><b>16.2.1</b> Multiple OLS Regression - Basics</a></li>
+<li class="chapter" data-level="16.2.2" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#multiple-ols-regression-using-qap"><i class="fa fa-check"></i><b>16.2.2</b> Multiple OLS Regression using QAP</a></li>
+<li class="chapter" data-level="16.2.3" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#options-and-defaults-in-qap-ols-regression"><i class="fa fa-check"></i><b>16.2.3</b> Options and Defaults in QAP OLS Regression</a></li>
+<li class="chapter" data-level="16.2.4" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#estimating-a-qap-ols-multiple-regression-in-r"><i class="fa fa-check"></i><b>16.2.4</b> Estimating a QAP OLS Multiple Regression in R</a></li>
+<li class="chapter" data-level="16.2.5" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#logistic-regression-using-qap"><i class="fa fa-check"></i><b>16.2.5</b> Logistic Regression Using QAP</a></li>
+<li class="chapter" data-level="16.2.6" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#options-and-defaults-in-qap-logistic-regression"><i class="fa fa-check"></i><b>16.2.6</b> Options and Defaults in QAP Logistic Regression</a></li>
+<li class="chapter" data-level="16.2.7" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#estimating-a-qap-logistic-regression-in-r"><i class="fa fa-check"></i><b>16.2.7</b> Estimating a QAP Logistic Regression in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="a-note-on-interpretation-causality-in-networks.html"><a href="a-note-on-interpretation-causality-in-networks.html"><i class="fa fa-check"></i><b>17</b> A Note on interpretation: Causality in Networks</a></li>
+<li class="chapter" data-level="18" data-path="summary-lessons-learned.html"><a href="summary-lessons-learned.html"><i class="fa fa-check"></i><b>18</b> Summary: Lessons Learned</a></li>
+<li class="part"><span><b>VII Lab 6</b></span></li>
+<li class="part"><span><b>VIII Lab 7</b></span></li>
+<li class="part"><span><b>IX Lab 8</b></span></li>
+<li class="part"><span><b>X Lab 9</b></span></li>
+<li class="part"><span><b>XI Lab 10</b></span></li>
+<li class="part"><span><b>XII Appendices</b></span></li>
+<li class="chapter" data-level="19" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>19</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>19.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
+<li class="chapter" data-level="19.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>19.2</b> Installation</a></li>
+<li class="chapter" data-level="19.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>19.3</b> Loading</a></li>
+<li class="chapter" data-level="19.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>19.4</b> Import and View Data</a></li>
+<li class="chapter" data-level="19.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>19.5</b> Extracting Variables/Columns</a></li>
+<li class="chapter" data-level="19.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>19.6</b> Creating Filters/Extracting Rows</a></li>
+<li class="chapter" data-level="19.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>19.7</b> Arrange Rows</a></li>
+<li class="chapter" data-level="19.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>19.8</b> Making a New Column/Variable</a></li>
+<li class="chapter" data-level="19.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>19.9</b> Rename Variables</a></li>
+<li class="chapter" data-level="19.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>19.10</b> Summarizing</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>19.10.1</b> Simple Summary</a></li>
+<li class="chapter" data-level="19.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>19.10.2</b> Group Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>19.11</b> Combining Data</a>
+<ul>
+<li class="chapter" data-level="19.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>19.11.1</b> Left Join</a></li>
+<li class="chapter" data-level="19.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>19.11.2</b> Right Join</a></li>
+<li class="chapter" data-level="19.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>19.11.3</b> Inner Join</a></li>
+<li class="chapter" data-level="19.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>19.11.4</b> Full Join</a></li>
+</ul></li>
+<li class="chapter" data-level="19.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>19.12</b> Piping Multiple Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>20</b> Key SNA Functions and Visualization Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>20.1</b> <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="20.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>20.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="20.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>20.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>20.2</b> <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>20.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="20.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>20.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>XIII References</b></span></li>
+<li class="chapter" data-level="21" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>21</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown">
+Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Social Network Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="quadratic-assignment-procedure-qap" class="section level1" number="16">
+<h1><span class="header-section-number">16</span> Quadratic Assignment Procedure (QAP)</h1>
+<p>Quadratic assignment procedure (QAP) is similar to CUG, in that it employs simulation in order to generate a distribution of hypothetical networks. However, whereas CUG controls for a network condition such as size or density, QAP controls for network structure <span class="citation">(<a href="#ref-Mantel1967" role="doc-biblioref">Mantel 1967</a>; <a href="#ref-HubertandSchultz1976" role="doc-biblioref">Hubert and Schultz 1976</a>; <a href="#ref-Krackhardt1987b" role="doc-biblioref">Krackhardt 1987b</a>, <a href="#ref-Krackhardt1988" role="doc-biblioref">1988</a>)</span>. QAP is useful for running a variety of statistical functions and, until recently, has been one of the most popular (and, therefore, widely accepted) methods for assessing statistical significance with network data. Below, are three of the options available in <strong>statnet</strong>.</p>
+<p>QAP is similar to bootstrapping in that it builds its own distribution using network simulations that are based on the network being estimated. This particular simulation process is referred to as a permutation test, and it is designed to mimic all of the scenarios that would be possible if everyone were able to switch places in the social order. In other words, the rows and columns in the network matrix are shuffled (i.e., permuted) randomly while names (and all their corresponding attributes) remain in the original order. This process essentially changes the node with which a particular name and set of attributes is associated without disturbing the underlying structure (See Figure <a href="quadratic-assignment-procedure-qap.html#fig:Two-Permutations">16.1</a> for an example of a permuted network). This random rearrangement is repeated to create a large number (usually hundreds or thousands) of simulated networks, which are then analyzed in the same manner as the original network in order to create a distribution of statistical measures that can then be compared to the measures calculated for the observed (i.e., actual) network. As with CUG tests, the proportion of measures in the distribution that are greater than, and less than the measure taken from the original network are then produced to give “p-value”-type information. If the observed measure occurs sufficiently infrequently (p &lt; 0.05) within the distribution of simulated networks, then we can reject the null and conclude that the observed statistics are not likely to have occurred by chance alone.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:Two-Permutations"></span>
+<img src="6-Hypothesis_Testing_QAP_CUG_files/figure-html/Two-Permutations-1.png" alt="Two Permutations of the Same Network" width="70%" />
+<p class="caption">
+Figure 16.1: Two Permutations of the Same Network
+</p>
+</div>
+<p>The essential difference, then, between CUG and QAP is that CUG controls for networks of a “similar type,” whereas QAP controls for the particular pattern of interrelatedness (i.e., network structure) in the original networks. When using QAP, we are ultimately asking whether the result of the test we are running is spurious, given the autocorrelation that is normally inherent in networks. The procedure accomplishes this by observing the interdependencies that are apparent through the network structure, and then essentially reshuffling the nodes along with all their attendant attributes among the various positions within that structure. The idea behind this is that the network’s various interdependencies remain in place, but the permuted networks are used to see whether the values we calculate would still be the same if the entities themselves were not interdependent in the same ways.</p>
+<p>For an analogy, imagine that everyone in a network was moved to some new spot in the social order in the network. If the ties within the network are fairly dense, with a lot of symmetry, it is much less likely that permutations of the network will result in large differences in the social order. This implies that the resulting correlations would not reflect a great deal of difference either. To illustrate, consider an extreme case. A friendship network that forms a clique would not change at all if all the positions were swapped around, since everyone in the clique is already adjacent to everyone else. So, permuting the network likely would not produce any differences in terms of relative positions in the structure of the network.</p>
+<div id="bivariate-tests-using-qap-correlation" class="section level2" number="16.1">
+<h2><span class="header-section-number">16.1</span> Bivariate Tests Using QAP: Correlation</h2>
+<p>Correlation values are calculated the same way, regardless of whether one is using CUG or QAP. It is the test and its accompanying assumptions that differ. When calculating the level of correlation between two networks, the first step is to compute the correlation coefficient between corresponding cells. Next, one of the networks is randomly permuted and the correlation is recalculated. This step is carried out hundreds or thousands of times in order to compute the proportion of times that a random measure is larger than or equal to the observed measure calculated in the first step. A low proportion suggests that a correlation between networks is unlikely to have occurred by chance and the correlation value is thus not spurious.</p>
+<p>Consider, for example, the organizational convergence networks, which describe the connections formed within and between two organizations that are in the process of merging into one. Table <a href="quadratic-assignment-procedure-qap.html#tab:convergence">16.1</a>, below, presents the three types of relationships identified as being important to the daily functioning of the institution. One concern that arises when conducting a survey of this sort is whether respondents are reading closely when answering each question and providing information appropriate to each question or just giving the same set of alters each time.</p>
+<table>
+<caption><span id="tab:convergence">Table 16.1: </span> Organizational convergence network</caption>
+<thead>
+<tr class="header">
+<th align="center"><strong>Network Name</strong></th>
+<th align="left"><strong>Survey Question</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><em>commun</em></td>
+<td align="left">“With whom do you communicate to perform your work?”</td>
+</tr>
+<tr class="even">
+<td align="center"><em>collab</em></td>
+<td align="left">“With whom do you collaborate?”</td>
+</tr>
+<tr class="odd">
+<td align="center"><em>esteem</em></td>
+<td align="left">“With whom would you like to work in the future?”</td>
+</tr>
+</tbody>
+</table>
+<p>Again, we’ve stored these as <code>.rda</code> files, which we can read using the <code>load()</code> function.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="quadratic-assignment-procedure-qap.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Communication.rda&quot;</span>) <span class="co"># Loads as &quot;commun&quot;</span></span>
+<span id="cb16-2"><a href="quadratic-assignment-procedure-qap.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Collaboration.rda&quot;</span>) <span class="co"># Loads as &quot;collab&quot;</span></span>
+<span id="cb16-3"><a href="quadratic-assignment-procedure-qap.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Esteem.rda&quot;</span>) <span class="co"># Loads as &quot;esteem&quot;</span></span></code></pre></div>
+<p>Because it measures relationships, one can think of correlation as providing a description of how much overlap exists between each of the networks. We may use correlation, therefore, to check whether respondents provided largely the same answers for each of the three questions. We would expect some overlap (i.e., maybe a weak to moderate correlation) if respondents answer each of the questions with a different type of relationship in mind. But, strong, very weak, or negative correlations would be a sign that we did a poor job of eliciting the various relationships. Table <a href="quadratic-assignment-procedure-qap.html#tab:Cor-tble">16.2</a> presents the results of the correlation measures among the three networks.</p>
+<pre><code>[1] 0.6009021</code></pre>
+<pre><code>          1         2         3
+1 1.0000000 0.6009021 0.4092608
+2 0.6009021 1.0000000 0.3891069
+3 0.4092608 0.3891069 1.0000000</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:Cor-tble">Table 16.2: </span>Table: Correlation Matrix
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Collaboration
+</th>
+<th style="text-align:center;">
+Esteem
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Communication
+</td>
+<td style="text-align:center;">
+0.6
+</td>
+<td style="text-align:center;">
+0.41
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Collaboration
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0.39
+</td>
+</tr>
+</tbody>
+</table>
+<p>The correlation matrix in Table <a href="quadratic-assignment-procedure-qap.html#tab:Cor-tble">16.2</a> demonstrates that the relationship between communication and collaboration is moderate to strong. This result makes sense, as we would expect that those who collaborate also communicate. But, not all who communicate useful information are also collaborating in their work. Collaboration and communication are also manifest ties, meaning that they are ties that exist in some tangible sense. The “esteem” network is more theoretical, and this becomes clear when one considers that the relationships between the manifest, and more tangible, networks correlate only weakly with the more nebulous idea of who people would like to work with in the future.</p>
+<p>The question that may arise at this point is just how much we should trust these correlation values. The test associated with Pearson’s correlation assesses whether the correlation value is “real,” or meaningful. The <code>qaptest()</code> function operates in a manner that is very similar to that of <code>cugtest()</code>. In its current form, the <code>qaptest()</code> function can simulate only the interaction between one network pair at a time. It is, therefore, necessary to specify which networks are being compared each time. The example below gives examples of how we would test correlation values for each of the network pairs.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="quadratic-assignment-procedure-qap.html#cb19-1" aria-hidden="true" tabindex="-1"></a>nets <span class="ot">&lt;-</span> <span class="fu">list</span>(commun, collab, esteem)</span>
+<span id="cb19-2"><a href="quadratic-assignment-procedure-qap.html#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="quadratic-assignment-procedure-qap.html#cb19-3" aria-hidden="true" tabindex="-1"></a>cortest12 <span class="ot">&lt;-</span> <span class="fu">qaptest</span>(nets, gcor, <span class="at">g1 =</span> <span class="dv">1</span>, <span class="at">g2 =</span> <span class="dv">2</span>)</span>
+<span id="cb19-4"><a href="quadratic-assignment-procedure-qap.html#cb19-4" aria-hidden="true" tabindex="-1"></a>cortest13 <span class="ot">&lt;-</span> <span class="fu">qaptest</span>(nets, gcor, <span class="at">g1 =</span> <span class="dv">1</span>, <span class="at">g2 =</span> <span class="dv">3</span>)</span>
+<span id="cb19-5"><a href="quadratic-assignment-procedure-qap.html#cb19-5" aria-hidden="true" tabindex="-1"></a>cortest23 <span class="ot">&lt;-</span> <span class="fu">qaptest</span>(nets, gcor, <span class="at">g1 =</span> <span class="dv">2</span>, <span class="at">g2 =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p>The format of the <code>qaptest()</code> function’s output is similar to the <code>cugtest()</code> results. The label <code>QAP Test Results</code> indicates the test results, with p-value approximations, the correlation value for the networks being compared, the number of simulated networks that were produced, and the distribution of correlation values between simulated networks. One can read and interpret the output, therefore, in the same manner as with CUG tests. As with other tests, users also can produce the distribution plot for the QAP correlation test.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="quadratic-assignment-procedure-qap.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cortest12)</span></code></pre></div>
+<pre><code>
+QAP Test Results
+
+Estimated p-values:
+    p(f(perm) &gt;= f(d)): 0 
+    p(f(perm) &lt;= f(d)): 1 
+
+Test Diagnostics:
+    Test Value (f(d)): 0.6009021 
+    Replications: 1000 
+    Distribution Summary:
+        Min:     -0.05672636 
+        1stQ:    -0.0152203 
+        Med:     -0.0006662233 
+        Mean:    -0.0001104733 
+        3rdQ:    0.01334881 
+        Max:     0.06347951 </code></pre>
+</div>
+<div id="multivariate-models-using-qap" class="section level2" number="16.2">
+<h2><span class="header-section-number">16.2</span> Multivariate Models using QAP</h2>
+<p>Testing the significance of univariate network descriptors, as with CUG, or testing bivariate descriptors, which is possible in both CUG and QAP, are powerful for their ability to validate or qualify the results of the measure or a test. Multivariate techniques, on the other hand, provide the option of using multiple variables to predict or explain an outcome. The use of multiple variables offers a powerful advantage over univariate or bivariate techniques, as the multiple predictors hold the potential to explain a great deal more about some outcome of interest.</p>
+<p>Multivariate techniques offer the advantage of accounting for a great deal more of the complexity that is inherent in social relations. The techniques presented below, and in the following chapters, are means of conducting multivariate analyses with network data. The two techniques presented below are more classical approaches to the problem of conducting multivariate network tests. Although both CUG and QAP may be used to create the null distribution for either approach, we present only the more commonly used used QAP approach.</p>
+<p>Below are two forms of multivariate regression: logistic regression and ordinary least squares (OLS) regression. The major difference between the two is in how ties in the network functioning as the dependent variable (i.e., the network being predicted or explained) are measured. The type of regression you choose, therefore, should reflect the way ties are measured in the dependent network. For example, in a scenario for testing whether family ties, prior communications, or business ties predict (or explain) operational collaborations between group members, the outcome of interest is operational collaborations.</p>
+<p>Logistic regression is designed for binary data and is suited for predicting or explaining the odds that a tie will form between any two nodes, given other factors. One should use it when the <em>outcome</em> network has tie values of only one or zero. In terms of the example presented in the QAP correlation section, “collaboration” only would be measured as one (a collaboration is observed) or zero (there was no collaboration observed). Multiple OLS regression, on the other hand, is best suited for explaining or predicting continuous measures. It is therefore better suited for use with dependent networks with tie values that could take any number. In the operational collaboration example, multiple linear regression would be appropriate if one measures the degree of collaboration (e.g., number of observed collaborations, “strength” of the collaboration, layers of collaboration) rather than just the simple presence or absence of collaboration ties.</p>
+<p>Note that the ties within the <em>predictor</em> networks (those networks being used to predict or explain the outcome network) may be either binary or continuous for either method. Numerous options and interpretation caveats go with either regression method. The descriptions below are provided only as a very general introduction. To use either of these tools well, it is advised that users consult any standard statistical text for properly applying either type of regression. Aside from the fact that here we use networks rather than independent observations, the rules for applying these techniques are fairly similar.</p>
+<p>Multiple regression - both OLS and logistic - allows analysts to use multiple predictor variables to predict or explain what we should expect from some other variable of interest. That is to say, we can use more than just one variable when trying to understand another. This is important when one considers that, in reality, outcomes tend to be much more complex than what a single predictor can capture - no matter how critical or important that predictor may be. Multiple regression makes it possible to account for the relationship between the predictors and the outcome while also controlling for the interrelationships between the predictors themselves. If you estimate three regression models, each with a different predictor, and then a fourth with all three predictors together you will notice a difference between what each of the predictors say about the outcome individually, and what they say when they are all included in the same model. This is because each of the predictors may be themselves related to one another.</p>
+<p>If predictors are even somewhat related, then the information they contribute about the outcome variable will likely overlap to some degree. When taken together, the redundancies are taken into account and each variable’s unique contribution is much more precise.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:predictorGraphic"></span>
+<img src="imgs/cor_uncor.jpg" alt="Uncorrelated and Correlated Predictors in a Regression" width="70%" />
+<p class="caption">
+Figure 16.2: Uncorrelated and Correlated Predictors in a Regression
+</p>
+</div>
+<p>More advanced tools are presented in subsequent chapters. They are considerably more involved and each is designed with specific analytic goals in mind. The following examples offer a good place to start for those who are just beginning to explore the potential of multivariate analysis. Once you have established a comfort zone around the following tools, you will likely have a much easier time in grasping the nature of ERGMs, SAOMs, latent space models, multilevel models, and other advanced techniques that are now available to network analysts.</p>
+<div id="multiple-ols-regression---basics" class="section level3" number="16.2.1">
+<h3><span class="header-section-number">16.2.1</span> Multiple OLS Regression - Basics</h3>
+<p>Multiple ordinary least squares (OLS) regression is a powerful technique for estimating a continuous outcome. We generally think of the estimates that a regression produces as either predicting or explaining that outcome. The name, “ordinary least squares,” refers to the way the prediction fits the patterns evident in the data. For a model to be a “good fit,” it should, overall, have the least (smallest) squared differences between what the model predicts and what the data show. There are other methods for fitting a regression model, but this is probably the most common and best understood.</p>
+<p>Fundamentally, multiple regression uses the information contained in a set of independent variables (i.e., predictors) to make some prediction about a dependent variable (i.e., outcome). In theory, the variation in the outcome <em>depends</em> on the behavior of a set of predictors that are relatively <em>independent</em> of one another. Analyst use this tool to predict or explain what we should expect to see in some outcome if there is a change in one or more of the predictors.</p>
+<p>The generic equation for a regression model is:</p>
+<p><span class="math display">\[ Y_i=  \beta_{0} + \beta_{1} X_{1} + \beta_{2} X_{2} + \beta_{3} X_{3} + ... + \beta_{k} X_{k} + \varepsilon   \]</span></p>
+<p>In a regression model, <span class="math inline">\(Y_i\)</span> represents the outcome, or <em>dependent variable</em>, that is being predicted or explained. The explanations are given by the <span class="math inline">\(\beta_{i} X_{i}\)</span> chunks of the model. The <span class="math inline">\(X_{i}\)</span>s represent the predictors and the <span class="math inline">\(\beta_{i}\)</span>s represent the slope, which tells us how much and in what way we should expect the outcome to change for each one unit change in the particular predictor with which it is associated. When we specify (i.e., construct) a regression model, we only select the outcome and predictors (<span class="math inline">\(Y = X_1 + X_2\)</span> or <span class="math inline">\(earnings = experience + age\)</span>). The betas (<span class="math inline">\(\beta\)</span>) are calculated by estimating the regression. For example, if the beta for the predictor “experience” (in years) is calculated to be 250 (<span class="math inline">\(\beta_{experience} = 250\)</span>), then we would expect that, for each additional year of experience, the outcome (in this case, earnings) would increase by 250, holding the other predictors constant.</p>
+<p>That last bit (holding the other predictors constant) is important. It means that we are using the model as a relatively full description of what may predict or explain changes in an outcome. But, if we use just one of the variables to describe the expected changes in the outcome, then we should also acknowledge that this is what we would expect in the presence of the other variables. In other words, this is just one part of the story of what makes that outcome change.</p>
+<p>There are a few other elements to the equation that should be noted. The ellipse, followed by “<span class="math inline">\(+ \beta_{k} X_{k}\)</span>” is included to point out that it is possible to add any number of predictors to a model, within certain limits. There are a number of important considerations to selecting a reasonable and valid number of predictors for a regression model, and readers are strongly encouraged to seek that information in a text that deals more specifically with regression techniques and considerations.</p>
+<p>The (<span class="math inline">\(\beta_0\)</span>) symbol is referred to in the output from estimating a regression as the “intercept.” It may be interpreted as the value of the outcome when the values of all of the predictors are zero. An error term (<span class="math inline">\(\varepsilon\)</span>) is also included in the formal regression model. The error is not something that analysts will calculate. It is merely included to make the equation balance and acknowledge that we are only explaining a portion of what makes the outcome vary. There will always be something that we miss in our description (and, thus, in our models).</p>
+</div>
+<div id="multiple-ols-regression-using-qap" class="section level3" number="16.2.2">
+<h3><span class="header-section-number">16.2.2</span> Multiple OLS Regression using QAP</h3>
+<p>Some important differences exist between estimating a multiple regression with standard, randomly selected data and estimating one with network data. One of these considerations involves the number and type of simulations that are used for assessing the model. The example below focuses on introducing quadratic assignment procedure (QAP) for multivariate models. The QAP procedure that was initially introduced by Krackhardt assumes that all of the predictors are independent of one another (uncorrelated). The problem with that assumption is that relationships between predictors are common in multiple regression, but they reduce the accuracy of the original QAP test.</p>
+<p>Because the assumption of independent predictors is unrealistic in most circumstances, a newer QAP approach called “double semi-partialling” <span class="citation">(<a href="#ref-Dekkeretal2007" role="doc-biblioref">Dekker, Krackhardt, and Snijders 2007</a>)</span> was developed to provide a more robust permutation test that better accounts for the correlations between predictors. This was done through a modification of QAP that permutes the regression residuals (the difference between what the model predicts and what the data actually show in each observation) for each of the predictor variables over the network structure. This creates a permutation method that is more effective in reducing Type I error rates than other available QAP approaches.</p>
+<p>We cannot emphasize enough that this overview of multiple regression and QAP multiple regression is very superficial. Please look into some of the suggested readings at the end of this chapter if you are not already familiar with either method. They can be very powerful analytic techniques, but the analysis also may be very nuanced in its execution if one hopes to produce an accurate interpretation of the output.</p>
+</div>
+<div id="options-and-defaults-in-qap-ols-regression" class="section level3" number="16.2.3">
+<h3><span class="header-section-number">16.2.3</span> Options and Defaults in QAP OLS Regression</h3>
+<p>The help section for <code>netlm()</code> offers the following defaults for the function:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="quadratic-assignment-procedure-qap.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">netlm</span>(y, x, <span class="at">intercept =</span> <span class="cn">TRUE</span>, <span class="at">mode =</span> <span class="st">&quot;digraph&quot;</span>, <span class="at">diag =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb22-2"><a href="quadratic-assignment-procedure-qap.html#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">nullhyp =</span> <span class="fu">c</span>(<span class="st">&quot;qap&quot;</span>, <span class="st">&quot;qapspp&quot;</span>, <span class="st">&quot;qapy&quot;</span>, <span class="st">&quot;qapx&quot;</span>, <span class="st">&quot;qapallx&quot;</span>, <span class="st">&quot;cugtie&quot;</span>, <span class="st">&quot;cugden&quot;</span>,</span>
+<span id="cb22-3"><a href="quadratic-assignment-procedure-qap.html#cb22-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;cuguman&quot;</span>, <span class="st">&quot;classical&quot;</span>), </span>
+<span id="cb22-4"><a href="quadratic-assignment-procedure-qap.html#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">test.statistic =</span> <span class="fu">c</span>(<span class="st">&quot;t-value&quot;</span>, <span class="st">&quot;beta&quot;</span>), </span>
+<span id="cb22-5"><a href="quadratic-assignment-procedure-qap.html#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">tol =</span> <span class="fl">1e-7</span>, <span class="at">reps =</span> <span class="dv">1000</span>)  </span></code></pre></div>
+<p>The <code>netlm()</code> function requires, at minimum, a dependent variable (<code>y</code>) and at least one predictor (<code>x</code>). The dependent variable <em>must be entered as a matrix</em> of valued ties. This point is important to the analysis, as you will need a continuous dependent variable to run an OLS regression. If a network object, rather than a matrix, is entered as the dependent variable (<code>y</code>), then the tie values will be ignored and the network will be considered to be composed of binary ties. Users will receive no warning about this, and as previously discussed, multiple OLS is designed to predict tie values; thus, a dependent network composed only of 0s and 1s could result in misleading results.</p>
+<p>By default, the <code>netlm()</code> function reads the input networks as directed and not containing loops (i.e., diagonal values). If you are working with undirected data or data with loops, you will need to modify the <code>mode</code> or <code>diag</code> parameters to reflect those network features. The function will not automatically adjust how it reads in data.</p>
+<p>With the exceptions of <code>y</code>, <code>x</code>, <code>mode</code>, and <code>diag</code>, it is generally a good idea to leave the default arguments as they are when running a regression. That said, <strong>statnet</strong> allows users to modify a number of additional parameters that may be helpful under some very specific conditions. Users may change the type or manner in which the networks that are used for hypothesis testing are simulated, the speed and specificity of the test, and some control of the model’s ability to converge on “accurate enough” estimates. Users should consider changes to these parameters carefully before making them, as they will usually change major assumptions under which the model is estimated.</p>
+<p>As with other functions in <strong>statnet</strong>, the number of permutations defaults to 1000 (<code>reps = 1000</code>). Changes in this parameter will not affect the accuracy of the estimates in the regression output, but it will affect your ability to assess their significance. A larger number will generally make it easier to differentiate between whether the null should or should not be rejected. The tradeoff, especially with larger networks and multiple regression models, is that the regression can take a while to run. In the initial model-fitting phase, where a user may wish to see if they can get a model to run, it is fine to lower the number of permuted replications for the sake of speed. However, in the interest of avoiding a false positive (Type I error), any final models should be run with a larger number of iterations (&gt;1,000).</p>
+<p>Other defaults include the option of whether to use the intercept, the type of generated networks to use as comparison for testing the null hypothesis, as well as some more nuanced refinements to the network simulations. By default, <code>netlm()</code> includes an intercept in the regression. This is standard for a regression and its removal only should be done under a very limited set of circumstances, as doing so would be unrealistic in most situations.</p>
+<p>The <code>nullhyp</code> options include a variety of QAP and CUG simulations that will be used to simulate networks to be used to test the null. At the time of this writing, <code>qap</code> (the default) and <code>qapspp</code> function identically and use the double semi-partialling approach discussed earlier. However, the <code>netlm()</code> function also allows users to apply selectively some less-used variations of QAP. In many cases, the other options will have a higher Type I error rate than the double semi-partialling approach. Under some - very limited - conditions, users may wish to independently permute each of the predictors (<code>qapallx</code>), or permute one predictor at a time while holding the others constant (<code>qapx</code>). On most occasions, QAP permutes the predictor variables. If there is a good reason for doing so, users may alternatively elect to permute the outcome (<code>qapy</code>). Under other special conditions, users also are offered a variety of conditional uniform graph simulation methods, such as simulating networks of the same order (<code>cug</code>), density (<code>cugden</code>), or tie distribution (<code>cugtie</code>). There is even an option to run a regression without simulating networks to test the null (<code>classical</code>). However, we do not recommended this under any circumstances since the fact that you are using network data violates the assumptions behind the least squares modeling being used to assess significance, which substantially raises the probability of committing a Type I error.</p>
+<p>The remaining parameters that may be set offer means of tweaking a regression either to have closer comparisons for hypothesis testing or to produce estimates under difficult circumstances. The <code>test.statistic</code> argument allows the user to select between using a <code>"t.value"</code> distribution and a <code>"beta"</code> distribution when generating simulated networks. The simulated networks that are generated to test the null hypothesis are drawn from a universe of possible networks, had some things been just a little different. This approach is somewhat like looking at models of alternate realities, each of which is based on the one that we have observed in the networks we are analyzing. Monte Carlo procedures are used to generate the simulated networks. Rather than subscribe to the “anything is possible” line of thinking (a uniform probability distribution), the simulated networks are based on the originals with most simulations bearing a fairly strong resemblance to the original. They are drawn from a realm of possibilities that has most of the networks’ possible morphologies being just a little different and progressively fewer being very different.</p>
+<p>The way that the possible network morphologies or permutations are distributed should reflect the actual probabilities that the networks may take on such structures. The problem with this is that we almost never possess such knowledge. It is very difficult to know what could have been under unlimited hypothetical scenarios. That said, in some cases, we might have some idea that there should be even odds as to whether the network could have deviated in one direction or another. Alternatively, perhaps, we may have prior knowledge that chances are better that the networks would be different in a particular way than another. In such cases, we can design the comparisons to be either evenly distributed around the original network or in a manner that favors a particular morphology over another. That is the purpose behind the two <code>test.statistic</code> options.</p>
+<p>The <em>t-distribution</em> should be adequate, under most circumstances, when selecting a distribution for the test statistic. The t distribution (<code>"t.value"</code>) provides a symmetric probability distribution, meaning that any value drawn at random from the distribution is equally likely to be either above or below the distribution’s mean. The beta distribution (<code>beta</code>), on the other hand, is used when analysts have prior information that gives them reason to believe that certain states are more likely than are others. It can take a range of shapes, including symmetric, with the shape depending on the prior information gained through - in this case - parameters of the network being analyzed. When it takes on a skewed shape, it assigns a greater probability for values falling in one direction rather than the other - greater or less than the median. In either case, the simulated networks affect only the networks that are generated for hypothesis testing purposes.</p>
+<p>An argument that may affect the regression estimates of the intercept and beta values is “tolerance.” By default, tolerance is set very close to zero. The tolerance is small because it is used as a parameter that guides the algorithm in assessing whether calculations have begun to improve so little in each iteration that we may judge then to have converged upon the answer. In essence, the tolerance is a standard used as a stopping point for the algorithm. The clear tradeoff is that smaller tolerance values may take longer to converge, but greater values may - sometimes substantially - decrease accuracy.</p>
+<p>The <code>netlm()</code> function tolerance defaults to <code>tol = 1e-7</code>. We do not recommend users to modify this parameter; it should be adequate under most circumstances. If a model fails to converge, we strongly recommended that users first reevaluate the model, as that is frequently the source of the problem. Possible reasons for failure to converge include multicollinearity or an outcome with too little variation. But, if there is some reason why the model must remain as-is, then the tolerance may be adjusted upward by small increments. However, the upper tolerance limit for the tolerance should be somewhere around <code>1e-5</code> or <code>1e-4</code> and the output should be regarded with some skepticism at that point.</p>
+</div>
+<div id="estimating-a-qap-ols-multiple-regression-in-r" class="section level3" number="16.2.4">
+<h3><span class="header-section-number">16.2.4</span> Estimating a QAP OLS Multiple Regression in R</h3>
+<p>For an example of multiple OLS regression, consider the class friendship and interaction networks introduced at the beginning of the chapter. Neither of these networks has valued ties, but we can create a network with tie values by adding network ties together. In this case, we will add three types of ties that express how much of an affinity people have for one another: people they know (know); people they like (buddy); and people they feel close with (friend). When added together, we have a “friendship” scale that ranges from not friendly (0) to very close (3). This step is accomplished as follows:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="quadratic-assignment-procedure-qap.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a matrix to use as a dependent variable</span></span>
+<span id="cb23-2"><a href="quadratic-assignment-procedure-qap.html#cb23-2" aria-hidden="true" tabindex="-1"></a>friendship <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(know) <span class="sc">+</span> <span class="fu">as.matrix</span>(buddy) <span class="sc">+</span> <span class="fu">as.matrix</span>(friend)</span></code></pre></div>
+<p>We can now estimate a QAP multiple regression since we have a network with valued ties (<code>friendship</code>) to use as an outcome. For our independent networks, we will use three: one that captures students who worked together in groups (<code>groupWork</code>), one that indicates students who had classes together (<code>haveClass</code>), and one that indicates students who tended to talk with and work with one another (<code>WorkWith</code>). Each of the predictor variables are binary, meaning that all tie values in the networks are either 1 (a tie is present), or 0 (no tie exists).</p>
+<p>The resulting model may be written as:</p>
+<p><span class="math display">\[Y_{friendship}=  \alpha + \beta_{groupWork} X_{groupWork} + \beta_{haveClass} X_{haveClass} + \beta_{WorkWith} X_{WorkWith}\]</span></p>
+<p>When using the <code>netlm()</code> function’s defaults, running the model is fairly straightforward.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="quadratic-assignment-procedure-qap.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
+<span id="cb24-2"><a href="quadratic-assignment-procedure-qap.html#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="quadratic-assignment-procedure-qap.html#cb24-3" aria-hidden="true" tabindex="-1"></a>nols <span class="ot">&lt;-</span> <span class="fu">netlm</span>(friendship, <span class="fu">list</span>(groupWork, haveClass, WorkWith))</span>
+<span id="cb24-4"><a href="quadratic-assignment-procedure-qap.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="quadratic-assignment-procedure-qap.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(nols)</span>
+<span id="cb24-6"><a href="quadratic-assignment-procedure-qap.html#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="quadratic-assignment-procedure-qap.html#cb24-7" aria-hidden="true" tabindex="-1"></a>OLS Network Model</span>
+<span id="cb24-8"><a href="quadratic-assignment-procedure-qap.html#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="quadratic-assignment-procedure-qap.html#cb24-9" aria-hidden="true" tabindex="-1"></a>Coefficients<span class="sc">:</span></span>
+<span id="cb24-10"><a href="quadratic-assignment-procedure-qap.html#cb24-10" aria-hidden="true" tabindex="-1"></a>            Estimate   <span class="fu">Pr</span>(<span class="sc">&lt;=</span>b) <span class="fu">Pr</span>(<span class="sc">&gt;=</span>b) <span class="fu">Pr</span>(<span class="sc">&gt;=</span><span class="er">|</span>b<span class="sc">|</span>)</span>
+<span id="cb24-11"><a href="quadratic-assignment-procedure-qap.html#cb24-11" aria-hidden="true" tabindex="-1"></a>(intercept) <span class="fl">0.09013486</span> <span class="fl">0.799</span>   <span class="fl">0.201</span>   <span class="fl">0.262</span>    </span>
+<span id="cb24-12"><a href="quadratic-assignment-procedure-qap.html#cb24-12" aria-hidden="true" tabindex="-1"></a>x1          <span class="fl">0.54500391</span> <span class="fl">1.000</span>   <span class="fl">0.000</span>   <span class="fl">0.000</span>    </span>
+<span id="cb24-13"><a href="quadratic-assignment-procedure-qap.html#cb24-13" aria-hidden="true" tabindex="-1"></a>x2          <span class="fl">0.49071928</span> <span class="fl">1.000</span>   <span class="fl">0.000</span>   <span class="fl">0.000</span>    </span>
+<span id="cb24-14"><a href="quadratic-assignment-procedure-qap.html#cb24-14" aria-hidden="true" tabindex="-1"></a>x3          <span class="fl">1.01990958</span> <span class="fl">1.000</span>   <span class="fl">0.000</span>   <span class="fl">0.000</span>    </span>
+<span id="cb24-15"><a href="quadratic-assignment-procedure-qap.html#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="quadratic-assignment-procedure-qap.html#cb24-16" aria-hidden="true" tabindex="-1"></a>Residual standard error<span class="sc">:</span> <span class="fl">0.6979</span> on <span class="dv">458</span> degrees of freedom</span>
+<span id="cb24-17"><a href="quadratic-assignment-procedure-qap.html#cb24-17" aria-hidden="true" tabindex="-1"></a>F<span class="sc">-</span>statistic<span class="sc">:</span> <span class="fl">190.2</span> on <span class="dv">3</span> and <span class="dv">458</span> degrees of freedom, p<span class="sc">-</span>value<span class="sc">:</span>     <span class="dv">0</span> </span>
+<span id="cb24-18"><a href="quadratic-assignment-procedure-qap.html#cb24-18" aria-hidden="true" tabindex="-1"></a>Multiple R<span class="sc">-</span>squared<span class="sc">:</span> <span class="fl">0.5547</span>  Adjusted R<span class="sc">-</span>squared<span class="sc">:</span> <span class="fl">0.5518</span> </span></code></pre></div>
+<p>We can call the output for a QAP multiple regression using either the <code>print()</code> or <code>summary()</code> commands. The <code>print()</code> command, which we use in our example, generates only the standard regression output, while the <code>summary()</code> command provides additional diagnostic measures, as well as which type of simulated network was used to create the null hypothesis distribution and the number of simulated networks in the distribution.</p>
+<p>The regression output from <code>netlm()</code> does not retain or include the names of the variables used. When running a number of regressions, this can quickly become a problem, since many of the regressions will look alike. It is, therefore, important to either retain the R script used to run the test, make a note of the order in which you entered the variables, or both.</p>
+<p>The <em>F-statistic</em> essentially tells us whether the model is more informative than if we were to simply consider the average tie value from the outcome variable (<span class="math inline">\(\mu_{friendship} = 1.10\)</span>). In this case, the F-statistic is significant (<span class="math inline">\(p\leq 0.05\)</span>). Thus, we can reject the null hypothesis that there is no difference between the information gained thorough using the model instead of the average tie value and conclude that the model is informative. We may, therefore, move on to consider the estimates that the model produced.</p>
+<p>In the output from the <code>friendship</code> model, under “Coefficients:” x1 represents the first variable in the model (<code>groupWork</code>), x2 represents the second (<code>haveClass</code>), and x3 the third (<code>WorkWith</code>). It is apparent from the two-tailed p-values (<code>Pr(&gt;=|b|)</code>) that each of the three predictors is statistically significant (<span class="math inline">\(p\leq 0.05\)</span>), telling us that all three variables predict (or, if you prefer, explain) the tie values in the outcome network. The intercept, on the other hand, is not statistically significant and therefore cannot be interpreted. We can, however, plug the estimates into the model at this point.</p>
+<p><span class="math display">\[Y_{friendship}=  0.09 + 0.55 *X_{groupWork} + 0.49 * X_{haveClass} + 1.02 * X_{WorkWith}\]</span></p>
+<p>The interpretation of the variables in this model generally is done variable by variable, while holding the others constant. For example, we can interpret the variable <code>WorkWith</code> as predicting, “the value of a friendship tie would increase by 1.02 if students work and talk together in class, holding the other two variables in the model constant.” In other words, if two students share a tie in the <code>WorkWith</code> network, then we would predict that the value of the tie that they share in the friendship network would be at least 1.02, regardless of whether they have ties in the <code>haveClass</code> or the <code>groupWork</code> networks. In addition, because all of the predictors in this network are measured in the same way (all three are binary networks), we can also see that that <code>WorkWith</code> ties appear to be more strongly associated with friendship tie values than the other two types of ties. If we measured the predictor networks on different scales, then we could not draw such a conclusion.</p>
+<p>Finally, we may wish to note the R-squared value. R-squared is a rule of thumb, and may be regarded an approximate measure of the variation in the outcome that is accounted for by the model. This value gives us an idea of how good our model predicts the outcome we are analyzing. In this case, we could state that this model accounts for roughly 55% of the variation in the value friendship ties in this network. Again, keep in mind that this is just a rule-of-thumb indicator and should not be taken too seriously.</p>
+</div>
+<div id="logistic-regression-using-qap" class="section level3" number="16.2.5">
+<h3><span class="header-section-number">16.2.5</span> Logistic Regression Using QAP</h3>
+<p>Logistic regression was designed to predict or explain binary outcomes. It is, therefore, best used to analyze networks with binary ties (i.e., tie values take a value of “0” or “1”). Like multiple OLS regression, the purpose of logistic regression is to describe the relationship between some outcome and the predictor variables that may relate to it. The major difference between the two is that logistic regression is designed for binary outcomes and, therefore, predicts the likelihood of a tie forming in the outcome network.</p>
+</div>
+<div id="options-and-defaults-in-qap-logistic-regression" class="section level3" number="16.2.6">
+<h3><span class="header-section-number">16.2.6</span> Options and Defaults in QAP Logistic Regression</h3>
+<p>The help section for <code>netlm()</code> offers the following defaults for the function:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="quadratic-assignment-procedure-qap.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">netlogit</span>(y, x, <span class="at">intercept =</span> <span class="cn">TRUE</span>, <span class="at">mode =</span> <span class="st">&quot;digraph&quot;</span>, <span class="at">diag =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb25-2"><a href="quadratic-assignment-procedure-qap.html#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">nullhyp =</span> <span class="fu">c</span>(<span class="st">&quot;qap&quot;</span>, <span class="st">&quot;qapspp&quot;</span>, <span class="st">&quot;qapy&quot;</span>, <span class="st">&quot;qapx&quot;</span>, <span class="st">&quot;qapallx&quot;</span>, <span class="st">&quot;cugtie&quot;</span>, <span class="st">&quot;cugden&quot;</span>,</span>
+<span id="cb25-3"><a href="quadratic-assignment-procedure-qap.html#cb25-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;cuguman&quot;</span>, <span class="st">&quot;classical&quot;</span>), </span>
+<span id="cb25-4"><a href="quadratic-assignment-procedure-qap.html#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">test.statistic =</span> <span class="fu">c</span>(<span class="st">&quot;z-value&quot;</span>,<span class="st">&quot;beta&quot;</span>), </span>
+<span id="cb25-5"><a href="quadratic-assignment-procedure-qap.html#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">tol =</span> <span class="fl">1e-7</span>, <span class="at">reps =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<p>As you can see, there is very little difference between the options in <code>netlogit()</code> and <code>netlm()</code> functions. The two differences are the y variable and the <code>test.statistic</code>. Because logistic regression is designed specifically for binary data, there is no problem with using a network object for the y variable. The <code>netlogit()</code> function will read network variables correctly, as being dichotomous. It remains important, however, to recheck the nature of the data being tested in order to account for directed networks and whether or not loops are present.</p>
+<p>The other difference, the test statistics available used for modeling the simulated networks, is in the available distributions. The notable difference is the use of the z-distribution, rather than the t-distribution, as the default option. This is because z is better suited for use with dichotomous outcomes than the t-distribution. It is also a symmetric distribution and thus models values above and below the median as being equally likely. The beta-distribution is available in both <code>netlm()</code> and <code>netlogit()</code> since it we can use it to describe dichotomous or continuous data. As mentioned earlier, it allows for either symmetric or skewed distributions. Depending on prior information, as is present in the network data, the beta distribution may give more weight to values either above or below the median.</p>
+<p>For most users, the test statistic options may not be necessary. Nevertheless, it is still important for those using the <code>netlogit()</code> function to review the options carefully and modify all that apply to the analysis being conducted and the networks being used to do so. For more information on each of the arguments within the <code>netlogit()</code> function, review the options and defaults section under the <code>netlm()</code> section of this text.</p>
+</div>
+<div id="estimating-a-qap-logistic-regression-in-r" class="section level3" number="16.2.7">
+<h3><span class="header-section-number">16.2.7</span> Estimating a QAP Logistic Regression in R</h3>
+<p>Estimating a logistic regression in R can be deceptively simple. If the observed network is directed and has no loops, then all that may be required is to list the networks being used as outcome and predictors. For an example, consider the organizational convergence network used in the QAP correlation example earlier in the chapter. Assuming that the organization would be interested in explaining why colleagues collaborate on projects, the other two networks could prove useful.</p>
+<p>As it happens, the networks used in this example are undirected. In addition to the outcome variable (y) and predictor variables (x), it is important for the sake of accuracy to identify the networks as undirected (<code>mode = "graph"</code>). All other default settings are applicable to this analysis, so no further specification is necessary.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="quadratic-assignment-procedure-qap.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
+<span id="cb26-2"><a href="quadratic-assignment-procedure-qap.html#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="quadratic-assignment-procedure-qap.html#cb26-3" aria-hidden="true" tabindex="-1"></a>nlog <span class="ot">&lt;-</span> <span class="fu">netlogit</span>(collab, <span class="fu">list</span>(commun, esteem), <span class="at">mode =</span> <span class="st">&quot;graph&quot;</span>)</span>
+<span id="cb26-4"><a href="quadratic-assignment-procedure-qap.html#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="quadratic-assignment-procedure-qap.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Examine the results</span></span>
+<span id="cb26-6"><a href="quadratic-assignment-procedure-qap.html#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(nlog)</span></code></pre></div>
+<p>As with OLS QAP regression, the logistic QAP model for networks does not retain or include the names of variables. In the model above, recall that the outcome is collaboration, x1 is the network of <code>communication</code> ties, and <code>x2</code> is the network of <code>esteem</code> ties. As with <code>netlm()</code>, either <code>print()</code> or <code>summary()</code> will call the regression output, with the latter calling additional diagnostic output.</p>
+<p>The <em>chi</em>-square test of fit improvement provides a loose indication of model fit. A significant p-value for the chi-square test of fit improvement tends to indicate relatively good model fit. Although this is a good place to start in evaluating the model, there are other indications that also should be considered. In this case, the p-value is less than the conventional 0.05 threshold, indicating that there is some reason to believe that the model may be a good fit.</p>
+<p>Each of the predictor variables, communication and esteem, are also statistically significant. The <code>netlogit()</code> output provides two forms of estimates. The coefficients listed under <em>Estimate</em> are the log odds of a tie in the output network, and the <em>Exp(b)</em> coefficients are the odds ratios, calculated by taking the exponential function of the log odds. For example, the exponential function of the estimate for community ties may be calculated by entering <code>exp(2.920187)</code>. The odds ratios are provided for the user’s convenience. We can see that the estimates of the log odds for each of the variables is positive, indicating that the likelihood of a tie is more likely than not in each case. We can get an idea of just how much more likely when considering the odds ratios. For example, the odds ratio for communication is 18.5, indicating that - holding all other variables constant - a collaboration tie is 18.5 times more likely between offices that share communication ties than with those that do not. We can see that, as may be expected, communication ties appear to offer greater odds of creating a collaboration tie than do esteem ties in this network.</p>
+<p>The pseudo R-square values offer a rough approximation of how well the predictors account for what we can observe in the outcome. We should note, however, that pseudo R-square measures are usually fairly conservative and, as with OLS regression, far from exact.</p>
+</div>
+</div>
+</div>
+<h3> References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Dekkeretal2007" class="csl-entry">
+Dekker, David, David Krackhardt, and Tom A. B. Snijders. 2007. <span>“Sensitivity of MRQAP Tests to Collinearity and Autocorrelation Conditions.”</span> <em>Psychometrika</em> 72: 563–81.
+</div>
+<div id="ref-HubertandSchultz1976" class="csl-entry">
+Hubert, Lawrence, and James Schultz. 1976. <span>“Quadratic Assignment as a General Data Analysis Strategy.”</span> <em>British Journal of Mathematical and Statistical Psychology</em> 29: 190–241.
+</div>
+<div id="ref-Krackhardt1987b" class="csl-entry">
+———. 1987b. <span>“QAP Partialling as a Test of Spuriosness.”</span> <em>Social Networks</em> 9.
+</div>
+<div id="ref-Krackhardt1988" class="csl-entry">
+———. 1988. <span>“Predicting with Networks: Nonparametric Multiple Regression Analysis on Dyadic Data.”</span> <em>Social Networks</em> 10: 359–81.
+</div>
+<div id="ref-Mantel1967" class="csl-entry">
+Mantel, Nathan. 1967. <span>“The Detection of Disease Clustering and a Generalized Regression Model.”</span> <em>Cancer Research</em> 27: 209–20.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="a-note-on-interpretation-causality-in-networks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjcallag/r4ds/edit/editing/6-Hypothesis_Testing_QAP_CUG.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"font_settings": {
+"family": "sans",
+"theme": "white",
+"size": 2
+},
+"info": true,
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

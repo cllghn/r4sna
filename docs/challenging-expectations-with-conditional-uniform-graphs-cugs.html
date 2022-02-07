@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>15 Challenging Expectations with Conditional Uniform Graphs (CUGs) | R for Social Network Analysis</title>
+  <meta name="description" content="TBD." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="15 Challenging Expectations with Conditional Uniform Graphs (CUGs) | R for Social Network Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="TBD." />
+  <meta name="github-repo" content="cjcallag/r4sna" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="15 Challenging Expectations with Conditional Uniform Graphs (CUGs) | R for Social Network Analysis" />
+  
+  <meta name="twitter:description" content="TBD." />
+  
+
+<meta name="author" content="CORE Lab" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="developing-and-testing-working-hypotheses.html"/>
+<link rel="next" href="quadratic-assignment-procedure-qap.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.20/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="libs/selectize-0.12.0/selectize.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="my_style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Social Network Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instructors"><i class="fa fa-check"></i><b>1.1</b> Instructors</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="2" data-path="setting-up.html"><a href="setting-up.html"><i class="fa fa-check"></i><b>2</b> Setting Up</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setting-up.html"><a href="setting-up.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.1</b> R and RStudio Basics</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="setting-up.html"><a href="setting-up.html#basics-of-r-coding-in-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Basics of R Coding in RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="setting-up.html"><a href="setting-up.html#project-workflow"><i class="fa fa-check"></i><b>2.2</b> Project Workflow</a></li>
+</ul></li>
+<li class="part"><span><b>II Lab 1</b></span></li>
+<li class="chapter" data-level="3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
+<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Lab 2</b></span></li>
+<li class="chapter" data-level="5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>5</b> Manipulating and Simplifying Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#setup-2"><i class="fa fa-check"></i><b>5.1</b> Setup</a></li>
+<li class="chapter" data-level="5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-libraries-2"><i class="fa fa-check"></i><b>5.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-the-backbones-of-two-mode-network-projections"><i class="fa fa-check"></i><b>5.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-data"><i class="fa fa-check"></i><b>5.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#non-statistical-projections-of-the-co-sponsorhip-data"><i class="fa fa-check"></i><b>5.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="5.3.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-backbones"><i class="fa fa-check"></i><b>5.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#simplifying-networks-in-igraph-anabaptist-leadership-network"><i class="fa fa-check"></i><b>5.4</b> Simplifying Networks in <strong>igraph</strong>: Anabaptist Leadership Network</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-network-and-attribute-data"><i class="fa fa-check"></i><b>5.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-the-anabaptist-network"><i class="fa fa-check"></i><b>5.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="5.4.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#shrinking-collapsing-contracting-networks"><i class="fa fa-check"></i><b>5.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="5.4.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-subnetworks"><i class="fa fa-check"></i><b>5.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#multiple-stacked-networks-in-igraph-sampson-monastery"><i class="fa fa-check"></i><b>5.5</b> Multiple (Stacked) Networks in <strong>igraph</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-edge-list-network-data"><i class="fa fa-check"></i><b>5.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="5.5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-stacked-networks"><i class="fa fa-check"></i><b>5.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="5.5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-and-plotting-individual-networks"><i class="fa fa-check"></i><b>5.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>6</b> Manipulating and Simplifying Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#setup-3"><i class="fa fa-check"></i><b>6.1</b> Setup</a></li>
+<li class="chapter" data-level="6.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-libraries-3"><i class="fa fa-check"></i><b>6.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="6.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-the-backbones-of-two-mode-network-projections-1"><i class="fa fa-check"></i><b>6.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-data-1"><i class="fa fa-check"></i><b>6.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#non-statistical-projections-of-the-co-sponsorhip-data-1"><i class="fa fa-check"></i><b>6.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="6.3.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-backbones-1"><i class="fa fa-check"></i><b>6.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#simplifying-networks-in-statnet-anabaptist-network"><i class="fa fa-check"></i><b>6.4</b> Simplifying Networks in <strong>statnet</strong>: Anabaptist Network</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-network-and-attribute-data-1"><i class="fa fa-check"></i><b>6.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="6.4.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-the-anabaptist-network-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="6.4.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#shrinking-collapsing-contracting-networks-1"><i class="fa fa-check"></i><b>6.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="6.4.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-subnetworks-1"><i class="fa fa-check"></i><b>6.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#multiple-stacked-networks-in-statnet-sampson-monastery"><i class="fa fa-check"></i><b>6.5</b> Multiple (Stacked) Networks in <strong>statnet</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-edge-list-network-data-1"><i class="fa fa-check"></i><b>6.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="6.5.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-stacked-networks-1"><i class="fa fa-check"></i><b>6.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="6.5.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-and-plotting-individual-networks-1"><i class="fa fa-check"></i><b>6.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Lab 3</b></span></li>
+<li class="chapter" data-level="7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html"><i class="fa fa-check"></i><b>7</b> Network Topography in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#setup-4"><i class="fa fa-check"></i><b>7.1</b> Setup</a></li>
+<li class="chapter" data-level="7.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#load-libraries-4"><i class="fa fa-check"></i><b>7.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="7.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#import-data"><i class="fa fa-check"></i><b>7.3</b> Import Data</a></li>
+<li class="chapter" data-level="7.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size-and-interconnectedness"><i class="fa fa-check"></i><b>7.4</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size"><i class="fa fa-check"></i><b>7.4.1</b> Network Size</a></li>
+<li class="chapter" data-level="7.4.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#density-and-average-degree"><i class="fa fa-check"></i><b>7.4.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="7.4.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#clustering-coefficient-global-and-local"><i class="fa fa-check"></i><b>7.4.3</b> Clustering Coefficient (Global and Local)</a></li>
+<li class="chapter" data-level="7.4.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#cohesion-and-fragmentation"><i class="fa fa-check"></i><b>7.4.4</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="7.4.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#compactness-and-breadth"><i class="fa fa-check"></i><b>7.4.5</b> Compactness and Breadth</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization-and-related-measures-of-spread"><i class="fa fa-check"></i><b>7.5</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization"><i class="fa fa-check"></i><b>7.5.1</b> Centralization</a></li>
+<li class="chapter" data-level="7.5.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#variance-and-standard-deviation"><i class="fa fa-check"></i><b>7.5.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="7.5.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#diameter-and-average-path-distance"><i class="fa fa-check"></i><b>7.5.3</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#calculating-the-e-i-index-with-isnar"><i class="fa fa-check"></i><b>7.6</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+<li class="chapter" data-level="7.7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-level-measures-table"><i class="fa fa-check"></i><b>7.7</b> Network Level Measures Table</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html"><i class="fa fa-check"></i><b>8</b> Network Topography in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#setup-5"><i class="fa fa-check"></i><b>8.1</b> Setup</a></li>
+<li class="chapter" data-level="8.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#load-libraries-5"><i class="fa fa-check"></i><b>8.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="8.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#import-data-1"><i class="fa fa-check"></i><b>8.3</b> Import Data</a></li>
+<li class="chapter" data-level="8.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-and-interconnectedness-1"><i class="fa fa-check"></i><b>8.4</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-1"><i class="fa fa-check"></i><b>8.4.1</b> Network Size</a></li>
+<li class="chapter" data-level="8.4.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#density-and-average-degree-1"><i class="fa fa-check"></i><b>8.4.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="8.4.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#cohesion-and-fragmentation-1"><i class="fa fa-check"></i><b>8.4.3</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="8.4.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#compactness-and-breadth-1"><i class="fa fa-check"></i><b>8.4.4</b> Compactness and Breadth</a></li>
+<li class="chapter" data-level="8.4.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-interconnectedness-scores"><i class="fa fa-check"></i><b>8.4.5</b> Table of Interconnectedness Scores</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-and-related-measures-of-spread-1"><i class="fa fa-check"></i><b>8.5</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-1"><i class="fa fa-check"></i><b>8.5.1</b> Centralization</a></li>
+<li class="chapter" data-level="8.5.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#variance-and-standard-deviation-1"><i class="fa fa-check"></i><b>8.5.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="8.5.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-centralization-scores"><i class="fa fa-check"></i><b>8.5.3</b> Table of Centralization Scores</a></li>
+<li class="chapter" data-level="8.5.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#diameter-and-average-path-distance-1"><i class="fa fa-check"></i><b>8.5.4</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#calculating-the-e-i-index-with-isnar-1"><i class="fa fa-check"></i><b>8.6</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+</ul></li>
+<li class="part"><span><b>V Lab 4</b></span></li>
+<li class="chapter" data-level="9" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html"><i class="fa fa-check"></i><b>9</b> Detecting Subgroups in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#setup-6"><i class="fa fa-check"></i><b>9.1</b> Setup</a></li>
+<li class="chapter" data-level="9.2" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#load-library"><i class="fa fa-check"></i><b>9.2</b> Load Library</a></li>
+<li class="chapter" data-level="9.3" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#import-and-plot-network"><i class="fa fa-check"></i><b>9.3</b> Import and Plot Network</a></li>
+<li class="chapter" data-level="9.4" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#components-in-igraph"><i class="fa fa-check"></i><b>9.4</b> Components in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.5" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#cliques-in-igraph"><i class="fa fa-check"></i><b>9.5</b> Cliques in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.6" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#k-cores-in-igraph"><i class="fa fa-check"></i><b>9.6</b> K-Cores in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.7" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#community-detection-in-igraph"><i class="fa fa-check"></i><b>9.7</b> Community Detection in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#girvan-newman"><i class="fa fa-check"></i><b>9.7.1</b> Girvan-Newman</a></li>
+<li class="chapter" data-level="9.7.2" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#walktrap"><i class="fa fa-check"></i><b>9.7.2</b> Walktrap</a></li>
+<li class="chapter" data-level="9.7.3" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#spin-glass"><i class="fa fa-check"></i><b>9.7.3</b> Spin-Glass</a></li>
+<li class="chapter" data-level="9.7.4" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#louvain"><i class="fa fa-check"></i><b>9.7.4</b> Louvain</a></li>
+<li class="chapter" data-level="9.7.5" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#table-of-results"><i class="fa fa-check"></i><b>9.7.5</b> Table of Results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html"><i class="fa fa-check"></i><b>10</b> Detecting Subgroups in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#setup-7"><i class="fa fa-check"></i><b>10.1</b> Setup</a></li>
+<li class="chapter" data-level="10.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#load-libraries-6"><i class="fa fa-check"></i><b>10.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="10.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#import-and-plot-network-1"><i class="fa fa-check"></i><b>10.3</b> Import and Plot Network</a></li>
+<li class="chapter" data-level="10.4" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#components-in-statnet"><i class="fa fa-check"></i><b>10.4</b> Components in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.5" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#cliques-in-statnet"><i class="fa fa-check"></i><b>10.5</b> Cliques in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.6" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#k-cores-in-statnet"><i class="fa fa-check"></i><b>10.6</b> K-Cores in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.7" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#community-detection-in-statnet"><i class="fa fa-check"></i><b>10.7</b> Community Detection in <strong>statnet</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path=""><a href="#part-lab-5"><i class="fa fa-check"></i>(PART) Lab 5</a>
+<ul>
+<li class="chapter" data-level="10.8" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#setup-8"><i class="fa fa-check"></i><b>10.8</b> Setup</a></li>
+<li class="chapter" data-level="10.9" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#load-libraries-7"><i class="fa fa-check"></i><b>10.9</b> Load Libraries</a></li>
+<li class="chapter" data-level="10.10" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#load-data-2"><i class="fa fa-check"></i><b>10.10</b> Load Data</a></li>
+<li class="chapter" data-level="10.11" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#centrality-and-power-undirected-networks"><i class="fa fa-check"></i><b>10.11</b> Centrality and Power (Undirected Networks)</a>
+<ul>
+<li class="chapter" data-level="10.11.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#degree-closeness-betweenness-and-eigenvector"><i class="fa fa-check"></i><b>10.11.1</b> Degree, Closeness, Betweenness, and Eigenvector</a></li>
+<li class="chapter" data-level="10.11.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#correlations"><i class="fa fa-check"></i><b>10.11.2</b> Correlations</a></li>
+<li class="chapter" data-level="10.11.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#interactive-table"><i class="fa fa-check"></i><b>10.11.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="10.12" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#centrality-and-prestige-directed-networks"><i class="fa fa-check"></i><b>10.12</b> Centrality and Prestige (Directed Networks)</a>
+<ul>
+<li class="chapter" data-level="10.12.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#in-n-out-degree-hubs-and-authorities"><i class="fa fa-check"></i><b>10.12.1</b> In-N-Out Degree, Hubs and Authorities</a></li>
+<li class="chapter" data-level="10.12.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#correlations-1"><i class="fa fa-check"></i><b>10.12.2</b> Correlations</a></li>
+<li class="chapter" data-level="10.12.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#interactive-table-1"><i class="fa fa-check"></i><b>10.12.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="10.13" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#brokerage"><i class="fa fa-check"></i><b>10.13</b> Brokerage</a>
+<ul>
+<li class="chapter" data-level="10.13.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#cutpoints"><i class="fa fa-check"></i><b>10.13.1</b> Cutpoints</a></li>
+<li class="chapter" data-level="10.13.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#cutsets-key-player"><i class="fa fa-check"></i><b>10.13.2</b> Cutsets (Key Player)</a></li>
+<li class="chapter" data-level="10.13.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#burts-constraint"><i class="fa fa-check"></i><b>10.13.3</b> Burt’s Constraint</a></li>
+<li class="chapter" data-level="10.13.4" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#bridges-edge-betweenness"><i class="fa fa-check"></i><b>10.13.4</b> Bridges: Edge Betweenness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html"><i class="fa fa-check"></i><b>11</b> Centrality and Brokerage in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#setup-9"><i class="fa fa-check"></i><b>11.1</b> Setup</a></li>
+<li class="chapter" data-level="11.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#libraries"><i class="fa fa-check"></i><b>11.2</b> Libraries</a></li>
+<li class="chapter" data-level="11.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#load-data-3"><i class="fa fa-check"></i><b>11.3</b> Load Data</a></li>
+<li class="chapter" data-level="11.4" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#centrality-and-power-undirected-networks-1"><i class="fa fa-check"></i><b>11.4</b> Centrality and Power (Undirected Networks)</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#degree-closeness-betweenness-and-eigenvector-centrality"><i class="fa fa-check"></i><b>11.4.1</b> Degree, Closeness, Betweenness and Eigenvector Centrality</a></li>
+<li class="chapter" data-level="11.4.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#correlations-2"><i class="fa fa-check"></i><b>11.4.2</b> Correlations</a></li>
+<li class="chapter" data-level="11.4.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#interactive-table-2"><i class="fa fa-check"></i><b>11.4.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#centrality-and-prestige-directed-networks-1"><i class="fa fa-check"></i><b>11.5</b> Centrality and Prestige (Directed Networks)</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#in-n-out-degree-input-domain-and-proximity-prestige"><i class="fa fa-check"></i><b>11.5.1</b> In-N-Out Degree, Input Domain, and Proximity Prestige</a></li>
+<li class="chapter" data-level="11.5.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#correlations-3"><i class="fa fa-check"></i><b>11.5.2</b> Correlations</a></li>
+<li class="chapter" data-level="11.5.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#interactive-table-3"><i class="fa fa-check"></i><b>11.5.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#brokerage-1"><i class="fa fa-check"></i><b>11.6</b> Brokerage</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#cutpoints-1"><i class="fa fa-check"></i><b>11.6.1</b> Cutpoints</a></li>
+<li class="chapter" data-level="11.6.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#cutsets-key-player-1"><i class="fa fa-check"></i><b>11.6.2</b> Cutsets (Key Player)</a></li>
+<li class="chapter" data-level="11.6.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#gould-and-fernandez"><i class="fa fa-check"></i><b>11.6.3</b> Gould and Fernandez</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VI Lab 6</b></span></li>
+<li class="chapter" data-level="12" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html"><i class="fa fa-check"></i><b>12</b> Hypothesis Testing (QAP and CUG)</a></li>
+<li class="chapter" data-level="13" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>13</b> Introduction</a></li>
+<li class="chapter" data-level="14" data-path="developing-and-testing-working-hypotheses.html"><a href="developing-and-testing-working-hypotheses.html"><i class="fa fa-check"></i><b>14</b> Developing and Testing Working Hypotheses</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="developing-and-testing-working-hypotheses.html"><a href="developing-and-testing-working-hypotheses.html#univariate-bivariate-and-multivariate-statistical-tests"><i class="fa fa-check"></i><b>14.1</b> Univariate, Bivariate, and Multivariate Statistical Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="challenging-expectations-with-conditional-uniform-graphs-cugs.html"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html"><i class="fa fa-check"></i><b>15</b> Challenging Expectations with Conditional Uniform Graphs (CUGs)</a>
+<ul>
+<li class="chapter" data-level="15.0.1" data-path="challenging-expectations-with-conditional-uniform-graphs-cugs.html"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#example-data"><i class="fa fa-check"></i><b>15.0.1</b> Example Data</a></li>
+<li class="chapter" data-level="15.1" data-path="challenging-expectations-with-conditional-uniform-graphs-cugs.html"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#univariate-cug-tests-in-statnet"><i class="fa fa-check"></i><b>15.1</b> Univariate CUG Tests in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="15.2" data-path="challenging-expectations-with-conditional-uniform-graphs-cugs.html"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#bivariate-tests-using-cug"><i class="fa fa-check"></i><b>15.2</b> Bivariate Tests Using CUG</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html"><i class="fa fa-check"></i><b>16</b> Quadratic Assignment Procedure (QAP)</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#bivariate-tests-using-qap-correlation"><i class="fa fa-check"></i><b>16.1</b> Bivariate Tests Using QAP: Correlation</a></li>
+<li class="chapter" data-level="16.2" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#multivariate-models-using-qap"><i class="fa fa-check"></i><b>16.2</b> Multivariate Models using QAP</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#multiple-ols-regression---basics"><i class="fa fa-check"></i><b>16.2.1</b> Multiple OLS Regression - Basics</a></li>
+<li class="chapter" data-level="16.2.2" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#multiple-ols-regression-using-qap"><i class="fa fa-check"></i><b>16.2.2</b> Multiple OLS Regression using QAP</a></li>
+<li class="chapter" data-level="16.2.3" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#options-and-defaults-in-qap-ols-regression"><i class="fa fa-check"></i><b>16.2.3</b> Options and Defaults in QAP OLS Regression</a></li>
+<li class="chapter" data-level="16.2.4" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#estimating-a-qap-ols-multiple-regression-in-r"><i class="fa fa-check"></i><b>16.2.4</b> Estimating a QAP OLS Multiple Regression in R</a></li>
+<li class="chapter" data-level="16.2.5" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#logistic-regression-using-qap"><i class="fa fa-check"></i><b>16.2.5</b> Logistic Regression Using QAP</a></li>
+<li class="chapter" data-level="16.2.6" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#options-and-defaults-in-qap-logistic-regression"><i class="fa fa-check"></i><b>16.2.6</b> Options and Defaults in QAP Logistic Regression</a></li>
+<li class="chapter" data-level="16.2.7" data-path="quadratic-assignment-procedure-qap.html"><a href="quadratic-assignment-procedure-qap.html#estimating-a-qap-logistic-regression-in-r"><i class="fa fa-check"></i><b>16.2.7</b> Estimating a QAP Logistic Regression in R</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="a-note-on-interpretation-causality-in-networks.html"><a href="a-note-on-interpretation-causality-in-networks.html"><i class="fa fa-check"></i><b>17</b> A Note on interpretation: Causality in Networks</a></li>
+<li class="chapter" data-level="18" data-path="summary-lessons-learned.html"><a href="summary-lessons-learned.html"><i class="fa fa-check"></i><b>18</b> Summary: Lessons Learned</a></li>
+<li class="part"><span><b>VII Lab 6</b></span></li>
+<li class="part"><span><b>VIII Lab 7</b></span></li>
+<li class="part"><span><b>IX Lab 8</b></span></li>
+<li class="part"><span><b>X Lab 9</b></span></li>
+<li class="part"><span><b>XI Lab 10</b></span></li>
+<li class="part"><span><b>XII Appendices</b></span></li>
+<li class="chapter" data-level="19" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>19</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>19.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
+<li class="chapter" data-level="19.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>19.2</b> Installation</a></li>
+<li class="chapter" data-level="19.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>19.3</b> Loading</a></li>
+<li class="chapter" data-level="19.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>19.4</b> Import and View Data</a></li>
+<li class="chapter" data-level="19.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>19.5</b> Extracting Variables/Columns</a></li>
+<li class="chapter" data-level="19.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>19.6</b> Creating Filters/Extracting Rows</a></li>
+<li class="chapter" data-level="19.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>19.7</b> Arrange Rows</a></li>
+<li class="chapter" data-level="19.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>19.8</b> Making a New Column/Variable</a></li>
+<li class="chapter" data-level="19.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>19.9</b> Rename Variables</a></li>
+<li class="chapter" data-level="19.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>19.10</b> Summarizing</a>
+<ul>
+<li class="chapter" data-level="19.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>19.10.1</b> Simple Summary</a></li>
+<li class="chapter" data-level="19.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>19.10.2</b> Group Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="19.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>19.11</b> Combining Data</a>
+<ul>
+<li class="chapter" data-level="19.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>19.11.1</b> Left Join</a></li>
+<li class="chapter" data-level="19.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>19.11.2</b> Right Join</a></li>
+<li class="chapter" data-level="19.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>19.11.3</b> Inner Join</a></li>
+<li class="chapter" data-level="19.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>19.11.4</b> Full Join</a></li>
+</ul></li>
+<li class="chapter" data-level="19.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>19.12</b> Piping Multiple Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>20</b> Key SNA Functions and Visualization Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>20.1</b> <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="20.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>20.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="20.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>20.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>20.2</b> <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="20.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>20.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="20.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>20.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>XIII References</b></span></li>
+<li class="chapter" data-level="21" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>21</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown">
+Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Social Network Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="challenging-expectations-with-conditional-uniform-graphs-cugs" class="section level1" number="15">
+<h1><span class="header-section-number">15</span> Challenging Expectations with Conditional Uniform Graphs (CUGs)</h1>
+<p>Social network researchers often ask themselves whether a particular measure is distinctive, or if it is more or less what one would expect of a network “of this sort.” That question is generally difficult to answer. Even when one has analyzed a large number of similar networks, such as communication networks, it can be difficult to quantify what to expect, given the functions, interactions, unique culture and history, and other features that may make a particular network somewhat idiosyncratic. Although there have been attempts to aggregate lessons learned about particular types of networks <span class="citation">(<a href="#ref-Gerdes2015" role="doc-biblioref">Gerdes 2015</a>)</span> and several typologies exist, such as scale-free and random networks <span class="citation">(<a href="#ref-Barabasi2003" role="doc-biblioref">Barabasi 2003</a>)</span>, there are presently no agreed upon standard benchmarks against which to measure a particular type of network.</p>
+<p>What we <em>can</em> do, however, is compare some global measure of a particular network to a random assortment of networks that share some structural similarity with the original network. This is the idea behind univariate (involving only one variable) <em>conditional uniform graph</em> (CUG) tests. We can use structural measures such as size, density, or other aspects that characterize a particular network as a reference point, from which to model hypothetical networks. The question we are asking then becomes, “is this measure of our network of interest about what we would expect of a network that is this size?” or “is this about what we would expect of a network with ties that are this dense?” In this way, we can at least get an idea of whether a network’s structure is relatively unique, as compared with a random assortment of networks that are similar in some way.</p>
+<p>In classical statistics, we normally gather a sample of independent observations (generally through random sampling) from a population through surveys, available data, or similar methods, and the distribution of those observations allows us to infer something about that population. Because it is currently impossible to collect a random sample of certain network typologies, Leo Katz and James Powell <span class="citation">(<a href="#ref-Katz1957" role="doc-biblioref">1957</a>)</span> proposed the next best thing: <em>generate</em> the distribution based on certain known properties of the observed network. The distribution of networks that are generated are considered to be “uniform” in the sense that all networks of a given description are equally likely. That is to say that the sample of networks that are generated according to (or “<em>conditioned</em> on”) some network characteristic, such as network size, density, the distribution of dyads, and so on, represent the population of all possible networks that could fall into that description. Although the computing power we currently possess does not allow us to reasonably create all possible permutations of networks that share a particular description, we do not need to do so. Instead, we only need to generate a sample of similar networks, which we can use use to help us infer how typical a particular metric is for a certain type of network.</p>
+<p>The idea behind conditional uniform graphs (CUGs) is simple in its essence. By executing the commands listed below, you will essentially run through a four-step process in one brief step. The process for estimating a CUG is:</p>
+<ol style="list-style-type: decimal">
+<li>First, calculate the summary measure (e.g., density, average degree, dyad census, centralization), or measure of network comparison (e.g., correlation).</li>
+<li>Next, generate a large number (usually n=1000) of random networks that share (or are “conditioned on”) a given parameter (e.g., size, number of edges, distribution of edges).</li>
+<li>Calculate the summary measure for all randomly generated networks.</li>
+<li>Compare the measure of the network being analyzed with the distribution of measures from the randomly generated networks.</li>
+</ol>
+<p>When comparing the measure of the network being analyzed with the distribution of measures from the randomly generated networks, we are essentially asking whether the measure we observe in the network under scrutiny occurs rarely enough for us to reject the idea that it is just what one would expect to see in any <em>similarly scaled</em> random network. For such an evaluation, the proportion of measures from the randomly generated networks that are greater than or equal to that of the original network, as well as the proportion that are equal to or less than the original network’s measure, will provide an indication of the measure’s relative rarity (similar to a p-value). Alternatively, one can graph the distribution for a visual comparison between the measure for the original network and the distribution of measures in the randomly generated networks. In either case, the object is to compare the metric generated from the network of interest with the same metric calculated on all of the randomly generated networks.</p>
+<p>Think of conditional uniform graphs as testing whether a particular measure is something that is unique to a particular network, or whether it falls into the range of what we may expect from any random network of that sort. From a hypothesis-testing point of view, we are testing to see whether we can reject the idea that the network measure is no different from what we would expect at random. The idea of “no difference” is the null hypothesis, which is what we test with CUGs. Stated somewhat more formally:</p>
+<blockquote>
+<p><strong>H<sub>0</sub>:</strong> <em>There is no difference between (a particular global measure) of a given network and what we would get if the same measure was taken over a set of similar networks.</em></p>
+</blockquote>
+<p>Imagine that a particular network seems to be very centralized, in terms of betweenness, around a particular set of nodes. You can report the value of betweenness centralization that you observe in the network. But, if you also suspect that the density of ties in that network may be what explains how the network came to be so dominated by only a few nodes, then it can be very helpful to test that suspicion. The null hypothesis would then read as follows:</p>
+<blockquote>
+<p><strong>H<sub>0</sub>:</strong> <em>There is no difference between the measure of betweenness centralization in the network being analyzed and the betweenness centralization of randomly generated networks with the same density.</em></p>
+</blockquote>
+<p>If, and only if, the measure for the network being analyzed is very rarely similar to those of the various randomly generated networks, then we are free to reject the null hypothesis. In rejecting the null, we are free to conclude that the measure of the observed network differs significantly from what we would expect from <em>similar</em> networks. Following traditional understandings of statistical significance, we generally think of “rare” as being about 5% or less. So, if the measure of the original network is similar to less than 5% of the randomly generated networks, we would consider the difference to be statistically significant, and therefore different from what we would expect to get at random. If, for example, we conditioned the randomly generated networks only on the density of the original network and there is a statistically significant difference, then we can conclude that the density of the network does not explain why the measure is as extreme as it is <span class="citation">(<a href="#ref-Robins2013" role="doc-biblioref">G. L. Robins 2013</a>)</span>.</p>
+<div id="example-data" class="section level3" number="15.0.1">
+<h3><span class="header-section-number">15.0.1</span> Example Data</h3>
+<p>The examples in this section utilize networks that were elicited from a class of students from disparate programs who were learning network analysis. In addition to answering questions about who they worked with in the past, who they were presently working with, and with whom they have had classes in the past, the group was asked to develop questions that correspond with three levels of intimacy for them. The three resulting networks were titled “know,” “buddy,” and “friend.” Each is defined by the question used to elicit the particular relationship.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-3">Table 15.1: </span>Class Friendship and Interaction Networks
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Network Name
+</th>
+<th style="text-align:left;">
+Survey Question
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+know
+</td>
+<td style="text-align:left;">
+I know this person well enough to feel compelled to greet them in a crowded room,<br> such as a bar or a restaurant.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+buddy
+</td>
+<td style="text-align:left;">
+I know this person well enough and I would choose - or have chosen - to spend time<br> with them outside of class.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+friend
+</td>
+<td style="text-align:left;">
+I would feel comfortable enough to trust this person with personal information that<br> I would not share with many people.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+groupWork
+</td>
+<td style="text-align:left;">
+Who have you studied or worked with in a group in the past?
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+haveClass
+</td>
+<td style="text-align:left;">
+Who do you have at least one other class with?
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WorkWith
+</td>
+<td style="text-align:left;">
+Who do you talk with and work with during this class?
+</td>
+</tr>
+</tbody>
+</table>
+<p>We’ve stored the files in <code>.rda</code> format (i.e. “Rdata”). You can load them using the <code>load()</code> function.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;know.rda&quot;</span>)</span>
+<span id="cb2-2"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;buddy.rda&quot;</span>)</span>
+<span id="cb2-3"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;friend.rda&quot;</span>)</span>
+<span id="cb2-4"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;groupWork.rda&quot;</span>)</span>
+<span id="cb2-5"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;haveClass.rda&quot;</span>)</span>
+<span id="cb2-6"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;WorkWith.rda&quot;</span>)</span></code></pre></div>
+</div>
+<div id="univariate-cug-tests-in-statnet" class="section level2" number="15.1">
+<h2><span class="header-section-number">15.1</span> Univariate CUG Tests in <strong>statnet</strong></h2>
+<p>Currently, <strong>statnet</strong> employs two forms of the CUG test function. The developers are phasing in a newer <code>cug.test()</code> function that eventually will be the only choice for running univariate or bivariate CUG tests in the <strong>statnet</strong> suite. The older <code>cugtest()</code> function (note the missing period in the name) remains the only method for running bivariate CUG tests and still has some functionality that the newer version currently does not exhibit.</p>
+<p>At its simplest, a CUG test will require three items of information: the network (<code>dat</code>), the global measure or univariate statistic to test (<code>FUN</code>), and the type of conditioning to create the randomly generated networks (<code>cmode</code>). The example below uses only betweenness centralization as the global measure. In some cases, however, global measures such as centralization may require additional arguments that support the function. For example, an analyst who wishes to run a CUG test using inverse closeness centralization as a global measure, will need to identify centralization as the function being tested (<code>FUN = centralization</code>); then, provide a list of arguments specifying the nodal centrality scores (<code>closeness</code>) and type of closeness being computed (<code>suminvdir</code>). Note that these latter two arguments would normally be provided when calculating the closeness centralization for a given graph (e.g., <code>centralization(dat, FUN = closeness, cmode = "suminvdir")</code>) using <strong>statnet</strong>. To communicate all of this, the script should read as follows.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cug.test</span>(<span class="at">dat =</span> net,</span>
+<span id="cb3-2"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb3-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">FUN =</span> centralization,</span>
+<span id="cb3-3"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb3-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">FUN.args =</span> <span class="fu">list</span>(closeness, </span>
+<span id="cb3-4"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb3-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">cmode =</span> <span class="st">&quot;suminvdir&quot;</span>),</span>
+<span id="cb3-5"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb3-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">cmode =</span> <span class="st">&quot;size&quot;</span>)</span></code></pre></div>
+<p>Other global measures such as transitivity, density, or reciprocity will not require passing additional arguments using <code>FUN.args = list()</code>.</p>
+<p>Also, note that we condition the randomly generated networks on all three of the conditions implemented in the <code>cug.test()</code> function: size; number of edges; and the distribution of dyads. This choice is for demonstration purposes only. Under normal circumstances, we would just condition the randomly generated networks on any one of the three. Here, we run all three to demonstrate how they differ.</p>
+<p>Each of the three options condition the randomly generated networks according to the number of nodes in the original network (<code>"size"</code>). Conditioning on <code>"edges"</code> jointly conditions simulations on size and the number of edges (for undirected networks) or the number of arcs (for directed networks) in a network. If the argument <code>ignore.eval = FALSE</code> is included, then the distribution of tie values will be used when conditioning on <code>"edges"</code>. The default for this function is <code>ignore.eval = TRUE</code>, meaning that CUG tests will ignore tie values by default. When conditioning on <code>"dyad.census"</code>, the function will replicate simulations according to the distribution of mutual, null, and (in the case of directed networks) asymmetric arcs in the original test network(s).</p>
+<p>By default, CUG tests in <strong>statnet</strong> will randomly generate 1,000 networks. The number of randomly generated networks can be reduced by specifying some smaller number (e.g., <code>reps = 100</code>); producing a smaller number of simulations will produce a quicker, if less precise, test. On one hand, this approach can be important for more intensive functions that take a while to render. On the other, this method can be an advantage for running tests on multiple networks when the measure is slow, or if the networks are large or particularly dense. For publishable-quality tests, however, we recommend to either use the default, or increase it to a much larger number (e.g., 10,000) in order to increase the theoretical sample size and, therefore, improve the precision of the test results.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:Know-Visualization"></span>
+<img src="6-Hypothesis_Testing_QAP_CUG_files/figure-html/Know-Visualization-1.png" alt="A directed network of self-reported friendships between students, sized according to betweenness." width="70%" />
+<p class="caption">
+Figure 15.1: A directed network of self-reported friendships between students, sized according to betweenness.
+</p>
+</div>
+<p>Consider the visualization of the directed network in <a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#fig:Know-Visualization">15.1</a>. The <code>friends</code> network consists of ties structured from one of three questions that students answered to denote close friends in class. Given the network’s structure and the betweenness centrality of each node, it seems apparent that three nodes dominate the network: <code>q</code>, <code>r</code>, and <code>b</code>. But is that level of centralization special to this class’ network, or is this something that we would normally expect for a network this size? Is it something that we would normally expect for a network with this size and number of edges? Is it something that we would normally expect for a network with this size and distribution of dyads? We could state, therefore, the null hypothesis for each as the following:</p>
+<blockquote>
+<p><strong>H<sub>0</sub>:</strong> <em>There is no difference between the measure of betweenness centralization in the friendship network and the betweenness centralization measures in networks of this size.</em></p>
+</blockquote>
+<blockquote>
+<p><strong>H<sub>0</sub>:</strong> <em>There is no difference between the measure of betweenness centralization in the friendship network and the betweenness centralization measures in networks of this size and number of edges.</em></p>
+</blockquote>
+<blockquote>
+<p><strong>H<sub>0</sub>:</strong> <em>There is no difference between the measure of betweenness centralization in the friendship network and the betweenness centralization measures in networks of this size and distribution of dyads.</em></p>
+</blockquote>
+<p>We can compare each CUG test run on betweenness centralization with a null distribution conditioned on size, edges, and dyad census.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Condition by size</span></span>
+<span id="cb4-2"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cug.test</span>(<span class="at">dat =</span> friend, </span>
+<span id="cb4-3"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb4-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">FUN =</span> centralization,</span>
+<span id="cb4-4"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb4-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">FUN.arg =</span> <span class="fu">list</span>(<span class="at">FUN =</span> betweenness), </span>
+<span id="cb4-5"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb4-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">cmode =</span> <span class="st">&quot;size&quot;</span>)</span>
+<span id="cb4-6"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Condition by edges</span></span>
+<span id="cb4-7"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cug.test</span>(<span class="at">dat =</span> friend,</span>
+<span id="cb4-8"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb4-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">FUN =</span> centralization,</span>
+<span id="cb4-9"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb4-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">FUN.arg =</span> <span class="fu">list</span>(<span class="at">FUN =</span> betweenness), </span>
+<span id="cb4-10"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb4-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">cmode =</span> <span class="st">&quot;edges&quot;</span>)</span>
+<span id="cb4-11"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Condition by dyad census</span></span>
+<span id="cb4-12"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cug.test</span>(<span class="at">dat =</span> friend,</span>
+<span id="cb4-13"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb4-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">FUN =</span> centralization,</span>
+<span id="cb4-14"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb4-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">FUN.arg =</span> <span class="fu">list</span>(<span class="at">FUN =</span> betweenness), </span>
+<span id="cb4-15"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb4-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">cmode =</span> <span class="st">&quot;dyad.census&quot;</span>)</span></code></pre></div>
+<p>We present an example of the raw CUG test output conditioned on size below followed by organized results for all three conditions (see <a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#tab:CUG-output">15.2</a>). Output for a CUG test includes information on the parameters included in the test. In the example below, the first four lines of the output indicate that network size served as the condition upon which to simulate networks; the network data were directed (<code>digraph</code>); the diagonal was not used (meaning that no loops were considered in calculations or simulations); and, the test generated 1,000 simulated networks (the default for this function). The lower portion of the output gives the observed value of betweenness centralization (<span class="math inline">\(C_B\)</span>=0.17) for the network being tested. The next two lines list the proportion of simulated networks with measures that are greater than or equal to the observed value, and the proportion with measures that are less than or equal to the observed measure, respectively. In this case, all the measures in the null distribution of simulated networks were less than or equal to the observed value of betweenness centralization. Normally, we can examine the proportions in much the same manner as a p-value in a standard statistical test. For reporting purposes, p-values cannot theoretically be equal to zero. For that reason, it is a good practice to report zero values of p as some arbitrarily small value such as p&lt;0.0001. The following table presents the results for all three tests.</p>
+<pre><code>
+Univariate Conditional Uniform Graph Test
+
+Conditioning Method: size 
+Graph Type: digraph 
+Diagonal Used: FALSE 
+Replications: 1000 
+
+Observed Value: 0.1700113 
+Pr(X&gt;=Obs): 0 
+Pr(X&lt;=Obs): 1 </code></pre>
+<table>
+<caption><span id="tab:CUG-output">Table 15.2: </span>Output from CUG Tests Conditioning on Size, Edges, and Dyads</caption>
+<thead>
+<tr class="header">
+<th align="right">Betweenness</th>
+<th align="right">Percent Greater</th>
+<th align="right">Percent Less</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.17</td>
+<td align="right">0.000</td>
+<td align="right">1.000</td>
+</tr>
+<tr class="even">
+<td align="right">0.17</td>
+<td align="right">0.268</td>
+<td align="right">0.732</td>
+</tr>
+<tr class="odd">
+<td align="right">0.17</td>
+<td align="right">0.458</td>
+<td align="right">0.542</td>
+</tr>
+</tbody>
+</table>
+<p>If you so desire, it is possible to produce a graphical representation of the comparison that is being implemented to run the test. This step is an optional one and it will not contribute greatly to the analysis. However, some may find it helpful to be able to see the comparison between the measure taken on the network, and the distribution of measures taken on the various simulations. Generating the graphical representation is a matter of plotting the test. The script below produces three plots, side-by-side. This step is done by using the <code>par(mfrow = c(1, 3))</code> to set the plot area to have one row and three columns. Each plot consists of the test name and an optional title (<code>main</code>).</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb6-2"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cugBetSize, </span>
+<span id="cb6-3"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb6-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Betweenness </span><span class="sc">\n</span><span class="st">Conditioned on Size&quot;</span>)</span>
+<span id="cb6-4"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cugBetEdges, </span>
+<span id="cb6-5"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb6-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Betweenness </span><span class="sc">\n</span><span class="st">Conditioned on Edges&quot;</span>)</span>
+<span id="cb6-6"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cugBetDyad, </span>
+<span id="cb6-7"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb6-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Betweenness </span><span class="sc">\n</span><span class="st">Conditioned on Dyads&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:CUGplots"></span>
+<img src="6-Hypothesis_Testing_QAP_CUG_files/figure-html/CUGplots-1.png" alt="CUG Plots Conditioning on Size, Edges, and Dyads" width="70%" />
+<p class="caption">
+Figure 15.2: CUG Plots Conditioning on Size, Edges, and Dyads
+</p>
+</div>
+<p>The resulting histograms, pictured in <a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#fig:CUGplots">15.2</a>, provide an intuitive representation of how the observed measure of betweenness centralization compares with the distributions of measures of the simulated networks. The vertical red line represents the observed measure and its relationship to the null distributions. In this case, the difference between the original network’s betweenness centralization is substantially greater than are those taken of the simulated networks of the same size. The histograms, however, demonstrate no statistically significant differences for networks conditioned on the same size and the same number of edges (density) as the friend network, or networks of the same size and the same number of dyads as the friend network. The latter two histograms illustrate that we cannot rule out the null hypothesis that the friendship network is the same as what we would expect from networks of the same size and density, or networks that are the same size and and have the same number of dyads. We <em>can</em> rule out the null hypothesis that betweenness centralization for the friend network is what we would expect for networks of the same size. This result is likely due to the way density and the number of dyads are not restricted when the networks are conditioned on size alone and were likely very different from the others.</p>
+</div>
+<div id="bivariate-tests-using-cug" class="section level2" number="15.2">
+<h2><span class="header-section-number">15.2</span> Bivariate Tests Using CUG</h2>
+<p>Analysts can use conditional uniform graph tests with multiple networks for bivariate and multivariate statistical tests as well. A fundamental bivariate test that researchers use frequently is the correlation test. Correlations provide a measure of relationships between variables and can be used to summarize the amount of similarity between pairs of networks. Although correlation is a descriptive measure in statistics, there is an associated test. Before running a correlation test, the correlation value is normally symbolized with the letter “r” or, when referring to populations, the Greek letter <em>Rho</em> (<span class="math inline">\(\rho\)</span>). Here, we use “r” to describe correlations between networks. In either case, correlation reflects the strength and direction of a relationship between two variables. In network analysis, those variables are embodied by networks.</p>
+<div class="infobox">
+<p><strong>Correlation Cheatsheet</strong></p>
+<ul>
+<li>Correlation is generally expressed as a two digit decimal.</li>
+<li>Correlations may take any value between negative one (-1) and one (1).
+<ul>
+<li>-1 and 1 both indicate a perfect relationship (or redundant information!).</li>
+<li>0 indicates no relationship.</li>
+</ul></li>
+<li>The absolute value of the correlation indicates the strength of the relationship.</li>
+<li>The sign of the correlation (- / +) value indicates the direction of the relationship.</li>
+</ul>
+</div>
+<p>It is also helpful to think of correlations in terms of how strong or weak they are. This way of thinking provides a more intuitive means of expressing what the correlation value indicates about the relationship between variables. <a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#tab:corvalues">15.3</a>, below, provides some rules of thumb for interpreting and reporting correlation values.</p>
+<table>
+<caption><span id="tab:corvalues">Table 15.3: </span> Rule of Thumb for Reading Correlation (Absolute) Values</caption>
+<thead>
+<tr class="header">
+<th align="left"><strong>Correlation Value</strong></th>
+<th align="center"><strong>General Interpretation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">|r| = 1.0</td>
+<td align="center">Perfect Correlation</td>
+</tr>
+<tr class="even">
+<td align="left">0.80 &lt; |r| &lt; 1.0</td>
+<td align="center">Very Strong</td>
+</tr>
+<tr class="odd">
+<td align="left">0.60 &lt; |r| &lt; 0.80</td>
+<td align="center">Strong</td>
+</tr>
+<tr class="even">
+<td align="left">0.40 &lt; |r| &lt; 0.60</td>
+<td align="center">Moderate</td>
+</tr>
+<tr class="odd">
+<td align="left">0.20 &lt; |r| &lt; 0.40</td>
+<td align="center">Weak</td>
+</tr>
+<tr class="even">
+<td align="left">0.00 &lt; |r| &lt; 0.20</td>
+<td align="center">Very Weak</td>
+</tr>
+<tr class="odd">
+<td align="left">|r| = 0.00</td>
+<td align="center">No Correlation</td>
+</tr>
+</tbody>
+</table>
+<p>The correlation <em>test</em> was designed to assess whether the correlation value is meaningful in the data that are being used. If the test indicates that the correlation value is not “meaningful,” then what we have learned is that we cannot rule out the possibility that the finding is spurious and no relationship actually exists. By running a correlation test, we are essentially double-checking to see whether a particular correlation is worth reporting. If the p-value for the correlation test is statistically insignificant (by convention, less than 0.05), then we treat the correlation as indeterminate. (We do not, however, report the value as zero.)</p>
+<p>Testing correlation between networks in R is fairly straightforward and similar to the tests covered above using centralization. Although the correlation test will provide correlation values, it is a good idea to produce them separately.</p>
+<p>Before going too far into how to calculate and test a correlation, it is important to highlight an important caveat. Each of the networks should be composed of the same nodes (people, organizations, etc.), and they should be in the same order if they are to be legitimately compared. Correlations between networks consisting of entirely different entities are not meaningful, since we are seeking to compare how similar or different the pattern of ties are for each node in one network with the same nodes in another. In other words, analysts only should calculate correlations between networks that represent differing sets of relationships for the <em>same</em> set of nodes. When <strong>statnet</strong> compares networks, it compares nodes based on the order in which they appear. The correlation function does not pay attention to vertex names and will not check to make sure that the networks consist of the same set of nodes and in the same order. So, while it is possible to get <strong>statnet</strong> to run a correlation on two networks of the same size but comprised of entirely different entities (e.g., people and organizations), the resulting correlation would be meaningless.</p>
+<p>The defaults for the <strong>statnet</strong>’s correlation function, <code>gcor()</code>, are listed below.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcor</span>(dat, <span class="at">dat2 =</span> <span class="cn">NULL</span>, <span class="at">g1 =</span> <span class="cn">NULL</span>, <span class="at">g2 =</span> <span class="cn">NULL</span>, <span class="at">diag =</span> <span class="cn">FALSE</span>, <span class="at">mode =</span> <span class="st">&quot;digraph&quot;</span>)</span></code></pre></div>
+<p>At its simplest, the <code>gcor()</code> function requires only a list of two or more networks that are comprised of the same node set. The function will produce correlation matrices when used with multiple networks, or a correlation value when using only two networks. As is standard for <strong>statnet</strong>, the <code>gcor()</code> function defaults to reading the networks as though they are directed (<code>mode</code>).</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gcor</span>(<span class="at">dat =</span> know, <span class="at">dat2 =</span> buddy)</span></code></pre></div>
+<pre><code>[1] 0.5155708</code></pre>
+<p>The <code>g1</code> and <code>g2</code> arguments are used to identify which elements (e.g., networks) of a list to use when calculating a correlation value. In the first example below, the correlation between the (directed) “know” and “buddy” networks is measured. In the second example, two of the three networks (“know” and “buddy”) are again selected, this time from a list of networks. The third example produces a correlation matrix.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb10-1" aria-hidden="true" tabindex="-1"></a>nets <span class="ot">&lt;-</span> <span class="fu">list</span>(know, buddy, friend)</span>
+<span id="cb10-2"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gcor</span>(<span class="at">dat =</span> nets, <span class="at">g1 =</span> <span class="dv">1</span>, <span class="at">g2 =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>[1] 0.5155708</code></pre>
+<p>To make the output more legible, the third example is nested within the <code>round()</code> function to reduce the output to two digits. <a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#tab:Correlation-table">15.4</a> provides a cleaner version of the correlation matrix of the three relationships.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">gcor</span>(nets), <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>     1    2    3
+1 1.00 0.52 0.25
+2 0.52 1.00 0.51
+3 0.25 0.51 1.00</code></pre>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:Correlation-table">Table 15.4: </span>Correlation Matrix for Aquaintances, Buddies, and Friends
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Buddies
+</th>
+<th style="text-align:center;">
+Close Friends
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Know Name
+</td>
+<td style="text-align:center;">
+0.52
+</td>
+<td style="text-align:center;">
+0.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Buddies
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0.51
+</td>
+</tr>
+</tbody>
+</table>
+<p>Correlation coefficients help empirically describe relationships. They do not provide, however, an indication of whether an observed measure of a relationship is just what we would expect from a pair of “similar” networks. Testing the correlation value provides an indication of whether that measure essentially is what we would expect in networks “of that sort.” The first decision, then, is in deciding what “networks of that sort” means.</p>
+<p>Traditional (parametric) correlation tests are designed to take the amount of variation in the sample into account in order to estimate whether the sample’s observed correlation value is likely to exist in the wider population the sample represents. The null hypothesis is then stated as either “no relationship,” or “the correlation value between the two variables does not exist in the population.” Using “r” as the symbol for correlation, this is more succinctly stated as “r=0.”</p>
+<p>For conditional uniform graph tests, we generally mean networks of the same size and maybe some other description. As with CUG tests, the correlation value for the original network pair is compared with the correlation values for all pairs of simulated networks. What we actually test is whether the strength and direction of the relationship (the correlation) that we observe between two networks is generalizable to similar networks. If we fail to reject the null hypothesis, we are saying that we cannot rule out the possibility that there is no difference between the measure we calculated and what we would expect from any two randomly selected networks of a certain type. The following are three alternatives for stating the null hypothesis (<span class="math inline">\(H_0\)</span>) for this test. If we fail to reject it, we are saying that we cannot rule out that the correlation value we observe is spurious.</p>
+<blockquote>
+<p><strong>H<sub>0</sub>:</strong> <em>r=0</em></p>
+</blockquote>
+<blockquote>
+<p><strong>H<sub>0</sub>:</strong> <em>There is no relationship. (The observed measure is spurious.)</em></p>
+</blockquote>
+<blockquote>
+<p><strong>H<sub>0</sub>:</strong> <em>The correlation value of the network is the same as the correlation values between randomly simulated networks of similar __________.</em></p>
+</blockquote>
+<p>R users should note a few differences between the two functions.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> One of the major differences between the two functions is the modes used for conditioning the simulated networks. Though similar, the options are not necessarily the same for both functions. The older function’s options allow analysts to condition networks based on size alone (<code>order</code>), size and tie probability (<code>density</code>), or size and bootstrapped degree distributions (<code>ties</code>). The default for this function is to condition networks on density. Therefore, if <code>cmode</code> (i.e., condition mode) is not specified, or if a user enters something the function does not recognize (i.e., anything that is not <code>order</code>, <code>density</code>, or <code>ties</code>), <code>cugtest()</code> will condition on density.</p>
+<table>
+<caption><span id="tab:differencesincugs">Table 15.5: </span> Differences in Conditioning between <code>cug.test</code> and <code>cugtest</code></caption>
+<thead>
+<tr class="header">
+<th align="left"><strong>Meaning</strong></th>
+<th align="center"><strong><code>cug.test</code> (newer)</strong></th>
+<th align="center"><strong><code>cugtest</code> (older)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Number of nodes in the network</td>
+<td align="center">“size” <em>(default)</em></td>
+<td align="center">“order”</td>
+</tr>
+<tr class="even">
+<td align="left">Distribution of edge values in the network</td>
+<td align="center"></td>
+<td align="center">“ties”</td>
+</tr>
+<tr class="odd">
+<td align="left">Distribution of edge values, or number of edges in the network</td>
+<td align="center">“edges”</td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="left">Density of the network</td>
+<td align="center"></td>
+<td align="center">“density” <em>(default)</em></td>
+</tr>
+<tr class="odd">
+<td align="left">Number (or value) of dyads the network</td>
+<td align="center">“dyad.census”</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p>Another difference between the two is that this older version allows analysts to specify which networks in a list to test. Unlike the <code>gcor()</code> function, which can produce a correlation matrix from a list of multiple networks, <strong>statnet</strong> does not currently produce a matrix with the results of correlation tests using conditional uniform graphs. Users have to estimate each test individually, as in the example below, or employ in a function to produce such a table. By default, <strong>statnet</strong> will select the first and second networks in the list (<code>g1 = 1</code> and <code>g2 = 2</code>). Users have to specify any other combination of networks.</p>
+<p>In the example below, correlation tests are run on a list of three networks (<code>know</code>, <code>buddy</code>, and <code>friend</code>). The <code>know</code> network is first, <code>buddy</code> is second, and <code>friend</code> is third. The function will see them, therefore, as networks 1, 2, and 3. The name of each object is, of course, up to the individual running the analysis. In this case, we named each test object in a way that helps keep track of which comparison is being run in each test and the conditions upon which the simulations are produced. This approach can be helpful since the output is savable and the network names and type of conditioning are not available in the output.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb14-1" aria-hidden="true" tabindex="-1"></a>nets <span class="ot">&lt;-</span> <span class="fu">list</span>(know, buddy, friend)</span>
+<span id="cb14-2"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb14-3" aria-hidden="true" tabindex="-1"></a>corOrd13 <span class="ot">&lt;-</span> <span class="fu">cugtest</span>(nets, gcor,</span>
+<span id="cb14-4"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb14-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">g1 =</span> <span class="dv">1</span>, <span class="at">g2 =</span> <span class="dv">3</span>,     <span class="co"># The first and third network</span></span>
+<span id="cb14-5"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb14-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cmode =</span> <span class="st">&quot;order&quot;</span>)</span>
+<span id="cb14-6"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb14-6" aria-hidden="true" tabindex="-1"></a>corOrd12 <span class="ot">&lt;-</span> <span class="fu">cugtest</span>(nets, gcor, </span>
+<span id="cb14-7"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb14-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">g1 =</span> <span class="dv">1</span>, <span class="at">g2 =</span> <span class="dv">2</span>,     <span class="co"># The first and second network</span></span>
+<span id="cb14-8"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb14-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cmode =</span> <span class="st">&quot;order&quot;</span>)</span>
+<span id="cb14-9"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb14-9" aria-hidden="true" tabindex="-1"></a>corOrd23 <span class="ot">&lt;-</span> <span class="fu">cugtest</span>(nets, gcor, </span>
+<span id="cb14-10"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb14-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">g1 =</span> <span class="dv">2</span>, <span class="at">g2 =</span> <span class="dv">3</span>,     <span class="co"># The second and third network </span></span>
+<span id="cb14-11"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb14-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">cmode =</span> <span class="st">&quot;order&quot;</span>)</span></code></pre></div>
+<p>For demonstration purposes, the next output depicts the results of only the first of the three tests. Unlike the newer <code>cug.test()</code> function, <code>cugtest()</code> does not provide information about the mode used for conditioning, whether the network was read as directed or undirected, or whether the diagonal (indicating the presence of loops) was included in the test. What this output provides, however, is still sufficient for performing the test and interpreting the results. Specifically, the output includes the p-values that were calculated in the same manner as the newer version, the number of simulations that were generated (<code>Replications</code>), the correlation value (<code>Test Value</code>), and a summary of the correlation values calculated for the simulated networks.</p>
+<p>The p-values reflect what can be seen when comparing the correlation value for the “know” and “friend” networks with those of the simulated networks. At no point is the correlation between simulated networks greater than 0.25. It is, rather, uniformly much lower. From this, we may conclude that it is safe to reject the null and conclude that the observed correlation between “know” and “friend” is not spurious when considered in comparison to networks of this size.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-1" aria-hidden="true" tabindex="-1"></a>corOrd13   <span class="ot">&lt;-</span> <span class="fu">cugtest</span>(nets, gcor, <span class="at">g1 =</span> <span class="dv">1</span>, <span class="at">g2 =</span> <span class="dv">3</span>, <span class="at">cmode =</span> <span class="st">&quot;order&quot;</span>)</span>
+<span id="cb15-2"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(corOrd13)</span>
+<span id="cb15-3"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-4" aria-hidden="true" tabindex="-1"></a>CUG Test Results</span>
+<span id="cb15-5"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-6" aria-hidden="true" tabindex="-1"></a>Estimated p<span class="sc">-</span>values<span class="sc">:</span></span>
+<span id="cb15-7"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">p</span>(<span class="fu">f</span>(rnd) <span class="sc">&gt;=</span> <span class="fu">f</span>(d))<span class="sc">:</span> <span class="dv">0</span> </span>
+<span id="cb15-8"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">p</span>(<span class="fu">f</span>(rnd) <span class="sc">&lt;=</span> <span class="fu">f</span>(d))<span class="sc">:</span> <span class="dv">1</span> </span>
+<span id="cb15-9"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-10" aria-hidden="true" tabindex="-1"></a>Test Diagnostics<span class="sc">:</span></span>
+<span id="cb15-11"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-11" aria-hidden="true" tabindex="-1"></a>    Test <span class="fu">Value</span> (<span class="fu">f</span>(d))<span class="sc">:</span> <span class="fl">0.2493995</span> </span>
+<span id="cb15-12"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-12" aria-hidden="true" tabindex="-1"></a>    Replications<span class="sc">:</span> <span class="dv">1000</span> </span>
+<span id="cb15-13"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-13" aria-hidden="true" tabindex="-1"></a>    Distribution Summary<span class="sc">:</span></span>
+<span id="cb15-14"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-14" aria-hidden="true" tabindex="-1"></a>        Min<span class="sc">:</span>     <span class="sc">-</span><span class="fl">0.1864245</span> </span>
+<span id="cb15-15"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-15" aria-hidden="true" tabindex="-1"></a>        1stQ<span class="sc">:</span>    <span class="sc">-</span><span class="fl">0.0338401</span> </span>
+<span id="cb15-16"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-16" aria-hidden="true" tabindex="-1"></a>        Med<span class="sc">:</span>     <span class="fl">0.0003852113</span> </span>
+<span id="cb15-17"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-17" aria-hidden="true" tabindex="-1"></a>        Mean<span class="sc">:</span>    <span class="sc">-</span><span class="fl">0.001926882</span> </span>
+<span id="cb15-18"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-18" aria-hidden="true" tabindex="-1"></a>        3rdQ<span class="sc">:</span>    <span class="fl">0.0279094</span> </span>
+<span id="cb15-19"><a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#cb15-19" aria-hidden="true" tabindex="-1"></a>        Max<span class="sc">:</span>     <span class="fl">0.1199181</span> </span></code></pre></div>
+<p>It is also possible to plot the distribution of simulation values using <code>plot(corOrd13)</code>, though the plots will appear somewhat different from the newer versions. As with other CUG tests, however, the plots are best only for illustration purposes and unnecessary for inference.</p>
+</div>
+</div>
+<h3> References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Barabasi2003" class="csl-entry">
+Barabasi, Albert-Laszlo. 2003. <em>Linked: How Everything Is Connected to Everything Else and What It Means for Business, Science, and Everyday Life</em>. 1st ed. New York, NY: Plume Books.
+</div>
+<div id="ref-Gerdes2015" class="csl-entry">
+Gerdes, Luke M. 2015. <em>Illuminating Dark Networks: The Study of Clandestine Groups and Organizations</em>. 1st ed. New York, NY: Cambridge University Press.
+</div>
+<div id="ref-Katz1957" class="csl-entry">
+Katz, Leo. 1957. <span>“Probability Distributions of Random Variables Associated with a Structure of the Sample Space of Sociometric Investigations.”</span> <em>Annals of Mathematical Statistics</em>, no. 2: 442–48.
+</div>
+<div id="ref-Robins2013" class="csl-entry">
+Robins, Gary L. 2013. <span>“A Tutorial on Methods of the Modeling and Analysis of Social Network Data.”</span> <em>Journal of Mathematical Psychology</em> 57: 261–74.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>The defaults for the <code>cugtest()</code> function are available by entering <code>?cugtest</code> into R.<a href="challenging-expectations-with-conditional-uniform-graphs-cugs.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="developing-and-testing-working-hypotheses.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="quadratic-assignment-procedure-qap.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjcallag/r4ds/edit/editing/6-Hypothesis_Testing_QAP_CUG.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"font_settings": {
+"family": "sans",
+"theme": "white",
+"size": 2
+},
+"info": true,
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
