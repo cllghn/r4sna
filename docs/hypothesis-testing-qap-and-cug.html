@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="centrality-and-brokerage-in-statnet.html"/>
-<link rel="next" href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"/>
+<link rel="next" href="exponential-random-graph-models-ergms.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -423,50 +423,67 @@ div.csl-indent {
 <li class="chapter" data-level="13.6" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#summary-lessons-learned"><i class="fa fa-check"></i><b>13.6</b> Summary: Lessons Learned</a></li>
 </ul></li>
 <li class="part"><span><b>VIII Lab 7</b></span></li>
+<li class="chapter" data-level="14" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html"><i class="fa fa-check"></i><b>14</b> Exponential Random Graph Models (ERGMs)</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#introduction-2"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#ergms-with-undirected-data"><i class="fa fa-check"></i><b>14.2</b> ERGMs With Undirected Data</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#data-and-setup"><i class="fa fa-check"></i><b>14.2.1</b> Data and Setup</a></li>
+<li class="chapter" data-level="14.2.2" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#pira-ergms"><i class="fa fa-check"></i><b>14.2.2</b> PIRA ERGMs</a></li>
+<li class="chapter" data-level="14.2.3" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#compare-to-qap-logistic-regression"><i class="fa fa-check"></i><b>14.2.3</b> Compare to QAP logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#ergms-with-directed-data"><i class="fa fa-check"></i><b>14.3</b> ERGMs With Directed Data</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#data-and-setup-1"><i class="fa fa-check"></i><b>14.3.1</b> Data and Setup</a></li>
+<li class="chapter" data-level="14.3.2" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#explore-data"><i class="fa fa-check"></i><b>14.3.2</b> Explore Data</a></li>
+<li class="chapter" data-level="14.3.3" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#teo-ergms"><i class="fa fa-check"></i><b>14.3.3</b> TEO ERGMs</a></li>
+<li class="chapter" data-level="14.3.4" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#appendix-ergm-package-and-pnet-comparison"><i class="fa fa-check"></i><b>14.3.4</b> Appendix: ERGM Package and PNet Comparison</a></li>
+</ul></li>
+</ul></li>
 <li class="part"><span><b>IX Lab 8</b></span></li>
 <li class="part"><span><b>X Lab 9</b></span></li>
 <li class="part"><span><b>XI Lab 10</b></span></li>
 <li class="part"><span><b>XII Appendices</b></span></li>
-<li class="chapter" data-level="14" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>14</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
+<li class="chapter" data-level="15" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>15</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>14.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
-<li class="chapter" data-level="14.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>14.2</b> Installation</a></li>
-<li class="chapter" data-level="14.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>14.3</b> Loading</a></li>
-<li class="chapter" data-level="14.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>14.4</b> Import and View Data</a></li>
-<li class="chapter" data-level="14.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>14.5</b> Extracting Variables/Columns</a></li>
-<li class="chapter" data-level="14.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>14.6</b> Creating Filters/Extracting Rows</a></li>
-<li class="chapter" data-level="14.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>14.7</b> Arrange Rows</a></li>
-<li class="chapter" data-level="14.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>14.8</b> Making a New Column/Variable</a></li>
-<li class="chapter" data-level="14.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>14.9</b> Rename Variables</a></li>
-<li class="chapter" data-level="14.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>14.10</b> Summarizing</a>
+<li class="chapter" data-level="15.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>15.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
+<li class="chapter" data-level="15.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>15.2</b> Installation</a></li>
+<li class="chapter" data-level="15.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>15.3</b> Loading</a></li>
+<li class="chapter" data-level="15.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>15.4</b> Import and View Data</a></li>
+<li class="chapter" data-level="15.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>15.5</b> Extracting Variables/Columns</a></li>
+<li class="chapter" data-level="15.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>15.6</b> Creating Filters/Extracting Rows</a></li>
+<li class="chapter" data-level="15.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>15.7</b> Arrange Rows</a></li>
+<li class="chapter" data-level="15.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>15.8</b> Making a New Column/Variable</a></li>
+<li class="chapter" data-level="15.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>15.9</b> Rename Variables</a></li>
+<li class="chapter" data-level="15.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>15.10</b> Summarizing</a>
 <ul>
-<li class="chapter" data-level="14.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>14.10.1</b> Simple Summary</a></li>
-<li class="chapter" data-level="14.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>14.10.2</b> Group Summary</a></li>
+<li class="chapter" data-level="15.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>15.10.1</b> Simple Summary</a></li>
+<li class="chapter" data-level="15.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>15.10.2</b> Group Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="14.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>14.11</b> Combining Data</a>
+<li class="chapter" data-level="15.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>15.11</b> Combining Data</a>
 <ul>
-<li class="chapter" data-level="14.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>14.11.1</b> Left Join</a></li>
-<li class="chapter" data-level="14.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>14.11.2</b> Right Join</a></li>
-<li class="chapter" data-level="14.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>14.11.3</b> Inner Join</a></li>
-<li class="chapter" data-level="14.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>14.11.4</b> Full Join</a></li>
+<li class="chapter" data-level="15.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>15.11.1</b> Left Join</a></li>
+<li class="chapter" data-level="15.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>15.11.2</b> Right Join</a></li>
+<li class="chapter" data-level="15.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>15.11.3</b> Inner Join</a></li>
+<li class="chapter" data-level="15.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>15.11.4</b> Full Join</a></li>
 </ul></li>
-<li class="chapter" data-level="14.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>14.12</b> Piping Multiple Variables</a></li>
+<li class="chapter" data-level="15.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>15.12</b> Piping Multiple Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>15</b> Key SNA Functions and Visualization Cheat Sheet</a>
+<li class="chapter" data-level="16" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>16</b> Key SNA Functions and Visualization Cheat Sheet</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>15.1</b> <strong>igraph</strong></a>
+<li class="chapter" data-level="16.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>16.1</b> <strong>igraph</strong></a>
 <ul>
-<li class="chapter" data-level="15.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>15.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
-<li class="chapter" data-level="15.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>15.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="16.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>16.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="16.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>16.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>15.2</b> <strong>statnet</strong></a>
+<li class="chapter" data-level="16.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>16.2</b> <strong>statnet</strong></a>
 <ul>
-<li class="chapter" data-level="15.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>15.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
-<li class="chapter" data-level="15.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>15.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="16.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>16.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="16.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>16.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>XIII References</b></span></li>
-<li class="chapter" data-level="16" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>16</b> References</a></li>
+<li class="chapter" data-level="17" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>17</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown">
 Published with bookdown</a></li>
@@ -1325,19 +1342,6 @@ Figure 13.4: Uncorrelated and Correlated Predictors in a Regression
 
 
 
-
-
-
-
-
-
-
-
-
-</div>
-
-
-
 <h3> References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Barabasi2003" class="csl-entry">
@@ -1380,7 +1384,7 @@ Mantel, Nathan. 1967. <span>“The Detection of Disease Clustering and a General
 McPherson, Miller, Lynn Smith-Lovin, and James M Cook. 2001. <span>“Birds of a Feather: Homophily in Social Networks.”</span> <em>Annual Review of Sociology</em> 27 (1): 415–44. <a href="https://doi.org/10.1146/annurev.soc.27.1.415">https://doi.org/10.1146/annurev.soc.27.1.415</a>.
 </div>
 <div id="ref-Robins2015" class="csl-entry">
-Robins, Gary. 2015. <em>Doing Social Network Research: Network-Based Research Design for Social Scientists</em>. 1st ed. SAGE Publications, Inc. <a href="https://methods.sagepub.com/book/doing-social-network-research">https://methods.sagepub.com/book/doing-social-network-research</a>.
+Robins, Garry. 2015. <em>Doing Social Network Research: Network-Based Research Design for Social Scientists</em>. 1st ed. SAGE Publications, Inc. <a href="https://methods.sagepub.com/book/doing-social-network-research">https://methods.sagepub.com/book/doing-social-network-research</a>.
 </div>
 <div id="ref-Robins2013" class="csl-entry">
 Robins, Gary L. 2013. <span>“A Tutorial on Methods of the Modeling and Analysis of Social Network Data.”</span> <em>Journal of Mathematical Psychology</em> 57: 261–74.
@@ -1408,7 +1412,7 @@ Valente, Thomas. 1995. <em>Network Models of the Diffusion of Innovations</em>. 
         </div>
       </div>
 <a href="centrality-and-brokerage-in-statnet.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="exponential-random-graph-models-ergms.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

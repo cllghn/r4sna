@@ -14,6 +14,8 @@ fig:Two-Permutations
 tab:convergence
 tab:Cor-tble
 fig:predictorGraphic
+tab:unnamed-chunk-13
+tab:unnamed-chunk-46
 introduction
 instructors
 setting-up
@@ -215,6 +217,17 @@ options-and-defaults-in-qap-logistic-regression
 estimating-a-qap-logistic-regression-in-r
 a-note-on-interpretation-causality-in-networks
 summary-lessons-learned
+exponential-random-graph-models-ergms
+introduction-2
+ergms-with-undirected-data
+data-and-setup
+pira-ergms
+compare-to-qap-logistic-regression
+ergms-with-directed-data
+data-and-setup-1
+explore-data
+teo-ergms
+appendix-ergm-package-and-pnet-comparison
 basic-base-r-and-tidyverse-data-manipulation-cheat-sheet
 basic-base-r-and-dplyr-functions
 installation
