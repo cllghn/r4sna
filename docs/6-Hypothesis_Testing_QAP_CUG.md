@@ -283,8 +283,8 @@ Table: (\#tab:CUG-output)Output from CUG Tests Conditioning on Size, Edges, and 
  Betweenness   Percent Greater   Percent Less
 ------------  ----------------  -------------
         0.17             0.000          1.000
-        0.17             0.268          0.732
-        0.17             0.458          0.542
+        0.17             0.241          0.759
+        0.17             0.462          0.538
 
 If you so desire, it is possible to produce a graphical representation of the comparison that is being implemented to run the test. This step is an optional one and it will not contribute greatly to the analysis. However, some may find it helpful to be able to see the comparison between the measure taken on the network, and the distribution of measures taken on the various simulations. Generating the graphical representation is a matter of plotting the test. The script below produces three plots, side-by-side. This step is done by using the `par(mfrow = c(1, 3))` to set the plot area to have one row and three columns. Each plot consists of the test name and an optional title (`main`).
 
@@ -478,12 +478,12 @@ Test Diagnostics:
 	Test Value (f(d)): 0.2493995 
 	Replications: 1000 
 	Distribution Summary:
-		Min:	 -0.1864245 
-		1stQ:	 -0.0338401 
-		Med:	 0.0003852113 
-		Mean:	 -0.001926882 
-		3rdQ:	 0.0279094 
-		Max:	 0.1199181 
+		Min:	 -0.1714765 
+		1stQ:	 -0.03411705 
+		Med:	 -0.0005437887 
+		Mean:	 -7.223176e-06 
+		3rdQ:	 0.03362787 
+		Max:	 0.1395489 
 ```
 
 It is also possible to plot the distribution of simulation values using `plot(corOrd13)`, though the plots will appear somewhat different from the newer versions. As with other CUG tests, however, the plots are best only for illustration purposes and unnecessary for inference.

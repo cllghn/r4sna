@@ -137,9 +137,9 @@ w_comp
 
 ```
 [[1]]
-IGRAPH b68efa8 DN-- 1702 9824 -- 
+IGRAPH e98d999 DN-- 1702 9824 -- 
 + attr: name (v/c), Type (e/c), Rel (e/c)
-+ edges from b68efa8 (vertex names):
++ edges from e98d999 (vertex names):
  [1] 1d_nicole_     ->ina_malone      1d_nicole_     ->willie_bign    
  [3] 4ever1937      ->bydrbre_        4ever1937      ->novostidamask  
  [5] 4ever1937      ->novostinn       4mysquad       ->crystal1johnson
@@ -151,9 +151,9 @@ IGRAPH b68efa8 DN-- 1702 9824 --
 + ... omitted several edges
 
 [[2]]
-IGRAPH b68efa8 DN-- 2 1 -- 
+IGRAPH 68ab784 DN-- 2 1 -- 
 + attr: name (v/c), Type (e/c), Rel (e/c)
-+ edge from b68efa8 (vertex names):
++ edge from 68ab784 (vertex names):
 [1] sto_christi->ingrkoch_koch
 ```
 
@@ -169,9 +169,9 @@ decompose(troll_g,
 
 ```
 [[1]]
-IGRAPH b6a1712 DN-- 1702 9824 -- 
+IGRAPH 7e816ce DN-- 1702 9824 -- 
 + attr: name (v/c), Type (e/c), Rel (e/c)
-+ edges from b6a1712 (vertex names):
++ edges from 7e816ce (vertex names):
  [1] 1d_nicole_     ->ina_malone      1d_nicole_     ->willie_bign    
  [3] 4ever1937      ->bydrbre_        4ever1937      ->novostidamask  
  [5] 4ever1937      ->novostinn       4mysquad       ->crystal1johnson
@@ -183,9 +183,9 @@ IGRAPH b6a1712 DN-- 1702 9824 --
 + ... omitted several edges
 
 [[2]]
-IGRAPH b6a1712 DN-- 2 1 -- 
+IGRAPH 85f7dab DN-- 2 1 -- 
 + attr: name (v/c), Type (e/c), Rel (e/c)
-+ edge from b6a1712 (vertex names):
++ edge from 85f7dab (vertex names):
 [1] sto_christi->ingrkoch_koch
 ```
 
@@ -197,9 +197,9 @@ w_comp[[1]]
 ```
 
 ```
-IGRAPH b68efa8 DN-- 1702 9824 -- 
+IGRAPH e98d999 DN-- 1702 9824 -- 
 + attr: name (v/c), Type (e/c), Rel (e/c)
-+ edges from b68efa8 (vertex names):
++ edges from e98d999 (vertex names):
  [1] 1d_nicole_     ->ina_malone      1d_nicole_     ->willie_bign    
  [3] 4ever1937      ->bydrbre_        4ever1937      ->novostidamask  
  [5] 4ever1937      ->novostinn       4mysquad       ->crystal1johnson
@@ -272,9 +272,9 @@ lg_s_comp
 ```
 
 ```
-IGRAPH bdc091a DN-- 168 974 -- 
+IGRAPH b60c60f DN-- 168 974 -- 
 + attr: name (v/c), Type (e/c), Rel (e/c)
-+ edges from bdc091a (vertex names):
++ edges from b60c60f (vertex names):
  [1] 4mysquad       ->crystal1johnson acejinev       ->4mysquad       
  [3] acejinev       ->blacknewsoutlet acejinev       ->tessyelmore    
  [5] acejinev       ->wokefromday1    acejinev       ->blacktolive    
@@ -420,9 +420,9 @@ troll_g
 ```
 
 ```
-IGRAPH af724af DN-- 1704 9825 -- 
+IGRAPH c9363b4 DN-- 1704 9825 -- 
 + attr: name (v/c), kcore (v/n), Type (e/c), Rel (e/c)
-+ edges from af724af (vertex names):
++ edges from c9363b4 (vertex names):
  [1] 1d_nicole_     ->ina_malone      1d_nicole_     ->willie_bign    
  [3] 4ever1937      ->bydrbre_        4ever1937      ->novostidamask  
  [5] 4ever1937      ->novostinn       4mysquad       ->crystal1johnson
@@ -446,9 +446,9 @@ induced_subgraph(troll_g,
 ```
 
 ```
-IGRAPH c0fbc03 DN-- 149 412 -- 
+IGRAPH 8cd4a25 DN-- 149 412 -- 
 + attr: name (v/c), kcore (v/n), Type (e/c), Rel (e/c)
-+ edges from c0fbc03 (vertex names):
++ edges from 8cd4a25 (vertex names):
  [1] _nickluna_   ->andyhashtagger _nickluna_   ->danageezus    
  [3] _nickluna_   ->xdwillie       _nickluna_   ->thefoundingson
  [5] _nickluna_   ->pamela_moore13 ameliebaldwin->_nickluna_    
@@ -564,9 +564,9 @@ lg_s_comp_simp
 ```
 
 ```
-IGRAPH c7f9f1b UN-- 168 922 -- 
+IGRAPH 0a13aef UN-- 168 922 -- 
 + attr: name (v/c)
-+ edges from c7f9f1b (vertex names):
++ edges from 0a13aef (vertex names):
  [1] 4mysquad       --acejinev        4mysquad       --blacknewsoutlet
  [3] acejinev       --blacknewsoutlet 4mysquad       --cornellburchet 
  [5] blacknewsoutlet--cornellburchet  4mysquad       --crystal1johnson

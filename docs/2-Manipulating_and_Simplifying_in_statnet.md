@@ -518,7 +518,7 @@ gden(fdsm_net)
 ```
 
 ```
-[1] 0.3606061
+[1] 0.3618182
 ```
 
 <img src="2-Manipulating_and_Simplifying_in_statnet_files/figure-html/unnamed-chunk-27-1.png" width="70%" style="display: block; margin: auto;" />
@@ -582,7 +582,7 @@ colnames(attributes)
 ```
 
 ```
- [1] "ï..Names"          "Believers.Baptism" "Violence"         
+ [1] "Names"             "Believers.Baptism" "Violence"         
  [4] "Munster.Rebellion" "Apocalyptic"       "Anabaptist"       
  [7] "Melchiorite"       "Swiss.Brethren"    "Denck"            
 [10] "Hut"               "Hutterite"         "Other.Anabaptist" 
@@ -610,7 +610,7 @@ attributes[1:5, # Rows 1 through 5
 ```
 
 ```
-        ï..Names Anabaptist
+           Names Anabaptist
 1  Martin Luther          0
 2    John Calvin          0
 3 Ulrich Zwingli          0

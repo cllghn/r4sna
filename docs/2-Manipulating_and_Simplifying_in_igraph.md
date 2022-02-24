@@ -511,9 +511,9 @@ anabaptist_ig
 ```
 
 ```
-IGRAPH 168d34c UNW- 67 183 -- 
+IGRAPH 637c07e UNW- 67 183 -- 
 + attr: id (v/c), name (v/c), x (v/n), y (v/n), z (v/n), weight (e/n)
-+ edges from 168d34c (vertex names):
++ edges from 637c07e (vertex names):
  [1] Martin Luther --Ulrich Zwingli      Martin Luther --Thomas Muntzer     
  [3] Martin Luther --Andreas Carlstadt   Martin Luther --Caspar Schwenckfeld
  [5] Martin Luther --Melchior Hofmann    Martin Luther --Philipp Melanchthon
@@ -556,7 +556,7 @@ colnames(attributes)
 ```
 
 ```
- [1] "ï..Names"          "Believers.Baptism" "Violence"         
+ [1] "Names"             "Believers.Baptism" "Violence"         
  [4] "Munster.Rebellion" "Apocalyptic"       "Anabaptist"       
  [7] "Melchiorite"       "Swiss.Brethren"    "Denck"            
 [10] "Hut"               "Hutterite"         "Other.Anabaptist" 
@@ -584,7 +584,7 @@ attributes[1:5, # Rows 1 through 5
 ```
 
 ```
-        ï..Names Anabaptist
+           Names Anabaptist
 1  Martin Luther          0
 2    John Calvin          0
 3 Ulrich Zwingli          0
@@ -668,9 +668,9 @@ anagroup_ig
 ```
 
 ```
-IGRAPH 16fc71a UNW- 3 183 -- 
+IGRAPH ff45fe6 UNW- 3 183 -- 
 + attr: name (v/x), weight (e/n)
-+ edges from 16fc71a (vertex names):
++ edges from ff45fe6 (vertex names):
 [1] Martin Luther      , John Calvin        , Ulrich Zwingli     , Joachim Vadian     , Leo Jud            , Henry Bullinger    , Thomas Muntzer     , Andreas Carlstadt  , Caspar Schwenckfeld, Philipp Melanchthon, Wolfgang Capito    , Martin Bucer       --Martin Luther      , John Calvin        , Ulrich Zwingli     , Joachim Vadian     , Leo Jud            , Henry Bullinger    , Thomas Muntzer     , Andreas Carlstadt  , Caspar Schwenckfeld, Philipp Melanchthon, Wolfgang Capito    , Martin Bucer       
 + ... omitted several edges
 ```
@@ -809,10 +809,10 @@ anabaptist2_ig
 ```
 
 ```
-IGRAPH 17aef93 UNW- 55 131 -- 
+IGRAPH 51d1df8 UNW- 55 131 -- 
 + attr: layout (g/n), id (v/c), name (v/c), x (v/n), y (v/n), z (v/n),
 | anabaptist (v/n), weight (e/n)
-+ edges from 17aef93 (vertex names):
++ edges from 51d1df8 (vertex names):
  [1] Conrad Grebel--Felix Manz              
  [2] Conrad Grebel--George Blaurock         
  [3] Conrad Grebel--Wilhelm Reublin         
@@ -891,10 +891,10 @@ str(samp_pos)
 
 ```
 'data.frame':	202 obs. of  4 variables:
- $ ï..Source: chr  "ROMUALD" "ROMUALD" "ROMUALD" "ROMUALD" ...
- $ Target   : chr  "BONAVENTURE" "AMBROSE" "PETER" "AMAND" ...
- $ Weight   : int  1 1 3 2 1 3 2 1 3 2 ...
- $ Relation : chr  "Liking 3" "Liking 3" "Liking 3" "Liking 3" ...
+ $ Source  : chr  "ROMUALD" "ROMUALD" "ROMUALD" "ROMUALD" ...
+ $ Target  : chr  "BONAVENTURE" "AMBROSE" "PETER" "AMAND" ...
+ $ Weight  : int  1 1 3 2 1 3 2 1 3 2 ...
+ $ Relation: chr  "Liking 3" "Liking 3" "Liking 3" "Liking 3" ...
 ```
 
 Now, convert the data frame to an `igraph` object.
@@ -907,9 +907,9 @@ samp_pos_ig
 ```
 
 ```
-IGRAPH 17fc2f0 DN-- 18 202 -- 
+IGRAPH 638402b DN-- 18 202 -- 
 + attr: name (v/c), Weight (e/n), Relation (e/c)
-+ edges from 17fc2f0 (vertex names):
++ edges from 638402b (vertex names):
  [1] ROMUALD    ->BONAVENTURE ROMUALD    ->AMBROSE     ROMUALD    ->PETER      
  [4] ROMUALD    ->AMAND       BONAVENTURE->AMBROSE     BONAVENTURE->PETER      
  [7] BONAVENTURE->LOUIS       AMBROSE    ->BONAVENTURE AMBROSE    ->VICTOR     

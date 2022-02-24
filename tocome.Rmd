@@ -2,8 +2,6 @@
 output: html_document
 ---
 
-# (PART) Lab 8 {-}
-
 # (PART) Lab 9 {-}
 
 # (PART) Lab 10 {-}

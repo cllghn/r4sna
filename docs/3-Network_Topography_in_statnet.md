@@ -554,7 +554,7 @@ names(attributes)
 ```
 
 ```
- [1] "ï..Names"          "Believers.Baptism" "Violence"         
+ [1] "Names"             "Believers.Baptism" "Violence"         
  [4] "Munster.Rebellion" "Apocalyptic"       "Anabaptist"       
  [7] "Melchiorite"       "Swiss.Brethren"    "Denck"            
 [10] "Hut"               "Hutterite"         "Other.Anabaptist" 

@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>16 Data and Setup for SAOMs in RSiena | R for Social Network Analysis</title>
+  <meta name="description" content="TBD." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="16 Data and Setup for SAOMs in RSiena | R for Social Network Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="TBD." />
+  <meta name="github-repo" content="cjcallag/r4sna" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="16 Data and Setup for SAOMs in RSiena | R for Social Network Analysis" />
+  
+  <meta name="twitter:description" content="TBD." />
+  
+
+<meta name="author" content="CORE Lab" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exploratory-analysis.html"/>
+<link rel="next" href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.18/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="libs/selectize-0.12.0/selectize.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="my_style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Social Network Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instructors"><i class="fa fa-check"></i><b>1.1</b> Instructors</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="2" data-path="setting-up.html"><a href="setting-up.html"><i class="fa fa-check"></i><b>2</b> Setting Up</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setting-up.html"><a href="setting-up.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.1</b> R and RStudio Basics</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="setting-up.html"><a href="setting-up.html#basics-of-r-coding-in-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Basics of R Coding in RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="setting-up.html"><a href="setting-up.html#project-workflow"><i class="fa fa-check"></i><b>2.2</b> Project Workflow</a></li>
+</ul></li>
+<li class="part"><span><b>II Lab 1</b></span></li>
+<li class="chapter" data-level="3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
+<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Lab 2</b></span></li>
+<li class="chapter" data-level="5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>5</b> Manipulating and Simplifying Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#setup-2"><i class="fa fa-check"></i><b>5.1</b> Setup</a></li>
+<li class="chapter" data-level="5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-libraries-2"><i class="fa fa-check"></i><b>5.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-the-backbones-of-two-mode-network-projections"><i class="fa fa-check"></i><b>5.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-data"><i class="fa fa-check"></i><b>5.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#non-statistical-projections-of-the-co-sponsorhip-data"><i class="fa fa-check"></i><b>5.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="5.3.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-backbones"><i class="fa fa-check"></i><b>5.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#simplifying-networks-in-igraph-anabaptist-leadership-network"><i class="fa fa-check"></i><b>5.4</b> Simplifying Networks in <strong>igraph</strong>: Anabaptist Leadership Network</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-network-and-attribute-data"><i class="fa fa-check"></i><b>5.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-the-anabaptist-network"><i class="fa fa-check"></i><b>5.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="5.4.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#shrinking-collapsing-contracting-networks"><i class="fa fa-check"></i><b>5.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="5.4.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-subnetworks"><i class="fa fa-check"></i><b>5.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#multiple-stacked-networks-in-igraph-sampson-monastery"><i class="fa fa-check"></i><b>5.5</b> Multiple (Stacked) Networks in <strong>igraph</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-edge-list-network-data"><i class="fa fa-check"></i><b>5.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="5.5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-stacked-networks"><i class="fa fa-check"></i><b>5.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="5.5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-and-plotting-individual-networks"><i class="fa fa-check"></i><b>5.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>6</b> Manipulating and Simplifying Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#setup-3"><i class="fa fa-check"></i><b>6.1</b> Setup</a></li>
+<li class="chapter" data-level="6.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-libraries-3"><i class="fa fa-check"></i><b>6.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="6.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-the-backbones-of-two-mode-network-projections-1"><i class="fa fa-check"></i><b>6.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-data-1"><i class="fa fa-check"></i><b>6.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#non-statistical-projections-of-the-co-sponsorhip-data-1"><i class="fa fa-check"></i><b>6.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="6.3.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-backbones-1"><i class="fa fa-check"></i><b>6.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#simplifying-networks-in-statnet-anabaptist-network"><i class="fa fa-check"></i><b>6.4</b> Simplifying Networks in <strong>statnet</strong>: Anabaptist Network</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-network-and-attribute-data-1"><i class="fa fa-check"></i><b>6.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="6.4.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-the-anabaptist-network-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="6.4.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#shrinking-collapsing-contracting-networks-1"><i class="fa fa-check"></i><b>6.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="6.4.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-subnetworks-1"><i class="fa fa-check"></i><b>6.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#multiple-stacked-networks-in-statnet-sampson-monastery"><i class="fa fa-check"></i><b>6.5</b> Multiple (Stacked) Networks in <strong>statnet</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-edge-list-network-data-1"><i class="fa fa-check"></i><b>6.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="6.5.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-stacked-networks-1"><i class="fa fa-check"></i><b>6.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="6.5.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-and-plotting-individual-networks-1"><i class="fa fa-check"></i><b>6.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Lab 3</b></span></li>
+<li class="chapter" data-level="7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html"><i class="fa fa-check"></i><b>7</b> Network Topography in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#setup-4"><i class="fa fa-check"></i><b>7.1</b> Setup</a></li>
+<li class="chapter" data-level="7.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#load-libraries-4"><i class="fa fa-check"></i><b>7.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="7.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#import-data"><i class="fa fa-check"></i><b>7.3</b> Import Data</a></li>
+<li class="chapter" data-level="7.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size-and-interconnectedness"><i class="fa fa-check"></i><b>7.4</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size"><i class="fa fa-check"></i><b>7.4.1</b> Network Size</a></li>
+<li class="chapter" data-level="7.4.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#density-and-average-degree"><i class="fa fa-check"></i><b>7.4.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="7.4.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#clustering-coefficient-global-and-local"><i class="fa fa-check"></i><b>7.4.3</b> Clustering Coefficient (Global and Local)</a></li>
+<li class="chapter" data-level="7.4.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#cohesion-and-fragmentation"><i class="fa fa-check"></i><b>7.4.4</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="7.4.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#compactness-and-breadth"><i class="fa fa-check"></i><b>7.4.5</b> Compactness and Breadth</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization-and-related-measures-of-spread"><i class="fa fa-check"></i><b>7.5</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization"><i class="fa fa-check"></i><b>7.5.1</b> Centralization</a></li>
+<li class="chapter" data-level="7.5.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#variance-and-standard-deviation"><i class="fa fa-check"></i><b>7.5.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="7.5.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#diameter-and-average-path-distance"><i class="fa fa-check"></i><b>7.5.3</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#calculating-the-e-i-index-with-isnar"><i class="fa fa-check"></i><b>7.6</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+<li class="chapter" data-level="7.7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-level-measures-table"><i class="fa fa-check"></i><b>7.7</b> Network Level Measures Table</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html"><i class="fa fa-check"></i><b>8</b> Network Topography in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#setup-5"><i class="fa fa-check"></i><b>8.1</b> Setup</a></li>
+<li class="chapter" data-level="8.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#load-libraries-5"><i class="fa fa-check"></i><b>8.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="8.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#import-data-1"><i class="fa fa-check"></i><b>8.3</b> Import Data</a></li>
+<li class="chapter" data-level="8.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-and-interconnectedness-1"><i class="fa fa-check"></i><b>8.4</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-1"><i class="fa fa-check"></i><b>8.4.1</b> Network Size</a></li>
+<li class="chapter" data-level="8.4.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#density-and-average-degree-1"><i class="fa fa-check"></i><b>8.4.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="8.4.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#cohesion-and-fragmentation-1"><i class="fa fa-check"></i><b>8.4.3</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="8.4.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#compactness-and-breadth-1"><i class="fa fa-check"></i><b>8.4.4</b> Compactness and Breadth</a></li>
+<li class="chapter" data-level="8.4.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-interconnectedness-scores"><i class="fa fa-check"></i><b>8.4.5</b> Table of Interconnectedness Scores</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-and-related-measures-of-spread-1"><i class="fa fa-check"></i><b>8.5</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-1"><i class="fa fa-check"></i><b>8.5.1</b> Centralization</a></li>
+<li class="chapter" data-level="8.5.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#variance-and-standard-deviation-1"><i class="fa fa-check"></i><b>8.5.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="8.5.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-centralization-scores"><i class="fa fa-check"></i><b>8.5.3</b> Table of Centralization Scores</a></li>
+<li class="chapter" data-level="8.5.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#diameter-and-average-path-distance-1"><i class="fa fa-check"></i><b>8.5.4</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#calculating-the-e-i-index-with-isnar-1"><i class="fa fa-check"></i><b>8.6</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+</ul></li>
+<li class="part"><span><b>V Lab 4</b></span></li>
+<li class="chapter" data-level="9" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html"><i class="fa fa-check"></i><b>9</b> Detecting Subgroups in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#setup-6"><i class="fa fa-check"></i><b>9.1</b> Setup</a></li>
+<li class="chapter" data-level="9.2" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#load-library"><i class="fa fa-check"></i><b>9.2</b> Load Library</a></li>
+<li class="chapter" data-level="9.3" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#import-and-plot-network"><i class="fa fa-check"></i><b>9.3</b> Import and Plot Network</a></li>
+<li class="chapter" data-level="9.4" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#components-in-igraph"><i class="fa fa-check"></i><b>9.4</b> Components in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.5" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#cliques-in-igraph"><i class="fa fa-check"></i><b>9.5</b> Cliques in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.6" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#k-cores-in-igraph"><i class="fa fa-check"></i><b>9.6</b> K-Cores in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.7" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#community-detection-in-igraph"><i class="fa fa-check"></i><b>9.7</b> Community Detection in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#girvan-newman"><i class="fa fa-check"></i><b>9.7.1</b> Girvan-Newman</a></li>
+<li class="chapter" data-level="9.7.2" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#walktrap"><i class="fa fa-check"></i><b>9.7.2</b> Walktrap</a></li>
+<li class="chapter" data-level="9.7.3" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#spin-glass"><i class="fa fa-check"></i><b>9.7.3</b> Spin-Glass</a></li>
+<li class="chapter" data-level="9.7.4" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#louvain"><i class="fa fa-check"></i><b>9.7.4</b> Louvain</a></li>
+<li class="chapter" data-level="9.7.5" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#table-of-results"><i class="fa fa-check"></i><b>9.7.5</b> Table of Results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html"><i class="fa fa-check"></i><b>10</b> Detecting Subgroups in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#setup-7"><i class="fa fa-check"></i><b>10.1</b> Setup</a></li>
+<li class="chapter" data-level="10.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#load-libraries-6"><i class="fa fa-check"></i><b>10.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="10.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#import-and-plot-network-1"><i class="fa fa-check"></i><b>10.3</b> Import and Plot Network</a></li>
+<li class="chapter" data-level="10.4" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#components-in-statnet"><i class="fa fa-check"></i><b>10.4</b> Components in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.5" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#cliques-in-statnet"><i class="fa fa-check"></i><b>10.5</b> Cliques in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.6" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#k-cores-in-statnet"><i class="fa fa-check"></i><b>10.6</b> K-Cores in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.7" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#community-detection-in-statnet"><i class="fa fa-check"></i><b>10.7</b> Community Detection in <strong>statnet</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path=""><a href="#part-lab-5"><i class="fa fa-check"></i>(PART) Lab 5</a>
+<ul>
+<li class="chapter" data-level="10.8" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#setup-8"><i class="fa fa-check"></i><b>10.8</b> Setup</a></li>
+<li class="chapter" data-level="10.9" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#load-libraries-7"><i class="fa fa-check"></i><b>10.9</b> Load Libraries</a></li>
+<li class="chapter" data-level="10.10" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#load-data-2"><i class="fa fa-check"></i><b>10.10</b> Load Data</a></li>
+<li class="chapter" data-level="10.11" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#centrality-and-power-undirected-networks"><i class="fa fa-check"></i><b>10.11</b> Centrality and Power (Undirected Networks)</a>
+<ul>
+<li class="chapter" data-level="10.11.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#degree-closeness-betweenness-and-eigenvector"><i class="fa fa-check"></i><b>10.11.1</b> Degree, Closeness, Betweenness, and Eigenvector</a></li>
+<li class="chapter" data-level="10.11.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#correlations"><i class="fa fa-check"></i><b>10.11.2</b> Correlations</a></li>
+<li class="chapter" data-level="10.11.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#interactive-table"><i class="fa fa-check"></i><b>10.11.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="10.12" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#centrality-and-prestige-directed-networks"><i class="fa fa-check"></i><b>10.12</b> Centrality and Prestige (Directed Networks)</a>
+<ul>
+<li class="chapter" data-level="10.12.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#in-n-out-degree-hubs-and-authorities"><i class="fa fa-check"></i><b>10.12.1</b> In-N-Out Degree, Hubs and Authorities</a></li>
+<li class="chapter" data-level="10.12.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#correlations-1"><i class="fa fa-check"></i><b>10.12.2</b> Correlations</a></li>
+<li class="chapter" data-level="10.12.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#interactive-table-1"><i class="fa fa-check"></i><b>10.12.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="10.13" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#brokerage"><i class="fa fa-check"></i><b>10.13</b> Brokerage</a>
+<ul>
+<li class="chapter" data-level="10.13.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#cutpoints"><i class="fa fa-check"></i><b>10.13.1</b> Cutpoints</a></li>
+<li class="chapter" data-level="10.13.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#cutsets-key-player"><i class="fa fa-check"></i><b>10.13.2</b> Cutsets (Key Player)</a></li>
+<li class="chapter" data-level="10.13.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#burts-constraint"><i class="fa fa-check"></i><b>10.13.3</b> Burt’s Constraint</a></li>
+<li class="chapter" data-level="10.13.4" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#bridges-edge-betweenness"><i class="fa fa-check"></i><b>10.13.4</b> Bridges: Edge Betweenness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html"><i class="fa fa-check"></i><b>11</b> Centrality and Brokerage in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#setup-9"><i class="fa fa-check"></i><b>11.1</b> Setup</a></li>
+<li class="chapter" data-level="11.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#libraries"><i class="fa fa-check"></i><b>11.2</b> Libraries</a></li>
+<li class="chapter" data-level="11.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#load-data-3"><i class="fa fa-check"></i><b>11.3</b> Load Data</a></li>
+<li class="chapter" data-level="11.4" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#centrality-and-power-undirected-networks-1"><i class="fa fa-check"></i><b>11.4</b> Centrality and Power (Undirected Networks)</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#degree-closeness-betweenness-and-eigenvector-centrality"><i class="fa fa-check"></i><b>11.4.1</b> Degree, Closeness, Betweenness and Eigenvector Centrality</a></li>
+<li class="chapter" data-level="11.4.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#correlations-2"><i class="fa fa-check"></i><b>11.4.2</b> Correlations</a></li>
+<li class="chapter" data-level="11.4.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#interactive-table-2"><i class="fa fa-check"></i><b>11.4.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#centrality-and-prestige-directed-networks-1"><i class="fa fa-check"></i><b>11.5</b> Centrality and Prestige (Directed Networks)</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#in-n-out-degree-input-domain-and-proximity-prestige"><i class="fa fa-check"></i><b>11.5.1</b> In-N-Out Degree, Input Domain, and Proximity Prestige</a></li>
+<li class="chapter" data-level="11.5.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#correlations-3"><i class="fa fa-check"></i><b>11.5.2</b> Correlations</a></li>
+<li class="chapter" data-level="11.5.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#interactive-table-3"><i class="fa fa-check"></i><b>11.5.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#brokerage-1"><i class="fa fa-check"></i><b>11.6</b> Brokerage</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#cutpoints-1"><i class="fa fa-check"></i><b>11.6.1</b> Cutpoints</a></li>
+<li class="chapter" data-level="11.6.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#cutsets-key-player-1"><i class="fa fa-check"></i><b>11.6.2</b> Cutsets (Key Player)</a></li>
+<li class="chapter" data-level="11.6.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#gould-and-fernandez"><i class="fa fa-check"></i><b>11.6.3</b> Gould and Fernandez</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VI Lab 6</b></span></li>
+<li class="chapter" data-level="12" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html"><i class="fa fa-check"></i><b>12</b> Hypothesis Testing (QAP and CUG)</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#introduction-1"><i class="fa fa-check"></i><b>12.1</b> Introduction</a></li>
+<li class="chapter" data-level="12.2" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#developing-and-testing-working-hypotheses"><i class="fa fa-check"></i><b>12.2</b> Developing and Testing Working Hypotheses</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#univariate-bivariate-and-multivariate-statistical-tests"><i class="fa fa-check"></i><b>12.2.1</b> Univariate, Bivariate, and Multivariate Statistical Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#challenging-expectations-with-conditional-uniform-graphs-cugs"><i class="fa fa-check"></i><b>12.3</b> Challenging Expectations with Conditional Uniform Graphs (CUGs)</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#univariate-cug-tests-in-statnet"><i class="fa fa-check"></i><b>12.3.1</b> Univariate CUG Tests in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="12.3.2" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#bivariate-tests-using-cug"><i class="fa fa-check"></i><b>12.3.2</b> Bivariate Tests Using CUG</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#quadratic-assignment-procedure-qap"><i class="fa fa-check"></i><b>12.4</b> Quadratic Assignment Procedure (QAP)</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#bivariate-tests-using-qap-correlation"><i class="fa fa-check"></i><b>12.4.1</b> Bivariate Tests Using QAP: Correlation</a></li>
+<li class="chapter" data-level="12.4.2" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#multivariate-models-using-qap"><i class="fa fa-check"></i><b>12.4.2</b> Multivariate Models using QAP</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#a-note-on-interpretation-causality-in-networks"><i class="fa fa-check"></i><b>12.5</b> A Note on interpretation: Causality in Networks</a></li>
+<li class="chapter" data-level="12.6" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#summary-lessons-learned"><i class="fa fa-check"></i><b>12.6</b> Summary: Lessons Learned</a></li>
+</ul></li>
+<li class="part"><span><b>VII Lab 7</b></span></li>
+<li class="chapter" data-level="13" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html"><i class="fa fa-check"></i><b>13</b> Exponential Random Graph Models (ERGMs)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#introduction-2"><i class="fa fa-check"></i><b>13.1</b> Introduction</a></li>
+<li class="chapter" data-level="13.2" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#ergms-with-undirected-data"><i class="fa fa-check"></i><b>13.2</b> ERGMs With Undirected Data</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#data-and-setup"><i class="fa fa-check"></i><b>13.2.1</b> Data and Setup</a></li>
+<li class="chapter" data-level="13.2.2" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#pira-ergms"><i class="fa fa-check"></i><b>13.2.2</b> PIRA ERGMs</a></li>
+<li class="chapter" data-level="13.2.3" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#compare-to-qap-logistic-regression"><i class="fa fa-check"></i><b>13.2.3</b> Compare to QAP logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#ergms-with-directed-data"><i class="fa fa-check"></i><b>13.3</b> ERGMs With Directed Data</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#data-and-setup-1"><i class="fa fa-check"></i><b>13.3.1</b> Data and Setup</a></li>
+<li class="chapter" data-level="13.3.2" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#explore-data"><i class="fa fa-check"></i><b>13.3.2</b> Explore Data</a></li>
+<li class="chapter" data-level="13.3.3" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#teo-ergms"><i class="fa fa-check"></i><b>13.3.3</b> TEO ERGMs</a></li>
+<li class="chapter" data-level="13.3.4" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#appendix-ergm-package-and-pnet-comparison"><i class="fa fa-check"></i><b>13.3.4</b> Appendix: ERGM Package and PNet Comparison</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VIII Lab 8</b></span></li>
+<li class="chapter" data-level="14" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html"><i class="fa fa-check"></i><b>14</b> Stochastic Actor Oriented Models (SAOMs)</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#core-assumptions"><i class="fa fa-check"></i><b>14.1</b> Core Assumptions</a></li>
+<li class="chapter" data-level="14.2" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#brief-overview-of-statistical-procedure"><i class="fa fa-check"></i><b>14.2</b> Brief Overview of Statistical Procedure</a></li>
+<li class="chapter" data-level="14.3" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#general-steps-in-r"><i class="fa fa-check"></i><b>14.3</b> General Steps in R</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="exploratory-analysis.html"><a href="exploratory-analysis.html"><i class="fa fa-check"></i><b>15</b> Exploratory Analysis</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="exploratory-analysis.html"><a href="exploratory-analysis.html#load-libraries-8"><i class="fa fa-check"></i><b>15.1</b> Load Libraries</a></li>
+<li class="chapter" data-level="15.2" data-path="exploratory-analysis.html"><a href="exploratory-analysis.html#import-data-2"><i class="fa fa-check"></i><b>15.2</b> Import Data</a></li>
+<li class="chapter" data-level="15.3" data-path="exploratory-analysis.html"><a href="exploratory-analysis.html#network-plots"><i class="fa fa-check"></i><b>15.3</b> Network Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="data-and-setup-for-saoms-in-rsiena.html"><a href="data-and-setup-for-saoms-in-rsiena.html"><i class="fa fa-check"></i><b>16</b> Data and Setup for SAOMs in <strong>RSiena</strong></a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="data-and-setup-for-saoms-in-rsiena.html"><a href="data-and-setup-for-saoms-in-rsiena.html#load-and-detach-libraries"><i class="fa fa-check"></i><b>16.1</b> Load and Detach Libraries</a></li>
+<li class="chapter" data-level="16.2" data-path="data-and-setup-for-saoms-in-rsiena.html"><a href="data-and-setup-for-saoms-in-rsiena.html#import-and-format-data"><i class="fa fa-check"></i><b>16.2</b> Import and Format Data</a></li>
+<li class="chapter" data-level="16.3" data-path="data-and-setup-for-saoms-in-rsiena.html"><a href="data-and-setup-for-saoms-in-rsiena.html#structural-model"><i class="fa fa-check"></i><b>16.3</b> Structural Model</a></li>
+<li class="chapter" data-level="16.4" data-path="data-and-setup-for-saoms-in-rsiena.html"><a href="data-and-setup-for-saoms-in-rsiena.html#model-with-actor-covariates"><i class="fa fa-check"></i><b>16.4</b> Model with Actor Covariates</a></li>
+<li class="chapter" data-level="16.5" data-path="data-and-setup-for-saoms-in-rsiena.html"><a href="data-and-setup-for-saoms-in-rsiena.html#goodness-of-fit-gof"><i class="fa fa-check"></i><b>16.5</b> Goodness of Fit (GOF)</a></li>
+<li class="chapter" data-level="16.6" data-path="data-and-setup-for-saoms-in-rsiena.html"><a href="data-and-setup-for-saoms-in-rsiena.html#interpret-the-results"><i class="fa fa-check"></i><b>16.6</b> Interpret the Results</a></li>
+</ul></li>
+<li class="part"><span><b>IX Lab 8</b></span></li>
+<li class="part"><span><b>X Lab 9</b></span></li>
+<li class="part"><span><b>XI Lab 10</b></span></li>
+<li class="part"><span><b>XII Appendices</b></span></li>
+<li class="chapter" data-level="17" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>17</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>17.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
+<li class="chapter" data-level="17.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>17.2</b> Installation</a></li>
+<li class="chapter" data-level="17.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>17.3</b> Loading</a></li>
+<li class="chapter" data-level="17.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>17.4</b> Import and View Data</a></li>
+<li class="chapter" data-level="17.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>17.5</b> Extracting Variables/Columns</a></li>
+<li class="chapter" data-level="17.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>17.6</b> Creating Filters/Extracting Rows</a></li>
+<li class="chapter" data-level="17.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>17.7</b> Arrange Rows</a></li>
+<li class="chapter" data-level="17.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>17.8</b> Making a New Column/Variable</a></li>
+<li class="chapter" data-level="17.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>17.9</b> Rename Variables</a></li>
+<li class="chapter" data-level="17.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>17.10</b> Summarizing</a>
+<ul>
+<li class="chapter" data-level="17.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>17.10.1</b> Simple Summary</a></li>
+<li class="chapter" data-level="17.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>17.10.2</b> Group Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="17.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>17.11</b> Combining Data</a>
+<ul>
+<li class="chapter" data-level="17.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>17.11.1</b> Left Join</a></li>
+<li class="chapter" data-level="17.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>17.11.2</b> Right Join</a></li>
+<li class="chapter" data-level="17.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>17.11.3</b> Inner Join</a></li>
+<li class="chapter" data-level="17.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>17.11.4</b> Full Join</a></li>
+</ul></li>
+<li class="chapter" data-level="17.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>17.12</b> Piping Multiple Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>18</b> Key SNA Functions and Visualization Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>18.1</b> <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>18.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="18.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>18.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>18.2</b> <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>18.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="18.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>18.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>XIII References</b></span></li>
+<li class="chapter" data-level="19" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>19</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown">
+Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Social Network Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-and-setup-for-saoms-in-rsiena" class="section level1" number="16">
+<h1><span class="header-section-number">16</span> Data and Setup for SAOMs in <strong>RSiena</strong></h1>
+<div id="load-and-detach-libraries" class="section level2" number="16.1">
+<h2><span class="header-section-number">16.1</span> Load and Detach Libraries</h2>
+<p>First detach <strong>sna</strong> library; it might conflict with some of the libraries for SAOMs.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>sna, <span class="at">unload=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Next, let’s load libraries for this exercise (you will likely have to install these first). The main package for SAOMs is <strong>RSiena</strong>.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RSiena)</span>
+<span id="cb16-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(snow) <span class="co"># Helps with computation.</span></span>
+<span id="cb16-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rlecuyer) <span class="co"># This package&#39;s main purpose is to enable the use of this random number generator in parallel R applications.</span></span>
+<span id="cb16-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(xtable) <span class="co"># Coerce data to LaTeX and HTML tables.</span></span>
+<span id="cb16-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car) <span class="co"># (https://www.rdocumentation.org/packages/car/versions/3.0-5)</span></span></code></pre></div>
+</div>
+<div id="import-and-format-data" class="section level2" number="16.2">
+<h2><span class="header-section-number">16.2</span> Import and Format Data</h2>
+<p>We will now turn to our longitudinal data for SAOMs. Because we have actors who left the network at various times, we have to employ “structural zeros.” We load files the files for those actors who cannot form ties at particular times points and then we multiple by 10, which is the value that indicates such actors. Note the first one is empty - no ties.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb17-1" aria-hidden="true" tabindex="-1"></a>st0s1525.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.paj</span>(<span class="st">&quot;data/Anabaptists67-1525S0s.net&quot;</span>),</span>
+<span id="cb17-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb17-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">directed =</span> <span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">10</span></span>
+<span id="cb17-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb17-3" aria-hidden="true" tabindex="-1"></a>st0s1530.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.paj</span>(<span class="st">&quot;data/Anabaptists67-1530S0s.net&quot;</span>),</span>
+<span id="cb17-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb17-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">directed =</span> <span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">10</span></span>
+<span id="cb17-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb17-5" aria-hidden="true" tabindex="-1"></a>st0s1535.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.paj</span>(<span class="st">&quot;data/Anabaptists67-1535S0s.net&quot;</span>),</span>
+<span id="cb17-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb17-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">directed =</span> <span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">10</span></span>
+<span id="cb17-7"><a href="data-and-setup-for-saoms-in-rsiena.html#cb17-7" aria-hidden="true" tabindex="-1"></a>st0s1540.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.paj</span>(<span class="st">&quot;data/Anabaptists67-1540S0s.net&quot;</span>),</span>
+<span id="cb17-8"><a href="data-and-setup-for-saoms-in-rsiena.html#cb17-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">directed =</span> <span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">10</span></span>
+<span id="cb17-9"><a href="data-and-setup-for-saoms-in-rsiena.html#cb17-9" aria-hidden="true" tabindex="-1"></a>st0s1545.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.paj</span>(<span class="st">&quot;data/Anabaptists67-1545S0s.net&quot;</span>),</span>
+<span id="cb17-10"><a href="data-and-setup-for-saoms-in-rsiena.html#cb17-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">directed =</span> <span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">10</span></span></code></pre></div>
+<p>Next, load actual networks (note that they are the same size even though size actually changes).</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb18-1" aria-hidden="true" tabindex="-1"></a>anab1525.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.paj</span>(<span class="st">&quot;data/UnionGraph-1525.net&quot;</span>),</span>
+<span id="cb18-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb18-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb18-3" aria-hidden="true" tabindex="-1"></a>anab1530.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.paj</span>(<span class="st">&quot;data/UnionGraph-1530.net&quot;</span>),</span>
+<span id="cb18-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb18-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb18-5" aria-hidden="true" tabindex="-1"></a>anab1535.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.paj</span>(<span class="st">&quot;data/UnionGraph-1535.net&quot;</span>),</span>
+<span id="cb18-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb18-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-7"><a href="data-and-setup-for-saoms-in-rsiena.html#cb18-7" aria-hidden="true" tabindex="-1"></a>anab1540.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.paj</span>(<span class="st">&quot;data/UnionGraph-1540.net&quot;</span>),</span>
+<span id="cb18-8"><a href="data-and-setup-for-saoms-in-rsiena.html#cb18-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-9"><a href="data-and-setup-for-saoms-in-rsiena.html#cb18-9" aria-hidden="true" tabindex="-1"></a>anab1545.mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.paj</span>(<span class="st">&quot;data/UnionGraph-1545.net&quot;</span>),</span>
+<span id="cb18-10"><a href="data-and-setup-for-saoms-in-rsiena.html#cb18-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">directed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>The next step is to add the two networks together representing each time slice.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb19-1" aria-hidden="true" tabindex="-1"></a>t1525.mat <span class="ot">&lt;-</span> anab1525.mat</span>
+<span id="cb19-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb19-2" aria-hidden="true" tabindex="-1"></a>t1530.mat <span class="ot">&lt;-</span> anab1530.mat <span class="sc">+</span> st0s1530.mat</span>
+<span id="cb19-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb19-3" aria-hidden="true" tabindex="-1"></a>t1535.mat <span class="ot">&lt;-</span> anab1535.mat <span class="sc">+</span> st0s1535.mat</span>
+<span id="cb19-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb19-4" aria-hidden="true" tabindex="-1"></a>t1540.mat <span class="ot">&lt;-</span> anab1540.mat <span class="sc">+</span> st0s1540.mat</span>
+<span id="cb19-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb19-5" aria-hidden="true" tabindex="-1"></a>t1545.mat <span class="ot">&lt;-</span> anab1545.mat <span class="sc">+</span> st0s1545.mat</span></code></pre></div>
+<p>You can check them out to make sure there are only 0’s, 1’s, and 10’s (<strong>Note</strong>: Output not shown here).</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(t1525.mat)</span>
+<span id="cb20-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(t1530.mat)</span>
+<span id="cb20-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(t1535.mat)</span>
+<span id="cb20-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(t1540.mat)</span>
+<span id="cb20-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(t1545.mat)</span></code></pre></div>
+<p>Bring in the attributes and establish them as constant covariates (i.e., unchanging attributes).</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb21-1" aria-hidden="true" tabindex="-1"></a>baptism <span class="ot">&lt;-</span> <span class="fu">coCovar</span>(attributes[, <span class="dv">1</span>])</span>
+<span id="cb21-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb21-2" aria-hidden="true" tabindex="-1"></a>violent <span class="ot">&lt;-</span> <span class="fu">coCovar</span>(attributes[, <span class="dv">2</span>])</span>
+<span id="cb21-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb21-3" aria-hidden="true" tabindex="-1"></a>munster <span class="ot">&lt;-</span> <span class="fu">coCovar</span>(attributes[, <span class="dv">3</span>])</span>
+<span id="cb21-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb21-4" aria-hidden="true" tabindex="-1"></a>apocalyptic <span class="ot">&lt;-</span> <span class="fu">coCovar</span>(attributes[, <span class="dv">4</span>])</span>
+<span id="cb21-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb21-5" aria-hidden="true" tabindex="-1"></a>melchorite <span class="ot">&lt;-</span> <span class="fu">coCovar</span>(attributes[, <span class="dv">6</span>])</span></code></pre></div>
+</div>
+<div id="structural-model" class="section level2" number="16.3">
+<h2><span class="header-section-number">16.3</span> Structural Model</h2>
+<p>We will begin with a simple model. We need to set dependent variable for both a three and a four period SAOM.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb22-1" aria-hidden="true" tabindex="-1"></a>anab03.net <span class="ot">&lt;-</span> <span class="fu">sienaNet</span>(<span class="at">netarray =</span> <span class="fu">array</span>(</span>
+<span id="cb22-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(t1530.mat, t1535.mat, t1540.mat),</span>
+<span id="cb22-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Determine the dimensions of the array</span></span>
+<span id="cb22-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">67</span>, <span class="dv">67</span>, <span class="dv">3</span>)</span>
+<span id="cb22-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb22-5" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb22-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="data-and-setup-for-saoms-in-rsiena.html#cb22-7" aria-hidden="true" tabindex="-1"></a>anab04.net <span class="ot">&lt;-</span> <span class="fu">sienaNet</span>(<span class="at">netarray =</span> <span class="fu">array</span>(</span>
+<span id="cb22-8"><a href="data-and-setup-for-saoms-in-rsiena.html#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(t1525.mat, t1530.mat, t1535.mat, t1540.mat),</span>
+<span id="cb22-9"><a href="data-and-setup-for-saoms-in-rsiena.html#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">67</span>, <span class="dv">67</span>, <span class="dv">4</span>)</span>
+<span id="cb22-10"><a href="data-and-setup-for-saoms-in-rsiena.html#cb22-10" aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div>
+<p>We can use the <code>sienaDataCreate()</code> function to define what network(s) we are going to analyze. The <code>getEffects()</code> function will create a list of all potential effects (i.e., structural configurations) in our dependent variable (i.e, network).</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb23-1" aria-hidden="true" tabindex="-1"></a>mydata03 <span class="ot">&lt;-</span> <span class="fu">sienaDataCreate</span>(anab03.net)</span>
+<span id="cb23-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb23-2" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">getEffects</span>(mydata03)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb24-1" aria-hidden="true" tabindex="-1"></a>mydata04 <span class="ot">&lt;-</span> <span class="fu">sienaDataCreate</span>(anab04.net)</span>
+<span id="cb24-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb24-2" aria-hidden="true" tabindex="-1"></a>myeff04 <span class="ot">&lt;-</span> <span class="fu">getEffects</span>(mydata04)</span></code></pre></div>
+<p>Use the <code>effectsDocumentation()</code> function to see what effects are available (should be an HTML in folder) for your models.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">effectsDocumentation</span>(myeff03)</span>
+<span id="cb25-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">effectsDocumentation</span>(myeff04)</span></code></pre></div>
+<p>Now let’s build out which structural effects we will include for each model, starting with the three wave model followed by the four wave model.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb26-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03,</span>
+<span id="cb26-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb26-2" aria-hidden="true" tabindex="-1"></a>                          transTriads,</span>
+<span id="cb26-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb26-3" aria-hidden="true" tabindex="-1"></a>                          gwesp,</span>
+<span id="cb26-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb26-4" aria-hidden="true" tabindex="-1"></a>                          density,</span>
+<span id="cb26-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb26-5" aria-hidden="true" tabindex="-1"></a>                          balance,</span>
+<span id="cb26-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb26-6" aria-hidden="true" tabindex="-1"></a>                          isolateNet)</span></code></pre></div>
+<pre><code>  effectName        include fix   test  initialValue parm
+1 degree (density)  TRUE    FALSE FALSE    -1.3701    0  
+2 transitive triads TRUE    FALSE FALSE     0.0000    0  
+3 balance           TRUE    FALSE FALSE     0.0000    0  
+4 GWESP (#)         TRUE    FALSE FALSE     0.0000   69  
+5 network-isolate   TRUE    FALSE FALSE     0.0000    0  </code></pre>
+<p>Now, start building the four wave effects.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb28-1" aria-hidden="true" tabindex="-1"></a>myeff04 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff04,</span>
+<span id="cb28-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb28-2" aria-hidden="true" tabindex="-1"></a>                          transTriads,</span>
+<span id="cb28-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb28-3" aria-hidden="true" tabindex="-1"></a>                          gwesp,</span>
+<span id="cb28-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb28-4" aria-hidden="true" tabindex="-1"></a>                          density,</span>
+<span id="cb28-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb28-5" aria-hidden="true" tabindex="-1"></a>                          balance,</span>
+<span id="cb28-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb28-6" aria-hidden="true" tabindex="-1"></a>                          isolateNet)</span></code></pre></div>
+<pre><code>  effectName        include fix   test  initialValue parm
+1 degree (density)  TRUE    FALSE FALSE   -1.69964    0  
+2 transitive triads TRUE    FALSE FALSE    0.00000    0  
+3 balance           TRUE    FALSE FALSE    0.00000    0  
+4 GWESP (#)         TRUE    FALSE FALSE    0.00000   69  
+5 network-isolate   TRUE    FALSE FALSE    0.00000    0  </code></pre>
+<p>Let’s first estimate the three period model. The <code>sienaModelCreate()</code> function creates the model object and <code>siena07()</code> estimates parameters. Note we have to include the<code>modelType</code> parameter because we are working with undirected data. The type we’ve selected here is called the “unilateral initiative and reciprocal confirmation” option. For more information on your options, see pg. 53 of the manual (Ripley et. al., 2020).</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-1" aria-hidden="true" tabindex="-1"></a>mymodel03 <span class="ot">&lt;-</span> <span class="fu">sienaModelCreate</span>(<span class="at">useStdInits =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb30-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">projname =</span> <span class="st">&#39;anab03a&#39;</span>,</span>
+<span id="cb30-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">modelType =</span> <span class="fu">c</span>(<span class="at">anab03.net =</span> <span class="dv">3</span>))</span>
+<span id="cb30-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-5" aria-hidden="true" tabindex="-1"></a>ans03 <span class="ot">&lt;-</span> <span class="fu">siena07</span>(mymodel03,</span>
+<span id="cb30-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> mydata03,</span>
+<span id="cb30-7"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">effects =</span> myeff03,</span>
+<span id="cb30-8"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-8" aria-hidden="true" tabindex="-1"></a>                 <span class="co">#Do you want to turn off the &quot;pop up&quot; box showing the package&#39;s</span></span>
+<span id="cb30-9"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-9" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># simulation outputs?</span></span>
+<span id="cb30-10"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">batch =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb30-11"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-11" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># Do you want to see detailed information about steps taken by</span></span>
+<span id="cb30-12"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-12" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># the algorithm?</span></span>
+<span id="cb30-13"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb30-14"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print01Report</span>(mydata03, <span class="at">modelname =</span> <span class="st">&#39;TrialOutput03a&#39;</span>)</span>
+<span id="cb30-16"><a href="data-and-setup-for-saoms-in-rsiena.html#cb30-16" aria-hidden="true" tabindex="-1"></a>ans03</span></code></pre></div>
+<pre><code>Estimates, standard errors and convergence t-ratios
+
+                                   Estimate   Standard   Convergence 
+                                                Error      t-ratio   
+
+Rate parameters: 
+  0.1      Rate parameter period 1  0.4434  ( 0.1088   )             
+  0.2      Rate parameter period 2  0.1078  ( 0.0538   )             
+
+Other parameters: 
+  1.  eval degree (density)         0.1801  ( 2.6139   )   -0.0345   
+  2.  eval transitive triads       -3.3982  ( 3.0024   )   -0.0143   
+  3.  eval balance                  0.6616  ( 0.4311   )   -0.0386   
+  4.  eval GWESP (69)               5.4771  ( 4.7461   )   -0.0144   
+  5.  eval network-isolate          5.4429  ( 4.7736   )    0.0656   
+
+Overall maximum convergence ratio:    0.0863 
+
+
+ Model Type:
+anab03.net : Initiative model 
+
+
+Total of 2720 iteration steps.</code></pre>
+<p>Take a look at the estimates and standard errors from before. One way to identify which effects are significant is to divide the estimate by the standard error. The effect is significant when the quotient is at least two times greater than the estimate the effect. For more proximate results you can try using <strong>RSiena</strong>’s <code>Multipar.RSiena()</code> function to run a Wald-Type test. The numbers in the code reflect the numerical position of each independent variable.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(ans03, <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ degree (density) 
+chi-squared = 0.00, d.f. = 1; one-sided Z = 0.07; two-sided p = 0.945. </code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(ans03, <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ transitive triads 
+chi-squared = 1.28, d.f. = 1; one-sided Z = -1.13; two-sided p = 0.258. </code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(ans03, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ balance 
+chi-squared = 2.36, d.f. = 1; one-sided Z = 1.53; two-sided p = 0.125. </code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(ans03, <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ GWESP (69) 
+chi-squared = 1.33, d.f. = 1; one-sided Z = 1.15; two-sided p = 0.248. </code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(ans03, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ network-isolate 
+chi-squared = 1.30, d.f. = 1; one-sided Z = 1.14; two-sided p = 0.254. </code></pre>
+<p>We aren’t getting any statistically significant results.</p>
+<p>Now let’s estimate a four period model containing structural variables. You’ll see the model does not come close to converging (i.e., overall convergence ratio is above 0.20 and variables are much higher than 0.1), so we will stick with the three period model from here on out.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-1" aria-hidden="true" tabindex="-1"></a>mymodel04 <span class="ot">&lt;-</span> <span class="fu">sienaModelCreate</span>(<span class="at">useStdInits =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb42-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">projname =</span> <span class="st">&#39;anab04a&#39;</span>,</span>
+<span id="cb42-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">modelType =</span> <span class="fu">c</span>(<span class="at">anab04.net =</span> <span class="dv">3</span>))</span>
+<span id="cb42-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-5" aria-hidden="true" tabindex="-1"></a>ans04 <span class="ot">&lt;-</span> <span class="fu">siena07</span>(mymodel04,</span>
+<span id="cb42-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> mydata04,</span>
+<span id="cb42-7"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">effects =</span> myeff04,</span>
+<span id="cb42-8"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">batch =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb42-9"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb42-10"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-11"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-11" aria-hidden="true" tabindex="-1"></a>ans04a <span class="ot">&lt;-</span> <span class="fu">siena07</span>(mymodel04,</span>
+<span id="cb42-12"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> mydata04,</span>
+<span id="cb42-13"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">effects =</span> myeff04,</span>
+<span id="cb42-14"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">batch =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb42-15"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-15" aria-hidden="true" tabindex="-1"></a>                  <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb42-16"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-16" aria-hidden="true" tabindex="-1"></a>                  <span class="at">prevAns =</span> ans04)</span>
+<span id="cb42-17"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-17" aria-hidden="true" tabindex="-1"></a>ans04a</span>
+<span id="cb42-18"><a href="data-and-setup-for-saoms-in-rsiena.html#cb42-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print01Report</span>(mydata04, <span class="at">modelname =</span> <span class="st">&#39;TrialOutput04a&#39;</span>)</span></code></pre></div>
+<pre><code>Estimates, standard errors and convergence t-ratios
+
+                                   Estimate    Standard   Convergence 
+                                                 Error      t-ratio   
+
+Rate parameters: 
+  0.1      Rate parameter period 1    1.3245 (   0.2000 )             
+  0.2      Rate parameter period 2    0.5268 (   0.1215 )             
+  0.3      Rate parameter period 3    0.1146 (   0.0585 )             
+
+Other parameters: 
+  1.  eval degree (density)         308.8978 ( 431.4367 )   -4.6570   
+  2.  eval transitive triads       -103.2716 ( 177.2008 )   -0.2199   
+  3.  eval balance                   -0.1437 (   0.1903 )   -4.1390   
+  4.  eval GWESP (69)               206.1166 ( 359.9364 )   -0.7556   
+  5.  eval network-isolate          400.2936 ( 114.2510 )   20.0822   
+
+Overall maximum convergence ratio:   22.0509 
+
+
+ Model Type:
+anab04.net : Initiative model 
+
+
+Total of 2570 iteration steps.</code></pre>
+</div>
+<div id="model-with-actor-covariates" class="section level2" number="16.4">
+<h2><span class="header-section-number">16.4</span> Model with Actor Covariates</h2>
+<p>Try more complex three period models with actor covariates. First set the dependent variable.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dependent variable</span></span>
+<span id="cb44-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb44-2" aria-hidden="true" tabindex="-1"></a>anab03.net <span class="ot">&lt;-</span> <span class="fu">sienaNet</span>(<span class="fu">array</span>(</span>
+<span id="cb44-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(t1530.mat, t1535.mat, t1540.mat),</span>
+<span id="cb44-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">dim =</span> <span class="fu">c</span>(<span class="dv">67</span>, <span class="dv">67</span>, <span class="dv">3</span>)</span>
+<span id="cb44-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb44-5" aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div>
+<p>Next, define what data are to be used in the analysis.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb45-1" aria-hidden="true" tabindex="-1"></a>mydata03 <span class="ot">&lt;-</span> <span class="fu">sienaDataCreate</span>(anab03.net,</span>
+<span id="cb45-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb45-2" aria-hidden="true" tabindex="-1"></a>                            baptism,</span>
+<span id="cb45-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb45-3" aria-hidden="true" tabindex="-1"></a>                            violent,</span>
+<span id="cb45-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb45-4" aria-hidden="true" tabindex="-1"></a>                            munster,</span>
+<span id="cb45-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb45-5" aria-hidden="true" tabindex="-1"></a>                            apocalyptic,</span>
+<span id="cb45-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb45-6" aria-hidden="true" tabindex="-1"></a>                            melchorite)</span>
+<span id="cb45-7"><a href="data-and-setup-for-saoms-in-rsiena.html#cb45-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-8"><a href="data-and-setup-for-saoms-in-rsiena.html#cb45-8" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">getEffects</span>(mydata03)</span></code></pre></div>
+<p>Again, you can see what effects are available for our models.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">effectsDocumentation</span>(myeff03)</span></code></pre></div>
+<p>We will now estimate <strong>four</strong> different models using structure and actor covariates. First, set up your data with the <code>sienaDataCreate</code> function.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb47-1" aria-hidden="true" tabindex="-1"></a>mydata03 <span class="ot">&lt;-</span> <span class="fu">sienaDataCreate</span>(anab03.net,</span>
+<span id="cb47-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb47-2" aria-hidden="true" tabindex="-1"></a>                            melchorite,</span>
+<span id="cb47-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb47-3" aria-hidden="true" tabindex="-1"></a>                            munster,</span>
+<span id="cb47-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb47-4" aria-hidden="true" tabindex="-1"></a>                            baptism,</span>
+<span id="cb47-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb47-5" aria-hidden="true" tabindex="-1"></a>                            apocalyptic)</span></code></pre></div>
+<p>Go ahead and include the following variables for “Model 1.” We’ve discussed the structural effects in class and note <code>simX</code> allows us to test for various forms of homophily.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb48-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">getEffects</span>(mydata03)</span>
+<span id="cb48-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb48-2" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03,</span>
+<span id="cb48-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb48-3" aria-hidden="true" tabindex="-1"></a>                          density,</span>
+<span id="cb48-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb48-4" aria-hidden="true" tabindex="-1"></a>                          transTriads,</span>
+<span id="cb48-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb48-5" aria-hidden="true" tabindex="-1"></a>                          balance,</span>
+<span id="cb48-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb48-6" aria-hidden="true" tabindex="-1"></a>                          gwesp,</span>
+<span id="cb48-7"><a href="data-and-setup-for-saoms-in-rsiena.html#cb48-7" aria-hidden="true" tabindex="-1"></a>                          isolateNet)</span></code></pre></div>
+<pre><code>  effectName        include fix   test  initialValue parm
+1 degree (density)  TRUE    FALSE FALSE    -1.3701    0  
+2 transitive triads TRUE    FALSE FALSE     0.0000    0  
+3 balance           TRUE    FALSE FALSE     0.0000    0  
+4 GWESP (#)         TRUE    FALSE FALSE     0.0000   69  
+5 network-isolate   TRUE    FALSE FALSE     0.0000    0  </code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb50-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, simX, <span class="at">interaction1 =</span> <span class="st">&#39;melchorite&#39;</span>)</span></code></pre></div>
+<pre><code>  effectName            include fix   test  initialValue parm
+1 melchorite similarity TRUE    FALSE FALSE          0   0   </code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb52-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, simX, <span class="at">interaction1 =</span> <span class="st">&#39;munster&#39;</span>)</span></code></pre></div>
+<pre><code>  effectName         include fix   test  initialValue parm
+1 munster similarity TRUE    FALSE FALSE          0   0   </code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb54-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, simX, <span class="at">interaction1 =</span> <span class="st">&#39;apocalyptic&#39;</span>)</span></code></pre></div>
+<pre><code>  effectName             include fix   test  initialValue parm
+1 apocalyptic similarity TRUE    FALSE FALSE          0   0   </code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb56-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, simX, <span class="at">interaction1 =</span> <span class="st">&#39;baptism&#39;</span>)</span></code></pre></div>
+<pre><code>  effectName         include fix   test  initialValue parm
+1 baptism similarity TRUE    FALSE FALSE          0   0   </code></pre>
+<p>Estimate the first three period model. Remember, the <code>sienaModelCreate()</code> function creates the model object and <code>siena07()</code> estimates parameters. Note we incorporate the <code>prevAns</code> argument to help with convergence. Also, the <code>returnDeps</code> parameter returns simulated networks that we need for GOF procedures. <strong>We will compare models based on their “Overall Convergence Ratio” where the lower ratio indicates the better model at this point(any model you compare should have an overall maximum convergence ratio less that 0.2). Your results may differ slightly from ours but should be consistent overall.</strong> You can find the overall maximum convergence near the bottom of the output.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save(mod1, mod1a, mod2, mod3, mod4, file = &quot;data/covariates.rda&quot;)</span></span>
+<span id="cb58-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/covariates.rda&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb59-1" aria-hidden="true" tabindex="-1"></a>mymodel03 <span class="ot">&lt;-</span> <span class="fu">sienaModelCreate</span>(<span class="at">useStdInits =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb59-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb59-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">projname =</span> <span class="st">&#39;finalanab03a&#39;</span>,</span>
+<span id="cb59-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb59-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">modelType =</span> <span class="fu">c</span>(<span class="at">anab03.net =</span> <span class="dv">3</span>))</span>
+<span id="cb59-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb59-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb59-5" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">siena07</span>(mymodel03,</span>
+<span id="cb59-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb59-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> mydata03,</span>
+<span id="cb59-7"><a href="data-and-setup-for-saoms-in-rsiena.html#cb59-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">effects =</span> myeff03,</span>
+<span id="cb59-8"><a href="data-and-setup-for-saoms-in-rsiena.html#cb59-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">batch =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb59-9"><a href="data-and-setup-for-saoms-in-rsiena.html#cb59-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">verbose =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb59-10"><a href="data-and-setup-for-saoms-in-rsiena.html#cb59-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">returnDeps =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb59-11"><a href="data-and-setup-for-saoms-in-rsiena.html#cb59-11" aria-hidden="true" tabindex="-1"></a>mod1</span></code></pre></div>
+<pre><code>Estimates, standard errors and convergence t-ratios
+
+                                   Estimate   Standard   Convergence 
+                                                Error      t-ratio   
+
+Rate parameters: 
+  0.1      Rate parameter period 1   0.3760 (   0.0862 )             
+  0.2      Rate parameter period 2   0.1045 (   0.0552 )             
+
+Other parameters: 
+  1.  eval degree (density)         -0.4233 (  10.1524 )    0.0184   
+  2.  eval transitive triads        -6.7655 (  67.2207 )    0.0258   
+  3.  eval balance                   1.2447 (  11.9207 )   -0.0622   
+  4.  eval GWESP (69)               10.8152 ( 107.4708 )    0.0239   
+  5.  eval network-isolate           8.4240 (  46.2529 )    0.0157   
+  6.  eval baptism similarity       -0.1357 (   3.0212 )   -0.0365   
+  7.  eval munster similarity      -11.7206 ( 161.9564 )   -0.0082   
+  8.  eval apocalyptic similarity    1.9096 (   4.9892 )    0.0024   
+  9.  eval melchorite similarity     7.9934 ( 141.3219 )   -0.0007   
+
+Overall maximum convergence ratio:    0.0934 
+
+
+ Model Type:
+anab03.net : Initiative model 
+
+
+Total of 2877 iteration steps.</code></pre>
+<p>Had it not converged, we could have run it again using the <code>prevAns</code> argument to help with convergence.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb61-1" aria-hidden="true" tabindex="-1"></a>mod1a <span class="ot">&lt;-</span> <span class="fu">siena07</span>(mymodel03,</span>
+<span id="cb61-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb61-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> mydata03,</span>
+<span id="cb61-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb61-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">effects =</span> myeff03,</span>
+<span id="cb61-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb61-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">batch =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb61-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb61-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb61-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb61-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">returnDeps =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb61-7"><a href="data-and-setup-for-saoms-in-rsiena.html#cb61-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">prevAns =</span> ans03)</span>
+<span id="cb61-8"><a href="data-and-setup-for-saoms-in-rsiena.html#cb61-8" aria-hidden="true" tabindex="-1"></a>mod1a</span></code></pre></div>
+<p>We can use the <code>Multipar.RSiena()</code> function when a model has converged. You can see that none of the configurations are statistically significant.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod1, <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ degree (density) 
+chi-squared = 0.00, d.f. = 1; one-sided Z = -0.04; two-sided p = 0.967. </code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod1, <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ transitive triads 
+chi-squared = 0.01, d.f. = 1; one-sided Z = -0.10; two-sided p = 0.92. </code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod1, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ balance 
+chi-squared = 0.01, d.f. = 1; one-sided Z = 0.10; two-sided p = 0.917. </code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod1, <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ GWESP (69) 
+chi-squared = 0.01, d.f. = 1; one-sided Z = 0.10; two-sided p = 0.92. </code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod1, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ network-isolate 
+chi-squared = 0.03, d.f. = 1; one-sided Z = 0.18; two-sided p = 0.855. </code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod1, <span class="dv">6</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ baptism similarity 
+chi-squared = 0.00, d.f. = 1; one-sided Z = -0.04; two-sided p = 0.964. </code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod1, <span class="dv">7</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ munster similarity 
+chi-squared = 0.01, d.f. = 1; one-sided Z = -0.07; two-sided p = 0.942. </code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod1, <span class="dv">8</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ apocalyptic similarity 
+chi-squared = 0.15, d.f. = 1; one-sided Z = 0.38; two-sided p = 0.702. </code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod1, <span class="dv">9</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ melchorite similarity 
+chi-squared = 0.00, d.f. = 1; one-sided Z = 0.06; two-sided p = 0.955. </code></pre>
+<p>Let’s now move onto “Model 2.” First use the <code>getEffects()</code> function to see what’s available and then include appropriate effects using <code>includeEffects()</code>. Note we “commented out” a few effects that we attempted to include at first but with no luck. When you’re building these on your own, you’ll notice you often need to use “trial and error” to get to working models.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb80-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">getEffects</span>(mydata03)</span>
+<span id="cb80-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb80-2" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, density)</span></code></pre></div>
+<pre><code>  effectName       include fix   test  initialValue parm
+1 degree (density) TRUE    FALSE FALSE    -1.3701   0   </code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb82-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, transTriads)</span></code></pre></div>
+<pre><code>  effectName        include fix   test  initialValue parm
+1 transitive triads TRUE    FALSE FALSE          0   0   </code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># myeff03 &lt;- includeEffects(myeff03,balance)</span></span>
+<span id="cb84-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="co"># myeff03 &lt;- includeEffects(myeff03,gwesp)</span></span>
+<span id="cb84-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="co"># myeff03 &lt;- includeEffects(myeff03,isolateNet)</span></span>
+<span id="cb84-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb84-4" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, simX, <span class="at">interaction1 =</span> <span class="st">&#39;melchorite&#39;</span>)</span></code></pre></div>
+<pre><code>  effectName            include fix   test  initialValue parm
+1 melchorite similarity TRUE    FALSE FALSE          0   0   </code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># myeff03 &lt;- includeEffects(myeff03,simX,interaction1=&#39;munster&#39;)</span></span>
+<span id="cb86-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb86-2" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, simX, <span class="at">interaction1 =</span> <span class="st">&#39;apocalyptic&#39;</span>)</span></code></pre></div>
+<pre><code>  effectName             include fix   test  initialValue parm
+1 apocalyptic similarity TRUE    FALSE FALSE          0   0   </code></pre>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb88-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, simX, <span class="at">interaction1 =</span> <span class="st">&#39;baptism&#39;</span>)</span></code></pre></div>
+<pre><code>  effectName         include fix   test  initialValue parm
+1 baptism similarity TRUE    FALSE FALSE          0   0   </code></pre>
+<p>Go ahead and estimate the second model. Check out overall maximum convergence ratio.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb90-1" aria-hidden="true" tabindex="-1"></a>mymodel03 <span class="ot">&lt;-</span> <span class="fu">sienaModelCreate</span>(<span class="at">useStdInits =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb90-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb90-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">projname =</span> <span class="st">&#39;finalanab03b&#39;</span>,</span>
+<span id="cb90-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb90-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">modelType =</span> <span class="fu">c</span>(<span class="at">anab03.net =</span> <span class="dv">3</span>))</span>
+<span id="cb90-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb90-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb90-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb90-6" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">siena07</span>(mymodel03,</span>
+<span id="cb90-7"><a href="data-and-setup-for-saoms-in-rsiena.html#cb90-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> mydata03,</span>
+<span id="cb90-8"><a href="data-and-setup-for-saoms-in-rsiena.html#cb90-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">effects =</span> myeff03,</span>
+<span id="cb90-9"><a href="data-and-setup-for-saoms-in-rsiena.html#cb90-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">batch =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb90-10"><a href="data-and-setup-for-saoms-in-rsiena.html#cb90-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">returnDeps =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb90-11"><a href="data-and-setup-for-saoms-in-rsiena.html#cb90-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb90-12"><a href="data-and-setup-for-saoms-in-rsiena.html#cb90-12" aria-hidden="true" tabindex="-1"></a>mod2</span></code></pre></div>
+<pre><code>Estimates, standard errors and convergence t-ratios
+
+                                   Estimate   Standard   Convergence 
+                                                Error      t-ratio   
+
+Rate parameters: 
+  0.1      Rate parameter period 1  0.4654  ( 0.1227   )             
+  0.2      Rate parameter period 2  0.0958  ( 0.0485   )             
+
+Other parameters: 
+  1.  eval degree (density)        -2.2457  ( 0.4788   )   -0.0421   
+  2.  eval transitive triads        1.0095  ( 0.3362   )   -0.0035   
+  3.  eval baptism similarity       0.7998  ( 0.7075   )   -0.0617   
+  4.  eval apocalyptic similarity  -0.0733  ( 0.8471   )    0.0203   
+  5.  eval melchorite similarity    1.4321  ( 0.8523   )   -0.0222   
+
+Overall maximum convergence ratio:    0.0923 
+
+
+ Model Type:
+anab03.net : Initiative model 
+
+
+Total of 2460 iteration steps.</code></pre>
+<p>Here we are successful. The overall maximum convergence ratio looks good and so do the individual ratios.</p>
+<p>You can check for which effects are statistically significant. You’ll notice that the value p &lt; 0.01 for transitive triads expresses strong evidence that the network dynamics depends on closure. Again, we don’t interpret density/edges typically.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod2, <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ degree (density) 
+chi-squared = 22.00, d.f. = 1; one-sided Z = -4.69; two-sided p &lt; 0.001. </code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod2, <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ transitive triads 
+chi-squared = 9.02, d.f. = 1; one-sided Z = 3.00; two-sided p = 0.003. </code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod2, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ baptism similarity 
+chi-squared = 1.28, d.f. = 1; one-sided Z = 1.13; two-sided p = 0.258. </code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod2, <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ apocalyptic similarity 
+chi-squared = 0.01, d.f. = 1; one-sided Z = -0.09; two-sided p = 0.931. </code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod2, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ melchorite similarity 
+chi-squared = 2.82, d.f. = 1; one-sided Z = 1.68; two-sided p = 0.093. </code></pre>
+<p>Now, let’s build our third model swapping out “melochorite” homophily for “munster” homophily.</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb102-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">getEffects</span>(mydata03)</span>
+<span id="cb102-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb102-2" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, density)</span></code></pre></div>
+<pre><code>  effectName       include fix   test  initialValue parm
+1 degree (density) TRUE    FALSE FALSE    -1.3701   0   </code></pre>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb104-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, transTriads)</span></code></pre></div>
+<pre><code>  effectName        include fix   test  initialValue parm
+1 transitive triads TRUE    FALSE FALSE          0   0   </code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># myeff03 &lt;- includeEffects(myeff03,balance)</span></span>
+<span id="cb106-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="co"># myeff03 &lt;- includeEffects(myeff03,gwesp)</span></span>
+<span id="cb106-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb106-3" aria-hidden="true" tabindex="-1"></a><span class="co"># myeff03 &lt;- includeEffects(myeff03,isolateNet)</span></span>
+<span id="cb106-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb106-4" aria-hidden="true" tabindex="-1"></a><span class="co"># myeff03 &lt;- includeEffects(myeff03,simX,interaction1=&#39;melchorite&#39;)</span></span>
+<span id="cb106-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb106-5" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, simX, <span class="at">interaction1 =</span> <span class="st">&#39;munster&#39;</span>)</span></code></pre></div>
+<pre><code>  effectName         include fix   test  initialValue parm
+1 munster similarity TRUE    FALSE FALSE          0   0   </code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb108-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, simX, <span class="at">interaction1 =</span> <span class="st">&#39;apocalyptic&#39;</span>)</span></code></pre></div>
+<pre><code>  effectName             include fix   test  initialValue parm
+1 apocalyptic similarity TRUE    FALSE FALSE          0   0   </code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb110-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, simX, <span class="at">interaction1 =</span> <span class="st">&#39;baptism&#39;</span>)</span></code></pre></div>
+<pre><code>  effectName         include fix   test  initialValue parm
+1 baptism similarity TRUE    FALSE FALSE          0   0   </code></pre>
+<p>Go ahead and estimate the model and check out the results. Again, look at the overall maximum convergence ratio.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb112-1" aria-hidden="true" tabindex="-1"></a>mymodel03 <span class="ot">&lt;-</span> <span class="fu">sienaModelCreate</span>(<span class="at">useStdInits =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb112-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb112-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">projname =</span> <span class="st">&#39;finalanab03c&#39;</span>,</span>
+<span id="cb112-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb112-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">modelType =</span> <span class="fu">c</span>(<span class="at">anab03.net =</span> <span class="dv">3</span>))</span>
+<span id="cb112-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb112-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb112-5" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">siena07</span>(mymodel03,</span>
+<span id="cb112-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb112-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> mydata03,</span>
+<span id="cb112-7"><a href="data-and-setup-for-saoms-in-rsiena.html#cb112-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">effects =</span> myeff03,</span>
+<span id="cb112-8"><a href="data-and-setup-for-saoms-in-rsiena.html#cb112-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">batch =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb112-9"><a href="data-and-setup-for-saoms-in-rsiena.html#cb112-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">returnDeps =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb112-10"><a href="data-and-setup-for-saoms-in-rsiena.html#cb112-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb112-11"><a href="data-and-setup-for-saoms-in-rsiena.html#cb112-11" aria-hidden="true" tabindex="-1"></a>mod3</span></code></pre></div>
+<pre><code>Estimates, standard errors and convergence t-ratios
+
+                                   Estimate   Standard   Convergence 
+                                                Error      t-ratio   
+
+Rate parameters: 
+  0.1      Rate parameter period 1  0.4074  ( 0.1001   )             
+  0.2      Rate parameter period 2  0.0939  ( 0.0495   )             
+
+Other parameters: 
+  1.  eval degree (density)        -2.3094  ( 0.5540   )   0.0178    
+  2.  eval transitive triads        1.0903  ( 0.3563   )   0.0382    
+  3.  eval baptism similarity       0.8840  ( 0.7685   )   0.0306    
+  4.  eval munster similarity      -3.0708  ( 2.5081   )   0.0205    
+  5.  eval apocalyptic similarity   2.3710  ( 1.8754   )   0.0337    
+
+Overall maximum convergence ratio:    0.0558 
+
+
+ Model Type:
+anab03.net : Initiative model 
+
+
+Total of 2555 iteration steps.</code></pre>
+<p>Again, you’ll notice that transitive triads is statistically significant (p &lt; 0.01).</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod3, <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ degree (density) 
+chi-squared = 17.38, d.f. = 1; one-sided Z = -4.17; two-sided p &lt; 0.001. </code></pre>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod3, <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ transitive triads 
+chi-squared = 9.36, d.f. = 1; one-sided Z = 3.06; two-sided p = 0.002. </code></pre>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod3, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ baptism similarity 
+chi-squared = 1.32, d.f. = 1; one-sided Z = 1.15; two-sided p = 0.25. </code></pre>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod3, <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ munster similarity 
+chi-squared = 1.50, d.f. = 1; one-sided Z = -1.22; two-sided p = 0.221. </code></pre>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod3, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ apocalyptic similarity 
+chi-squared = 1.60, d.f. = 1; one-sided Z = 1.26; two-sided p = 0.206. </code></pre>
+<p>Now, let’s set up and run the final model.</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb124-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">getEffects</span>(mydata03)</span>
+<span id="cb124-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb124-2" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, density)</span></code></pre></div>
+<pre><code>  effectName       include fix   test  initialValue parm
+1 degree (density) TRUE    FALSE FALSE    -1.3701   0   </code></pre>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb126-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, transTriads)</span></code></pre></div>
+<pre><code>  effectName        include fix   test  initialValue parm
+1 transitive triads TRUE    FALSE FALSE          0   0   </code></pre>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="co"># myeff03 &lt;- includeEffects(myeff03,balance)</span></span>
+<span id="cb128-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb128-2" aria-hidden="true" tabindex="-1"></a><span class="co"># myeff03 &lt;- includeEffects(myeff03,gwesp)</span></span>
+<span id="cb128-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb128-3" aria-hidden="true" tabindex="-1"></a><span class="co"># myeff03 &lt;- includeEffects(myeff03,isolateNet)</span></span>
+<span id="cb128-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb128-4" aria-hidden="true" tabindex="-1"></a><span class="co"># myeff03 &lt;- includeEffects(myeff03,simX,interaction1=&#39;melchorite&#39;)</span></span>
+<span id="cb128-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb128-5" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, simX, <span class="at">interaction1 =</span> <span class="st">&#39;munster&#39;</span>)</span></code></pre></div>
+<pre><code>  effectName         include fix   test  initialValue parm
+1 munster similarity TRUE    FALSE FALSE          0   0   </code></pre>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb130-1" aria-hidden="true" tabindex="-1"></a>myeff03 <span class="ot">&lt;-</span> <span class="fu">includeEffects</span>(myeff03, simX, <span class="at">interaction1 =</span> <span class="st">&#39;apocalyptic&#39;</span>)</span></code></pre></div>
+<pre><code>  effectName             include fix   test  initialValue parm
+1 apocalyptic similarity TRUE    FALSE FALSE          0   0   </code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># myeff03 &lt;- includeEffects(myeff03,simX,interaction1=&#39;baptism&#39;)</span></span></code></pre></div>
+<p>The overall maximum convergence ratio suggests this is a good model, too.</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb133-1" aria-hidden="true" tabindex="-1"></a>mymodel03 <span class="ot">&lt;-</span> <span class="fu">sienaModelCreate</span>(<span class="at">useStdInits =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb133-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb133-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">projname =</span> <span class="st">&#39;finalanab03d&#39;</span>,</span>
+<span id="cb133-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb133-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">modelType =</span> <span class="fu">c</span>(<span class="at">anab03.net =</span> <span class="dv">3</span>))</span>
+<span id="cb133-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb133-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb133-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb133-5" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">siena07</span>(mymodel03,</span>
+<span id="cb133-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb133-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> mydata03,</span>
+<span id="cb133-7"><a href="data-and-setup-for-saoms-in-rsiena.html#cb133-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">effects =</span> myeff03,</span>
+<span id="cb133-8"><a href="data-and-setup-for-saoms-in-rsiena.html#cb133-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">batch =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb133-9"><a href="data-and-setup-for-saoms-in-rsiena.html#cb133-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">verbose =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb133-10"><a href="data-and-setup-for-saoms-in-rsiena.html#cb133-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">returnDeps =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb133-11"><a href="data-and-setup-for-saoms-in-rsiena.html#cb133-11" aria-hidden="true" tabindex="-1"></a>mod4</span></code></pre></div>
+<pre><code>Estimates, standard errors and convergence t-ratios
+
+                                   Estimate   Standard   Convergence 
+                                                Error      t-ratio   
+
+Rate parameters: 
+  0.1      Rate parameter period 1  0.4047  ( 0.0984   )             
+  0.2      Rate parameter period 2  0.0949  ( 0.0469   )             
+
+Other parameters: 
+  1.  eval degree (density)        -2.2633  ( 0.5614   )    0.0251   
+  2.  eval transitive triads        1.0565  ( 0.3715   )   -0.0302   
+  3.  eval munster similarity      -3.4282  ( 2.5863   )   -0.0569   
+  4.  eval apocalyptic similarity   2.7423  ( 1.9945   )   -0.1150   
+
+Overall maximum convergence ratio:    0.1569 
+
+
+ Model Type:
+anab03.net : Initiative model 
+
+
+Total of 2356 iteration steps.</code></pre>
+<p>Again, you’ll notice that transitive triads is statistically significant (p &lt; 0.01).</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod4, <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ degree (density) 
+chi-squared = 16.25, d.f. = 1; one-sided Z = -4.03; two-sided p &lt; 0.001. </code></pre>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod4, <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ transitive triads 
+chi-squared = 8.09, d.f. = 1; one-sided Z = 2.84; two-sided p = 0.004. </code></pre>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod4, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ munster similarity 
+chi-squared = 1.76, d.f. = 1; one-sided Z = -1.33; two-sided p = 0.185. </code></pre>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Multipar.RSiena</span>(mod4, <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>Tested effects:
+ apocalyptic similarity 
+chi-squared = 1.89, d.f. = 1; one-sided Z = 1.37; two-sided p = 0.169. </code></pre>
+</div>
+<div id="goodness-of-fit-gof" class="section level2" number="16.5">
+<h2><span class="header-section-number">16.5</span> Goodness of Fit (GOF)</h2>
+<p>We will demonstrate GOF by accounting for degree distribution, triad census, and path distance. These are not the only GOF tests you can (and should) run but are good places to start. In all cases, we want to the p-values to be around or <em>larger</em> than 0.05 (<a href="https://www.stats.ox.ac.uk/~snijders/siena/SienaAdvancedUsersWorkshop2018.pdf" class="uri">https://www.stats.ox.ac.uk/~snijders/siena/SienaAdvancedUsersWorkshop2018.pdf</a>, see slides 49-63)</p>
+<p>Though we have an undirected network, we will use the <code>IndegreeDistribution</code> option. Note this may take awhile.</p>
+<p>We will only assess our third model to keep things simple but you will want to assess GOF for all models that have converged and that you plan to interpret in your research. Note that some of you may have gotten lower overall maximum convergence ratios for other models. Continue to use them as a guide but note they can vary at times.</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save(gof1.deg, gof.tc, gof.gd, file = &quot;data/gof.rda&quot;)</span></span>
+<span id="cb143-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/gof.rda&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb144-1" aria-hidden="true" tabindex="-1"></a>gof1.deg <span class="ot">&lt;-</span> <span class="fu">sienaGOF</span>(mod3, </span>
+<span id="cb144-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb144-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">verbose =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb144-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb144-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">varName =</span> <span class="st">&quot;anab03.net&quot;</span>, </span>
+<span id="cb144-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb144-4" aria-hidden="true" tabindex="-1"></a>                     IndegreeDistribution)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb145-1" aria-hidden="true" tabindex="-1"></a>gof1.deg</span></code></pre></div>
+<pre><code>Siena Goodness of Fit ( IndegreeDistribution ), all periods
+=====
+Monte Carlo Mahalanobis distance test p-value:  0.035 
+-----
+One tailed test used  (i.e. estimated probability of greater distance than observation).
+-----
+Calculated joint MHD = ( 35.04 ) for current model.</code></pre>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gof1.deg)</span></code></pre></div>
+<p><img src="8-SAOMs_files/figure-html/unnamed-chunk-59-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>You’ll see that our model does okay accounting for degree distributions.</p>
+<p>Now, let’s check for triadic processes. We pulled this off the web to account for various triads (<a href="https://dnac.ssri.duke.edu/r-labs/2017/07_sienna_models.php" class="uri">https://dnac.ssri.duke.edu/r-labs/2017/07_sienna_models.php</a>). Again, this will take awhile.</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-1" aria-hidden="true" tabindex="-1"></a>TriadCensus <span class="ot">&lt;-</span> <span class="cf">function</span>(i, data, sims, wave, groupName, varName, <span class="at">levls =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">16</span>) {</span>
+<span id="cb148-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unloadNamespace</span>(<span class="st">&quot;igraph&quot;</span>) <span class="co"># to avoid package clashes</span></span>
+<span id="cb148-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(sna)</span>
+<span id="cb148-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(network)</span>
+<span id="cb148-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">networkExtraction</span>(i, data, sims, wave, groupName, varName)</span>
+<span id="cb148-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">network.edgecount</span>(x) <span class="sc">&lt;=</span> <span class="dv">0</span>){x <span class="ot">&lt;-</span> <span class="fu">symmetrize</span>(x)}</span>
+<span id="cb148-7"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># because else triad.census(x) will lead to an error</span></span>
+<span id="cb148-8"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-8" aria-hidden="true" tabindex="-1"></a>  tc <span class="ot">&lt;-</span> sna<span class="sc">::</span><span class="fu">triad.census</span>(x)[<span class="dv">1</span>, levls]</span>
+<span id="cb148-9"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># triad names are transferred automatically</span></span>
+<span id="cb148-10"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-10" aria-hidden="true" tabindex="-1"></a>  tc</span>
+<span id="cb148-11"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb148-12"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-12" aria-hidden="true" tabindex="-1"></a>gof.tc <span class="ot">&lt;-</span> <span class="fu">sienaGOF</span>(mod3, </span>
+<span id="cb148-13"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">verbose =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb148-14"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">varName =</span> <span class="st">&quot;anab03.net&quot;</span>, </span>
+<span id="cb148-15"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-15" aria-hidden="true" tabindex="-1"></a>                   TriadCensus)</span>
+<span id="cb148-16"><a href="data-and-setup-for-saoms-in-rsiena.html#cb148-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gof.tc, <span class="at">scale =</span> <span class="cn">TRUE</span>, <span class="at">center =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>Note: some statistics are not plotted because their variance is 0.
+This holds for the statistics: 012 021D 021U 021C 111D 111U 030T 030C 120D 120U 120C 210.</code></pre>
+<p><img src="8-SAOMs_files/figure-html/unnamed-chunk-61-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>We are okay here but we could improve our model in the future by accounting for open triads (i.e., “201” is a type of undirected triad in triad consensus).</p>
+<p>Finally, let’s account for geodesic distance ((<a href="https://dnac.ssri.duke.edu/r-labs/2017/07_sienna_models.php" class="uri">https://dnac.ssri.duke.edu/r-labs/2017/07_sienna_models.php</a>).</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-1" aria-hidden="true" tabindex="-1"></a>GeodesicDistribution <span class="ot">&lt;-</span> <span class="cf">function</span>(i, data, sims, period, groupName, varName,</span>
+<span id="cb150-2"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">levls =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="cn">Inf</span>), <span class="at">cumulative=</span><span class="cn">TRUE</span>, ...) {</span>
+<span id="cb150-3"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-3" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">networkExtraction</span>(i, data, sims, period, groupName, varName)</span>
+<span id="cb150-4"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">require</span>(sna)</span>
+<span id="cb150-5"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-5" aria-hidden="true" tabindex="-1"></a>  a <span class="ot">&lt;-</span> sna<span class="sc">::</span><span class="fu">geodist</span>(<span class="fu">symmetrize</span>(x))<span class="sc">$</span>gdist</span>
+<span id="cb150-6"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (cumulative)</span>
+<span id="cb150-7"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-7" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb150-8"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-8" aria-hidden="true" tabindex="-1"></a>    gdi <span class="ot">&lt;-</span> <span class="fu">sapply</span>(levls, <span class="cf">function</span>(i){ <span class="fu">sum</span>(a <span class="sc">&lt;=</span> i) })</span>
+<span id="cb150-9"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb150-10"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span></span>
+<span id="cb150-11"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-11" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb150-12"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-12" aria-hidden="true" tabindex="-1"></a>    gdi <span class="ot">&lt;-</span> <span class="fu">sapply</span>(levls, <span class="cf">function</span>(i){ <span class="fu">sum</span>(a <span class="sc">==</span> i) })</span>
+<span id="cb150-13"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb150-14"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(gdi) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(levls)</span>
+<span id="cb150-15"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-15" aria-hidden="true" tabindex="-1"></a>  gdi</span>
+<span id="cb150-16"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb150-17"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb150-18"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-18" aria-hidden="true" tabindex="-1"></a>gof.gd <span class="ot">&lt;-</span> <span class="fu">sienaGOF</span>(mod3, </span>
+<span id="cb150-19"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-19" aria-hidden="true" tabindex="-1"></a>                   <span class="at">verbose =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb150-20"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-20" aria-hidden="true" tabindex="-1"></a>                   <span class="at">varName =</span> <span class="st">&quot;anab03.net&quot;</span>, </span>
+<span id="cb150-21"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-21" aria-hidden="true" tabindex="-1"></a>                   GeodesicDistribution,</span>
+<span id="cb150-22"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-22" aria-hidden="true" tabindex="-1"></a>                   <span class="at">join =</span> T, </span>
+<span id="cb150-23"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-23" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cumulative =</span> F,</span>
+<span id="cb150-24"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-24" aria-hidden="true" tabindex="-1"></a>                   <span class="at">returnDeps =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb150-25"><a href="data-and-setup-for-saoms-in-rsiena.html#cb150-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gof.gd)</span></code></pre></div>
+<p><img src="8-SAOMs_files/figure-html/unnamed-chunk-63-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="interpret-the-results" class="section level2" number="16.6">
+<h2><span class="header-section-number">16.6</span> Interpret the Results</h2>
+<p>To help with interpretation, we can convert the results to odds ratios. Again, we will do this for statistically significant configurations in Model 3 only (i.e, transitive triads). Here are the results again.</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb151-1" aria-hidden="true" tabindex="-1"></a>mod3</span></code></pre></div>
+<pre><code>Estimates, standard errors and convergence t-ratios
+
+                                   Estimate   Standard   Convergence 
+                                                Error      t-ratio   
+
+Rate parameters: 
+  0.1      Rate parameter period 1  0.4074  ( 0.1001   )             
+  0.2      Rate parameter period 2  0.0939  ( 0.0495   )             
+
+Other parameters: 
+  1.  eval degree (density)        -2.3094  ( 0.5540   )   0.0178    
+  2.  eval transitive triads        1.0903  ( 0.3563   )   0.0382    
+  3.  eval baptism similarity       0.8840  ( 0.7685   )   0.0306    
+  4.  eval munster similarity      -3.0708  ( 2.5081   )   0.0205    
+  5.  eval apocalyptic similarity   2.3710  ( 1.8754   )   0.0337    
+
+Overall maximum convergence ratio:    0.0558 
+
+
+ Model Type:
+anab03.net : Initiative model 
+
+
+Total of 2555 iteration steps.</code></pre>
+<p>Simply enter the estimate for transitive triads into the <code>exp()</code> function. Your estimate for transitive triads, and therefore odds ratio, might be slightly different than mine, so we’ll keep the interpretation vague at the moment.</p>
+<p>For transitive triads, you can interpret the results as pairs of disconnected individuals who share a single contact are (blank…insert odds ratio) times more like to establish a direct connection than those who do not share a single contact.</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="data-and-setup-for-saoms-in-rsiena.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="co">#exp() #Insert estimate from model output.</span></span></code></pre></div>
+<p>That’s all for now.</p>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exploratory-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjcallag/r4ds/edit/editing/8-SAOMs.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"font_settings": {
+"family": "sans",
+"theme": "white",
+"size": 2
+},
+"info": true,
+"toolbar": {
+"position": "fixed"
+},
+"search": {
+"engine": "lunr",
+"options": null
+}
+});
+});
+</script>
+
+</body>
+
+</html>

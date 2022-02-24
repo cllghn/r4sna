@@ -127,9 +127,9 @@ koschade1_ig
 ```
 
 ```
-IGRAPH 0344ec3 UNW- 17 63 -- 
+IGRAPH 756eaa2 UNW- 17 63 -- 
 + attr: name (v/c), weight (e/n)
-+ edges from 0344ec3 (vertex names):
++ edges from 756eaa2 (vertex names):
  [1] Muklas --Amrozi   Muklas --Imron    Muklas --Samudra  Muklas --Dulmatin
  [5] Muklas --Idris    Muklas --Azahari  Muklas --Ghoni    Muklas --Patek   
  [9] Muklas --Sarijo   Amrozi --Samudra  Amrozi --Idris    Amrozi --Mubarok 
@@ -205,9 +205,9 @@ koschade2_ig <- graph_from_data_frame(d = koschade2_el,
                                       directed = FALSE)
 # Look at the printout
 koschade2_ig
-IGRAPH 036e1f0 UN-- 17 63 -- 
+IGRAPH 6f375c3 UN-- 17 63 -- 
 + attr: name (v/c), Weight (e/n)
-+ edges from 036e1f0 (vertex names):
++ edges from 6f375c3 (vertex names):
  [1] Muklas --Amrozi   Muklas --Imron    Muklas --Samudra  Muklas --Dulmatin
  [5] Muklas --Idris    Muklas --Azahari  Muklas --Ghoni    Muklas --Patek   
  [9] Muklas --Sarijo   Amrozi --Samudra  Amrozi --Idris    Amrozi --Mubarok 
@@ -235,9 +235,9 @@ koschade2_ig
 ```
 
 ```
-IGRAPH 03739d5 UN-- 17 63 -- 
+IGRAPH 704c098 UN-- 17 63 -- 
 + attr: name (v/c), Weight (e/n)
-+ edges from 03739d5 (vertex names):
++ edges from 704c098 (vertex names):
  [1] Muklas --Amrozi   Muklas --Imron    Muklas --Samudra  Muklas --Dulmatin
  [5] Muklas --Idris    Muklas --Azahari  Muklas --Ghoni    Muklas --Patek   
  [9] Muklas --Sarijo   Amrozi --Samudra  Amrozi --Idris    Amrozi --Mubarok 
@@ -262,9 +262,9 @@ koschade3_ig
 ```
 
 ```
-IGRAPH 037e99d UNW- 17 63 -- 
+IGRAPH 1a2c142 UNW- 17 63 -- 
 + attr: id (v/c), name (v/c), x (v/n), y (v/n), z (v/n), weight (e/n)
-+ edges from 037e99d (vertex names):
++ edges from 1a2c142 (vertex names):
  [1] Muklas --Amrozi   Muklas --Imron    Muklas --Samudra  Muklas --Dulmatin
  [5] Muklas --Idris    Muklas --Azahari  Muklas --Ghoni    Muklas --Patek   
  [9] Muklas --Sarijo   Amrozi --Samudra  Amrozi --Idris    Amrozi --Mubarok 
@@ -579,9 +579,9 @@ davis1_ig
 ```
 
 ```
-IGRAPH 04927ba UN-B 32 89 -- 
+IGRAPH 0f65b2d UN-B 32 89 -- 
 + attr: type (v/l), name (v/c)
-+ edges from 04927ba (vertex names):
++ edges from 0f65b2d (vertex names):
  [1] EVELYN   --E1 EVELYN   --E2 EVELYN   --E3 EVELYN   --E4 EVELYN   --E5
  [6] EVELYN   --E6 EVELYN   --E8 EVELYN   --E9 LAURA    --E1 LAURA    --E2
 [11] LAURA    --E3 LAURA    --E5 LAURA    --E6 LAURA    --E7 LAURA    --E8
@@ -631,9 +631,9 @@ davis2_ig
 ```
 
 ```
-IGRAPH 04a58e8 UN-- 32 89 -- 
+IGRAPH df8b819 UN-- 32 89 -- 
 + attr: name (v/c), Weight (e/n)
-+ edges from 04a58e8 (vertex names):
++ edges from df8b819 (vertex names):
  [1] EVELYN   --E1 EVELYN   --E2 EVELYN   --E3 EVELYN   --E4 EVELYN   --E5
  [6] EVELYN   --E6 EVELYN   --E8 EVELYN   --E9 LAURA    --E1 LAURA    --E2
 [11] LAURA    --E3 LAURA    --E5 LAURA    --E6 LAURA    --E7 LAURA    --E8
@@ -689,9 +689,9 @@ davis2_ig
 ```
 
 ```
-IGRAPH 04a58e8 UN-B 32 89 -- 
+IGRAPH df8b819 UN-B 32 89 -- 
 + attr: name (v/c), type (v/l), Weight (e/n)
-+ edges from 04a58e8 (vertex names):
++ edges from df8b819 (vertex names):
  [1] EVELYN   --E1 EVELYN   --E2 EVELYN   --E3 EVELYN   --E4 EVELYN   --E5
  [6] EVELYN   --E6 EVELYN   --E8 EVELYN   --E9 LAURA    --E1 LAURA    --E2
 [11] LAURA    --E3 LAURA    --E5 LAURA    --E6 LAURA    --E7 LAURA    --E8
@@ -972,9 +972,9 @@ davis_women_ig
 ```
 
 ```
-IGRAPH 05e2f18 UNW- 18 139 -- 
+IGRAPH 471d7aa UNW- 18 139 -- 
 + attr: name (v/c), weight (e/n)
-+ edges from 05e2f18 (vertex names):
++ edges from 471d7aa (vertex names):
  [1] EVELYN --LAURA     EVELYN --THERESA   EVELYN --BRENDA    EVELYN --CHARLOTTE
  [5] EVELYN --FRANCES   EVELYN --ELEANOR   EVELYN --PEARL     EVELYN --RUTH     
  [9] EVELYN --VERNE     EVELYN --MYRNA     EVELYN --KATHERINE EVELYN --SYLVIA   
@@ -1000,9 +1000,9 @@ davis_events_ig
 ```
 
 ```
-IGRAPH 05e896b UNW- 14 66 -- 
+IGRAPH 9175b5b UNW- 14 66 -- 
 + attr: name (v/c), weight (e/n)
-+ edges from 05e896b (vertex names):
++ edges from 9175b5b (vertex names):
  [1] E1 --E2  E1 --E3  E1 --E4  E1 --E5  E1 --E6  E1 --E7  E1 --E8  E1 --E9 
  [9] E2 --E3  E2 --E4  E2 --E5  E2 --E6  E2 --E7  E2 --E8  E2 --E9  E3 --E4 
 [17] E3 --E5  E3 --E6  E3 --E7  E3 --E8  E3 --E9  E4 --E5  E4 --E6  E4 --E7 
@@ -1040,9 +1040,9 @@ davis_events_ig
 ```
 
 ```
-IGRAPH 065c677 UNW- 14 66 -- 
+IGRAPH 08d9482 UNW- 14 66 -- 
 + attr: name (v/c), weight (e/n)
-+ edges from 065c677 (vertex names):
++ edges from 08d9482 (vertex names):
  [1] E1 --E2  E1 --E3  E1 --E4  E1 --E5  E1 --E6  E1 --E8  E1 --E9  E1 --E7 
  [9] E2 --E3  E2 --E4  E2 --E5  E2 --E6  E2 --E8  E2 --E9  E2 --E7  E3 --E4 
 [17] E3 --E5  E3 --E6  E3 --E8  E3 --E9  E3 --E7  E4 --E5  E4 --E6  E4 --E8 
@@ -1064,9 +1064,9 @@ davis_women_ig
 ```
 
 ```
-IGRAPH 06631e6 UNW- 18 139 -- 
+IGRAPH 876568c UNW- 18 139 -- 
 + attr: name (v/c), weight (e/n)
-+ edges from 06631e6 (vertex names):
++ edges from 876568c (vertex names):
  [1] EVELYN --LAURA     EVELYN --BRENDA    EVELYN --THERESA   EVELYN --CHARLOTTE
  [5] EVELYN --FRANCES   EVELYN --ELEANOR   EVELYN --RUTH      EVELYN --PEARL    
  [9] EVELYN --NORA      EVELYN --VERNE     EVELYN --MYRNA     EVELYN --KATHERINE

@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>15 Exploratory Analysis | R for Social Network Analysis</title>
+  <meta name="description" content="TBD." />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="15 Exploratory Analysis | R for Social Network Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="TBD." />
+  <meta name="github-repo" content="cjcallag/r4sna" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="15 Exploratory Analysis | R for Social Network Analysis" />
+  
+  <meta name="twitter:description" content="TBD." />
+  
+
+<meta name="author" content="CORE Lab" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="stochastic-actor-oriented-models-saoms.html"/>
+<link rel="next" href="data-and-setup-for-saoms-in-rsiena.html"/>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.18/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="libs/selectize-0.12.0/selectize.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="my_style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Social Network Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instructors"><i class="fa fa-check"></i><b>1.1</b> Instructors</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="2" data-path="setting-up.html"><a href="setting-up.html"><i class="fa fa-check"></i><b>2</b> Setting Up</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setting-up.html"><a href="setting-up.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.1</b> R and RStudio Basics</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="setting-up.html"><a href="setting-up.html#basics-of-r-coding-in-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Basics of R Coding in RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="setting-up.html"><a href="setting-up.html#project-workflow"><i class="fa fa-check"></i><b>2.2</b> Project Workflow</a></li>
+</ul></li>
+<li class="part"><span><b>II Lab 1</b></span></li>
+<li class="chapter" data-level="3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
+<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Lab 2</b></span></li>
+<li class="chapter" data-level="5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>5</b> Manipulating and Simplifying Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#setup-2"><i class="fa fa-check"></i><b>5.1</b> Setup</a></li>
+<li class="chapter" data-level="5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-libraries-2"><i class="fa fa-check"></i><b>5.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-the-backbones-of-two-mode-network-projections"><i class="fa fa-check"></i><b>5.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-data"><i class="fa fa-check"></i><b>5.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#non-statistical-projections-of-the-co-sponsorhip-data"><i class="fa fa-check"></i><b>5.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="5.3.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-backbones"><i class="fa fa-check"></i><b>5.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#simplifying-networks-in-igraph-anabaptist-leadership-network"><i class="fa fa-check"></i><b>5.4</b> Simplifying Networks in <strong>igraph</strong>: Anabaptist Leadership Network</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-network-and-attribute-data"><i class="fa fa-check"></i><b>5.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-the-anabaptist-network"><i class="fa fa-check"></i><b>5.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="5.4.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#shrinking-collapsing-contracting-networks"><i class="fa fa-check"></i><b>5.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="5.4.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-subnetworks"><i class="fa fa-check"></i><b>5.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#multiple-stacked-networks-in-igraph-sampson-monastery"><i class="fa fa-check"></i><b>5.5</b> Multiple (Stacked) Networks in <strong>igraph</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-edge-list-network-data"><i class="fa fa-check"></i><b>5.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="5.5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-stacked-networks"><i class="fa fa-check"></i><b>5.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="5.5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-and-plotting-individual-networks"><i class="fa fa-check"></i><b>5.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>6</b> Manipulating and Simplifying Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#setup-3"><i class="fa fa-check"></i><b>6.1</b> Setup</a></li>
+<li class="chapter" data-level="6.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-libraries-3"><i class="fa fa-check"></i><b>6.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="6.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-the-backbones-of-two-mode-network-projections-1"><i class="fa fa-check"></i><b>6.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-data-1"><i class="fa fa-check"></i><b>6.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#non-statistical-projections-of-the-co-sponsorhip-data-1"><i class="fa fa-check"></i><b>6.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="6.3.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-backbones-1"><i class="fa fa-check"></i><b>6.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#simplifying-networks-in-statnet-anabaptist-network"><i class="fa fa-check"></i><b>6.4</b> Simplifying Networks in <strong>statnet</strong>: Anabaptist Network</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-network-and-attribute-data-1"><i class="fa fa-check"></i><b>6.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="6.4.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-the-anabaptist-network-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="6.4.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#shrinking-collapsing-contracting-networks-1"><i class="fa fa-check"></i><b>6.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="6.4.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-subnetworks-1"><i class="fa fa-check"></i><b>6.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#multiple-stacked-networks-in-statnet-sampson-monastery"><i class="fa fa-check"></i><b>6.5</b> Multiple (Stacked) Networks in <strong>statnet</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-edge-list-network-data-1"><i class="fa fa-check"></i><b>6.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="6.5.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-stacked-networks-1"><i class="fa fa-check"></i><b>6.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="6.5.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-and-plotting-individual-networks-1"><i class="fa fa-check"></i><b>6.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Lab 3</b></span></li>
+<li class="chapter" data-level="7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html"><i class="fa fa-check"></i><b>7</b> Network Topography in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#setup-4"><i class="fa fa-check"></i><b>7.1</b> Setup</a></li>
+<li class="chapter" data-level="7.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#load-libraries-4"><i class="fa fa-check"></i><b>7.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="7.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#import-data"><i class="fa fa-check"></i><b>7.3</b> Import Data</a></li>
+<li class="chapter" data-level="7.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size-and-interconnectedness"><i class="fa fa-check"></i><b>7.4</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size"><i class="fa fa-check"></i><b>7.4.1</b> Network Size</a></li>
+<li class="chapter" data-level="7.4.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#density-and-average-degree"><i class="fa fa-check"></i><b>7.4.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="7.4.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#clustering-coefficient-global-and-local"><i class="fa fa-check"></i><b>7.4.3</b> Clustering Coefficient (Global and Local)</a></li>
+<li class="chapter" data-level="7.4.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#cohesion-and-fragmentation"><i class="fa fa-check"></i><b>7.4.4</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="7.4.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#compactness-and-breadth"><i class="fa fa-check"></i><b>7.4.5</b> Compactness and Breadth</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization-and-related-measures-of-spread"><i class="fa fa-check"></i><b>7.5</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization"><i class="fa fa-check"></i><b>7.5.1</b> Centralization</a></li>
+<li class="chapter" data-level="7.5.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#variance-and-standard-deviation"><i class="fa fa-check"></i><b>7.5.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="7.5.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#diameter-and-average-path-distance"><i class="fa fa-check"></i><b>7.5.3</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#calculating-the-e-i-index-with-isnar"><i class="fa fa-check"></i><b>7.6</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+<li class="chapter" data-level="7.7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-level-measures-table"><i class="fa fa-check"></i><b>7.7</b> Network Level Measures Table</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html"><i class="fa fa-check"></i><b>8</b> Network Topography in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#setup-5"><i class="fa fa-check"></i><b>8.1</b> Setup</a></li>
+<li class="chapter" data-level="8.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#load-libraries-5"><i class="fa fa-check"></i><b>8.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="8.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#import-data-1"><i class="fa fa-check"></i><b>8.3</b> Import Data</a></li>
+<li class="chapter" data-level="8.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-and-interconnectedness-1"><i class="fa fa-check"></i><b>8.4</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-1"><i class="fa fa-check"></i><b>8.4.1</b> Network Size</a></li>
+<li class="chapter" data-level="8.4.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#density-and-average-degree-1"><i class="fa fa-check"></i><b>8.4.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="8.4.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#cohesion-and-fragmentation-1"><i class="fa fa-check"></i><b>8.4.3</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="8.4.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#compactness-and-breadth-1"><i class="fa fa-check"></i><b>8.4.4</b> Compactness and Breadth</a></li>
+<li class="chapter" data-level="8.4.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-interconnectedness-scores"><i class="fa fa-check"></i><b>8.4.5</b> Table of Interconnectedness Scores</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-and-related-measures-of-spread-1"><i class="fa fa-check"></i><b>8.5</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-1"><i class="fa fa-check"></i><b>8.5.1</b> Centralization</a></li>
+<li class="chapter" data-level="8.5.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#variance-and-standard-deviation-1"><i class="fa fa-check"></i><b>8.5.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="8.5.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-centralization-scores"><i class="fa fa-check"></i><b>8.5.3</b> Table of Centralization Scores</a></li>
+<li class="chapter" data-level="8.5.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#diameter-and-average-path-distance-1"><i class="fa fa-check"></i><b>8.5.4</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#calculating-the-e-i-index-with-isnar-1"><i class="fa fa-check"></i><b>8.6</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+</ul></li>
+<li class="part"><span><b>V Lab 4</b></span></li>
+<li class="chapter" data-level="9" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html"><i class="fa fa-check"></i><b>9</b> Detecting Subgroups in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#setup-6"><i class="fa fa-check"></i><b>9.1</b> Setup</a></li>
+<li class="chapter" data-level="9.2" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#load-library"><i class="fa fa-check"></i><b>9.2</b> Load Library</a></li>
+<li class="chapter" data-level="9.3" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#import-and-plot-network"><i class="fa fa-check"></i><b>9.3</b> Import and Plot Network</a></li>
+<li class="chapter" data-level="9.4" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#components-in-igraph"><i class="fa fa-check"></i><b>9.4</b> Components in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.5" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#cliques-in-igraph"><i class="fa fa-check"></i><b>9.5</b> Cliques in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.6" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#k-cores-in-igraph"><i class="fa fa-check"></i><b>9.6</b> K-Cores in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.7" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#community-detection-in-igraph"><i class="fa fa-check"></i><b>9.7</b> Community Detection in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#girvan-newman"><i class="fa fa-check"></i><b>9.7.1</b> Girvan-Newman</a></li>
+<li class="chapter" data-level="9.7.2" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#walktrap"><i class="fa fa-check"></i><b>9.7.2</b> Walktrap</a></li>
+<li class="chapter" data-level="9.7.3" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#spin-glass"><i class="fa fa-check"></i><b>9.7.3</b> Spin-Glass</a></li>
+<li class="chapter" data-level="9.7.4" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#louvain"><i class="fa fa-check"></i><b>9.7.4</b> Louvain</a></li>
+<li class="chapter" data-level="9.7.5" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#table-of-results"><i class="fa fa-check"></i><b>9.7.5</b> Table of Results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html"><i class="fa fa-check"></i><b>10</b> Detecting Subgroups in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#setup-7"><i class="fa fa-check"></i><b>10.1</b> Setup</a></li>
+<li class="chapter" data-level="10.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#load-libraries-6"><i class="fa fa-check"></i><b>10.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="10.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#import-and-plot-network-1"><i class="fa fa-check"></i><b>10.3</b> Import and Plot Network</a></li>
+<li class="chapter" data-level="10.4" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#components-in-statnet"><i class="fa fa-check"></i><b>10.4</b> Components in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.5" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#cliques-in-statnet"><i class="fa fa-check"></i><b>10.5</b> Cliques in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.6" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#k-cores-in-statnet"><i class="fa fa-check"></i><b>10.6</b> K-Cores in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.7" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#community-detection-in-statnet"><i class="fa fa-check"></i><b>10.7</b> Community Detection in <strong>statnet</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path=""><a href="#part-lab-5"><i class="fa fa-check"></i>(PART) Lab 5</a>
+<ul>
+<li class="chapter" data-level="10.8" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#setup-8"><i class="fa fa-check"></i><b>10.8</b> Setup</a></li>
+<li class="chapter" data-level="10.9" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#load-libraries-7"><i class="fa fa-check"></i><b>10.9</b> Load Libraries</a></li>
+<li class="chapter" data-level="10.10" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#load-data-2"><i class="fa fa-check"></i><b>10.10</b> Load Data</a></li>
+<li class="chapter" data-level="10.11" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#centrality-and-power-undirected-networks"><i class="fa fa-check"></i><b>10.11</b> Centrality and Power (Undirected Networks)</a>
+<ul>
+<li class="chapter" data-level="10.11.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#degree-closeness-betweenness-and-eigenvector"><i class="fa fa-check"></i><b>10.11.1</b> Degree, Closeness, Betweenness, and Eigenvector</a></li>
+<li class="chapter" data-level="10.11.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#correlations"><i class="fa fa-check"></i><b>10.11.2</b> Correlations</a></li>
+<li class="chapter" data-level="10.11.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#interactive-table"><i class="fa fa-check"></i><b>10.11.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="10.12" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#centrality-and-prestige-directed-networks"><i class="fa fa-check"></i><b>10.12</b> Centrality and Prestige (Directed Networks)</a>
+<ul>
+<li class="chapter" data-level="10.12.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#in-n-out-degree-hubs-and-authorities"><i class="fa fa-check"></i><b>10.12.1</b> In-N-Out Degree, Hubs and Authorities</a></li>
+<li class="chapter" data-level="10.12.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#correlations-1"><i class="fa fa-check"></i><b>10.12.2</b> Correlations</a></li>
+<li class="chapter" data-level="10.12.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#interactive-table-1"><i class="fa fa-check"></i><b>10.12.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="10.13" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#brokerage"><i class="fa fa-check"></i><b>10.13</b> Brokerage</a>
+<ul>
+<li class="chapter" data-level="10.13.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#cutpoints"><i class="fa fa-check"></i><b>10.13.1</b> Cutpoints</a></li>
+<li class="chapter" data-level="10.13.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#cutsets-key-player"><i class="fa fa-check"></i><b>10.13.2</b> Cutsets (Key Player)</a></li>
+<li class="chapter" data-level="10.13.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#burts-constraint"><i class="fa fa-check"></i><b>10.13.3</b> Burt’s Constraint</a></li>
+<li class="chapter" data-level="10.13.4" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#bridges-edge-betweenness"><i class="fa fa-check"></i><b>10.13.4</b> Bridges: Edge Betweenness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html"><i class="fa fa-check"></i><b>11</b> Centrality and Brokerage in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#setup-9"><i class="fa fa-check"></i><b>11.1</b> Setup</a></li>
+<li class="chapter" data-level="11.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#libraries"><i class="fa fa-check"></i><b>11.2</b> Libraries</a></li>
+<li class="chapter" data-level="11.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#load-data-3"><i class="fa fa-check"></i><b>11.3</b> Load Data</a></li>
+<li class="chapter" data-level="11.4" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#centrality-and-power-undirected-networks-1"><i class="fa fa-check"></i><b>11.4</b> Centrality and Power (Undirected Networks)</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#degree-closeness-betweenness-and-eigenvector-centrality"><i class="fa fa-check"></i><b>11.4.1</b> Degree, Closeness, Betweenness and Eigenvector Centrality</a></li>
+<li class="chapter" data-level="11.4.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#correlations-2"><i class="fa fa-check"></i><b>11.4.2</b> Correlations</a></li>
+<li class="chapter" data-level="11.4.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#interactive-table-2"><i class="fa fa-check"></i><b>11.4.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#centrality-and-prestige-directed-networks-1"><i class="fa fa-check"></i><b>11.5</b> Centrality and Prestige (Directed Networks)</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#in-n-out-degree-input-domain-and-proximity-prestige"><i class="fa fa-check"></i><b>11.5.1</b> In-N-Out Degree, Input Domain, and Proximity Prestige</a></li>
+<li class="chapter" data-level="11.5.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#correlations-3"><i class="fa fa-check"></i><b>11.5.2</b> Correlations</a></li>
+<li class="chapter" data-level="11.5.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#interactive-table-3"><i class="fa fa-check"></i><b>11.5.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#brokerage-1"><i class="fa fa-check"></i><b>11.6</b> Brokerage</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#cutpoints-1"><i class="fa fa-check"></i><b>11.6.1</b> Cutpoints</a></li>
+<li class="chapter" data-level="11.6.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#cutsets-key-player-1"><i class="fa fa-check"></i><b>11.6.2</b> Cutsets (Key Player)</a></li>
+<li class="chapter" data-level="11.6.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#gould-and-fernandez"><i class="fa fa-check"></i><b>11.6.3</b> Gould and Fernandez</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VI Lab 6</b></span></li>
+<li class="chapter" data-level="12" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html"><i class="fa fa-check"></i><b>12</b> Hypothesis Testing (QAP and CUG)</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#introduction-1"><i class="fa fa-check"></i><b>12.1</b> Introduction</a></li>
+<li class="chapter" data-level="12.2" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#developing-and-testing-working-hypotheses"><i class="fa fa-check"></i><b>12.2</b> Developing and Testing Working Hypotheses</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#univariate-bivariate-and-multivariate-statistical-tests"><i class="fa fa-check"></i><b>12.2.1</b> Univariate, Bivariate, and Multivariate Statistical Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#challenging-expectations-with-conditional-uniform-graphs-cugs"><i class="fa fa-check"></i><b>12.3</b> Challenging Expectations with Conditional Uniform Graphs (CUGs)</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#univariate-cug-tests-in-statnet"><i class="fa fa-check"></i><b>12.3.1</b> Univariate CUG Tests in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="12.3.2" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#bivariate-tests-using-cug"><i class="fa fa-check"></i><b>12.3.2</b> Bivariate Tests Using CUG</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#quadratic-assignment-procedure-qap"><i class="fa fa-check"></i><b>12.4</b> Quadratic Assignment Procedure (QAP)</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#bivariate-tests-using-qap-correlation"><i class="fa fa-check"></i><b>12.4.1</b> Bivariate Tests Using QAP: Correlation</a></li>
+<li class="chapter" data-level="12.4.2" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#multivariate-models-using-qap"><i class="fa fa-check"></i><b>12.4.2</b> Multivariate Models using QAP</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#a-note-on-interpretation-causality-in-networks"><i class="fa fa-check"></i><b>12.5</b> A Note on interpretation: Causality in Networks</a></li>
+<li class="chapter" data-level="12.6" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#summary-lessons-learned"><i class="fa fa-check"></i><b>12.6</b> Summary: Lessons Learned</a></li>
+</ul></li>
+<li class="part"><span><b>VII Lab 7</b></span></li>
+<li class="chapter" data-level="13" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html"><i class="fa fa-check"></i><b>13</b> Exponential Random Graph Models (ERGMs)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#introduction-2"><i class="fa fa-check"></i><b>13.1</b> Introduction</a></li>
+<li class="chapter" data-level="13.2" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#ergms-with-undirected-data"><i class="fa fa-check"></i><b>13.2</b> ERGMs With Undirected Data</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#data-and-setup"><i class="fa fa-check"></i><b>13.2.1</b> Data and Setup</a></li>
+<li class="chapter" data-level="13.2.2" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#pira-ergms"><i class="fa fa-check"></i><b>13.2.2</b> PIRA ERGMs</a></li>
+<li class="chapter" data-level="13.2.3" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#compare-to-qap-logistic-regression"><i class="fa fa-check"></i><b>13.2.3</b> Compare to QAP logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#ergms-with-directed-data"><i class="fa fa-check"></i><b>13.3</b> ERGMs With Directed Data</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#data-and-setup-1"><i class="fa fa-check"></i><b>13.3.1</b> Data and Setup</a></li>
+<li class="chapter" data-level="13.3.2" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#explore-data"><i class="fa fa-check"></i><b>13.3.2</b> Explore Data</a></li>
+<li class="chapter" data-level="13.3.3" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#teo-ergms"><i class="fa fa-check"></i><b>13.3.3</b> TEO ERGMs</a></li>
+<li class="chapter" data-level="13.3.4" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#appendix-ergm-package-and-pnet-comparison"><i class="fa fa-check"></i><b>13.3.4</b> Appendix: ERGM Package and PNet Comparison</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VIII Lab 8</b></span></li>
+<li class="chapter" data-level="14" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html"><i class="fa fa-check"></i><b>14</b> Stochastic Actor Oriented Models (SAOMs)</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#core-assumptions"><i class="fa fa-check"></i><b>14.1</b> Core Assumptions</a></li>
+<li class="chapter" data-level="14.2" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#brief-overview-of-statistical-procedure"><i class="fa fa-check"></i><b>14.2</b> Brief Overview of Statistical Procedure</a></li>
+<li class="chapter" data-level="14.3" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#general-steps-in-r"><i class="fa fa-check"></i><b>14.3</b> General Steps in R</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="exploratory-analysis.html"><a href="exploratory-analysis.html"><i class="fa fa-check"></i><b>15</b> Exploratory Analysis</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="exploratory-analysis.html"><a href="exploratory-analysis.html#load-libraries-8"><i class="fa fa-check"></i><b>15.1</b> Load Libraries</a></li>
+<li class="chapter" data-level="15.2" data-path="exploratory-analysis.html"><a href="exploratory-analysis.html#import-data-2"><i class="fa fa-check"></i><b>15.2</b> Import Data</a></li>
+<li class="chapter" data-level="15.3" data-path="exploratory-analysis.html"><a href="exploratory-analysis.html#network-plots"><i class="fa fa-check"></i><b>15.3</b> Network Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="data-and-setup-for-saoms-in-rsiena.html"><a href="data-and-setup-for-saoms-in-rsiena.html"><i class="fa fa-check"></i><b>16</b> Data and Setup for SAOMs in <strong>RSiena</strong></a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="data-and-setup-for-saoms-in-rsiena.html"><a href="data-and-setup-for-saoms-in-rsiena.html#load-and-detach-libraries"><i class="fa fa-check"></i><b>16.1</b> Load and Detach Libraries</a></li>
+<li class="chapter" data-level="16.2" data-path="data-and-setup-for-saoms-in-rsiena.html"><a href="data-and-setup-for-saoms-in-rsiena.html#import-and-format-data"><i class="fa fa-check"></i><b>16.2</b> Import and Format Data</a></li>
+<li class="chapter" data-level="16.3" data-path="data-and-setup-for-saoms-in-rsiena.html"><a href="data-and-setup-for-saoms-in-rsiena.html#structural-model"><i class="fa fa-check"></i><b>16.3</b> Structural Model</a></li>
+<li class="chapter" data-level="16.4" data-path="data-and-setup-for-saoms-in-rsiena.html"><a href="data-and-setup-for-saoms-in-rsiena.html#model-with-actor-covariates"><i class="fa fa-check"></i><b>16.4</b> Model with Actor Covariates</a></li>
+<li class="chapter" data-level="16.5" data-path="data-and-setup-for-saoms-in-rsiena.html"><a href="data-and-setup-for-saoms-in-rsiena.html#goodness-of-fit-gof"><i class="fa fa-check"></i><b>16.5</b> Goodness of Fit (GOF)</a></li>
+<li class="chapter" data-level="16.6" data-path="data-and-setup-for-saoms-in-rsiena.html"><a href="data-and-setup-for-saoms-in-rsiena.html#interpret-the-results"><i class="fa fa-check"></i><b>16.6</b> Interpret the Results</a></li>
+</ul></li>
+<li class="part"><span><b>IX Lab 8</b></span></li>
+<li class="part"><span><b>X Lab 9</b></span></li>
+<li class="part"><span><b>XI Lab 10</b></span></li>
+<li class="part"><span><b>XII Appendices</b></span></li>
+<li class="chapter" data-level="17" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>17</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>17.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
+<li class="chapter" data-level="17.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>17.2</b> Installation</a></li>
+<li class="chapter" data-level="17.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>17.3</b> Loading</a></li>
+<li class="chapter" data-level="17.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>17.4</b> Import and View Data</a></li>
+<li class="chapter" data-level="17.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>17.5</b> Extracting Variables/Columns</a></li>
+<li class="chapter" data-level="17.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>17.6</b> Creating Filters/Extracting Rows</a></li>
+<li class="chapter" data-level="17.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>17.7</b> Arrange Rows</a></li>
+<li class="chapter" data-level="17.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>17.8</b> Making a New Column/Variable</a></li>
+<li class="chapter" data-level="17.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>17.9</b> Rename Variables</a></li>
+<li class="chapter" data-level="17.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>17.10</b> Summarizing</a>
+<ul>
+<li class="chapter" data-level="17.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>17.10.1</b> Simple Summary</a></li>
+<li class="chapter" data-level="17.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>17.10.2</b> Group Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="17.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>17.11</b> Combining Data</a>
+<ul>
+<li class="chapter" data-level="17.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>17.11.1</b> Left Join</a></li>
+<li class="chapter" data-level="17.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>17.11.2</b> Right Join</a></li>
+<li class="chapter" data-level="17.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>17.11.3</b> Inner Join</a></li>
+<li class="chapter" data-level="17.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>17.11.4</b> Full Join</a></li>
+</ul></li>
+<li class="chapter" data-level="17.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>17.12</b> Piping Multiple Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>18</b> Key SNA Functions and Visualization Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>18.1</b> <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>18.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="18.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>18.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>18.2</b> <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>18.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="18.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>18.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>XIII References</b></span></li>
+<li class="chapter" data-level="19" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>19</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown">
+Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Social Network Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exploratory-analysis" class="section level1" number="15">
+<h1><span class="header-section-number">15</span> Exploratory Analysis</h1>
+<p><strong>Remember</strong> to set your working directory or set up a project before getting started. We will start by exploring the data so go ahead and load the <strong>sna</strong> and <strong>network</strong> packages.</p>
+<div id="load-libraries-8" class="section level2" number="15.1">
+<h2><span class="header-section-number">15.1</span> Load Libraries</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="exploratory-analysis.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sna)</span>
+<span id="cb2-2"><a href="exploratory-analysis.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(network)</span></code></pre></div>
+<p>At this point you should be familiar with the “Anabaptist” data set. In case you don’t remember, the data set includes 67 actors, 55 who were sixteenth century Anabaptist leaders and 12 who were prominent Protestant Reformation leaders (e.g., Martin Luther, John Calvin, Ulrich Zwingli, Martin Bucer, and Philip Melanchthon) that had contact with and influenced some of the Anabaptist leaders included in this data set. These data build on a smaller data set (Matthews et al., 2013) that did not include some leading Anabaptist leaders, such as Menno Simons, who is generally seen as the “founder” of the Amish and Mennonites.</p>
+<p>For the exploratory analyses portion of this exercise, we will use the network at a single snapshot in time. We will import our “waves” or time slices later when we begin building our models. So for now, we need to import our static network and our attributes.</p>
+</div>
+<div id="import-data-2" class="section level2" number="15.2">
+<h2><span class="header-section-number">15.2</span> Import Data</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="exploratory-analysis.html#cb3-1" aria-hidden="true" tabindex="-1"></a>anabaptists.net <span class="ot">&lt;-</span> <span class="fu">as.network</span>(</span>
+<span id="cb3-2"><a href="exploratory-analysis.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.paj</span>(<span class="st">&quot;data/Anabaptist Leadership Network 67.net&quot;</span>),</span>
+<span id="cb3-3"><a href="exploratory-analysis.html#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">directed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>We’ve stored our attributes as binary variables. We will bring them in as use the <code>as.matrix()</code> function to put them in a usable format. Once we’ve imported the attributes, we will use the <code>set.vertex.attribute()</code> function to set them as vertex attributes.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="exploratory-analysis.html#cb4-1" aria-hidden="true" tabindex="-1"></a>attributes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/Anabaptist Attributes67.csv&quot;</span>,</span>
+<span id="cb4-2"><a href="exploratory-analysis.html#cb4-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-3"><a href="exploratory-analysis.html#cb4-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb4-4"><a href="exploratory-analysis.html#cb4-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-5"><a href="exploratory-analysis.html#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="exploratory-analysis.html#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="exploratory-analysis.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(anabaptists.net, <span class="st">&#39;believers&#39;</span>, attributes[, <span class="dv">1</span>])</span>
+<span id="cb4-8"><a href="exploratory-analysis.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(anabaptists.net, <span class="st">&#39;violent&#39;</span>, attributes[, <span class="dv">2</span>])</span>
+<span id="cb4-9"><a href="exploratory-analysis.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(anabaptists.net, <span class="st">&#39;munster&#39;</span>, attributes[, <span class="dv">3</span>])</span>
+<span id="cb4-10"><a href="exploratory-analysis.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(anabaptists.net, <span class="st">&#39;apocalyptic&#39;</span>, attributes[, <span class="dv">4</span>])</span>
+<span id="cb4-11"><a href="exploratory-analysis.html#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(anabaptists.net, <span class="st">&#39;anabaptist&#39;</span>, attributes[, <span class="dv">5</span>])</span>
+<span id="cb4-12"><a href="exploratory-analysis.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(anabaptists.net, <span class="st">&#39;melchiorite&#39;</span>, attributes[, <span class="dv">6</span>])</span>
+<span id="cb4-13"><a href="exploratory-analysis.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(anabaptists.net, <span class="st">&#39;apocviolent&#39;</span>, attributes[, <span class="dv">7</span>])</span>
+<span id="cb4-14"><a href="exploratory-analysis.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(anabaptists.net, <span class="st">&#39;apocnonviolent&#39;</span>, attributes[, <span class="dv">8</span>])</span>
+<span id="cb4-15"><a href="exploratory-analysis.html#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">set.vertex.attribute</span>(anabaptists.net, <span class="st">&#39;nonapocviolent&#39;</span>, attributes[, <span class="dv">9</span>])</span></code></pre></div>
+</div>
+<div id="network-plots" class="section level2" number="15.3">
+<h2><span class="header-section-number">15.3</span> Network Plots</h2>
+<p>Let’s begin with some basic plots.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="exploratory-analysis.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(anabaptists.net,</span>
+<span id="cb5-2"><a href="exploratory-analysis.html#cb5-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(anabaptists.net),</span>
+<span id="cb5-3"><a href="exploratory-analysis.html#cb5-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb5-4"><a href="exploratory-analysis.html#cb5-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb5-5"><a href="exploratory-analysis.html#cb5-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb5-6"><a href="exploratory-analysis.html#cb5-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;light gray&quot;</span>,</span>
+<span id="cb5-7"><a href="exploratory-analysis.html#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">1</span>, </span>
+<span id="cb5-8"><a href="exploratory-analysis.html#cb5-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&quot;Anabaptist Network&quot;</span>)</span></code></pre></div>
+<p><img src="8-SAOMs_files/figure-html/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Go ahead and re-position the labels.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="exploratory-analysis.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(anabaptists.net,</span>
+<span id="cb6-2"><a href="exploratory-analysis.html#cb6-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(anabaptists.net),</span>
+<span id="cb6-3"><a href="exploratory-analysis.html#cb6-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb6-4"><a href="exploratory-analysis.html#cb6-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb6-5"><a href="exploratory-analysis.html#cb6-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb6-6"><a href="exploratory-analysis.html#cb6-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb6-7"><a href="exploratory-analysis.html#cb6-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;light gray&quot;</span>,</span>
+<span id="cb6-8"><a href="exploratory-analysis.html#cb6-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">1</span>, </span>
+<span id="cb6-9"><a href="exploratory-analysis.html#cb6-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&quot;Anabaptist Network&quot;</span>)</span></code></pre></div>
+<p><img src="8-SAOMs_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Next, let’s color the nodes by a few attributes.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="exploratory-analysis.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Anabaptists</span></span>
+<span id="cb7-2"><a href="exploratory-analysis.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(anabaptists.net,</span>
+<span id="cb7-3"><a href="exploratory-analysis.html#cb7-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(anabaptists.net),</span>
+<span id="cb7-4"><a href="exploratory-analysis.html#cb7-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-5"><a href="exploratory-analysis.html#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb7-6"><a href="exploratory-analysis.html#cb7-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb7-7"><a href="exploratory-analysis.html#cb7-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb7-8"><a href="exploratory-analysis.html#cb7-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> attributes[, <span class="dv">5</span>],</span>
+<span id="cb7-9"><a href="exploratory-analysis.html#cb7-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">1</span>, </span>
+<span id="cb7-10"><a href="exploratory-analysis.html#cb7-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&quot;Anabaptists&quot;</span>)</span></code></pre></div>
+<p><img src="8-SAOMs_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="exploratory-analysis.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Münster rebellion</span></span>
+<span id="cb8-2"><a href="exploratory-analysis.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(anabaptists.net,</span>
+<span id="cb8-3"><a href="exploratory-analysis.html#cb8-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">network.vertex.names</span>(anabaptists.net),</span>
+<span id="cb8-4"><a href="exploratory-analysis.html#cb8-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb8-5"><a href="exploratory-analysis.html#cb8-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb8-6"><a href="exploratory-analysis.html#cb8-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.6</span>,</span>
+<span id="cb8-7"><a href="exploratory-analysis.html#cb8-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>,</span>
+<span id="cb8-8"><a href="exploratory-analysis.html#cb8-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> attributes[, <span class="dv">4</span>],</span>
+<span id="cb8-9"><a href="exploratory-analysis.html#cb8-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">1</span>, </span>
+<span id="cb8-10"><a href="exploratory-analysis.html#cb8-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&quot;Munster Rebellion&quot;</span>)</span></code></pre></div>
+<p><img src="8-SAOMs_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Here’s another way to do something similar by creating vectors of attributes.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="exploratory-analysis.html#cb9-1" aria-hidden="true" tabindex="-1"></a>baptism.vec <span class="ot">&lt;-</span> attributes[, <span class="dv">1</span>]</span>
+<span id="cb9-2"><a href="exploratory-analysis.html#cb9-2" aria-hidden="true" tabindex="-1"></a>violence.vec <span class="ot">&lt;-</span> attributes[, <span class="dv">2</span>]</span>
+<span id="cb9-3"><a href="exploratory-analysis.html#cb9-3" aria-hidden="true" tabindex="-1"></a>munster.vec <span class="ot">&lt;-</span> attributes[, <span class="dv">3</span>]</span>
+<span id="cb9-4"><a href="exploratory-analysis.html#cb9-4" aria-hidden="true" tabindex="-1"></a>apocalyptic.vec <span class="ot">&lt;-</span> attributes[, <span class="dv">4</span>]</span>
+<span id="cb9-5"><a href="exploratory-analysis.html#cb9-5" aria-hidden="true" tabindex="-1"></a>anabaptist.vec <span class="ot">&lt;-</span> attributes[, <span class="dv">5</span>]</span>
+<span id="cb9-6"><a href="exploratory-analysis.html#cb9-6" aria-hidden="true" tabindex="-1"></a>melchiorite.vec <span class="ot">&lt;-</span> attributes[, <span class="dv">6</span>]</span>
+<span id="cb9-7"><a href="exploratory-analysis.html#cb9-7" aria-hidden="true" tabindex="-1"></a>y1525.vec <span class="ot">&lt;-</span> attributes[, <span class="dv">10</span>]</span>
+<span id="cb9-8"><a href="exploratory-analysis.html#cb9-8" aria-hidden="true" tabindex="-1"></a>anabmunst.vec <span class="ot">&lt;-</span> anabaptist.vec <span class="sc">+</span> munster.vec</span>
+<span id="cb9-9"><a href="exploratory-analysis.html#cb9-9" aria-hidden="true" tabindex="-1"></a>anabmelch.vec <span class="ot">&lt;-</span> anabaptist.vec <span class="sc">+</span> melchiorite.vec</span></code></pre></div>
+<p>We can change some of the default colors to help us explore the network visually.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="exploratory-analysis.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Change the default colors</span></span>
+<span id="cb10-2"><a href="exploratory-analysis.html#cb10-2" aria-hidden="true" tabindex="-1"></a>baptism.vec[baptism.vec <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;dark gray&quot;</span></span>
+<span id="cb10-3"><a href="exploratory-analysis.html#cb10-3" aria-hidden="true" tabindex="-1"></a>baptism.vec[baptism.vec <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">&quot;white&quot;</span></span>
+<span id="cb10-4"><a href="exploratory-analysis.html#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="exploratory-analysis.html#cb10-5" aria-hidden="true" tabindex="-1"></a>violence.vec[violence.vec <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;dark gray&quot;</span></span>
+<span id="cb10-6"><a href="exploratory-analysis.html#cb10-6" aria-hidden="true" tabindex="-1"></a>violence.vec[violence.vec <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">&quot;white&quot;</span></span>
+<span id="cb10-7"><a href="exploratory-analysis.html#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="exploratory-analysis.html#cb10-8" aria-hidden="true" tabindex="-1"></a>munster.vec[munster.vec <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb10-9"><a href="exploratory-analysis.html#cb10-9" aria-hidden="true" tabindex="-1"></a>munster.vec[munster.vec <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">&quot;white&quot;</span></span>
+<span id="cb10-10"><a href="exploratory-analysis.html#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="exploratory-analysis.html#cb10-11" aria-hidden="true" tabindex="-1"></a>apocalyptic.vec[apocalyptic.vec <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;dark gray&quot;</span></span>
+<span id="cb10-12"><a href="exploratory-analysis.html#cb10-12" aria-hidden="true" tabindex="-1"></a>apocalyptic.vec[apocalyptic.vec <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">&quot;white&quot;</span></span>
+<span id="cb10-13"><a href="exploratory-analysis.html#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="exploratory-analysis.html#cb10-14" aria-hidden="true" tabindex="-1"></a>anabaptist.vec[anabaptist.vec <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;dark gray&quot;</span></span>
+<span id="cb10-15"><a href="exploratory-analysis.html#cb10-15" aria-hidden="true" tabindex="-1"></a>anabaptist.vec[anabaptist.vec <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">&quot;white&quot;</span></span>
+<span id="cb10-16"><a href="exploratory-analysis.html#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="exploratory-analysis.html#cb10-17" aria-hidden="true" tabindex="-1"></a>melchiorite.vec[melchiorite.vec <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;dark gray&quot;</span></span>
+<span id="cb10-18"><a href="exploratory-analysis.html#cb10-18" aria-hidden="true" tabindex="-1"></a>melchiorite.vec[melchiorite.vec <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">&quot;white&quot;</span></span>
+<span id="cb10-19"><a href="exploratory-analysis.html#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="exploratory-analysis.html#cb10-20" aria-hidden="true" tabindex="-1"></a>anabmunst.vec[anabmunst.vec <span class="sc">==</span> <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb10-21"><a href="exploratory-analysis.html#cb10-21" aria-hidden="true" tabindex="-1"></a>anabmunst.vec[anabmunst.vec <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;dark gray&quot;</span></span>
+<span id="cb10-22"><a href="exploratory-analysis.html#cb10-22" aria-hidden="true" tabindex="-1"></a>anabmunst.vec[anabmunst.vec <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">&quot;white&quot;</span></span>
+<span id="cb10-23"><a href="exploratory-analysis.html#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="exploratory-analysis.html#cb10-24" aria-hidden="true" tabindex="-1"></a>anabmelch.vec[anabmelch.vec <span class="sc">==</span> <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb10-25"><a href="exploratory-analysis.html#cb10-25" aria-hidden="true" tabindex="-1"></a>anabmelch.vec[anabmelch.vec <span class="sc">==</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;dark gray&quot;</span></span>
+<span id="cb10-26"><a href="exploratory-analysis.html#cb10-26" aria-hidden="true" tabindex="-1"></a>anabmelch.vec[anabmelch.vec <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="st">&quot;white&quot;</span></span></code></pre></div>
+<p>Let’s visualize the entire network and use various attributes as visual cues.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="exploratory-analysis.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First get coordinates</span></span>
+<span id="cb11-2"><a href="exploratory-analysis.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
+<span id="cb11-3"><a href="exploratory-analysis.html#cb11-3" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">network.layout.kamadakawai</span>(anabaptists.net,</span>
+<span id="cb11-4"><a href="exploratory-analysis.html#cb11-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">layout.par =</span> <span class="cn">NULL</span>)</span>
+<span id="cb11-5"><a href="exploratory-analysis.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(anabaptists.net, </span>
+<span id="cb11-6"><a href="exploratory-analysis.html#cb11-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb11-7"><a href="exploratory-analysis.html#cb11-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">displayisolates =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb11-8"><a href="exploratory-analysis.html#cb11-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> F,</span>
+<span id="cb11-9"><a href="exploratory-analysis.html#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> anabaptist.vec,</span>
+<span id="cb11-10"><a href="exploratory-analysis.html#cb11-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords,</span>
+<span id="cb11-11"><a href="exploratory-analysis.html#cb11-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">1</span>,</span>
+<span id="cb11-12"><a href="exploratory-analysis.html#cb11-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>,</span>
+<span id="cb11-13"><a href="exploratory-analysis.html#cb11-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&quot;Anabaptist Network&quot;</span>)</span>
+<span id="cb11-14"><a href="exploratory-analysis.html#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="exploratory-analysis.html#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="exploratory-analysis.html#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="sc">-</span><span class="fl">3.0</span>, </span>
+<span id="cb11-17"><a href="exploratory-analysis.html#cb11-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="sc">-</span><span class="fl">3.1</span>, </span>
+<span id="cb11-18"><a href="exploratory-analysis.html#cb11-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Yes&quot;</span>,<span class="st">&quot;No&quot;</span>), </span>
+<span id="cb11-19"><a href="exploratory-analysis.html#cb11-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">21</span>,</span>
+<span id="cb11-20"><a href="exploratory-analysis.html#cb11-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.bg =</span> <span class="fu">c</span>(<span class="st">&quot;dark gray&quot;</span>, <span class="st">&quot;white&quot;</span>), </span>
+<span id="cb11-21"><a href="exploratory-analysis.html#cb11-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.cex =</span> <span class="dv">2</span>, </span>
+<span id="cb11-22"><a href="exploratory-analysis.html#cb11-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">1.2</span>, </span>
+<span id="cb11-23"><a href="exploratory-analysis.html#cb11-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, </span>
+<span id="cb11-24"><a href="exploratory-analysis.html#cb11-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="8-SAOMs_files/figure-html/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="exploratory-analysis.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(anabaptists.net,</span>
+<span id="cb12-2"><a href="exploratory-analysis.html#cb12-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-3"><a href="exploratory-analysis.html#cb12-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">displayisolates =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-4"><a href="exploratory-analysis.html#cb12-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> F,</span>
+<span id="cb12-5"><a href="exploratory-analysis.html#cb12-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> melchiorite.vec,</span>
+<span id="cb12-6"><a href="exploratory-analysis.html#cb12-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">1</span>,</span>
+<span id="cb12-7"><a href="exploratory-analysis.html#cb12-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>,</span>
+<span id="cb12-8"><a href="exploratory-analysis.html#cb12-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords, </span>
+<span id="cb12-9"><a href="exploratory-analysis.html#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&quot;Anabaptist Network (Mechiorites)&quot;</span>)</span>
+<span id="cb12-10"><a href="exploratory-analysis.html#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="exploratory-analysis.html#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="sc">-</span><span class="fl">3.0</span>, </span>
+<span id="cb12-12"><a href="exploratory-analysis.html#cb12-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="sc">-</span><span class="fl">3.1</span>, </span>
+<span id="cb12-13"><a href="exploratory-analysis.html#cb12-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Yes&quot;</span>,<span class="st">&quot;No&quot;</span>), </span>
+<span id="cb12-14"><a href="exploratory-analysis.html#cb12-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">21</span>,</span>
+<span id="cb12-15"><a href="exploratory-analysis.html#cb12-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.bg =</span> <span class="fu">c</span>(<span class="st">&quot;dark gray&quot;</span>, <span class="st">&quot;white&quot;</span>), </span>
+<span id="cb12-16"><a href="exploratory-analysis.html#cb12-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.cex =</span> <span class="dv">2</span>, </span>
+<span id="cb12-17"><a href="exploratory-analysis.html#cb12-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">1.2</span>, </span>
+<span id="cb12-18"><a href="exploratory-analysis.html#cb12-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, </span>
+<span id="cb12-19"><a href="exploratory-analysis.html#cb12-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="8-SAOMs_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="exploratory-analysis.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(anabaptists.net,</span>
+<span id="cb13-2"><a href="exploratory-analysis.html#cb13-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb13-3"><a href="exploratory-analysis.html#cb13-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">displayisolates =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb13-4"><a href="exploratory-analysis.html#cb13-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> F,</span>
+<span id="cb13-5"><a href="exploratory-analysis.html#cb13-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> munster.vec,</span>
+<span id="cb13-6"><a href="exploratory-analysis.html#cb13-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">1</span>,</span>
+<span id="cb13-7"><a href="exploratory-analysis.html#cb13-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>,</span>
+<span id="cb13-8"><a href="exploratory-analysis.html#cb13-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords, </span>
+<span id="cb13-9"><a href="exploratory-analysis.html#cb13-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&quot;Anabaptist Network (Munster)&quot;</span>)</span>
+<span id="cb13-10"><a href="exploratory-analysis.html#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="exploratory-analysis.html#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="sc">-</span><span class="fl">3.0</span>, </span>
+<span id="cb13-12"><a href="exploratory-analysis.html#cb13-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="sc">-</span><span class="fl">3.1</span>,</span>
+<span id="cb13-13"><a href="exploratory-analysis.html#cb13-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;0&quot;</span>), </span>
+<span id="cb13-14"><a href="exploratory-analysis.html#cb13-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">21</span>,</span>
+<span id="cb13-15"><a href="exploratory-analysis.html#cb13-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.bg =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;white&quot;</span>), </span>
+<span id="cb13-16"><a href="exploratory-analysis.html#cb13-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.cex =</span> <span class="dv">2</span>, </span>
+<span id="cb13-17"><a href="exploratory-analysis.html#cb13-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">1.2</span>, </span>
+<span id="cb13-18"><a href="exploratory-analysis.html#cb13-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, </span>
+<span id="cb13-19"><a href="exploratory-analysis.html#cb13-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="8-SAOMs_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="exploratory-analysis.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(anabaptists.net,</span>
+<span id="cb14-2"><a href="exploratory-analysis.html#cb14-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">usearrows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb14-3"><a href="exploratory-analysis.html#cb14-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">displayisolates =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb14-4"><a href="exploratory-analysis.html#cb14-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> F,</span>
+<span id="cb14-5"><a href="exploratory-analysis.html#cb14-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> anabmelch.vec,</span>
+<span id="cb14-6"><a href="exploratory-analysis.html#cb14-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="dv">1</span>,</span>
+<span id="cb14-7"><a href="exploratory-analysis.html#cb14-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>,</span>
+<span id="cb14-8"><a href="exploratory-analysis.html#cb14-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> coords, </span>
+<span id="cb14-9"><a href="exploratory-analysis.html#cb14-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&quot;Anabaptist Network (Anabaptist-Melch)&quot;</span>)</span>
+<span id="cb14-10"><a href="exploratory-analysis.html#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="exploratory-analysis.html#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="sc">-</span><span class="fl">3.5</span>, </span>
+<span id="cb14-12"><a href="exploratory-analysis.html#cb14-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="sc">-</span><span class="fl">3.1</span>, </span>
+<span id="cb14-13"><a href="exploratory-analysis.html#cb14-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;2&quot;</span>,<span class="st">&quot;1&quot;</span>, <span class="st">&quot;0&quot;</span>), </span>
+<span id="cb14-14"><a href="exploratory-analysis.html#cb14-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">21</span>,</span>
+<span id="cb14-15"><a href="exploratory-analysis.html#cb14-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.bg =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;dark gray&quot;</span>, <span class="st">&quot;white&quot;</span>), </span>
+<span id="cb14-16"><a href="exploratory-analysis.html#cb14-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.cex =</span> <span class="dv">2</span>, </span>
+<span id="cb14-17"><a href="exploratory-analysis.html#cb14-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">1.2</span>, </span>
+<span id="cb14-18"><a href="exploratory-analysis.html#cb14-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, </span>
+<span id="cb14-19"><a href="exploratory-analysis.html#cb14-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="8-SAOMs_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Now, remember that we are working with undirected data here, so we cannot measure reciprocity and triad census in a meaningful way.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="stochastic-actor-oriented-models-saoms.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-and-setup-for-saoms-in-rsiena.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjcallag/r4ds/edit/editing/8-SAOMs.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"font_settings": {
+"family": "sans",
+"theme": "white",
+"size": 2
+},
+"info": true,
+"toolbar": {
+"position": "fixed"
+},
+"search": {
+"engine": "lunr",
+"options": null
+}
+});
+});
+</script>
+
+</body>
+
+</html>

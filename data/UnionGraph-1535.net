@@ -1,0 +1,126 @@
+*Vertices 67
+  1 "Martin Luther"                         0.7376    0.4995    0.5000
+  2 "John Calvin"                           0.3480    0.7773    0.5000
+  3 "Ulrich Zwingli"                        0.7379    0.5012    0.5000
+  4 "Vadian"                                0.7337    0.5011    0.5000
+  5 "Conrad Grebel "                        0.7335    0.5014    0.5000
+  6 "Felix Manz"                            0.7314    0.5011    0.5000
+  7 "George Blaurock"                       0.7302    0.5013    0.5000
+  8 "Wilhelm Reublin"                       0.7324    0.5019    0.5000
+  9 "Johannes Brotli"                       0.7277    0.5011    0.5000
+ 10 "Louis Haetzer"                         0.7284    0.5019    0.5000
+ 11 "Leo Jud"                               0.7247    0.5010    0.5000
+ 12 "Henry Bullinger"                       0.7236    0.5011    0.5000
+ 13 "Wolfgang Ulimann"                      0.7218    0.5021    0.5000
+ 14 "Andrew Castelberger"                   0.7208    0.5011    0.5000
+ 15 "John Denck"                            0.7273    0.5038    0.5000
+ 16 "Thomas Muntzer"                        0.7239    0.5050    0.5000
+ 17 "Andreas Carlstadt"                     0.7196    0.5037    0.5000
+ 18 "Balthasar Hubmaier"                    0.7225    0.5001    0.5000
+ 19 "John Hut"                              0.7185    0.5021    0.5000
+ 20 "Michael Sattler"                       0.7170    0.4992    0.5000
+ 21 "Jacob Hutter"                          0.1940    0.6399    0.5000
+ 22 "Pilgrim Marpeck"                       0.2443    0.7008    0.5000
+ 23 "Oswald Glait"                          0.1819    0.5842    0.5000
+ 24 "Andreas Fischer"                       0.3933    0.8074    0.5000
+ 25 "Caspar Schwenckfeld"                   0.7115    0.5045    0.5000
+ 26 "Leonhard von Lichtenstein"             0.7083    0.5052    0.5000
+ 27 "Hans Schlaffer"                        0.4479    0.8246    0.5000
+ 28 "Melchior Hofmann"                      0.7092    0.5061    0.5000
+ 29 "John Matthijs"                         0.2862    0.7321    0.5000
+ 30 "John Layden"                           0.4994    0.8342    0.5000
+ 31 "Rothmann, Bernard"                     0.5536    0.8469    0.5000
+ 32 "Jacob Gross"                           0.7091    0.5080    0.5000
+ 33 "Leonard Schiemer"                      0.7072    0.5077    0.5000
+ 34 "John Schlaffer"                        0.7055    0.5064    0.5000
+ 35 "Ambrose Spittelmaier"                  0.2412    0.6501    0.5000
+ 36 "Peter Riedemann"                       0.3411    0.7261    0.5000
+ 37 "Gabriel Ascherham"                     0.6112    0.8500    0.5000
+ 38 "George Zaunring"                       0.6787    0.8498    0.5000
+ 39 "Jacob Wiedemann"                       0.7576    0.8381    0.5000
+ 40 "Simon Schutzinger"                     0.1500    0.4533    0.5000
+ 41 "John Amon"                             0.1739    0.3859    0.5000
+ 42 "Leonard Lanzenstiel"                   0.2059    0.3345    0.5000
+ 43 "Peter Walpot"                          0.8500    0.8079    0.5000
+ 44 "Kautz, Jacob"                          0.1698    0.5108    0.5000
+ 45 "Hans Romer"                            0.6981    0.5053    0.5000
+ 46 "Jan Batenburg"                         0.2095    0.4305    0.5000
+ 47 "Heinrich Kretching"                    0.2241    0.5468    0.5000
+ 48 "Jacob Dachser"                         0.7656    0.1612    0.5000
+ 49 "Hippolytus (Bolt) Eberli"              0.6997    0.5039    0.5000
+ 50 "Bernard Knipperdolling"                0.2451    0.2905    0.5000
+ 51 "Philip Plener"                         0.2835    0.2543    0.5000
+ 52 "Sigmund Salminger"                     0.2497    0.4909    0.5000
+ 53 "George Schad"                          0.6956    0.5029    0.5000
+ 54 "Menno Simons"                          0.3295    0.2208    0.5000
+ 55 "Ulrich Stadler"                        0.6900    0.5022    0.5000
+ 56 "Obbe Philips"                          0.3795    0.1953    0.5000
+ 57 "Dirk Philips"                          0.2750    0.3636    0.5000
+ 58 "John Spittelmaier"                     0.8488    0.1970    0.5000
+ 59 "David Joris"                           0.4298    0.1822    0.5000
+ 60 "Jan Trypmaker"                         0.4789    0.1664    0.5000
+ 61 "Boekbinder"                            0.3425    0.2887    0.5000
+ 62 "Jacob Van Campen"                      0.5321    0.1620    0.5000
+ 63 "Philipp Melanchthon"                   0.6887    0.4993    0.5000
+ 64 "Wolfgang Capito"                       0.6907    0.4995    0.5000
+ 65 "Martin Bucer"                          0.6899    0.4999    0.5000
+ 66 "Cornelis Appleman"                     0.5885    0.1500    0.5000
+ 67 "Jan Van Geelen"                        0.6528    0.1515    0.5000
+*Edges
+  1  17 1
+  1  25 1
+  1  28 1
+  1  63 1
+  1  65 1
+  2  64 1
+  2  65 1
+  8  21 1
+  8  22 1
+  8  39 1
+  8  53 1
+  8  64 1
+  8  65 1
+ 11  12 1
+ 17  28 1
+ 21  36 1
+ 21  38 1
+ 21  40 1
+ 21  41 1
+ 21  55 1
+ 22  25 1
+ 22  64 1
+ 22  65 1
+ 23  24 1
+ 23  25 1
+ 24  25 1
+ 25  28 1
+ 25  31 1
+ 25  64 1
+ 25  65 1
+ 28  30 1
+ 28  31 1
+ 28  50 1
+ 30  31 1
+ 30  47 1
+ 30  50 1
+ 30  67 1
+ 31  50 1
+ 31  63 1
+ 31  64 1
+ 36  41 1
+ 36  42 1
+ 36  51 1
+ 36  55 1
+ 38  39 1
+ 41  42 1
+ 41  55 1
+ 42  55 1
+ 46  47 1
+ 47  59 1
+ 56  57 1
+ 56  59 1
+ 42  58 1
+ 57  59 1
+ 62  67 1
+ 63  64 1
+ 64  65 1

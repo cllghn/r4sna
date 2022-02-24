@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9 Detecting Subgroups in igraph | R for Social Network Analysis</title>
   <meta name="description" content="TBD." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9 Detecting Subgroups in igraph | R for Social Network Analysis" />
   <meta property="og:type" content="book" />
@@ -32,9 +32,8 @@
   
 <link rel="prev" href="network-topography-in-statnet.html"/>
 <link rel="next" href="detecting-subgroups-in-statnet.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -55,10 +54,10 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.20/datatables.js"></script>
-<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="libs/datatables-binding-0.18/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
 <link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
@@ -187,46 +186,46 @@ div.csl-indent {
 <li class="chapter" data-level="2.2" data-path="setting-up.html"><a href="setting-up.html#project-workflow"><i class="fa fa-check"></i><b>2.2</b> Project Workflow</a></li>
 </ul></li>
 <li class="part"><span><b>II Lab 1</b></span></li>
-<li class="chapter" data-level="3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
+<li class="chapter" data-level="3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
-<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
-<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
+<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
-<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
-<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
-<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
+<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
+<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <strong>igraph</strong></a></li>
-<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
-<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
-<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
-<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
-<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
+<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
+<li class="chapter" data-level="4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
-<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
-<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
+<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
-<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
-<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
-<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
+<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
-<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
-<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
-<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
-<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
-<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
+<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
+<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III Lab 2</b></span></li>
@@ -441,49 +440,70 @@ div.csl-indent {
 </ul></li>
 </ul></li>
 <li class="part"><span><b>IX Lab 8</b></span></li>
+<li class="chapter" data-level="15" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html"><i class="fa fa-check"></i><b>15</b> Stochastic Actor Oriented Models (SAOMs)</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#core-assumptions"><i class="fa fa-check"></i><b>15.1</b> Core Assumptions</a></li>
+<li class="chapter" data-level="15.2" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#brief-overview-of-statistical-procedure"><i class="fa fa-check"></i><b>15.2</b> Brief Overview of Statistical Procedure</a></li>
+<li class="chapter" data-level="15.3" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#general-steps-in-r"><i class="fa fa-check"></i><b>15.3</b> General Steps in R</a></li>
+<li class="chapter" data-level="15.4" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#exploratory-analysis"><i class="fa fa-check"></i><b>15.4</b> Exploratory Analysis</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#load-libraries-8"><i class="fa fa-check"></i><b>15.4.1</b> Load Libraries</a></li>
+<li class="chapter" data-level="15.4.2" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#import-data-2"><i class="fa fa-check"></i><b>15.4.2</b> Import Data</a></li>
+<li class="chapter" data-level="15.4.3" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#network-plots"><i class="fa fa-check"></i><b>15.4.3</b> Network Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#data-and-setup-for-saoms-in-rsiena"><i class="fa fa-check"></i><b>15.5</b> Data and Setup for SAOMs in <strong>RSiena</strong></a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#load-and-detach-libraries"><i class="fa fa-check"></i><b>15.5.1</b> Load and Detach Libraries</a></li>
+<li class="chapter" data-level="15.5.2" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#import-and-format-data"><i class="fa fa-check"></i><b>15.5.2</b> Import and Format Data</a></li>
+<li class="chapter" data-level="15.5.3" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#structural-model"><i class="fa fa-check"></i><b>15.5.3</b> Structural Model</a></li>
+<li class="chapter" data-level="15.5.4" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#model-with-actor-covariates"><i class="fa fa-check"></i><b>15.5.4</b> Model with Actor Covariates</a></li>
+<li class="chapter" data-level="15.5.5" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#goodness-of-fit-gof"><i class="fa fa-check"></i><b>15.5.5</b> Goodness of Fit (GOF)</a></li>
+<li class="chapter" data-level="15.5.6" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#interpret-the-results"><i class="fa fa-check"></i><b>15.5.6</b> Interpret the Results</a></li>
+</ul></li>
+</ul></li>
 <li class="part"><span><b>X Lab 9</b></span></li>
 <li class="part"><span><b>XI Lab 10</b></span></li>
 <li class="part"><span><b>XII Appendices</b></span></li>
-<li class="chapter" data-level="15" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>15</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
+<li class="chapter" data-level="16" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>16</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>15.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
-<li class="chapter" data-level="15.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>15.2</b> Installation</a></li>
-<li class="chapter" data-level="15.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>15.3</b> Loading</a></li>
-<li class="chapter" data-level="15.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>15.4</b> Import and View Data</a></li>
-<li class="chapter" data-level="15.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>15.5</b> Extracting Variables/Columns</a></li>
-<li class="chapter" data-level="15.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>15.6</b> Creating Filters/Extracting Rows</a></li>
-<li class="chapter" data-level="15.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>15.7</b> Arrange Rows</a></li>
-<li class="chapter" data-level="15.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>15.8</b> Making a New Column/Variable</a></li>
-<li class="chapter" data-level="15.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>15.9</b> Rename Variables</a></li>
-<li class="chapter" data-level="15.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>15.10</b> Summarizing</a>
+<li class="chapter" data-level="16.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>16.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
+<li class="chapter" data-level="16.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>16.2</b> Installation</a></li>
+<li class="chapter" data-level="16.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>16.3</b> Loading</a></li>
+<li class="chapter" data-level="16.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>16.4</b> Import and View Data</a></li>
+<li class="chapter" data-level="16.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>16.5</b> Extracting Variables/Columns</a></li>
+<li class="chapter" data-level="16.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>16.6</b> Creating Filters/Extracting Rows</a></li>
+<li class="chapter" data-level="16.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>16.7</b> Arrange Rows</a></li>
+<li class="chapter" data-level="16.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>16.8</b> Making a New Column/Variable</a></li>
+<li class="chapter" data-level="16.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>16.9</b> Rename Variables</a></li>
+<li class="chapter" data-level="16.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>16.10</b> Summarizing</a>
 <ul>
-<li class="chapter" data-level="15.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>15.10.1</b> Simple Summary</a></li>
-<li class="chapter" data-level="15.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>15.10.2</b> Group Summary</a></li>
+<li class="chapter" data-level="16.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>16.10.1</b> Simple Summary</a></li>
+<li class="chapter" data-level="16.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>16.10.2</b> Group Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="15.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>15.11</b> Combining Data</a>
+<li class="chapter" data-level="16.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>16.11</b> Combining Data</a>
 <ul>
-<li class="chapter" data-level="15.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>15.11.1</b> Left Join</a></li>
-<li class="chapter" data-level="15.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>15.11.2</b> Right Join</a></li>
-<li class="chapter" data-level="15.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>15.11.3</b> Inner Join</a></li>
-<li class="chapter" data-level="15.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>15.11.4</b> Full Join</a></li>
+<li class="chapter" data-level="16.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>16.11.1</b> Left Join</a></li>
+<li class="chapter" data-level="16.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>16.11.2</b> Right Join</a></li>
+<li class="chapter" data-level="16.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>16.11.3</b> Inner Join</a></li>
+<li class="chapter" data-level="16.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>16.11.4</b> Full Join</a></li>
 </ul></li>
-<li class="chapter" data-level="15.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>15.12</b> Piping Multiple Variables</a></li>
+<li class="chapter" data-level="16.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>16.12</b> Piping Multiple Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>16</b> Key SNA Functions and Visualization Cheat Sheet</a>
+<li class="chapter" data-level="17" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>17</b> Key SNA Functions and Visualization Cheat Sheet</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>16.1</b> <strong>igraph</strong></a>
+<li class="chapter" data-level="17.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>17.1</b> <strong>igraph</strong></a>
 <ul>
-<li class="chapter" data-level="16.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>16.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
-<li class="chapter" data-level="16.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>16.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="17.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>17.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="17.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>17.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
 </ul></li>
-<li class="chapter" data-level="16.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>16.2</b> <strong>statnet</strong></a>
+<li class="chapter" data-level="17.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>17.2</b> <strong>statnet</strong></a>
 <ul>
-<li class="chapter" data-level="16.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>16.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
-<li class="chapter" data-level="16.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>16.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="17.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>17.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="17.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>17.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>XIII References</b></span></li>
-<li class="chapter" data-level="17" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>17</b> References</a></li>
+<li class="chapter" data-level="18" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>18</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown">
 Published with bookdown</a></li>
@@ -570,9 +590,9 @@ Published with bookdown</a></li>
 <pre><code>[1] 2</code></pre>
 <div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="detecting-subgroups-in-igraph.html#cb513-1" aria-hidden="true" tabindex="-1"></a>w_comp</span></code></pre></div>
 <pre><code>[[1]]
-IGRAPH b68efa8 DN-- 1702 9824 -- 
+IGRAPH e98d999 DN-- 1702 9824 -- 
 + attr: name (v/c), Type (e/c), Rel (e/c)
-+ edges from b68efa8 (vertex names):
++ edges from e98d999 (vertex names):
  [1] 1d_nicole_     -&gt;ina_malone      1d_nicole_     -&gt;willie_bign    
  [3] 4ever1937      -&gt;bydrbre_        4ever1937      -&gt;novostidamask  
  [5] 4ever1937      -&gt;novostinn       4mysquad       -&gt;crystal1johnson
@@ -584,9 +604,9 @@ IGRAPH b68efa8 DN-- 1702 9824 --
 + ... omitted several edges
 
 [[2]]
-IGRAPH b68efa8 DN-- 2 1 -- 
+IGRAPH 68ab784 DN-- 2 1 -- 
 + attr: name (v/c), Type (e/c), Rel (e/c)
-+ edge from b68efa8 (vertex names):
++ edge from 68ab784 (vertex names):
 [1] sto_christi-&gt;ingrkoch_koch</code></pre>
 <p>We don’t have any isolates in this example but if you don’t want to consider isolates as components in other data sets, you can modify the command using the <code>min.vertices = 2</code> argument.</p>
 <div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="detecting-subgroups-in-igraph.html#cb515-1" aria-hidden="true" tabindex="-1"></a><span class="fu">decompose</span>(troll_g, </span>
@@ -594,9 +614,9 @@ IGRAPH b68efa8 DN-- 2 1 --
 <span id="cb515-3"><a href="detecting-subgroups-in-igraph.html#cb515-3" aria-hidden="true" tabindex="-1"></a>          <span class="co"># The minimum number of nodes a component should contain</span></span>
 <span id="cb515-4"><a href="detecting-subgroups-in-igraph.html#cb515-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">min.vertices =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>[[1]]
-IGRAPH b6a1712 DN-- 1702 9824 -- 
+IGRAPH 7e816ce DN-- 1702 9824 -- 
 + attr: name (v/c), Type (e/c), Rel (e/c)
-+ edges from b6a1712 (vertex names):
++ edges from 7e816ce (vertex names):
  [1] 1d_nicole_     -&gt;ina_malone      1d_nicole_     -&gt;willie_bign    
  [3] 4ever1937      -&gt;bydrbre_        4ever1937      -&gt;novostidamask  
  [5] 4ever1937      -&gt;novostinn       4mysquad       -&gt;crystal1johnson
@@ -608,15 +628,15 @@ IGRAPH b6a1712 DN-- 1702 9824 --
 + ... omitted several edges
 
 [[2]]
-IGRAPH b6a1712 DN-- 2 1 -- 
+IGRAPH 85f7dab DN-- 2 1 -- 
 + attr: name (v/c), Type (e/c), Rel (e/c)
-+ edge from b6a1712 (vertex names):
++ edge from 85f7dab (vertex names):
 [1] sto_christi-&gt;ingrkoch_koch</code></pre>
 <p>The <code>decompose()</code> function produces a list of subnetworks. We can see from the output that the largest weak component (the “main” component) is the first component listed. If we want to extract it, we can use the <code>[[</code> accessor and tell R we want to extract the first item on the list.</p>
 <div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="detecting-subgroups-in-igraph.html#cb517-1" aria-hidden="true" tabindex="-1"></a>w_comp[[<span class="dv">1</span>]]</span></code></pre></div>
-<pre><code>IGRAPH b68efa8 DN-- 1702 9824 -- 
+<pre><code>IGRAPH e98d999 DN-- 1702 9824 -- 
 + attr: name (v/c), Type (e/c), Rel (e/c)
-+ edges from b68efa8 (vertex names):
++ edges from e98d999 (vertex names):
  [1] 1d_nicole_     -&gt;ina_malone      1d_nicole_     -&gt;willie_bign    
  [3] 4ever1937      -&gt;bydrbre_        4ever1937      -&gt;novostidamask  
  [5] 4ever1937      -&gt;novostinn       4mysquad       -&gt;crystal1johnson
@@ -655,9 +675,9 @@ IGRAPH b6a1712 DN-- 2 1 --
 <span id="cb525-3"><a href="detecting-subgroups-in-igraph.html#cb525-3" aria-hidden="true" tabindex="-1"></a>                                s_comp<span class="sc">$</span>membership <span class="sc">==</span> <span class="fu">which.max</span>(s_comp<span class="sc">$</span>csize))]</span>
 <span id="cb525-4"><a href="detecting-subgroups-in-igraph.html#cb525-4" aria-hidden="true" tabindex="-1"></a>                              )</span>
 <span id="cb525-5"><a href="detecting-subgroups-in-igraph.html#cb525-5" aria-hidden="true" tabindex="-1"></a>lg_s_comp</span></code></pre></div>
-<pre><code>IGRAPH bdc091a DN-- 168 974 -- 
+<pre><code>IGRAPH b60c60f DN-- 168 974 -- 
 + attr: name (v/c), Type (e/c), Rel (e/c)
-+ edges from bdc091a (vertex names):
++ edges from b60c60f (vertex names):
  [1] 4mysquad       -&gt;crystal1johnson acejinev       -&gt;4mysquad       
  [3] acejinev       -&gt;blacknewsoutlet acejinev       -&gt;tessyelmore    
  [5] acejinev       -&gt;wokefromday1    acejinev       -&gt;blacktolive    
@@ -726,9 +746,9 @@ IGRAPH b6a1712 DN-- 2 1 --
 <span id="cb544-5"><a href="detecting-subgroups-in-igraph.html#cb544-5" aria-hidden="true" tabindex="-1"></a>                                <span class="at">value =</span> <span class="fu">coreness</span>(troll_g))</span>
 <span id="cb544-6"><a href="detecting-subgroups-in-igraph.html#cb544-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look at the graph with a new vertex attribute</span></span>
 <span id="cb544-7"><a href="detecting-subgroups-in-igraph.html#cb544-7" aria-hidden="true" tabindex="-1"></a>troll_g</span></code></pre></div>
-<pre><code>IGRAPH af724af DN-- 1704 9825 -- 
+<pre><code>IGRAPH c9363b4 DN-- 1704 9825 -- 
 + attr: name (v/c), kcore (v/n), Type (e/c), Rel (e/c)
-+ edges from af724af (vertex names):
++ edges from c9363b4 (vertex names):
  [1] 1d_nicole_     -&gt;ina_malone      1d_nicole_     -&gt;willie_bign    
  [3] 4ever1937      -&gt;bydrbre_        4ever1937      -&gt;novostidamask  
  [5] 4ever1937      -&gt;novostinn       4mysquad       -&gt;crystal1johnson
@@ -744,9 +764,9 @@ IGRAPH b6a1712 DN-- 2 1 --
 <span id="cb546-3"><a href="detecting-subgroups-in-igraph.html#cb546-3" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># Create a logical vector of which vertices to keep using the</span></span>
 <span id="cb546-4"><a href="detecting-subgroups-in-igraph.html#cb546-4" aria-hidden="true" tabindex="-1"></a>                 <span class="co"># V() function and the $ accessor to set up a logical test</span></span>
 <span id="cb546-5"><a href="detecting-subgroups-in-igraph.html#cb546-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">vids =</span> <span class="fu">V</span>(troll_g)<span class="sc">$</span>kcore <span class="sc">==</span> <span class="dv">9</span>)</span></code></pre></div>
-<pre><code>IGRAPH c0fbc03 DN-- 149 412 -- 
+<pre><code>IGRAPH 8cd4a25 DN-- 149 412 -- 
 + attr: name (v/c), kcore (v/n), Type (e/c), Rel (e/c)
-+ edges from c0fbc03 (vertex names):
++ edges from 8cd4a25 (vertex names):
  [1] _nickluna_   -&gt;andyhashtagger _nickluna_   -&gt;danageezus    
  [3] _nickluna_   -&gt;xdwillie       _nickluna_   -&gt;thefoundingson
  [5] _nickluna_   -&gt;pamela_moore13 ameliebaldwin-&gt;_nickluna_    
@@ -838,9 +858,9 @@ IGRAPH b6a1712 DN-- 2 1 --
 <span id="cb551-2"><a href="detecting-subgroups-in-igraph.html#cb551-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.undirected</span>()</span>
 <span id="cb551-3"><a href="detecting-subgroups-in-igraph.html#cb551-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb551-4"><a href="detecting-subgroups-in-igraph.html#cb551-4" aria-hidden="true" tabindex="-1"></a>lg_s_comp_simp</span></code></pre></div>
-<pre><code>IGRAPH c7f9f1b UN-- 168 922 -- 
+<pre><code>IGRAPH 0a13aef UN-- 168 922 -- 
 + attr: name (v/c)
-+ edges from c7f9f1b (vertex names):
++ edges from 0a13aef (vertex names):
  [1] 4mysquad       --acejinev        4mysquad       --blacknewsoutlet
  [3] acejinev       --blacknewsoutlet 4mysquad       --cornellburchet 
  [5] blacknewsoutlet--cornellburchet  4mysquad       --crystal1johnson
@@ -1077,10 +1097,6 @@ gitbook.start({
 "text": null
 },
 "download": null,
-"search": {
-"engine": "lunr",
-"options": null
-},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
@@ -1093,6 +1109,10 @@ gitbook.start({
 "info": true,
 "toolbar": {
 "position": "fixed"
+},
+"search": {
+"engine": "lunr",
+"options": null
 }
 });
 });

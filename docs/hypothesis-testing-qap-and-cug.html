@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>13 Hypothesis Testing (QAP and CUG) | R for Social Network Analysis</title>
   <meta name="description" content="TBD." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="13 Hypothesis Testing (QAP and CUG) | R for Social Network Analysis" />
   <meta property="og:type" content="book" />
@@ -32,9 +32,8 @@
   
 <link rel="prev" href="centrality-and-brokerage-in-statnet.html"/>
 <link rel="next" href="exponential-random-graph-models-ergms.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -55,10 +54,10 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.20/datatables.js"></script>
-<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="libs/datatables-binding-0.18/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
 <link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
@@ -187,46 +186,46 @@ div.csl-indent {
 <li class="chapter" data-level="2.2" data-path="setting-up.html"><a href="setting-up.html#project-workflow"><i class="fa fa-check"></i><b>2.2</b> Project Workflow</a></li>
 </ul></li>
 <li class="part"><span><b>II Lab 1</b></span></li>
-<li class="chapter" data-level="3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
+<li class="chapter" data-level="3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
-<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
-<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
+<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
-<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
-<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
-<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
+<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
+<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <strong>igraph</strong></a></li>
-<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
-<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
-<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
-<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
-<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
+<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
+<li class="chapter" data-level="4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
-<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
-<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
+<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
-<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
-<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
-<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
+<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
-<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
-<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
-<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
-<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
-<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
+<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
+<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III Lab 2</b></span></li>
@@ -441,49 +440,70 @@ div.csl-indent {
 </ul></li>
 </ul></li>
 <li class="part"><span><b>IX Lab 8</b></span></li>
+<li class="chapter" data-level="15" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html"><i class="fa fa-check"></i><b>15</b> Stochastic Actor Oriented Models (SAOMs)</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#core-assumptions"><i class="fa fa-check"></i><b>15.1</b> Core Assumptions</a></li>
+<li class="chapter" data-level="15.2" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#brief-overview-of-statistical-procedure"><i class="fa fa-check"></i><b>15.2</b> Brief Overview of Statistical Procedure</a></li>
+<li class="chapter" data-level="15.3" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#general-steps-in-r"><i class="fa fa-check"></i><b>15.3</b> General Steps in R</a></li>
+<li class="chapter" data-level="15.4" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#exploratory-analysis"><i class="fa fa-check"></i><b>15.4</b> Exploratory Analysis</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#load-libraries-8"><i class="fa fa-check"></i><b>15.4.1</b> Load Libraries</a></li>
+<li class="chapter" data-level="15.4.2" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#import-data-2"><i class="fa fa-check"></i><b>15.4.2</b> Import Data</a></li>
+<li class="chapter" data-level="15.4.3" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#network-plots"><i class="fa fa-check"></i><b>15.4.3</b> Network Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#data-and-setup-for-saoms-in-rsiena"><i class="fa fa-check"></i><b>15.5</b> Data and Setup for SAOMs in <strong>RSiena</strong></a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#load-and-detach-libraries"><i class="fa fa-check"></i><b>15.5.1</b> Load and Detach Libraries</a></li>
+<li class="chapter" data-level="15.5.2" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#import-and-format-data"><i class="fa fa-check"></i><b>15.5.2</b> Import and Format Data</a></li>
+<li class="chapter" data-level="15.5.3" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#structural-model"><i class="fa fa-check"></i><b>15.5.3</b> Structural Model</a></li>
+<li class="chapter" data-level="15.5.4" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#model-with-actor-covariates"><i class="fa fa-check"></i><b>15.5.4</b> Model with Actor Covariates</a></li>
+<li class="chapter" data-level="15.5.5" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#goodness-of-fit-gof"><i class="fa fa-check"></i><b>15.5.5</b> Goodness of Fit (GOF)</a></li>
+<li class="chapter" data-level="15.5.6" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#interpret-the-results"><i class="fa fa-check"></i><b>15.5.6</b> Interpret the Results</a></li>
+</ul></li>
+</ul></li>
 <li class="part"><span><b>X Lab 9</b></span></li>
 <li class="part"><span><b>XI Lab 10</b></span></li>
 <li class="part"><span><b>XII Appendices</b></span></li>
-<li class="chapter" data-level="15" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>15</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
+<li class="chapter" data-level="16" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>16</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>15.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
-<li class="chapter" data-level="15.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>15.2</b> Installation</a></li>
-<li class="chapter" data-level="15.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>15.3</b> Loading</a></li>
-<li class="chapter" data-level="15.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>15.4</b> Import and View Data</a></li>
-<li class="chapter" data-level="15.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>15.5</b> Extracting Variables/Columns</a></li>
-<li class="chapter" data-level="15.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>15.6</b> Creating Filters/Extracting Rows</a></li>
-<li class="chapter" data-level="15.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>15.7</b> Arrange Rows</a></li>
-<li class="chapter" data-level="15.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>15.8</b> Making a New Column/Variable</a></li>
-<li class="chapter" data-level="15.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>15.9</b> Rename Variables</a></li>
-<li class="chapter" data-level="15.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>15.10</b> Summarizing</a>
+<li class="chapter" data-level="16.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>16.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
+<li class="chapter" data-level="16.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>16.2</b> Installation</a></li>
+<li class="chapter" data-level="16.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>16.3</b> Loading</a></li>
+<li class="chapter" data-level="16.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>16.4</b> Import and View Data</a></li>
+<li class="chapter" data-level="16.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>16.5</b> Extracting Variables/Columns</a></li>
+<li class="chapter" data-level="16.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>16.6</b> Creating Filters/Extracting Rows</a></li>
+<li class="chapter" data-level="16.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>16.7</b> Arrange Rows</a></li>
+<li class="chapter" data-level="16.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>16.8</b> Making a New Column/Variable</a></li>
+<li class="chapter" data-level="16.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>16.9</b> Rename Variables</a></li>
+<li class="chapter" data-level="16.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>16.10</b> Summarizing</a>
 <ul>
-<li class="chapter" data-level="15.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>15.10.1</b> Simple Summary</a></li>
-<li class="chapter" data-level="15.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>15.10.2</b> Group Summary</a></li>
+<li class="chapter" data-level="16.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>16.10.1</b> Simple Summary</a></li>
+<li class="chapter" data-level="16.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>16.10.2</b> Group Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="15.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>15.11</b> Combining Data</a>
+<li class="chapter" data-level="16.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>16.11</b> Combining Data</a>
 <ul>
-<li class="chapter" data-level="15.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>15.11.1</b> Left Join</a></li>
-<li class="chapter" data-level="15.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>15.11.2</b> Right Join</a></li>
-<li class="chapter" data-level="15.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>15.11.3</b> Inner Join</a></li>
-<li class="chapter" data-level="15.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>15.11.4</b> Full Join</a></li>
+<li class="chapter" data-level="16.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>16.11.1</b> Left Join</a></li>
+<li class="chapter" data-level="16.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>16.11.2</b> Right Join</a></li>
+<li class="chapter" data-level="16.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>16.11.3</b> Inner Join</a></li>
+<li class="chapter" data-level="16.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>16.11.4</b> Full Join</a></li>
 </ul></li>
-<li class="chapter" data-level="15.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>15.12</b> Piping Multiple Variables</a></li>
+<li class="chapter" data-level="16.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>16.12</b> Piping Multiple Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>16</b> Key SNA Functions and Visualization Cheat Sheet</a>
+<li class="chapter" data-level="17" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>17</b> Key SNA Functions and Visualization Cheat Sheet</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>16.1</b> <strong>igraph</strong></a>
+<li class="chapter" data-level="17.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>17.1</b> <strong>igraph</strong></a>
 <ul>
-<li class="chapter" data-level="16.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>16.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
-<li class="chapter" data-level="16.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>16.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="17.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>17.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="17.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>17.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
 </ul></li>
-<li class="chapter" data-level="16.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>16.2</b> <strong>statnet</strong></a>
+<li class="chapter" data-level="17.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>17.2</b> <strong>statnet</strong></a>
 <ul>
-<li class="chapter" data-level="16.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>16.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
-<li class="chapter" data-level="16.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>16.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="17.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>17.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="17.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>17.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>XIII References</b></span></li>
-<li class="chapter" data-level="17" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>17</b> References</a></li>
+<li class="chapter" data-level="18" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>18</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown">
 Published with bookdown</a></li>
@@ -791,7 +811,7 @@ Who do you talk with and work with during this class?
 <p>Also, note that we condition the randomly generated networks on all three of the conditions implemented in the <code>cug.test()</code> function: size; number of edges; and the distribution of dyads. This choice is for demonstration purposes only. Under normal circumstances, we would just condition the randomly generated networks on any one of the three. Here, we run all three to demonstrate how they differ.</p>
 <p>Each of the three options condition the randomly generated networks according to the number of nodes in the original network (<code>"size"</code>). Conditioning on <code>"edges"</code> jointly conditions simulations on size and the number of edges (for undirected networks) or the number of arcs (for directed networks) in a network. If the argument <code>ignore.eval = FALSE</code> is included, then the distribution of tie values will be used when conditioning on <code>"edges"</code>. The default for this function is <code>ignore.eval = TRUE</code>, meaning that CUG tests will ignore tie values by default. When conditioning on <code>"dyad.census"</code>, the function will replicate simulations according to the distribution of mutual, null, and (in the case of directed networks) asymmetric arcs in the original test network(s).</p>
 <p>By default, CUG tests in <strong>statnet</strong> will randomly generate 1,000 networks. The number of randomly generated networks can be reduced by specifying some smaller number (e.g., <code>reps = 100</code>); producing a smaller number of simulations will produce a quicker, if less precise, test. On one hand, this approach can be important for more intensive functions that take a while to render. On the other, this method can be an advantage for running tests on multiple networks when the measure is slow, or if the networks are large or particularly dense. For publishable-quality tests, however, we recommend to either use the default, or increase it to a much larger number (e.g., 10,000) in order to increase the theoretical sample size and, therefore, improve the precision of the test results.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:Know-Visualization"></span>
+<div class="figure" style="text-align: center"><span id="fig:Know-Visualization"></span>
 <img src="6-Hypothesis_Testing_QAP_CUG_files/figure-html/Know-Visualization-1.png" alt="A directed network of self-reported friendships between students, sized according to betweenness." width="70%" />
 <p class="caption">
 Figure 13.1: A directed network of self-reported friendships between students, sized according to betweenness.
@@ -852,13 +872,13 @@ Pr(X&lt;=Obs): 1 </code></pre>
 </tr>
 <tr class="even">
 <td align="right">0.17</td>
-<td align="right">0.268</td>
-<td align="right">0.732</td>
+<td align="right">0.241</td>
+<td align="right">0.759</td>
 </tr>
 <tr class="odd">
 <td align="right">0.17</td>
-<td align="right">0.458</td>
-<td align="right">0.542</td>
+<td align="right">0.462</td>
+<td align="right">0.538</td>
 </tr>
 </tbody>
 </table>
@@ -870,7 +890,7 @@ Pr(X&lt;=Obs): 1 </code></pre>
 <span id="cb783-5"><a href="hypothesis-testing-qap-and-cug.html#cb783-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Betweenness </span><span class="sc">\n</span><span class="st">Conditioned on Edges&quot;</span>)</span>
 <span id="cb783-6"><a href="hypothesis-testing-qap-and-cug.html#cb783-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cugBetDyad, </span>
 <span id="cb783-7"><a href="hypothesis-testing-qap-and-cug.html#cb783-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Betweenness </span><span class="sc">\n</span><span class="st">Conditioned on Dyads&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:CUGplots"></span>
+<div class="figure" style="text-align: center"><span id="fig:CUGplots"></span>
 <img src="6-Hypothesis_Testing_QAP_CUG_files/figure-html/CUGplots-1.png" alt="CUG Plots Conditioning on Size, Edges, and Dyads" width="70%" />
 <p class="caption">
 Figure 13.2: CUG Plots Conditioning on Size, Edges, and Dyads
@@ -1071,12 +1091,12 @@ Buddies
 <span id="cb792-11"><a href="hypothesis-testing-qap-and-cug.html#cb792-11" aria-hidden="true" tabindex="-1"></a>    Test <span class="fu">Value</span> (<span class="fu">f</span>(d))<span class="sc">:</span> <span class="fl">0.2493995</span> </span>
 <span id="cb792-12"><a href="hypothesis-testing-qap-and-cug.html#cb792-12" aria-hidden="true" tabindex="-1"></a>    Replications<span class="sc">:</span> <span class="dv">1000</span> </span>
 <span id="cb792-13"><a href="hypothesis-testing-qap-and-cug.html#cb792-13" aria-hidden="true" tabindex="-1"></a>    Distribution Summary<span class="sc">:</span></span>
-<span id="cb792-14"><a href="hypothesis-testing-qap-and-cug.html#cb792-14" aria-hidden="true" tabindex="-1"></a>        Min<span class="sc">:</span>     <span class="sc">-</span><span class="fl">0.1864245</span> </span>
-<span id="cb792-15"><a href="hypothesis-testing-qap-and-cug.html#cb792-15" aria-hidden="true" tabindex="-1"></a>        1stQ<span class="sc">:</span>    <span class="sc">-</span><span class="fl">0.0338401</span> </span>
-<span id="cb792-16"><a href="hypothesis-testing-qap-and-cug.html#cb792-16" aria-hidden="true" tabindex="-1"></a>        Med<span class="sc">:</span>     <span class="fl">0.0003852113</span> </span>
-<span id="cb792-17"><a href="hypothesis-testing-qap-and-cug.html#cb792-17" aria-hidden="true" tabindex="-1"></a>        Mean<span class="sc">:</span>    <span class="sc">-</span><span class="fl">0.001926882</span> </span>
-<span id="cb792-18"><a href="hypothesis-testing-qap-and-cug.html#cb792-18" aria-hidden="true" tabindex="-1"></a>        3rdQ<span class="sc">:</span>    <span class="fl">0.0279094</span> </span>
-<span id="cb792-19"><a href="hypothesis-testing-qap-and-cug.html#cb792-19" aria-hidden="true" tabindex="-1"></a>        Max<span class="sc">:</span>     <span class="fl">0.1199181</span> </span></code></pre></div>
+<span id="cb792-14"><a href="hypothesis-testing-qap-and-cug.html#cb792-14" aria-hidden="true" tabindex="-1"></a>        Min<span class="sc">:</span>     <span class="sc">-</span><span class="fl">0.1714765</span> </span>
+<span id="cb792-15"><a href="hypothesis-testing-qap-and-cug.html#cb792-15" aria-hidden="true" tabindex="-1"></a>        1stQ<span class="sc">:</span>    <span class="sc">-</span><span class="fl">0.03411705</span> </span>
+<span id="cb792-16"><a href="hypothesis-testing-qap-and-cug.html#cb792-16" aria-hidden="true" tabindex="-1"></a>        Med<span class="sc">:</span>     <span class="sc">-</span><span class="fl">0.0005437887</span> </span>
+<span id="cb792-17"><a href="hypothesis-testing-qap-and-cug.html#cb792-17" aria-hidden="true" tabindex="-1"></a>        Mean<span class="sc">:</span>    <span class="sc">-</span><span class="fl">7.223176e-06</span> </span>
+<span id="cb792-18"><a href="hypothesis-testing-qap-and-cug.html#cb792-18" aria-hidden="true" tabindex="-1"></a>        3rdQ<span class="sc">:</span>    <span class="fl">0.03362787</span> </span>
+<span id="cb792-19"><a href="hypothesis-testing-qap-and-cug.html#cb792-19" aria-hidden="true" tabindex="-1"></a>        Max<span class="sc">:</span>     <span class="fl">0.1395489</span> </span></code></pre></div>
 <p>It is also possible to plot the distribution of simulation values using <code>plot(corOrd13)</code>, though the plots will appear somewhat different from the newer versions. As with other CUG tests, however, the plots are best only for illustration purposes and unnecessary for inference.</p>
 </div>
 </div>
@@ -1084,7 +1104,7 @@ Buddies
 <h2><span class="header-section-number">13.4</span> Quadratic Assignment Procedure (QAP)</h2>
 <p>Quadratic assignment procedure (QAP) is similar to CUG, in that it employs simulation in order to generate a distribution of hypothetical networks. However, whereas CUG controls for a network condition such as size or density, QAP controls for network structure <span class="citation">(<a href="#ref-Mantel1967" role="doc-biblioref">Mantel 1967</a>; <a href="#ref-HubertandSchultz1976" role="doc-biblioref">Hubert and Schultz 1976</a>; <a href="#ref-Krackhardt1987b" role="doc-biblioref">Krackhardt 1987b</a>, <a href="#ref-Krackhardt1988" role="doc-biblioref">1988</a>)</span>. QAP is useful for running a variety of statistical functions and, until recently, has been one of the most popular (and, therefore, widely accepted) methods for assessing statistical significance with network data. Below, are three of the options available in <strong>statnet</strong>.</p>
 <p>QAP is similar to bootstrapping in that it builds its own distribution using network simulations that are based on the network being estimated. This particular simulation process is referred to as a permutation test, and it is designed to mimic all of the scenarios that would be possible if everyone were able to switch places in the social order. In other words, the rows and columns in the network matrix are shuffled (i.e., permuted) randomly while names (and all their corresponding attributes) remain in the original order. This process essentially changes the node with which a particular name and set of attributes is associated without disturbing the underlying structure (See Figure <a href="hypothesis-testing-qap-and-cug.html#fig:Two-Permutations">13.3</a> for an example of a permuted network). This random rearrangement is repeated to create a large number (usually hundreds or thousands) of simulated networks, which are then analyzed in the same manner as the original network in order to create a distribution of statistical measures that can then be compared to the measures calculated for the observed (i.e., actual) network. As with CUG tests, the proportion of measures in the distribution that are greater than, and less than the measure taken from the original network are then produced to give “p-value”-type information. If the observed measure occurs sufficiently infrequently (p &lt; 0.05) within the distribution of simulated networks, then we can reject the null and conclude that the observed statistics are not likely to have occurred by chance alone.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:Two-Permutations"></span>
+<div class="figure" style="text-align: center"><span id="fig:Two-Permutations"></span>
 <img src="6-Hypothesis_Testing_QAP_CUG_files/figure-html/Two-Permutations-1.png" alt="Two Permutations of the Same Network" width="70%" />
 <p class="caption">
 Figure 13.3: Two Permutations of the Same Network
@@ -1206,7 +1226,7 @@ Test Diagnostics:
 <p>Note that the ties within the <em>predictor</em> networks (those networks being used to predict or explain the outcome network) may be either binary or continuous for either method. Numerous options and interpretation caveats go with either regression method. The descriptions below are provided only as a very general introduction. To use either of these tools well, it is advised that users consult any standard statistical text for properly applying either type of regression. Aside from the fact that here we use networks rather than independent observations, the rules for applying these techniques are fairly similar.</p>
 <p>Multiple regression - both OLS and logistic - allows analysts to use multiple predictor variables to predict or explain what we should expect from some other variable of interest. That is to say, we can use more than just one variable when trying to understand another. This is important when one considers that, in reality, outcomes tend to be much more complex than what a single predictor can capture - no matter how critical or important that predictor may be. Multiple regression makes it possible to account for the relationship between the predictors and the outcome while also controlling for the interrelationships between the predictors themselves. If you estimate three regression models, each with a different predictor, and then a fourth with all three predictors together you will notice a difference between what each of the predictors say about the outcome individually, and what they say when they are all included in the same model. This is because each of the predictors may be themselves related to one another.</p>
 <p>If predictors are even somewhat related, then the information they contribute about the outcome variable will likely overlap to some degree. When taken together, the redundancies are taken into account and each variable’s unique contribution is much more precise.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:predictorGraphic"></span>
+<div class="figure" style="text-align: center"><span id="fig:predictorGraphic"></span>
 <img src="imgs/cor_uncor.jpg" alt="Uncorrelated and Correlated Predictors in a Regression" width="70%" />
 <p class="caption">
 Figure 13.4: Uncorrelated and Correlated Predictors in a Regression
@@ -1446,10 +1466,6 @@ gitbook.start({
 "text": null
 },
 "download": null,
-"search": {
-"engine": "lunr",
-"options": null
-},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
@@ -1462,6 +1478,10 @@ gitbook.start({
 "info": true,
 "toolbar": {
 "position": "fixed"
+},
+"search": {
+"engine": "lunr",
+"options": null
 }
 });
 });
