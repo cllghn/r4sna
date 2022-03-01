@@ -389,75 +389,70 @@ pira6.03.gof
 Goodness-of-fit for degree 
 
          obs min  mean max MC p-value
-degree0    0   0  2.43   6       0.12
-degree1   48  28 38.42  50       0.06
-degree2   16  14 23.49  33       0.06
-degree3    1   2  6.47  12       0.00
-degree4   10   0  2.28   5       0.00
-degree5    1   0  1.29   4       1.00
-degree6    0   0  1.44   5       0.44
-degree7    2   0  1.95   6       1.00
-degree8    4   0  2.97   8       0.66
-degree9    0   0  2.01   8       0.20
-degree10   1   0  0.25   2       0.48
+degree0    0   0  2.48   8       0.16
+degree1   48  31 38.26  49       0.06
+degree2   16  13 24.21  33       0.06
+degree3    1   2  6.45  14       0.00
+degree4   10   0  2.18   7       0.00
+degree5    1   0  1.23   5       1.00
+degree6    0   0  1.35   5       0.50
+degree7    2   0  2.12   6       1.00
+degree8    4   0  2.67   8       0.58
+degree9    0   0  1.90   7       0.20
+degree10   1   0  0.15   2       0.28
 
 Goodness-of-fit for edgewise shared partner 
 
      obs min  mean max MC p-value
-esp0  58  49 60.84  73       0.68
-esp1  22   2 15.99  30       0.32
-esp2   2   0  8.43  25       0.12
-esp3   7   0  6.39  15       0.96
-esp4   2   0  1.59   9       0.74
-esp5   1   0  0.27   4       0.42
+esp0  58  48 60.10  76       0.72
+esp1  22   2 15.67  30       0.44
+esp2   2   0  7.90  17       0.16
+esp3   7   0  6.69  16       1.00
+esp4   2   0  1.31   6       0.68
+esp5   1   0  0.23   2       0.36
 
 Goodness-of-fit for minimum geodesic distance 
 
      obs min    mean  max MC p-value
-1     92  66   93.51  122       0.92
-2    209  80  219.12  369       0.88
-3    278  67  358.46  631       0.52
-4    247  46  403.69  727       0.32
-5    164  22  305.33  581       0.28
-6     59   1  181.71  370       0.16
-7     18   0   96.63  260       0.20
-8      0   0   48.12  194       0.06
-9      0   0   22.91  130       0.26
-10     0   0   11.67  114       0.66
-11     0   0    5.71   83       1.00
-12     0   0    2.85   66       1.00
-13     0   0    1.52   52       1.00
-14     0   0    0.74   33       1.00
-15     0   0    0.30   20       1.00
-16     0   0    0.12    9       1.00
-17     0   0    0.08    6       1.00
-18     0   0    0.05    4       1.00
-19     0   0    0.02    2       1.00
-20     0   0    0.01    1       1.00
-Inf 2336 398 1650.45 3044       0.28
+1     92  70   91.90  117       1.00
+2    209  99  207.63  329       0.90
+3    278  85  337.66  664       0.72
+4    247  83  380.19  767       0.38
+5    164  51  292.11  659       0.28
+6     59  38  176.40  441       0.06
+7     18   7   97.46  236       0.08
+8      0   0   52.57  178       0.04
+9      0   0   28.33  125       0.24
+10     0   0   14.28   72       0.64
+11     0   0    6.46   56       1.00
+12     0   0    2.47   41       1.00
+13     0   0    0.62   21       1.00
+14     0   0    0.16    9       1.00
+15     0   0    0.02    2       1.00
+Inf 2336 473 1714.74 2926       0.24
 
 Goodness-of-fit for model statistics 
 
-                        obs      min      mean        max MC p-value
-edges              92.00000 66.00000  93.51000  122.00000       0.92
-kstar3            465.00000 75.00000 490.70000 1003.00000       0.88
-kstar4            575.00000 76.00000 612.24000 1350.00000       0.90
-altkstar.2        151.25391 61.89062 156.27027  254.01562       0.84
-gwesp.fixed.0.693  42.93568  6.00000  43.31993   82.99617       0.92
-dyadcov.pira5.net  52.00000 43.00000  52.56000   61.00000       0.90
+                        obs       min      mean        max MC p-value
+edges              92.00000  70.00000  91.90000  117.00000       1.00
+kstar3            465.00000 118.00000 455.79000  909.00000       0.90
+kstar4            575.00000 143.00000 560.58000 1221.00000       0.86
+altkstar.2        151.25391  78.57031 150.38152  233.75781       0.92
+gwesp.fixed.0.693  42.93568  15.00000  42.12749   72.05897       0.86
+dyadcov.pira5.net  52.00000  42.00000  51.90000   61.00000       1.00
 ```
 
 For simplicity, we will only interpret the last output of the printout (the Goodness-of-fit for model statistics table, see printout below). The model simulations built into the `gof()` function can compare the network characteristics for simulated networks and the observed network; then, the observed frequencies for each statistic can be compared against those simulated [@Harris2013]. The model statistics comparison table includes five columns of information; as an aside, these variables and their interpretation can also be used in comparing the degree, edgewise shared partner, and minimum geodesic distance tables. The first column contains the name for each statistic. The second, *obs* includes the number of nodes in the observed network with the listed statistic. Notice that the edges statistic should correspond to the number of edges in the network (you can always check using `network.edgecount(pira6.net)`). The third, fourth, and fifth columns (*min*, *mean*, and *max*) represent the minimum, maximum and average number for a given statistic across the simulated networks. Finally, and perhaps most importantly, the *MC p-value* column includes the proportion of the simulated values for a given term that are at least as extreme as the observed value. Here, large p-values indicate that the simulated networks are not significantly different from the observed network; on the other hand, small p-values (less than 0.05) would be interpreted as demonstrating a significant difference between the simulated and observed statistic [@Harris2013]. In our output, the p-values are close to one, so our model did well at predicting the terms in our model, which we expected. Determining how well a model fits require evaluating the other tables. Generally speaking, the fewer p-values of less than 0.5 the better.
 
 
 ```
-                        obs      min      mean        max MC p-value
-edges              92.00000 66.00000  93.51000  122.00000       0.92
-kstar3            465.00000 75.00000 490.70000 1003.00000       0.88
-kstar4            575.00000 76.00000 612.24000 1350.00000       0.90
-altkstar.2        151.25391 61.89062 156.27027  254.01562       0.84
-gwesp.fixed.0.693  42.93568  6.00000  43.31993   82.99617       0.92
-dyadcov.pira5.net  52.00000 43.00000  52.56000   61.00000       0.90
+                        obs       min      mean        max MC p-value
+edges              92.00000  70.00000  91.90000  117.00000       1.00
+kstar3            465.00000 118.00000 455.79000  909.00000       0.90
+kstar4            575.00000 143.00000 560.58000 1221.00000       0.86
+altkstar.2        151.25391  78.57031 150.38152  233.75781       0.92
+gwesp.fixed.0.693  42.93568  15.00000  42.12749   72.05897       0.86
+dyadcov.pira5.net  52.00000  42.00000  51.90000   61.00000       1.00
 ```
 
 To aid the process of determining model fit, we can also plot the output of our GOF evaluation using the `plot()` function. Note that each plot represents each GOF test. The x-axis on each plot represents a given statistic, while the y-axis represents the proportion of nodes in the observed network with the proportion of nodes in the simulated network with the same characteristics [@Harris2013]. The thick black line in each graph represents the value for the observed network, while the grey box shows the 95% confidence interval for the simulated networks. When the observed values fall within the confidence interval, the simulated networks are capturing the configurations in the observed network and we assume the model fits well.

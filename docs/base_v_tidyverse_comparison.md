@@ -345,7 +345,7 @@ tb %>%
 ```
 
 ```
-# A tibble: 5 × 3
+# A tibble: 5 x 3
   screen_name  retweet_count followers_count
   <chr>                <dbl>           <dbl>
 1 warmediateam             1            3073
@@ -495,7 +495,7 @@ tb %>%
 ```
 
 ```
-# A tibble: 5 × 3
+# A tibble: 5 x 3
   screen_name  retweet_count followers_count
   <chr>                <dbl>           <dbl>
 1 warmediateam            22            3073
@@ -576,7 +576,7 @@ tb %>%
 ```
 
 ```
-# A tibble: 5 × 2
+# A tibble: 5 x 2
   screen_name     retweet_count
   <chr>                   <dbl>
 1 5qxsN9lLdn1Nanl             0
@@ -655,7 +655,7 @@ tb %>%
 ```
 
 ```
-# A tibble: 5 × 2
+# A tibble: 5 x 2
   screen_name   retweet_count
   <chr>                 <dbl>
 1 zaidaliallawi             0
@@ -747,7 +747,7 @@ tb %>%
 ```
 
 ```
-# A tibble: 5 × 2
+# A tibble: 5 x 2
   screen_name     retweet_success
   <chr>                     <dbl>
 1 MzcCY48mFeyS1ly            Inf 
@@ -827,7 +827,7 @@ tb %>%
 ```
 
 ```
-# A tibble: 5 × 2
+# A tibble: 5 x 2
   Screen_Name  N_Retweets
   <chr>             <dbl>
 1 warmediateam          1
@@ -883,7 +883,7 @@ tb %>%
 ```
 
 ```
-# A tibble: 1 × 1
+# A tibble: 1 x 1
   rt_avg
    <dbl>
 1   245.
@@ -968,7 +968,7 @@ tb %>%
 ```
 
 ```
-# A tibble: 5 × 2
+# A tibble: 5 x 2
   screen_name     rt_avg
   <chr>            <dbl>
 1 TheEisaAli       4910.
@@ -1405,7 +1405,7 @@ tb %>%
 ```
 
 ```
-# A tibble: 89 × 2
+# A tibble: 89 x 2
    Screen_Name     N_Retweets
    <chr>                <dbl>
  1 TheEisaAli          486055
@@ -1418,7 +1418,7 @@ tb %>%
  8 amnesty              80147
  9 Protectthenhs        72937
 10 YouTube              62145
-# … with 79 more rows
+# ... with 79 more rows
 ```
 
 We can clean up the output to only present the top accounts by adding
@@ -1437,7 +1437,7 @@ tb %>%
 ```
 
 ```
-# A tibble: 15 × 2
+# A tibble: 15 x 2
    Screen_Name     N_Retweets
    <chr>                <dbl>
  1 TheEisaAli          486055

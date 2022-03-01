@@ -243,6 +243,14 @@ structural-model
 model-with-actor-covariates
 goodness-of-fit-gof
 interpret-the-results
+text-mining-and-semantic-network-analysis
+data-exploration
+data-formatting-and-preprocessing-text
+analysis
+frequencies
+term-frequency---inverse-document-frequency-tf-idf
+bigrams
+semantic-networks
 basic-base-r-and-tidyverse-data-manipulation-cheat-sheet
 basic-base-r-and-dplyr-functions
 installation

@@ -96,9 +96,9 @@ anabaptist_ig
 ```
 
 ```
-IGRAPH c8458db UN-- 67 183 -- 
+IGRAPH b43b453 UN-- 67 183 -- 
 + attr: name (v/c)
-+ edges from c8458db (vertex names):
++ edges from b43b453 (vertex names):
  [1] Martin Luther --Ulrich Zwingli      Martin Luther --Thomas Muntzer     
  [3] Martin Luther --Andreas Carlstadt   Martin Luther --Caspar Schwenckfeld
  [5] Martin Luther --Melchior Hofmann    Martin Luther --Philipp Melanchthon
@@ -132,9 +132,9 @@ simplify(anabaptist_ig,
 ```
 
 ```
-IGRAPH 5381319 UN-- 67 183 -- 
+IGRAPH b44928c UN-- 67 183 -- 
 + attr: name (v/c)
-+ edges from 5381319 (vertex names):
++ edges from b44928c (vertex names):
  [1] Martin Luther --Ulrich Zwingli      Martin Luther --Thomas Muntzer     
  [3] Martin Luther --Andreas Carlstadt   Martin Luther --Caspar Schwenckfeld
  [5] Martin Luther --Melchior Hofmann    Martin Luther --Philipp Melanchthon
@@ -626,7 +626,7 @@ names(attributes)
 ```
 
 ```
- [1] "Names"             "Believers.Baptism" "Violence"         
+ [1] "ï..Names"          "Believers.Baptism" "Violence"         
  [4] "Munster.Rebellion" "Apocalyptic"       "Anabaptist"       
  [7] "Melchiorite"       "Swiss.Brethren"    "Denck"            
 [10] "Hut"               "Hutterite"         "Other.Anabaptist" 

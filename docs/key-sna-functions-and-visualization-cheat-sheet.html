@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>17 Key SNA Functions and Visualization Cheat Sheet | R for Social Network Analysis</title>
+  <title>18 Key SNA Functions and Visualization Cheat Sheet | R for Social Network Analysis</title>
   <meta name="description" content="TBD." />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="17 Key SNA Functions and Visualization Cheat Sheet | R for Social Network Analysis" />
+  <meta property="og:title" content="18 Key SNA Functions and Visualization Cheat Sheet | R for Social Network Analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="cjcallag/r4sna" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="17 Key SNA Functions and Visualization Cheat Sheet | R for Social Network Analysis" />
+  <meta name="twitter:title" content="18 Key SNA Functions and Visualization Cheat Sheet | R for Social Network Analysis" />
   
   <meta name="twitter:description" content="TBD." />
   
@@ -32,8 +32,9 @@
   
 <link rel="prev" href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"/>
 <link rel="next" href="references.html"/>
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -54,10 +55,10 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.18/datatables.js"></script>
-<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="libs/datatables-binding-0.20/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
 <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
 <link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
@@ -66,6 +67,10 @@
 <script src="libs/selectize-0.12.0/selectize.min.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet" />
+<script src="libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
+<script src="libs/wordcloud2-0.0.1/hover.js"></script>
+<script src="libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script>
 
 
 <style type="text/css">
@@ -186,46 +191,46 @@ div.csl-indent {
 <li class="chapter" data-level="2.2" data-path="setting-up.html"><a href="setting-up.html#project-workflow"><i class="fa fa-check"></i><b>2.2</b> Project Workflow</a></li>
 </ul></li>
 <li class="part"><span><b>II Lab 1</b></span></li>
-<li class="chapter" data-level="3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
+<li class="chapter" data-level="3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
-<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
-<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
+<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
-<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
-<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
-<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
+<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
+<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <strong>igraph</strong></a></li>
-<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
-<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
-<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
-<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
-<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
+<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
+<li class="chapter" data-level="4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
-<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
-<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
+<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
-<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
-<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
-<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
+<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
-<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
-<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
-<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
-<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
-<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one-and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
+<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
+<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III Lab 2</b></span></li>
@@ -462,48 +467,62 @@ div.csl-indent {
 </ul></li>
 </ul></li>
 <li class="part"><span><b>X Lab 9</b></span></li>
+<li class="chapter" data-level="16" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html"><i class="fa fa-check"></i><b>16</b> Text Mining and Semantic Network Analysis</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#data-exploration"><i class="fa fa-check"></i><b>16.1</b> Data Exploration</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#data-formatting-and-preprocessing-text"><i class="fa fa-check"></i><b>16.1.1</b> Data Formatting and Preprocessing Text</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#analysis"><i class="fa fa-check"></i><b>16.2</b> Analysis</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#frequencies"><i class="fa fa-check"></i><b>16.2.1</b> Frequencies</a></li>
+<li class="chapter" data-level="16.2.2" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#term-frequency---inverse-document-frequency-tf-idf"><i class="fa fa-check"></i><b>16.2.2</b> Term Frequency - Inverse Document Frequency (TF-IDF)</a></li>
+<li class="chapter" data-level="16.2.3" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#bigrams"><i class="fa fa-check"></i><b>16.2.3</b> Bigrams</a></li>
+<li class="chapter" data-level="16.2.4" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#semantic-networks"><i class="fa fa-check"></i><b>16.2.4</b> Semantic Networks</a></li>
+</ul></li>
+</ul></li>
 <li class="part"><span><b>XI Lab 10</b></span></li>
 <li class="part"><span><b>XII Appendices</b></span></li>
-<li class="chapter" data-level="16" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>16</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
+<li class="chapter" data-level="17" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>17</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>16.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
-<li class="chapter" data-level="16.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>16.2</b> Installation</a></li>
-<li class="chapter" data-level="16.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>16.3</b> Loading</a></li>
-<li class="chapter" data-level="16.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>16.4</b> Import and View Data</a></li>
-<li class="chapter" data-level="16.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>16.5</b> Extracting Variables/Columns</a></li>
-<li class="chapter" data-level="16.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>16.6</b> Creating Filters/Extracting Rows</a></li>
-<li class="chapter" data-level="16.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>16.7</b> Arrange Rows</a></li>
-<li class="chapter" data-level="16.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>16.8</b> Making a New Column/Variable</a></li>
-<li class="chapter" data-level="16.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>16.9</b> Rename Variables</a></li>
-<li class="chapter" data-level="16.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>16.10</b> Summarizing</a>
+<li class="chapter" data-level="17.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>17.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
+<li class="chapter" data-level="17.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>17.2</b> Installation</a></li>
+<li class="chapter" data-level="17.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>17.3</b> Loading</a></li>
+<li class="chapter" data-level="17.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>17.4</b> Import and View Data</a></li>
+<li class="chapter" data-level="17.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>17.5</b> Extracting Variables/Columns</a></li>
+<li class="chapter" data-level="17.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>17.6</b> Creating Filters/Extracting Rows</a></li>
+<li class="chapter" data-level="17.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>17.7</b> Arrange Rows</a></li>
+<li class="chapter" data-level="17.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>17.8</b> Making a New Column/Variable</a></li>
+<li class="chapter" data-level="17.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>17.9</b> Rename Variables</a></li>
+<li class="chapter" data-level="17.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>17.10</b> Summarizing</a>
 <ul>
-<li class="chapter" data-level="16.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>16.10.1</b> Simple Summary</a></li>
-<li class="chapter" data-level="16.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>16.10.2</b> Group Summary</a></li>
+<li class="chapter" data-level="17.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>17.10.1</b> Simple Summary</a></li>
+<li class="chapter" data-level="17.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>17.10.2</b> Group Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="16.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>16.11</b> Combining Data</a>
+<li class="chapter" data-level="17.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>17.11</b> Combining Data</a>
 <ul>
-<li class="chapter" data-level="16.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>16.11.1</b> Left Join</a></li>
-<li class="chapter" data-level="16.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>16.11.2</b> Right Join</a></li>
-<li class="chapter" data-level="16.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>16.11.3</b> Inner Join</a></li>
-<li class="chapter" data-level="16.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>16.11.4</b> Full Join</a></li>
+<li class="chapter" data-level="17.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>17.11.1</b> Left Join</a></li>
+<li class="chapter" data-level="17.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>17.11.2</b> Right Join</a></li>
+<li class="chapter" data-level="17.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>17.11.3</b> Inner Join</a></li>
+<li class="chapter" data-level="17.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>17.11.4</b> Full Join</a></li>
 </ul></li>
-<li class="chapter" data-level="16.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>16.12</b> Piping Multiple Variables</a></li>
+<li class="chapter" data-level="17.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>17.12</b> Piping Multiple Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>17</b> Key SNA Functions and Visualization Cheat Sheet</a>
+<li class="chapter" data-level="18" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>18</b> Key SNA Functions and Visualization Cheat Sheet</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>17.1</b> <strong>igraph</strong></a>
+<li class="chapter" data-level="18.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>18.1</b> <strong>igraph</strong></a>
 <ul>
-<li class="chapter" data-level="17.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>17.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
-<li class="chapter" data-level="17.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>17.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="18.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>18.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="18.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>18.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
 </ul></li>
-<li class="chapter" data-level="17.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>17.2</b> <strong>statnet</strong></a>
+<li class="chapter" data-level="18.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>18.2</b> <strong>statnet</strong></a>
 <ul>
-<li class="chapter" data-level="17.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>17.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
-<li class="chapter" data-level="17.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>17.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="18.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>18.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="18.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>18.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>XIII References</b></span></li>
-<li class="chapter" data-level="18" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>18</b> References</a></li>
+<li class="chapter" data-level="19" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>19</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown">
 Published with bookdown</a></li>
@@ -525,64 +544,64 @@ Published with bookdown</a></li>
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="key-sna-functions-and-visualization-cheat-sheet" class="section level1" number="17">
-<h1><span class="header-section-number">17</span> Key SNA Functions and Visualization Cheat Sheet</h1>
+<div id="key-sna-functions-and-visualization-cheat-sheet" class="section level1" number="18">
+<h1><span class="header-section-number">18</span> Key SNA Functions and Visualization Cheat Sheet</h1>
 <p>This document’s purpose is to serve as a simple reference guide comparing a handful of basic, visualization-related functions in <strong>igraph</strong> and <strong>statnet</strong>. It designed to help you begin to understand some basic differences between the two packages as you learn R, but this is far from an exhaustive list of functions in the two programs.</p>
 <p>We will use the same data set for both - <strong>igraph</strong> and <strong>statnet</strong> - sections, which is a network comprised of violent interactions among African Violent Extremist Organizations (VEOs). Since you are likely to work with edge lists and matrices, we have included code for importing both.</p>
-<div class="sourceCode" id="cb1118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1118-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read edge list</span></span>
-<span id="cb1118-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1118-2" aria-hidden="true" tabindex="-1"></a>teo_el <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/TEO_EL.csv&quot;</span>)</span>
-<span id="cb1118-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1118-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Read matrix</span></span>
-<span id="cb1118-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1118-4" aria-hidden="true" tabindex="-1"></a>teo_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(</span>
-<span id="cb1118-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1118-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="st">&quot;data/TEO_Matrix.csv&quot;</span>,</span>
-<span id="cb1118-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1118-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">header =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb1118-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1118-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb1118-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1118-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1118-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1118-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb1171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1171-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1171-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read edge list</span></span>
+<span id="cb1171-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1171-2" aria-hidden="true" tabindex="-1"></a>teo_el <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/TEO_EL.csv&quot;</span>)</span>
+<span id="cb1171-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1171-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Read matrix</span></span>
+<span id="cb1171-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1171-4" aria-hidden="true" tabindex="-1"></a>teo_mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(</span>
+<span id="cb1171-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1171-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read.csv</span>(<span class="st">&quot;data/TEO_Matrix.csv&quot;</span>,</span>
+<span id="cb1171-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1171-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">header =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1171-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1171-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb1171-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1171-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1171-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1171-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Take a look at the class for each object:</p>
-<div class="sourceCode" id="cb1119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1119-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(teo_el)</span></code></pre></div>
+<div class="sourceCode" id="cb1172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1172-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1172-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(teo_el)</span></code></pre></div>
 <pre><code>[1] &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb1121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1121-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(teo_mat)</span></code></pre></div>
+<div class="sourceCode" id="cb1174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1174-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(teo_mat)</span></code></pre></div>
 <pre><code>[1] &quot;matrix&quot; &quot;array&quot; </code></pre>
-<div id="igraph" class="section level2" number="17.1">
-<h2><span class="header-section-number">17.1</span> <strong>igraph</strong></h2>
+<div id="igraph" class="section level2" number="18.1">
+<h2><span class="header-section-number">18.1</span> <strong>igraph</strong></h2>
 <p>Assuming you have installed it already, we will load <strong>igraph</strong> first.</p>
-<div class="sourceCode" id="cb1123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1123-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span></code></pre></div>
-<div id="creating-a-graph-object-in-igraph" class="section level3" number="17.1.1">
-<h3><span class="header-section-number">17.1.1</span> Creating a graph object in <strong>igraph</strong></h3>
+<div class="sourceCode" id="cb1176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1176-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span></code></pre></div>
+<div id="creating-a-graph-object-in-igraph" class="section level3" number="18.1.1">
+<h3><span class="header-section-number">18.1.1</span> Creating a graph object in <strong>igraph</strong></h3>
 <p>Importing either object requires functions designed to work with the object class. For importing <code>data.frame</code>’s you can use the aptly named <code>graph_from_data_frame()</code> function. Transforming a <code>matrix</code> into a graph object in <strong>igraph</strong> requires the <code>graph_from_adjacency_matrix()</code> function.</p>
 <p>First, import the edge list:</p>
-<div class="sourceCode" id="cb1124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1124-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1124-1" aria-hidden="true" tabindex="-1"></a>g_from_el <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(<span class="at">d =</span> teo_el,</span>
-<span id="cb1124-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1124-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># Is your data directed?</span></span>
-<span id="cb1124-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1124-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">directed =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb1124-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1124-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># Will you include a data.frame with node </span></span>
-<span id="cb1124-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1124-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># attributes?</span></span>
-<span id="cb1124-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1124-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">vertices =</span> <span class="cn">NULL</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1177-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1177-1" aria-hidden="true" tabindex="-1"></a>g_from_el <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(<span class="at">d =</span> teo_el,</span>
+<span id="cb1177-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1177-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># Is your data directed?</span></span>
+<span id="cb1177-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1177-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">directed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1177-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1177-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># Will you include a data.frame with node </span></span>
+<span id="cb1177-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1177-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="co"># attributes?</span></span>
+<span id="cb1177-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1177-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">vertices =</span> <span class="cn">NULL</span>)</span></code></pre></div>
 <p>Now, import the matrix:</p>
-<div class="sourceCode" id="cb1125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1125-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1125-1" aria-hidden="true" tabindex="-1"></a>g_from_mat <span class="ot">&lt;-</span> <span class="fu">graph_from_adjacency_matrix</span>(<span class="at">adjmatrix =</span> teo_mat,</span>
-<span id="cb1125-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1125-2" aria-hidden="true" tabindex="-1"></a>                                          <span class="co"># How should the matrix be interpreted?</span></span>
-<span id="cb1125-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1125-3" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">mode =</span> <span class="st">&quot;undirected&quot;</span>, </span>
-<span id="cb1125-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1125-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="co"># Create a weighted graph?</span></span>
-<span id="cb1125-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1125-5" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">weighted =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1125-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1125-6" aria-hidden="true" tabindex="-1"></a>                                          <span class="co"># Should the diagonal be zeroed out?</span></span>
-<span id="cb1125-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1125-7" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">diag =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1178-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1178-1" aria-hidden="true" tabindex="-1"></a>g_from_mat <span class="ot">&lt;-</span> <span class="fu">graph_from_adjacency_matrix</span>(<span class="at">adjmatrix =</span> teo_mat,</span>
+<span id="cb1178-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1178-2" aria-hidden="true" tabindex="-1"></a>                                          <span class="co"># How should the matrix be interpreted?</span></span>
+<span id="cb1178-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1178-3" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">mode =</span> <span class="st">&quot;undirected&quot;</span>, </span>
+<span id="cb1178-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1178-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="co"># Create a weighted graph?</span></span>
+<span id="cb1178-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1178-5" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">weighted =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1178-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1178-6" aria-hidden="true" tabindex="-1"></a>                                          <span class="co"># Should the diagonal be zeroed out?</span></span>
+<span id="cb1178-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1178-7" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">diag =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Inspect the newly created objects for their class:</p>
-<div class="sourceCode" id="cb1126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1126-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(g_from_el)</span></code></pre></div>
+<div class="sourceCode" id="cb1179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1179-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1179-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(g_from_el)</span></code></pre></div>
 <pre><code>[1] &quot;igraph&quot;</code></pre>
-<div class="sourceCode" id="cb1128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1128-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(g_from_mat)</span></code></pre></div>
+<div class="sourceCode" id="cb1181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1181-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(g_from_mat)</span></code></pre></div>
 <pre><code>[1] &quot;igraph&quot;</code></pre>
 <p>As you can see, there are no differences between the two graphs, though they originated from differing data formats.</p>
-<div class="sourceCode" id="cb1130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1130-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">difference</span>(g_from_el, g_from_mat)</span></code></pre></div>
-<pre><code>IGRAPH 185d982 UN-- 83 0 -- 
+<div class="sourceCode" id="cb1183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1183-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">difference</span>(g_from_el, g_from_mat)</span></code></pre></div>
+<pre><code>IGRAPH 1f4289b UN-- 83 0 -- 
 + attr: name (v/c)
-+ edges from 185d982 (vertex names):</code></pre>
++ edges from 1f4289b (vertex names):</code></pre>
 </div>
-<div id="visualization-parameters-and-layouts-in-igraph" class="section level3" number="17.1.2">
-<h3><span class="header-section-number">17.1.2</span> Visualization Parameters and Layouts in <strong>igraph</strong></h3>
+<div id="visualization-parameters-and-layouts-in-igraph" class="section level3" number="18.1.2">
+<h3><span class="header-section-number">18.1.2</span> Visualization Parameters and Layouts in <strong>igraph</strong></h3>
 <p>The <code>plot</code> function permits you to see the network data visually by recognizing the <code>igraph</code> class.</p>
-<div class="sourceCode" id="cb1132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1132-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1132-1" aria-hidden="true" tabindex="-1"></a>teo_ig <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(<span class="at">d =</span> teo_el,</span>
-<span id="cb1132-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1132-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">directed =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb1132-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1132-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">vertices =</span> <span class="cn">NULL</span>)</span>
-<span id="cb1132-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1132-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(teo_ig)</span></code></pre></div>
+<div class="sourceCode" id="cb1185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1185-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1185-1" aria-hidden="true" tabindex="-1"></a>teo_ig <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(<span class="at">d =</span> teo_el,</span>
+<span id="cb1185-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1185-2" aria-hidden="true" tabindex="-1"></a>                                <span class="at">directed =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1185-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1185-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">vertices =</span> <span class="cn">NULL</span>)</span>
+<span id="cb1185-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1185-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(teo_ig)</span></code></pre></div>
 <p><img src="key_functions_and_visualization_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>This could be greatly improved!</p>
 <p>Now let’s consider making some adjustments. <em>Table 1</em> provides a summary of commonly used plotting parameters in <strong>igraph</strong>. See <strong>igraph’s</strong> manual, Katya Ognyanova’s excellent tutorial on SNA in <strong>igraph</strong> (<a href="https://kateto.net/networks-r-igraph" class="uri">https://kateto.net/networks-r-igraph</a>), and <strong>igraph’s</strong> website (<a href="https://igraph.org/r/" class="uri">https://igraph.org/r/</a>) for a more comprehensive list of options.</p>
@@ -655,25 +674,25 @@ Published with bookdown</a></li>
 </tbody>
 </table>
 </center>
-<div class="sourceCode" id="cb1133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1133-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(teo_ig, </span>
-<span id="cb1133-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1133-2" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Modify vertices</span></span>
-<span id="cb1133-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1133-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
-<span id="cb1133-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1133-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">10</span>, </span>
-<span id="cb1133-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1133-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.shape =</span> <span class="st">&quot;sphere&quot;</span>, </span>
-<span id="cb1133-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1133-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.font =</span> <span class="fl">0.25</span>, </span>
-<span id="cb1133-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1133-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">label.family =</span> <span class="st">&quot;Courier&quot;</span>, </span>
-<span id="cb1133-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1133-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> .<span class="dv">75</span>,</span>
-<span id="cb1133-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1133-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;darkblue&quot;</span>, </span>
-<span id="cb1133-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1133-10" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Modify edges</span></span>
-<span id="cb1133-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1133-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;black&quot;</span>,  </span>
-<span id="cb1133-12"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1133-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">edgewidth =</span> <span class="dv">3</span>, </span>
-<span id="cb1133-13"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1133-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">arrow.mode =</span> <span class="dv">3</span>,</span>
-<span id="cb1133-14"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1133-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.25</span>, </span>
-<span id="cb1133-15"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1133-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1186-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(teo_ig, </span>
+<span id="cb1186-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1186-2" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Modify vertices</span></span>
+<span id="cb1186-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1186-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
+<span id="cb1186-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1186-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">10</span>, </span>
+<span id="cb1186-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1186-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.shape =</span> <span class="st">&quot;sphere&quot;</span>, </span>
+<span id="cb1186-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1186-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.font =</span> <span class="fl">0.25</span>, </span>
+<span id="cb1186-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1186-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">label.family =</span> <span class="st">&quot;Courier&quot;</span>, </span>
+<span id="cb1186-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1186-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.cex =</span> .<span class="dv">75</span>,</span>
+<span id="cb1186-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1186-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label.color =</span> <span class="st">&quot;darkblue&quot;</span>, </span>
+<span id="cb1186-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1186-10" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Modify edges</span></span>
+<span id="cb1186-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1186-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;black&quot;</span>,  </span>
+<span id="cb1186-12"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1186-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">edgewidth =</span> <span class="dv">3</span>, </span>
+<span id="cb1186-13"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1186-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">arrow.mode =</span> <span class="dv">3</span>,</span>
+<span id="cb1186-14"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1186-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.25</span>, </span>
+<span id="cb1186-15"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1186-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <p><img src="key_functions_and_visualization_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>The graph layout can vary. <strong>igraph</strong> provides multiple layout algorithms (e.g., Kamada-Kawai, circle, etc.), which can be usually located by typing the prefix <code>layout_</code> or <code>layout_with_</code> (e.g., <code>layout_with_kk</code>, <code>layout_in_circle()</code>, etc.).</p>
 <p>Note you can store a layout as an object (e.g., <code>coords &lt;- layout_with_dh(teo_g)</code>) and subsequently pass it to the <code>plot()</code> function as a parameter for the <code>layout</code> argument (e.g., <code>plot(teog_g, layout = coords))</code>, which we will do below.</p>
-<div class="sourceCode" id="cb1134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1134-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1134-1" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">layout_with_kk</span>(teo_ig)</span></code></pre></div>
+<div class="sourceCode" id="cb1187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1187-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1187-1" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> <span class="fu">layout_with_kk</span>(teo_ig)</span></code></pre></div>
 <p>Some of the commonly used layout options are outlined below, which you can find in <strong>igraph</strong>’s help section.</p>
 <center>
 <table>
@@ -733,107 +752,107 @@ Published with bookdown</a></li>
 </table>
 </center>
 <p>For instance, the visual below depicts the network using Fruchterman Reingold. Note we’ve turned off the labels so you can see the structure more clearly.</p>
-<div class="sourceCode" id="cb1135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1135-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(teo_ig, </span>
-<span id="cb1135-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1135-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;TEO Fruchterman Reingold Layout&quot;</span>,</span>
-<span id="cb1135-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1135-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_with_fr, </span>
-<span id="cb1135-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1135-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
-<span id="cb1135-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1135-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">10</span>, </span>
-<span id="cb1135-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1135-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.shape =</span> <span class="st">&quot;sphere&quot;</span>, </span>
-<span id="cb1135-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1135-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>, </span>
-<span id="cb1135-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1135-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;black&quot;</span>, </span>
-<span id="cb1135-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1135-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">edgewidth =</span> <span class="dv">3</span>, </span>
-<span id="cb1135-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1135-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">arrow.mode =</span> <span class="dv">3</span>,</span>
-<span id="cb1135-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1135-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.25</span>, </span>
-<span id="cb1135-12"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1135-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1188-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(teo_ig, </span>
+<span id="cb1188-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1188-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;TEO Fruchterman Reingold Layout&quot;</span>,</span>
+<span id="cb1188-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1188-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_with_fr, </span>
+<span id="cb1188-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1188-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
+<span id="cb1188-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1188-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">10</span>, </span>
+<span id="cb1188-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1188-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.shape =</span> <span class="st">&quot;sphere&quot;</span>, </span>
+<span id="cb1188-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1188-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>, </span>
+<span id="cb1188-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1188-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;black&quot;</span>, </span>
+<span id="cb1188-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1188-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">edgewidth =</span> <span class="dv">3</span>, </span>
+<span id="cb1188-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1188-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">arrow.mode =</span> <span class="dv">3</span>,</span>
+<span id="cb1188-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1188-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.25</span>, </span>
+<span id="cb1188-12"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1188-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <p><img src="key_functions_and_visualization_files/figure-html/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Now, plot the network using Kamada-Kawai.</p>
-<div class="sourceCode" id="cb1136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1136-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(teo_ig, </span>
-<span id="cb1136-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1136-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;TEO Kamada-Kawai Layout&quot;</span>, </span>
-<span id="cb1136-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1136-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_with_kk, </span>
-<span id="cb1136-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1136-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
-<span id="cb1136-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1136-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">10</span>, </span>
-<span id="cb1136-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1136-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.shape =</span> <span class="st">&quot;sphere&quot;</span>, </span>
-<span id="cb1136-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1136-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>, </span>
-<span id="cb1136-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1136-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;black&quot;</span>, </span>
-<span id="cb1136-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1136-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">edgewidth =</span> <span class="dv">3</span>, </span>
-<span id="cb1136-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1136-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">arrow.mode =</span> <span class="dv">3</span>,</span>
-<span id="cb1136-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1136-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.25</span>, </span>
-<span id="cb1136-12"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1136-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1189-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(teo_ig, </span>
+<span id="cb1189-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1189-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;TEO Kamada-Kawai Layout&quot;</span>, </span>
+<span id="cb1189-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1189-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_with_kk, </span>
+<span id="cb1189-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1189-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
+<span id="cb1189-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1189-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">10</span>, </span>
+<span id="cb1189-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1189-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.shape =</span> <span class="st">&quot;sphere&quot;</span>, </span>
+<span id="cb1189-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1189-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>, </span>
+<span id="cb1189-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1189-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;black&quot;</span>, </span>
+<span id="cb1189-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1189-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">edgewidth =</span> <span class="dv">3</span>, </span>
+<span id="cb1189-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1189-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">arrow.mode =</span> <span class="dv">3</span>,</span>
+<span id="cb1189-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1189-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.25</span>, </span>
+<span id="cb1189-12"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1189-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <p><img src="key_functions_and_visualization_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>We can look at these side-by-side using <code>par(mfrow = c(1, 2))</code>, which tells <strong>igraph</strong> to create multiple plots along a single row with two columns.</p>
-<div class="sourceCode" id="cb1137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1137-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb1137-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1137-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(teo_ig, </span>
-<span id="cb1137-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_with_fr, </span>
-<span id="cb1137-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
-<span id="cb1137-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">10</span>, </span>
-<span id="cb1137-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.shape =</span> <span class="st">&quot;sphere&quot;</span>, </span>
-<span id="cb1137-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>, </span>
-<span id="cb1137-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;black&quot;</span>, </span>
-<span id="cb1137-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">edgewidth =</span> <span class="dv">3</span>, </span>
-<span id="cb1137-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">arrow.mode =</span> <span class="dv">3</span>,</span>
-<span id="cb1137-12"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.25</span>, </span>
-<span id="cb1137-13"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.5</span>, </span>
-<span id="cb1137-14"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;FR Layout&quot;</span>)</span>
-<span id="cb1137-15"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1137-16"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(teo_ig, </span>
-<span id="cb1137-17"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-17" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Use the stored coordinates</span></span>
-<span id="cb1137-18"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
-<span id="cb1137-19"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
-<span id="cb1137-20"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">10</span>, </span>
-<span id="cb1137-21"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.shape =</span> <span class="st">&quot;sphere&quot;</span>, </span>
-<span id="cb1137-22"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>, </span>
-<span id="cb1137-23"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;black&quot;</span>, </span>
-<span id="cb1137-24"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">edgewidth =</span> <span class="dv">3</span>, </span>
-<span id="cb1137-25"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">arrow.mode =</span> <span class="dv">3</span>,</span>
-<span id="cb1137-26"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-26" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> .<span class="dv">25</span>, </span>
-<span id="cb1137-27"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-27" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.curved =</span> .<span class="dv">5</span>, </span>
-<span id="cb1137-28"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-28" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;KK Layout&quot;</span>)</span>
-<span id="cb1137-29"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1137-30"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend to plot, for information use ?legend</span></span>
-<span id="cb1137-31"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-31" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="dv">0</span>, </span>
-<span id="cb1137-32"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="sc">-</span><span class="dv">2</span>, </span>
-<span id="cb1137-33"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="st">&quot;VEOs&quot;</span>, </span>
-<span id="cb1137-34"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">21</span>,</span>
-<span id="cb1137-35"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.bg =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
-<span id="cb1137-36"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.cex =</span> <span class="dv">2</span>, </span>
-<span id="cb1137-37"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.8</span>, </span>
-<span id="cb1137-38"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-38" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, </span>
-<span id="cb1137-39"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1137-39" aria-hidden="true" tabindex="-1"></a>       <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1190-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb1190-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1190-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(teo_ig, </span>
+<span id="cb1190-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_with_fr, </span>
+<span id="cb1190-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
+<span id="cb1190-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">10</span>, </span>
+<span id="cb1190-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.shape =</span> <span class="st">&quot;sphere&quot;</span>, </span>
+<span id="cb1190-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>, </span>
+<span id="cb1190-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;black&quot;</span>, </span>
+<span id="cb1190-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">edgewidth =</span> <span class="dv">3</span>, </span>
+<span id="cb1190-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">arrow.mode =</span> <span class="dv">3</span>,</span>
+<span id="cb1190-12"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.25</span>, </span>
+<span id="cb1190-13"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.curved =</span> <span class="fl">0.5</span>, </span>
+<span id="cb1190-14"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;FR Layout&quot;</span>)</span>
+<span id="cb1190-15"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1190-16"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(teo_ig, </span>
+<span id="cb1190-17"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-17" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Use the stored coordinates</span></span>
+<span id="cb1190-18"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> coords,</span>
+<span id="cb1190-19"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
+<span id="cb1190-20"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">10</span>, </span>
+<span id="cb1190-21"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.shape =</span> <span class="st">&quot;sphere&quot;</span>, </span>
+<span id="cb1190-22"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.label =</span> <span class="cn">NA</span>, </span>
+<span id="cb1190-23"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.color =</span> <span class="st">&quot;black&quot;</span>, </span>
+<span id="cb1190-24"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">edgewidth =</span> <span class="dv">3</span>, </span>
+<span id="cb1190-25"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">arrow.mode =</span> <span class="dv">3</span>,</span>
+<span id="cb1190-26"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-26" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> .<span class="dv">25</span>, </span>
+<span id="cb1190-27"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-27" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.curved =</span> .<span class="dv">5</span>, </span>
+<span id="cb1190-28"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-28" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;KK Layout&quot;</span>)</span>
+<span id="cb1190-29"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1190-30"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend to plot, for information use ?legend</span></span>
+<span id="cb1190-31"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-31" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="dv">0</span>, </span>
+<span id="cb1190-32"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="sc">-</span><span class="dv">2</span>, </span>
+<span id="cb1190-33"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="st">&quot;VEOs&quot;</span>, </span>
+<span id="cb1190-34"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">21</span>,</span>
+<span id="cb1190-35"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.bg =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
+<span id="cb1190-36"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.cex =</span> <span class="dv">2</span>, </span>
+<span id="cb1190-37"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.8</span>, </span>
+<span id="cb1190-38"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-38" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>, </span>
+<span id="cb1190-39"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1190-39" aria-hidden="true" tabindex="-1"></a>       <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="key_functions_and_visualization_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>We will detach <strong>igraph</strong> before moving onto <strong>statnet</strong>.</p>
-<div class="sourceCode" id="cb1138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1138-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(<span class="st">&quot;package:igraph&quot;</span>, <span class="at">unload =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1191-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(<span class="st">&quot;package:igraph&quot;</span>, <span class="at">unload =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 </div>
-<div id="statnet" class="section level2" number="17.2">
-<h2><span class="header-section-number">17.2</span> <strong>statnet</strong></h2>
+<div id="statnet" class="section level2" number="18.2">
+<h2><span class="header-section-number">18.2</span> <strong>statnet</strong></h2>
 <p>Assuming you have installed it already, we will load <strong>statnet</strong> first.</p>
-<div class="sourceCode" id="cb1139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1139-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statnet)</span></code></pre></div>
-<div id="creating-a-graph-object-in-statnet" class="section level3" number="17.2.1">
-<h3><span class="header-section-number">17.2.1</span> Creating a graph object in <strong>statnet</strong></h3>
+<div class="sourceCode" id="cb1192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1192-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statnet)</span></code></pre></div>
+<div id="creating-a-graph-object-in-statnet" class="section level3" number="18.2.1">
+<h3><span class="header-section-number">18.2.1</span> Creating a graph object in <strong>statnet</strong></h3>
 <p>For importing <code>data.frame</code>’s you can use the aptly named <code>as.network()</code> function setting the argument <code>matrix.type</code> to <code>"edgelist"</code>. Transforming a <code>matrix</code> into a graph object in <strong>network</strong> requires the <code>as.network()</code> function, but the argument must be set to <code>matrix.type = "adjacency"</code>.</p>
 <p>First, import the edge list:</p>
-<div class="sourceCode" id="cb1140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1140-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1140-1" aria-hidden="true" tabindex="-1"></a>g_from_el <span class="ot">&lt;-</span> <span class="fu">as.network</span>(teo_el,</span>
-<span id="cb1140-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1140-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">matrix.type =</span> <span class="st">&quot;edgelist&quot;</span>,</span>
-<span id="cb1140-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1140-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">directed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1193-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1193-1" aria-hidden="true" tabindex="-1"></a>g_from_el <span class="ot">&lt;-</span> <span class="fu">as.network</span>(teo_el,</span>
+<span id="cb1193-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1193-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">matrix.type =</span> <span class="st">&quot;edgelist&quot;</span>,</span>
+<span id="cb1193-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1193-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">directed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Now, import the matrix:</p>
-<div class="sourceCode" id="cb1141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1141-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1141-1" aria-hidden="true" tabindex="-1"></a>g_from_mat <span class="ot">&lt;-</span> <span class="fu">as.network</span>(teo_el,</span>
-<span id="cb1141-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1141-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">matrix.type =</span> <span class="st">&quot;adjacency&quot;</span>,</span>
-<span id="cb1141-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1141-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">directed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1194-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1194-1" aria-hidden="true" tabindex="-1"></a>g_from_mat <span class="ot">&lt;-</span> <span class="fu">as.network</span>(teo_el,</span>
+<span id="cb1194-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1194-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">matrix.type =</span> <span class="st">&quot;adjacency&quot;</span>,</span>
+<span id="cb1194-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1194-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">directed =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Inspect the newly created objects for their class:</p>
-<div class="sourceCode" id="cb1142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1142-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(g_from_el)</span></code></pre></div>
+<div class="sourceCode" id="cb1195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1195-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(g_from_el)</span></code></pre></div>
 <pre><code>[1] &quot;network&quot;</code></pre>
-<div class="sourceCode" id="cb1144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1144-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(g_from_mat)</span></code></pre></div>
+<div class="sourceCode" id="cb1197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1197-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(g_from_mat)</span></code></pre></div>
 <pre><code>[1] &quot;network&quot;</code></pre>
 </div>
-<div id="visualization-parameters-and-layouts-in-statnet" class="section level3" number="17.2.2">
-<h3><span class="header-section-number">17.2.2</span> Visualization Parameters and Layouts in <strong>statnet</strong></h3>
+<div id="visualization-parameters-and-layouts-in-statnet" class="section level3" number="18.2.2">
+<h3><span class="header-section-number">18.2.2</span> Visualization Parameters and Layouts in <strong>statnet</strong></h3>
 <p>The <code>gplot()</code> function permits you to see the network data visually by recognizing the <code>network</code> class.</p>
-<div class="sourceCode" id="cb1146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1146-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1146-1" aria-hidden="true" tabindex="-1"></a>teo_net <span class="ot">&lt;-</span> <span class="fu">as.network</span>(teo_el,</span>
-<span id="cb1146-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1146-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">matrix.type =</span> <span class="st">&quot;edgelist&quot;</span>,</span>
-<span id="cb1146-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1146-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1146-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1146-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1146-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1146-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(teo_net)</span></code></pre></div>
+<div class="sourceCode" id="cb1199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1199-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1199-1" aria-hidden="true" tabindex="-1"></a>teo_net <span class="ot">&lt;-</span> <span class="fu">as.network</span>(teo_el,</span>
+<span id="cb1199-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1199-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">matrix.type =</span> <span class="st">&quot;edgelist&quot;</span>,</span>
+<span id="cb1199-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1199-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1199-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1199-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1199-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1199-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(teo_net)</span></code></pre></div>
 <p><img src="key_functions_and_visualization_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>This could be greatly improved!</p>
 <p><em>Table 3</em> provides a summary of commonly used plotting parameters in <strong>statnet</strong>. See the <strong>sna</strong> package’s manual for an exhaustive list.</p>
@@ -907,18 +926,18 @@ Published with bookdown</a></li>
 </table>
 </center>
 <p>Now, plot the graph with some changes to the parameters.</p>
-<div class="sourceCode" id="cb1147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1147-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(teo_net, </span>
-<span id="cb1147-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1147-2" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Modify vertex parameters</span></span>
-<span id="cb1147-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1147-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
-<span id="cb1147-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1147-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.5</span>, </span>
-<span id="cb1147-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1147-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb1147-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1147-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>, </span>
-<span id="cb1147-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1147-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.5</span>, </span>
-<span id="cb1147-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1147-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;Blue&quot;</span>,</span>
-<span id="cb1147-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1147-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Modify edge parameters</span></span>
-<span id="cb1147-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1147-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;Gray&quot;</span>, </span>
-<span id="cb1147-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1147-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">displayisolates =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb1147-12"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1147-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">usecurve =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1200-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(teo_net, </span>
+<span id="cb1200-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1200-2" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Modify vertex parameters</span></span>
+<span id="cb1200-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1200-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
+<span id="cb1200-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1200-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.5</span>, </span>
+<span id="cb1200-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1200-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1200-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1200-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>, </span>
+<span id="cb1200-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1200-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> <span class="fl">0.5</span>, </span>
+<span id="cb1200-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1200-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;Blue&quot;</span>,</span>
+<span id="cb1200-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1200-9" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Modify edge parameters</span></span>
+<span id="cb1200-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1200-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;Gray&quot;</span>, </span>
+<span id="cb1200-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1200-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">displayisolates =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb1200-12"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1200-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">usecurve =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="key_functions_and_visualization_files/figure-html/unnamed-chunk-20-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>You can change the layout in **statnet* as well. Here we will use <code>mode</code> to adjust our network layouts.</p>
 <center>
@@ -959,56 +978,56 @@ Published with bookdown</a></li>
 </table>
 </center>
 <p>For instance, the visual below depicts the network using Fruchterman Reingold. Note we’ve turned off the labels so you can see the structure more clearly.</p>
-<div class="sourceCode" id="cb1148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1148-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(teo_net, </span>
-<span id="cb1148-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1148-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
-<span id="cb1148-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1148-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.5</span>, </span>
-<span id="cb1148-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1148-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb1148-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1148-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>, </span>
-<span id="cb1148-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1148-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> .<span class="dv">5</span>, </span>
-<span id="cb1148-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1148-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;Blue&quot;</span>, </span>
-<span id="cb1148-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1148-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;Gray&quot;</span>, </span>
-<span id="cb1148-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1148-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">displayisolates =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb1148-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1148-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">usecurve =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1148-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1148-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">mode =</span> <span class="st">&quot;fruchtermanreingold&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1201-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(teo_net, </span>
+<span id="cb1201-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1201-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
+<span id="cb1201-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1201-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.5</span>, </span>
+<span id="cb1201-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1201-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1201-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1201-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>, </span>
+<span id="cb1201-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1201-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> .<span class="dv">5</span>, </span>
+<span id="cb1201-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1201-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;Blue&quot;</span>, </span>
+<span id="cb1201-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1201-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;Gray&quot;</span>, </span>
+<span id="cb1201-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1201-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">displayisolates =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb1201-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1201-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">usecurve =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1201-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1201-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">mode =</span> <span class="st">&quot;fruchtermanreingold&quot;</span>)</span></code></pre></div>
 <p><img src="key_functions_and_visualization_files/figure-html/unnamed-chunk-21-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Now, with Kamada-Kawai.</p>
-<div class="sourceCode" id="cb1149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1149-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(teo_net, </span>
-<span id="cb1149-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1149-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
-<span id="cb1149-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1149-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.5</span>, </span>
-<span id="cb1149-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1149-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb1149-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1149-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>, </span>
-<span id="cb1149-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1149-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> .<span class="dv">5</span>, </span>
-<span id="cb1149-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1149-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;Blue&quot;</span>, </span>
-<span id="cb1149-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1149-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;Gray&quot;</span>, </span>
-<span id="cb1149-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1149-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">displayisolates =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb1149-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1149-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">usecurve =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb1149-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1149-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">mode =</span> <span class="st">&quot;kamadakawai&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1202-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(teo_net, </span>
+<span id="cb1202-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1202-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
+<span id="cb1202-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1202-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.5</span>, </span>
+<span id="cb1202-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1202-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1202-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1202-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.pos =</span> <span class="dv">5</span>, </span>
+<span id="cb1202-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1202-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.cex =</span> .<span class="dv">5</span>, </span>
+<span id="cb1202-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1202-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">label.col =</span> <span class="st">&quot;Blue&quot;</span>, </span>
+<span id="cb1202-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1202-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;Gray&quot;</span>, </span>
+<span id="cb1202-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1202-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">displayisolates =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb1202-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1202-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">usecurve =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1202-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1202-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">mode =</span> <span class="st">&quot;kamadakawai&quot;</span>)</span></code></pre></div>
 <p><img src="key_functions_and_visualization_files/figure-html/unnamed-chunk-22-1.png" width="70%" style="display: block; margin: auto;" /></p>
 <p>Keep in mind that you can use the <code>gplot.layout.*</code> functions to store coordinates and use them later.</p>
-<div class="sourceCode" id="cb1150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1150-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-1" aria-hidden="true" tabindex="-1"></a>fr <span class="ot">&lt;-</span> <span class="fu">gplot.layout.fruchtermanreingold</span>(teo_net, <span class="at">layout.par =</span> <span class="cn">NULL</span>)</span>
-<span id="cb1150-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-2" aria-hidden="true" tabindex="-1"></a>kk <span class="ot">&lt;-</span> <span class="fu">gplot.layout.kamadakawai</span>(teo_net, <span class="at">layout.par =</span> <span class="cn">NULL</span>)</span>
-<span id="cb1150-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1150-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
-<span id="cb1150-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1150-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-6" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(teo_net, </span>
-<span id="cb1150-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
-<span id="cb1150-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.5</span>, </span>
-<span id="cb1150-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb1150-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;Gray&quot;</span>, </span>
-<span id="cb1150-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">displayisolates =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb1150-12"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">usecurve =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb1150-13"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-13" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Pass along the layout</span></span>
-<span id="cb1150-14"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> fr)</span>
-<span id="cb1150-15"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1150-16"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-16" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(teo_net, </span>
-<span id="cb1150-17"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
-<span id="cb1150-18"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.5</span>, </span>
-<span id="cb1150-19"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb1150-20"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;Gray&quot;</span>, </span>
-<span id="cb1150-21"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">displayisolates =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb1150-22"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">usecurve =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb1150-23"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-23" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Pass along the layout</span></span>
-<span id="cb1150-24"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1150-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> kk)</span></code></pre></div>
+<div class="sourceCode" id="cb1203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1203-1"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-1" aria-hidden="true" tabindex="-1"></a>fr <span class="ot">&lt;-</span> <span class="fu">gplot.layout.fruchtermanreingold</span>(teo_net, <span class="at">layout.par =</span> <span class="cn">NULL</span>)</span>
+<span id="cb1203-2"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-2" aria-hidden="true" tabindex="-1"></a>kk <span class="ot">&lt;-</span> <span class="fu">gplot.layout.kamadakawai</span>(teo_net, <span class="at">layout.par =</span> <span class="cn">NULL</span>)</span>
+<span id="cb1203-3"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1203-4"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb1203-5"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1203-6"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-6" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(teo_net, </span>
+<span id="cb1203-7"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
+<span id="cb1203-8"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.5</span>, </span>
+<span id="cb1203-9"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb1203-10"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;Gray&quot;</span>, </span>
+<span id="cb1203-11"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">displayisolates =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb1203-12"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">usecurve =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1203-13"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-13" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Pass along the layout</span></span>
+<span id="cb1203-14"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> fr)</span>
+<span id="cb1203-15"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1203-16"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-16" aria-hidden="true" tabindex="-1"></a><span class="fu">gplot</span>(teo_net, </span>
+<span id="cb1203-17"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.col =</span> <span class="st">&quot;lightgreen&quot;</span>, </span>
+<span id="cb1203-18"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">vertex.cex =</span> <span class="fl">1.5</span>, </span>
+<span id="cb1203-19"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">displaylabels =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb1203-20"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">edge.col =</span> <span class="st">&quot;Gray&quot;</span>, </span>
+<span id="cb1203-21"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">displayisolates =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb1203-22"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">usecurve =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1203-23"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-23" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Pass along the layout</span></span>
+<span id="cb1203-24"><a href="key-sna-functions-and-visualization-cheat-sheet.html#cb1203-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">coord =</span> kk)</span></code></pre></div>
 <p><img src="key_functions_and_visualization_files/figure-html/unnamed-chunk-23-1.png" width="70%" style="display: block; margin: auto;" /></p>
 
 </div>
@@ -1057,6 +1076,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "section",
 "scroll_highlight": true
@@ -1069,10 +1092,6 @@ gitbook.start({
 "info": true,
 "toolbar": {
 "position": "fixed"
-},
-"search": {
-"engine": "lunr",
-"options": null
 }
 });
 });
