@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>16 Text Mining and Semantic Network Analysis | R for Social Network Analysis</title>
+  <meta name="description" content="TBD." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="16 Text Mining and Semantic Network Analysis | R for Social Network Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="TBD." />
+  <meta name="github-repo" content="cjcallag/r4sna" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="16 Text Mining and Semantic Network Analysis | R for Social Network Analysis" />
+  
+  <meta name="twitter:description" content="TBD." />
+  
+
+<meta name="author" content="CORE Lab" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="stochastic-actor-oriented-models-saoms.html"/>
+<link rel="next" href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.20/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="libs/selectize-0.12.0/selectize.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet" />
+<script src="libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
+<script src="libs/wordcloud2-0.0.1/hover.js"></script>
+<script src="libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="my_style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Social Network Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instructors"><i class="fa fa-check"></i><b>1.1</b> Instructors</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="2" data-path="setting-up.html"><a href="setting-up.html"><i class="fa fa-check"></i><b>2</b> Setting Up</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setting-up.html"><a href="setting-up.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.1</b> R and RStudio Basics</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="setting-up.html"><a href="setting-up.html#basics-of-r-coding-in-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Basics of R Coding in RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="setting-up.html"><a href="setting-up.html#project-workflow"><i class="fa fa-check"></i><b>2.2</b> Project Workflow</a></li>
+</ul></li>
+<li class="part"><span><b>II Lab 1</b></span></li>
+<li class="chapter" data-level="3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
+<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Lab 2</b></span></li>
+<li class="chapter" data-level="5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>5</b> Manipulating and Simplifying Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#setup-2"><i class="fa fa-check"></i><b>5.1</b> Setup</a></li>
+<li class="chapter" data-level="5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-libraries-2"><i class="fa fa-check"></i><b>5.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-the-backbones-of-two-mode-network-projections"><i class="fa fa-check"></i><b>5.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-data"><i class="fa fa-check"></i><b>5.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#non-statistical-projections-of-the-co-sponsorhip-data"><i class="fa fa-check"></i><b>5.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="5.3.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-backbones"><i class="fa fa-check"></i><b>5.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#simplifying-networks-in-igraph-anabaptist-leadership-network"><i class="fa fa-check"></i><b>5.4</b> Simplifying Networks in <strong>igraph</strong>: Anabaptist Leadership Network</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-network-and-attribute-data"><i class="fa fa-check"></i><b>5.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-the-anabaptist-network"><i class="fa fa-check"></i><b>5.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="5.4.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#shrinking-collapsing-contracting-networks"><i class="fa fa-check"></i><b>5.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="5.4.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-subnetworks"><i class="fa fa-check"></i><b>5.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#multiple-stacked-networks-in-igraph-sampson-monastery"><i class="fa fa-check"></i><b>5.5</b> Multiple (Stacked) Networks in <strong>igraph</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-edge-list-network-data"><i class="fa fa-check"></i><b>5.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="5.5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-stacked-networks"><i class="fa fa-check"></i><b>5.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="5.5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-and-plotting-individual-networks"><i class="fa fa-check"></i><b>5.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>6</b> Manipulating and Simplifying Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#setup-3"><i class="fa fa-check"></i><b>6.1</b> Setup</a></li>
+<li class="chapter" data-level="6.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-libraries-3"><i class="fa fa-check"></i><b>6.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="6.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-the-backbones-of-two-mode-network-projections-1"><i class="fa fa-check"></i><b>6.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-data-1"><i class="fa fa-check"></i><b>6.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#non-statistical-projections-of-the-co-sponsorhip-data-1"><i class="fa fa-check"></i><b>6.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="6.3.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-backbones-1"><i class="fa fa-check"></i><b>6.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#simplifying-networks-in-statnet-anabaptist-network"><i class="fa fa-check"></i><b>6.4</b> Simplifying Networks in <strong>statnet</strong>: Anabaptist Network</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-network-and-attribute-data-1"><i class="fa fa-check"></i><b>6.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="6.4.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-the-anabaptist-network-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="6.4.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#shrinking-collapsing-contracting-networks-1"><i class="fa fa-check"></i><b>6.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="6.4.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-subnetworks-1"><i class="fa fa-check"></i><b>6.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#multiple-stacked-networks-in-statnet-sampson-monastery"><i class="fa fa-check"></i><b>6.5</b> Multiple (Stacked) Networks in <strong>statnet</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-edge-list-network-data-1"><i class="fa fa-check"></i><b>6.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="6.5.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-stacked-networks-1"><i class="fa fa-check"></i><b>6.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="6.5.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-and-plotting-individual-networks-1"><i class="fa fa-check"></i><b>6.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Lab 3</b></span></li>
+<li class="chapter" data-level="7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html"><i class="fa fa-check"></i><b>7</b> Network Topography in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#setup-4"><i class="fa fa-check"></i><b>7.1</b> Setup</a></li>
+<li class="chapter" data-level="7.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#load-libraries-4"><i class="fa fa-check"></i><b>7.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="7.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#import-data"><i class="fa fa-check"></i><b>7.3</b> Import Data</a></li>
+<li class="chapter" data-level="7.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size-and-interconnectedness"><i class="fa fa-check"></i><b>7.4</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size"><i class="fa fa-check"></i><b>7.4.1</b> Network Size</a></li>
+<li class="chapter" data-level="7.4.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#density-and-average-degree"><i class="fa fa-check"></i><b>7.4.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="7.4.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#clustering-coefficient-global-and-local"><i class="fa fa-check"></i><b>7.4.3</b> Clustering Coefficient (Global and Local)</a></li>
+<li class="chapter" data-level="7.4.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#cohesion-and-fragmentation"><i class="fa fa-check"></i><b>7.4.4</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="7.4.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#compactness-and-breadth"><i class="fa fa-check"></i><b>7.4.5</b> Compactness and Breadth</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization-and-related-measures-of-spread"><i class="fa fa-check"></i><b>7.5</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization"><i class="fa fa-check"></i><b>7.5.1</b> Centralization</a></li>
+<li class="chapter" data-level="7.5.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#variance-and-standard-deviation"><i class="fa fa-check"></i><b>7.5.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="7.5.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#diameter-and-average-path-distance"><i class="fa fa-check"></i><b>7.5.3</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#calculating-the-e-i-index-with-isnar"><i class="fa fa-check"></i><b>7.6</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+<li class="chapter" data-level="7.7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-level-measures-table"><i class="fa fa-check"></i><b>7.7</b> Network Level Measures Table</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html"><i class="fa fa-check"></i><b>8</b> Network Topography in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#setup-5"><i class="fa fa-check"></i><b>8.1</b> Setup</a></li>
+<li class="chapter" data-level="8.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#load-libraries-5"><i class="fa fa-check"></i><b>8.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="8.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#import-data-1"><i class="fa fa-check"></i><b>8.3</b> Import Data</a></li>
+<li class="chapter" data-level="8.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-and-interconnectedness-1"><i class="fa fa-check"></i><b>8.4</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-1"><i class="fa fa-check"></i><b>8.4.1</b> Network Size</a></li>
+<li class="chapter" data-level="8.4.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#density-and-average-degree-1"><i class="fa fa-check"></i><b>8.4.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="8.4.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#cohesion-and-fragmentation-1"><i class="fa fa-check"></i><b>8.4.3</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="8.4.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#compactness-and-breadth-1"><i class="fa fa-check"></i><b>8.4.4</b> Compactness and Breadth</a></li>
+<li class="chapter" data-level="8.4.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-interconnectedness-scores"><i class="fa fa-check"></i><b>8.4.5</b> Table of Interconnectedness Scores</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-and-related-measures-of-spread-1"><i class="fa fa-check"></i><b>8.5</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-1"><i class="fa fa-check"></i><b>8.5.1</b> Centralization</a></li>
+<li class="chapter" data-level="8.5.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#variance-and-standard-deviation-1"><i class="fa fa-check"></i><b>8.5.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="8.5.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-centralization-scores"><i class="fa fa-check"></i><b>8.5.3</b> Table of Centralization Scores</a></li>
+<li class="chapter" data-level="8.5.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#diameter-and-average-path-distance-1"><i class="fa fa-check"></i><b>8.5.4</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#calculating-the-e-i-index-with-isnar-1"><i class="fa fa-check"></i><b>8.6</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+</ul></li>
+<li class="part"><span><b>V Lab 4</b></span></li>
+<li class="chapter" data-level="9" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html"><i class="fa fa-check"></i><b>9</b> Detecting Subgroups in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#setup-6"><i class="fa fa-check"></i><b>9.1</b> Setup</a></li>
+<li class="chapter" data-level="9.2" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#load-library"><i class="fa fa-check"></i><b>9.2</b> Load Library</a></li>
+<li class="chapter" data-level="9.3" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#import-and-plot-network"><i class="fa fa-check"></i><b>9.3</b> Import and Plot Network</a></li>
+<li class="chapter" data-level="9.4" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#components-in-igraph"><i class="fa fa-check"></i><b>9.4</b> Components in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.5" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#cliques-in-igraph"><i class="fa fa-check"></i><b>9.5</b> Cliques in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.6" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#k-cores-in-igraph"><i class="fa fa-check"></i><b>9.6</b> K-Cores in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.7" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#community-detection-in-igraph"><i class="fa fa-check"></i><b>9.7</b> Community Detection in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#girvan-newman"><i class="fa fa-check"></i><b>9.7.1</b> Girvan-Newman</a></li>
+<li class="chapter" data-level="9.7.2" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#walktrap"><i class="fa fa-check"></i><b>9.7.2</b> Walktrap</a></li>
+<li class="chapter" data-level="9.7.3" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#spin-glass"><i class="fa fa-check"></i><b>9.7.3</b> Spin-Glass</a></li>
+<li class="chapter" data-level="9.7.4" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#louvain"><i class="fa fa-check"></i><b>9.7.4</b> Louvain</a></li>
+<li class="chapter" data-level="9.7.5" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#table-of-results"><i class="fa fa-check"></i><b>9.7.5</b> Table of Results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html"><i class="fa fa-check"></i><b>10</b> Detecting Subgroups in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#setup-7"><i class="fa fa-check"></i><b>10.1</b> Setup</a></li>
+<li class="chapter" data-level="10.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#load-libraries-6"><i class="fa fa-check"></i><b>10.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="10.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#import-and-plot-network-1"><i class="fa fa-check"></i><b>10.3</b> Import and Plot Network</a></li>
+<li class="chapter" data-level="10.4" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#components-in-statnet"><i class="fa fa-check"></i><b>10.4</b> Components in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.5" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#cliques-in-statnet"><i class="fa fa-check"></i><b>10.5</b> Cliques in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.6" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#k-cores-in-statnet"><i class="fa fa-check"></i><b>10.6</b> K-Cores in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.7" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#community-detection-in-statnet"><i class="fa fa-check"></i><b>10.7</b> Community Detection in <strong>statnet</strong></a></li>
+</ul></li>
+<li class="part"><span><b>VI Lab 5</b></span></li>
+<li class="chapter" data-level="11" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html"><i class="fa fa-check"></i><b>11</b> Centrality and Brokerage in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#setup-8"><i class="fa fa-check"></i><b>11.1</b> Setup</a></li>
+<li class="chapter" data-level="11.2" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#load-libraries-7"><i class="fa fa-check"></i><b>11.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="11.3" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#load-data-2"><i class="fa fa-check"></i><b>11.3</b> Load Data</a></li>
+<li class="chapter" data-level="11.4" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#centrality-and-power-undirected-networks"><i class="fa fa-check"></i><b>11.4</b> Centrality and Power (Undirected Networks)</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#degree-closeness-betweenness-and-eigenvector"><i class="fa fa-check"></i><b>11.4.1</b> Degree, Closeness, Betweenness, and Eigenvector</a></li>
+<li class="chapter" data-level="11.4.2" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#correlations"><i class="fa fa-check"></i><b>11.4.2</b> Correlations</a></li>
+<li class="chapter" data-level="11.4.3" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#interactive-table"><i class="fa fa-check"></i><b>11.4.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#centrality-and-prestige-directed-networks"><i class="fa fa-check"></i><b>11.5</b> Centrality and Prestige (Directed Networks)</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#in-n-out-degree-hubs-and-authorities"><i class="fa fa-check"></i><b>11.5.1</b> In-N-Out Degree, Hubs and Authorities</a></li>
+<li class="chapter" data-level="11.5.2" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#correlations-1"><i class="fa fa-check"></i><b>11.5.2</b> Correlations</a></li>
+<li class="chapter" data-level="11.5.3" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#interactive-table-1"><i class="fa fa-check"></i><b>11.5.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#brokerage"><i class="fa fa-check"></i><b>11.6</b> Brokerage</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#cutpoints"><i class="fa fa-check"></i><b>11.6.1</b> Cutpoints</a></li>
+<li class="chapter" data-level="11.6.2" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#cutsets-key-player"><i class="fa fa-check"></i><b>11.6.2</b> Cutsets (Key Player)</a></li>
+<li class="chapter" data-level="11.6.3" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#burts-constraint"><i class="fa fa-check"></i><b>11.6.3</b> Burt’s Constraint</a></li>
+<li class="chapter" data-level="11.6.4" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#bridges-edge-betweenness"><i class="fa fa-check"></i><b>11.6.4</b> Bridges: Edge Betweenness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html"><i class="fa fa-check"></i><b>12</b> Centrality and Brokerage in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#setup-9"><i class="fa fa-check"></i><b>12.1</b> Setup</a></li>
+<li class="chapter" data-level="12.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#libraries"><i class="fa fa-check"></i><b>12.2</b> Libraries</a></li>
+<li class="chapter" data-level="12.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#load-data-3"><i class="fa fa-check"></i><b>12.3</b> Load Data</a></li>
+<li class="chapter" data-level="12.4" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#centrality-and-power-undirected-networks-1"><i class="fa fa-check"></i><b>12.4</b> Centrality and Power (Undirected Networks)</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#degree-closeness-betweenness-and-eigenvector-centrality"><i class="fa fa-check"></i><b>12.4.1</b> Degree, Closeness, Betweenness and Eigenvector Centrality</a></li>
+<li class="chapter" data-level="12.4.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#correlations-2"><i class="fa fa-check"></i><b>12.4.2</b> Correlations</a></li>
+<li class="chapter" data-level="12.4.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#interactive-table-2"><i class="fa fa-check"></i><b>12.4.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#centrality-and-prestige-directed-networks-1"><i class="fa fa-check"></i><b>12.5</b> Centrality and Prestige (Directed Networks)</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#in-n-out-degree-input-domain-and-proximity-prestige"><i class="fa fa-check"></i><b>12.5.1</b> In-N-Out Degree, Input Domain, and Proximity Prestige</a></li>
+<li class="chapter" data-level="12.5.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#correlations-3"><i class="fa fa-check"></i><b>12.5.2</b> Correlations</a></li>
+<li class="chapter" data-level="12.5.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#interactive-table-3"><i class="fa fa-check"></i><b>12.5.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#brokerage-1"><i class="fa fa-check"></i><b>12.6</b> Brokerage</a>
+<ul>
+<li class="chapter" data-level="12.6.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#cutpoints-1"><i class="fa fa-check"></i><b>12.6.1</b> Cutpoints</a></li>
+<li class="chapter" data-level="12.6.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#cutsets-key-player-1"><i class="fa fa-check"></i><b>12.6.2</b> Cutsets (Key Player)</a></li>
+<li class="chapter" data-level="12.6.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#gould-and-fernandez"><i class="fa fa-check"></i><b>12.6.3</b> Gould and Fernandez</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VII Lab 6</b></span></li>
+<li class="chapter" data-level="13" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html"><i class="fa fa-check"></i><b>13</b> Hypothesis Testing (QAP and CUG)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#introduction-1"><i class="fa fa-check"></i><b>13.1</b> Introduction</a></li>
+<li class="chapter" data-level="13.2" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#developing-and-testing-working-hypotheses"><i class="fa fa-check"></i><b>13.2</b> Developing and Testing Working Hypotheses</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#univariate-bivariate-and-multivariate-statistical-tests"><i class="fa fa-check"></i><b>13.2.1</b> Univariate, Bivariate, and Multivariate Statistical Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#challenging-expectations-with-conditional-uniform-graphs-cugs"><i class="fa fa-check"></i><b>13.3</b> Challenging Expectations with Conditional Uniform Graphs (CUGs)</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#univariate-cug-tests-in-statnet"><i class="fa fa-check"></i><b>13.3.1</b> Univariate CUG Tests in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="13.3.2" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#bivariate-tests-using-cug"><i class="fa fa-check"></i><b>13.3.2</b> Bivariate Tests Using CUG</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#quadratic-assignment-procedure-qap"><i class="fa fa-check"></i><b>13.4</b> Quadratic Assignment Procedure (QAP)</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#bivariate-tests-using-qap-correlation"><i class="fa fa-check"></i><b>13.4.1</b> Bivariate Tests Using QAP: Correlation</a></li>
+<li class="chapter" data-level="13.4.2" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#multivariate-models-using-qap"><i class="fa fa-check"></i><b>13.4.2</b> Multivariate Models using QAP</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#a-note-on-interpretation-causality-in-networks"><i class="fa fa-check"></i><b>13.5</b> A Note on interpretation: Causality in Networks</a></li>
+<li class="chapter" data-level="13.6" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#summary-lessons-learned"><i class="fa fa-check"></i><b>13.6</b> Summary: Lessons Learned</a></li>
+</ul></li>
+<li class="part"><span><b>VIII Lab 7</b></span></li>
+<li class="chapter" data-level="14" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html"><i class="fa fa-check"></i><b>14</b> Exponential Random Graph Models (ERGMs)</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#introduction-2"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#ergms-with-undirected-data"><i class="fa fa-check"></i><b>14.2</b> ERGMs With Undirected Data</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#data-and-setup"><i class="fa fa-check"></i><b>14.2.1</b> Data and Setup</a></li>
+<li class="chapter" data-level="14.2.2" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#pira-ergms"><i class="fa fa-check"></i><b>14.2.2</b> PIRA ERGMs</a></li>
+<li class="chapter" data-level="14.2.3" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#compare-to-qap-logistic-regression"><i class="fa fa-check"></i><b>14.2.3</b> Compare to QAP logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#ergms-with-directed-data"><i class="fa fa-check"></i><b>14.3</b> ERGMs With Directed Data</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#data-and-setup-1"><i class="fa fa-check"></i><b>14.3.1</b> Data and Setup</a></li>
+<li class="chapter" data-level="14.3.2" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#explore-data"><i class="fa fa-check"></i><b>14.3.2</b> Explore Data</a></li>
+<li class="chapter" data-level="14.3.3" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#teo-ergms"><i class="fa fa-check"></i><b>14.3.3</b> TEO ERGMs</a></li>
+<li class="chapter" data-level="14.3.4" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#appendix-ergm-package-and-pnet-comparison"><i class="fa fa-check"></i><b>14.3.4</b> Appendix: ERGM Package and PNet Comparison</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IX Lab 8</b></span></li>
+<li class="chapter" data-level="15" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html"><i class="fa fa-check"></i><b>15</b> Stochastic Actor Oriented Models (SAOMs)</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#core-assumptions"><i class="fa fa-check"></i><b>15.1</b> Core Assumptions</a></li>
+<li class="chapter" data-level="15.2" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#brief-overview-of-statistical-procedure"><i class="fa fa-check"></i><b>15.2</b> Brief Overview of Statistical Procedure</a></li>
+<li class="chapter" data-level="15.3" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#general-steps-in-r"><i class="fa fa-check"></i><b>15.3</b> General Steps in R</a></li>
+<li class="chapter" data-level="15.4" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#exploratory-analysis"><i class="fa fa-check"></i><b>15.4</b> Exploratory Analysis</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#load-libraries-8"><i class="fa fa-check"></i><b>15.4.1</b> Load Libraries</a></li>
+<li class="chapter" data-level="15.4.2" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#import-data-2"><i class="fa fa-check"></i><b>15.4.2</b> Import Data</a></li>
+<li class="chapter" data-level="15.4.3" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#network-plots"><i class="fa fa-check"></i><b>15.4.3</b> Network Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#data-and-setup-for-saoms-in-rsiena"><i class="fa fa-check"></i><b>15.5</b> Data and Setup for SAOMs in <strong>RSiena</strong></a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#load-and-detach-libraries"><i class="fa fa-check"></i><b>15.5.1</b> Load and Detach Libraries</a></li>
+<li class="chapter" data-level="15.5.2" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#import-and-format-data"><i class="fa fa-check"></i><b>15.5.2</b> Import and Format Data</a></li>
+<li class="chapter" data-level="15.5.3" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#structural-model"><i class="fa fa-check"></i><b>15.5.3</b> Structural Model</a></li>
+<li class="chapter" data-level="15.5.4" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#model-with-actor-covariates"><i class="fa fa-check"></i><b>15.5.4</b> Model with Actor Covariates</a></li>
+<li class="chapter" data-level="15.5.5" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#goodness-of-fit-gof"><i class="fa fa-check"></i><b>15.5.5</b> Goodness of Fit (GOF)</a></li>
+<li class="chapter" data-level="15.5.6" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#interpret-the-results"><i class="fa fa-check"></i><b>15.5.6</b> Interpret the Results</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>X Lab 9</b></span></li>
+<li class="chapter" data-level="16" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html"><i class="fa fa-check"></i><b>16</b> Text Mining and Semantic Network Analysis</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#data-exploration"><i class="fa fa-check"></i><b>16.1</b> Data Exploration</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#data-formatting-and-preprocessing-text"><i class="fa fa-check"></i><b>16.1.1</b> Data Formatting and Preprocessing Text</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#analysis"><i class="fa fa-check"></i><b>16.2</b> Analysis</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#frequencies"><i class="fa fa-check"></i><b>16.2.1</b> Frequencies</a></li>
+<li class="chapter" data-level="16.2.2" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#term-frequency---inverse-document-frequency-tf-idf"><i class="fa fa-check"></i><b>16.2.2</b> Term Frequency - Inverse Document Frequency (TF-IDF)</a></li>
+<li class="chapter" data-level="16.2.3" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#bigrams"><i class="fa fa-check"></i><b>16.2.3</b> Bigrams</a></li>
+<li class="chapter" data-level="16.2.4" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#semantic-networks"><i class="fa fa-check"></i><b>16.2.4</b> Semantic Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>XI Lab 10</b></span></li>
+<li class="part"><span><b>XII Appendices</b></span></li>
+<li class="chapter" data-level="17" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>17</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>17.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
+<li class="chapter" data-level="17.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>17.2</b> Installation</a></li>
+<li class="chapter" data-level="17.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>17.3</b> Loading</a></li>
+<li class="chapter" data-level="17.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>17.4</b> Import and View Data</a></li>
+<li class="chapter" data-level="17.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>17.5</b> Extracting Variables/Columns</a></li>
+<li class="chapter" data-level="17.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>17.6</b> Creating Filters/Extracting Rows</a></li>
+<li class="chapter" data-level="17.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>17.7</b> Arrange Rows</a></li>
+<li class="chapter" data-level="17.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>17.8</b> Making a New Column/Variable</a></li>
+<li class="chapter" data-level="17.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>17.9</b> Rename Variables</a></li>
+<li class="chapter" data-level="17.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>17.10</b> Summarizing</a>
+<ul>
+<li class="chapter" data-level="17.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>17.10.1</b> Simple Summary</a></li>
+<li class="chapter" data-level="17.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>17.10.2</b> Group Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="17.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>17.11</b> Combining Data</a>
+<ul>
+<li class="chapter" data-level="17.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>17.11.1</b> Left Join</a></li>
+<li class="chapter" data-level="17.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>17.11.2</b> Right Join</a></li>
+<li class="chapter" data-level="17.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>17.11.3</b> Inner Join</a></li>
+<li class="chapter" data-level="17.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>17.11.4</b> Full Join</a></li>
+</ul></li>
+<li class="chapter" data-level="17.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>17.12</b> Piping Multiple Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>18</b> Key SNA Functions and Visualization Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>18.1</b> <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>18.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="18.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>18.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>18.2</b> <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>18.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="18.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>18.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>XIII References</b></span></li>
+<li class="chapter" data-level="19" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>19</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown">
+Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Social Network Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="text-mining-and-semantic-network-analysis" class="section level1" number="16">
+<h1><span class="header-section-number">16</span> Text Mining and Semantic Network Analysis</h1>
+<p>Place a header at the top of your script that tells you what you called it, what it accomplishes, etc.</p>
+<div class="sourceCode" id="cb1013"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1013-1"><a href="text-mining-and-semantic-network-analysis.html#cb1013-1" aria-hidden="true" tabindex="-1"></a><span class="do">#################################################</span></span>
+<span id="cb1013-2"><a href="text-mining-and-semantic-network-analysis.html#cb1013-2" aria-hidden="true" tabindex="-1"></a><span class="co"># What: Text Mining and Analysis</span></span>
+<span id="cb1013-3"><a href="text-mining-and-semantic-network-analysis.html#cb1013-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Created: </span></span>
+<span id="cb1013-4"><a href="text-mining-and-semantic-network-analysis.html#cb1013-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Revised: </span></span>
+<span id="cb1013-5"><a href="text-mining-and-semantic-network-analysis.html#cb1013-5" aria-hidden="true" tabindex="-1"></a><span class="do">#################################################</span></span></code></pre></div>
+<p>We will use a handful of packages for this exercise. You will need to install these first if you haven’t done so already (<code>install.packages()</code>).</p>
+<div class="sourceCode" id="cb1014"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1014-1"><a href="text-mining-and-semantic-network-analysis.html#cb1014-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb1014-2"><a href="text-mining-and-semantic-network-analysis.html#cb1014-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer)</span>
+<span id="cb1014-3"><a href="text-mining-and-semantic-network-analysis.html#cb1014-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rtweet)</span>
+<span id="cb1014-4"><a href="text-mining-and-semantic-network-analysis.html#cb1014-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stopwords)</span>
+<span id="cb1014-5"><a href="text-mining-and-semantic-network-analysis.html#cb1014-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb1014-6"><a href="text-mining-and-semantic-network-analysis.html#cb1014-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># We work mostly with dplyr, ggplot, stringr,and tidytext.</span></span>
+<span id="cb1014-7"><a href="text-mining-and-semantic-network-analysis.html#cb1014-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(wordcloud2)</span></code></pre></div>
+<p>Set your global options so that strings are NOT considered as factors. If you are not familiar with factors, these are ordered vectors used to store categorical data <span class="citation">(<a href="#ref-Wickham2019" role="doc-biblioref">Wickham 2019</a>)</span>. By default, functions in R will coerce strings as factors, so we will turn off this behavior before we begin working with text data.</p>
+<div class="sourceCode" id="cb1015"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1015-1"><a href="text-mining-and-semantic-network-analysis.html#cb1015-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>In this exercise, we will demonstrate basic text mining and analysis by exploring a subset of a hashtag-based, Twitter data set pulled using Twitter’s REST API. Specifically, we used <strong>rtweet</strong>’s <code>search_tweets()</code> function to search for tweets containing #QAnon from April to November 2020. This lab’s data set consists of relevant tweets from August 1-3, during which there were ~20,000 tweets.</p>
+<p>Note much of this is adapted from the excellent reference, <em>Text Mining with R: A Tidy Approach</em> <span class="citation">(<a href="#ref-Silge2017" role="doc-biblioref">2017</a>)</span>, which is freely available online: <a href="https://www.tidytextmining.com/" class="uri">https://www.tidytextmining.com/</a>.</p>
+<p>Go ahead and import the data. <strong>This step may take some time, so please be patient.</strong></p>
+<div class="sourceCode" id="cb1016"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1016-1"><a href="text-mining-and-semantic-network-analysis.html#cb1016-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;data/AUGSAMPQ_df.RData&quot;</span>)</span></code></pre></div>
+<div class="infobox">
+<p>Since this exercise is adapted from a tutorial using the <strong>tidyverse</strong> keep in mind that the syntax may look a bit different. The <strong>tidyverse</strong> often utilizes “piping” (<code>%&gt;%</code>) to execute chained actions.</p>
+<p>You can think of the <code>%&gt;%</code> as saying “and then” followed by a function
+or action. The use of this operator is not required, but we will use it
+here.</p>
+<p>In base R we would read and summarize the following way:</p>
+<div class="sourceCode" id="cb1017"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1017-1"><a href="text-mining-and-semantic-network-analysis.html#cb1017-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;PATH/TO/MY/DATA&quot;</span>)</span>
+<span id="cb1017-2"><a href="text-mining-and-semantic-network-analysis.html#cb1017-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df)</span></code></pre></div>
+<p>However, in the <strong>tidyverse</strong> the <code>%&gt;%</code> operator is used to chain objects by passing either the raw data or the resulting data from a function to another for additional processing.</p>
+<div class="sourceCode" id="cb1018"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1018-1"><a href="text-mining-and-semantic-network-analysis.html#cb1018-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="st">&quot;PATH/TO/MY/DATA&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1018-2"><a href="text-mining-and-semantic-network-analysis.html#cb1018-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+<p>Both function calls achieve the same goal.</p>
+</div>
+<div id="data-exploration" class="section level2" number="16.1">
+<h2><span class="header-section-number">16.1</span> Data Exploration</h2>
+<p>Let’s get acquainted with the data set. You’ll see that it contains 20,053 unique statuses/tweets and 91 variables.</p>
+<div class="sourceCode" id="cb1019"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1019-1"><a href="text-mining-and-semantic-network-analysis.html#cb1019-1" aria-hidden="true" tabindex="-1"></a>AUGSAMPQ_df <span class="sc">%&gt;%</span></span>
+<span id="cb1019-2"><a href="text-mining-and-semantic-network-analysis.html#cb1019-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dim_desc</span>()</span></code></pre></div>
+<pre><code>[1] &quot;[20,053 x 91]&quot;</code></pre>
+<p>In this data set, each row corresponds to a user’s tweet/status and the subsequent columns are comprised of attributes describing the tweet. Go ahead and check out the column names/variables using the <code>colnames()</code> function.</p>
+<div class="sourceCode" id="cb1021"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1021-1"><a href="text-mining-and-semantic-network-analysis.html#cb1021-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(AUGSAMPQ_df)</span></code></pre></div>
+<p>Feel free to use the <code>head(AUGSAMPQ_df)</code> or <code>View(AUGSAMPQ_df)</code> functions to check out the data set; however, the results may appear slowly. We will be particularly interested in the <code>text</code> column, which is the fifth column and includes the tweet content.</p>
+<p>It is useful to explore some other details about the data set, such as tweet frequency over time, the most active users, and the most used hashtags contained in tweets using #QAnon. We’re using code from <a href="https://github.com/mkearney/rstudioconf_tweets" class="uri">https://github.com/mkearney/rstudioconf_tweets</a>. First, let’s look at the number of tweets using #QAnon during the August 1-3 time frame.</p>
+<div class="sourceCode" id="cb1022"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1022-1"><a href="text-mining-and-semantic-network-analysis.html#cb1022-1" aria-hidden="true" tabindex="-1"></a>AUGSAMPQ_df <span class="sc">%&gt;%</span></span>
+<span id="cb1022-2"><a href="text-mining-and-semantic-network-analysis.html#cb1022-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ts_plot creates a ggplot of tweet frequencies over time.</span></span>
+<span id="cb1022-3"><a href="text-mining-and-semantic-network-analysis.html#cb1022-3" aria-hidden="true" tabindex="-1"></a>  rtweet<span class="sc">::</span><span class="fu">ts_plot</span>(<span class="at">by =</span> <span class="st">&quot;day&quot;</span>, <span class="at">color =</span> <span class="st">&quot;transparent&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb1022-4"><a href="text-mining-and-semantic-network-analysis.html#cb1022-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The following functions are exported from the ggplot2 package.</span></span>
+<span id="cb1022-5"><a href="text-mining-and-semantic-network-analysis.html#cb1022-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;purple&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1022-6"><a href="text-mining-and-semantic-network-analysis.html#cb1022-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">&quot;royalblue4&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1022-7"><a href="text-mining-and-semantic-network-analysis.html#cb1022-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb1022-8"><a href="text-mining-and-semantic-network-analysis.html#cb1022-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>),</span>
+<span id="cb1022-9"><a href="text-mining-and-semantic-network-analysis.html#cb1022-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">1.25</span>), <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb1022-10"><a href="text-mining-and-semantic-network-analysis.html#cb1022-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">1.1</span>)),</span>
+<span id="cb1022-11"><a href="text-mining-and-semantic-network-analysis.html#cb1022-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb1022-12"><a href="text-mining-and-semantic-network-analysis.html#cb1022-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Frequency #QAnon Tweets (August 1-3)&quot;</span>,</span>
+<span id="cb1022-13"><a href="text-mining-and-semantic-network-analysis.html#cb1022-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;#QAnon status counts aggregated using daily intervals&quot;</span>,</span>
+<span id="cb1022-14"><a href="text-mining-and-semantic-network-analysis.html#cb1022-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">Source: Data gathered via Twitter&#39;s standard `search_tweets` API using rtweet&quot;</span>,</span>
+<span id="cb1022-15"><a href="text-mining-and-semantic-network-analysis.html#cb1022-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>)</span></code></pre></div>
+<p><img src="9-Text_Minning_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Next, let’s adjust the code a little bit to check out the most active Twitter accounts (top 25 accounts) using #QAnon during the time frame. The process below can be broken down into two steps. First the data is wrangled into the appropriate format by counting the <code>screen_name</code> variable, reordering the resulting data by descending number (<code>n</code>) of appearances, and then selecting for the top 25 observations. Second, the data is used to create a graph object, which is fine tuned using functions from the <strong>ggplot2</strong> library.</p>
+<div class="sourceCode" id="cb1023"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1023-1"><a href="text-mining-and-semantic-network-analysis.html#cb1023-1" aria-hidden="true" tabindex="-1"></a>AUGSAMPQ_df <span class="sc">%&gt;%</span></span>
+<span id="cb1023-2"><a href="text-mining-and-semantic-network-analysis.html#cb1023-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># data wrangling</span></span>
+<span id="cb1023-3"><a href="text-mining-and-semantic-network-analysis.html#cb1023-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(screen_name) <span class="sc">%&gt;%</span></span>
+<span id="cb1023-4"><a href="text-mining-and-semantic-network-analysis.html#cb1023-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">screen_name =</span> <span class="fu">fct_reorder</span>(screen_name, n)) <span class="sc">%&gt;%</span></span>
+<span id="cb1023-5"><a href="text-mining-and-semantic-network-analysis.html#cb1023-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">25</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1023-6"><a href="text-mining-and-semantic-network-analysis.html#cb1023-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Data plotring </span></span>
+<span id="cb1023-7"><a href="text-mining-and-semantic-network-analysis.html#cb1023-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> screen_name, <span class="at">y =</span> n, <span class="at">fill =</span> n)) <span class="sc">+</span></span>
+<span id="cb1023-8"><a href="text-mining-and-semantic-network-analysis.html#cb1023-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb1023-9"><a href="text-mining-and-semantic-network-analysis.html#cb1023-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb1023-10"><a href="text-mining-and-semantic-network-analysis.html#cb1023-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb1023-11"><a href="text-mining-and-semantic-network-analysis.html#cb1023-11" aria-hidden="true" tabindex="-1"></a>  viridis<span class="sc">::</span><span class="fu">scale_fill_viridis</span>(<span class="at">option =</span> <span class="st">&quot;plasma&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1023-12"><a href="text-mining-and-semantic-network-analysis.html#cb1023-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Tweet Count&quot;</span>,</span>
+<span id="cb1023-13"><a href="text-mining-and-semantic-network-analysis.html#cb1023-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Twitter Accounts&quot;</span>,</span>
+<span id="cb1023-14"><a href="text-mining-and-semantic-network-analysis.html#cb1023-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;#QAnon Conversation (AUG 1-7)&quot;</span>,</span>
+<span id="cb1023-15"><a href="text-mining-and-semantic-network-analysis.html#cb1023-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Most Active Accounts&quot;</span>)</span></code></pre></div>
+<p><img src="9-Text_Minning_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Let’s create and save account count data as a <code>data.frame</code> so we can use it later.</p>
+<div class="sourceCode" id="cb1024"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1024-1"><a href="text-mining-and-semantic-network-analysis.html#cb1024-1" aria-hidden="true" tabindex="-1"></a>active_accounts <span class="ot">&lt;-</span> AUGSAMPQ_df <span class="sc">%&gt;%</span></span>
+<span id="cb1024-2"><a href="text-mining-and-semantic-network-analysis.html#cb1024-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(screen_name, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Check out the most frequently used hashtags in our data. In this example, we expect #QAnon to appear the most often, but this approach could be useful to guide further collection because one of the biggest challenges is deciding on which hashtags by which to collect our data. For the sake of brevity, we have included notes on each step as a comment.</p>
+<div class="sourceCode" id="cb1025"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1025-1"><a href="text-mining-and-semantic-network-analysis.html#cb1025-1" aria-hidden="true" tabindex="-1"></a>AUGSAMPQ_df <span class="sc">%&gt;%</span></span>
+<span id="cb1025-2"><a href="text-mining-and-semantic-network-analysis.html#cb1025-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select the variable of interest, which is a list column</span></span>
+<span id="cb1025-3"><a href="text-mining-and-semantic-network-analysis.html#cb1025-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hashtags) <span class="sc">%&gt;%</span></span>
+<span id="cb1025-4"><a href="text-mining-and-semantic-network-analysis.html#cb1025-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Unnest the list column</span></span>
+<span id="cb1025-5"><a href="text-mining-and-semantic-network-analysis.html#cb1025-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(hashtags) <span class="sc">%&gt;%</span></span>
+<span id="cb1025-6"><a href="text-mining-and-semantic-network-analysis.html#cb1025-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter out missing data (NAs)</span></span>
+<span id="cb1025-7"><a href="text-mining-and-semantic-network-analysis.html#cb1025-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(hashtags)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1025-8"><a href="text-mining-and-semantic-network-analysis.html#cb1025-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Standardize your text characters by transforming them to upper case</span></span>
+<span id="cb1025-9"><a href="text-mining-and-semantic-network-analysis.html#cb1025-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hashtags =</span> <span class="fu">str_to_upper</span>(hashtags)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1025-10"><a href="text-mining-and-semantic-network-analysis.html#cb1025-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Count how many times a give string (hashtag) appears in the variable</span></span>
+<span id="cb1025-11"><a href="text-mining-and-semantic-network-analysis.html#cb1025-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(hashtags) <span class="sc">%&gt;%</span></span>
+<span id="cb1025-12"><a href="text-mining-and-semantic-network-analysis.html#cb1025-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Modify the hashtags by adding a &quot;#&quot; at the start and then order the factors</span></span>
+<span id="cb1025-13"><a href="text-mining-and-semantic-network-analysis.html#cb1025-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hashtags =</span> <span class="fu">str_c</span>(<span class="st">&quot;#&quot;</span>, hashtags) <span class="sc">%&gt;%</span></span>
+<span id="cb1025-14"><a href="text-mining-and-semantic-network-analysis.html#cb1025-14" aria-hidden="true" tabindex="-1"></a>           <span class="fu">fct_reorder</span>(., n)) <span class="sc">%&gt;%</span></span>
+<span id="cb1025-15"><a href="text-mining-and-semantic-network-analysis.html#cb1025-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Arrange by n</span></span>
+<span id="cb1025-16"><a href="text-mining-and-semantic-network-analysis.html#cb1025-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(n) <span class="sc">%&gt;%</span> </span>
+<span id="cb1025-17"><a href="text-mining-and-semantic-network-analysis.html#cb1025-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Pull the top 25 entries</span></span>
+<span id="cb1025-18"><a href="text-mining-and-semantic-network-analysis.html#cb1025-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">25</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1025-19"><a href="text-mining-and-semantic-network-analysis.html#cb1025-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Graph your data</span></span>
+<span id="cb1025-20"><a href="text-mining-and-semantic-network-analysis.html#cb1025-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hashtags, <span class="at">y =</span> n, <span class="at">fill =</span> n)) <span class="sc">+</span> </span>
+<span id="cb1025-21"><a href="text-mining-and-semantic-network-analysis.html#cb1025-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1025-22"><a href="text-mining-and-semantic-network-analysis.html#cb1025-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb1025-23"><a href="text-mining-and-semantic-network-analysis.html#cb1025-23" aria-hidden="true" tabindex="-1"></a>  viridis<span class="sc">::</span><span class="fu">scale_fill_viridis</span>(<span class="at">option =</span> <span class="st">&quot;plasma&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1025-24"><a href="text-mining-and-semantic-network-analysis.html#cb1025-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Hashtag Count&quot;</span>,</span>
+<span id="cb1025-25"><a href="text-mining-and-semantic-network-analysis.html#cb1025-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Hashtag&quot;</span>,</span>
+<span id="cb1025-26"><a href="text-mining-and-semantic-network-analysis.html#cb1025-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;#QAnon Conversation (AUG 1-3)&quot;</span>,</span>
+<span id="cb1025-27"><a href="text-mining-and-semantic-network-analysis.html#cb1025-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Most Frequent Hashtags&quot;</span>)</span></code></pre></div>
+<p><img src="9-Text_Minning_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Let’s follow one of the hashtags over time. Here we will look at “#pizzagate” over the three days. Here we’ll use the <code>str_detect()</code> function in conjunction with <code>filter()</code> to identify and extract tweets that contain the hashtag.</p>
+<div class="sourceCode" id="cb1026"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1026-1"><a href="text-mining-and-semantic-network-analysis.html#cb1026-1" aria-hidden="true" tabindex="-1"></a>AUGSAMPQ_df <span class="sc">%&gt;%</span> </span>
+<span id="cb1026-2"><a href="text-mining-and-semantic-network-analysis.html#cb1026-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Use str_detect() function to search for patterns in text</span></span>
+<span id="cb1026-3"><a href="text-mining-and-semantic-network-analysis.html#cb1026-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(<span class="at">string =</span> text, <span class="at">pattern =</span> <span class="st">&quot;#pizzagate&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1026-4"><a href="text-mining-and-semantic-network-analysis.html#cb1026-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot the activity using the ts_plot() function and other ggplot2 functions</span></span>
+<span id="cb1026-5"><a href="text-mining-and-semantic-network-analysis.html#cb1026-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_plot</span>(<span class="st">&quot;day&quot;</span>, <span class="at">color =</span> <span class="st">&quot;transparent&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1026-6"><a href="text-mining-and-semantic-network-analysis.html#cb1026-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">colour =</span> <span class="st">&quot;purple&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1026-7"><a href="text-mining-and-semantic-network-analysis.html#cb1026-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb1026-8"><a href="text-mining-and-semantic-network-analysis.html#cb1026-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">&quot;royalblue4&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1026-9"><a href="text-mining-and-semantic-network-analysis.html#cb1026-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb1026-10"><a href="text-mining-and-semantic-network-analysis.html#cb1026-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>),</span>
+<span id="cb1026-11"><a href="text-mining-and-semantic-network-analysis.html#cb1026-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">1.25</span>), <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb1026-12"><a href="text-mining-and-semantic-network-analysis.html#cb1026-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">1.1</span>)),</span>
+<span id="cb1026-13"><a href="text-mining-and-semantic-network-analysis.html#cb1026-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb1026-14"><a href="text-mining-and-semantic-network-analysis.html#cb1026-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Pizzagate Usage (August 1-3)&quot;</span>,</span>
+<span id="cb1026-15"><a href="text-mining-and-semantic-network-analysis.html#cb1026-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;#Pizzagate based on daily intervals&quot;</span>,</span>
+<span id="cb1026-16"><a href="text-mining-and-semantic-network-analysis.html#cb1026-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">Source: Data gathered via Twitter&#39;s standard `search_tweets` API using rtweet&quot;</span>,</span>
+<span id="cb1026-17"><a href="text-mining-and-semantic-network-analysis.html#cb1026-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>)</span></code></pre></div>
+<p><img src="9-Text_Minning_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Now let’s check out which accounts used this hashtag the most frequently during our time frame of interest.</p>
+<div class="sourceCode" id="cb1027"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1027-1"><a href="text-mining-and-semantic-network-analysis.html#cb1027-1" aria-hidden="true" tabindex="-1"></a>AUGSAMPQ_df <span class="sc">%&gt;%</span> </span>
+<span id="cb1027-2"><a href="text-mining-and-semantic-network-analysis.html#cb1027-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Use str_detect() function to search for patterns in text</span></span>
+<span id="cb1027-3"><a href="text-mining-and-semantic-network-analysis.html#cb1027-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(<span class="at">string =</span> text, <span class="at">pattern =</span> <span class="st">&quot;#pizzagate&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1027-4"><a href="text-mining-and-semantic-network-analysis.html#cb1027-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Here we will aggregate our data by screen_name and then sort</span></span>
+<span id="cb1027-5"><a href="text-mining-and-semantic-network-analysis.html#cb1027-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(screen_name) <span class="sc">%&gt;%</span></span>
+<span id="cb1027-6"><a href="text-mining-and-semantic-network-analysis.html#cb1027-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb1027-7"><a href="text-mining-and-semantic-network-analysis.html#cb1027-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># We have several tied with 6</span></span>
+<span id="cb1027-8"><a href="text-mining-and-semantic-network-analysis.html#cb1027-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">26</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb1027-9"><a href="text-mining-and-semantic-network-analysis.html#cb1027-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">screen_name =</span> <span class="fu">fct_reorder</span>(screen_name, n)) <span class="sc">%&gt;%</span></span>
+<span id="cb1027-10"><a href="text-mining-and-semantic-network-analysis.html#cb1027-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Graph</span></span>
+<span id="cb1027-11"><a href="text-mining-and-semantic-network-analysis.html#cb1027-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> screen_name, <span class="at">y =</span> n, <span class="at">fill =</span> n)) <span class="sc">+</span></span>
+<span id="cb1027-12"><a href="text-mining-and-semantic-network-analysis.html#cb1027-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb1027-13"><a href="text-mining-and-semantic-network-analysis.html#cb1027-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb1027-14"><a href="text-mining-and-semantic-network-analysis.html#cb1027-14" aria-hidden="true" tabindex="-1"></a>  viridis<span class="sc">::</span><span class="fu">scale_fill_viridis</span>(<span class="at">option =</span> <span class="st">&quot;plasma&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1027-15"><a href="text-mining-and-semantic-network-analysis.html#cb1027-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;#Pizzagate Usage Count&quot;</span>,</span>
+<span id="cb1027-16"><a href="text-mining-and-semantic-network-analysis.html#cb1027-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Twitter Accounts&quot;</span>,</span>
+<span id="cb1027-17"><a href="text-mining-and-semantic-network-analysis.html#cb1027-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;#Pizzagate Usage in #QAnon Conversation (AUG 1-3)&quot;</span>,</span>
+<span id="cb1027-18"><a href="text-mining-and-semantic-network-analysis.html#cb1027-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Most Active Accounts&quot;</span>)</span></code></pre></div>
+<p><img src="9-Text_Minning_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>We can explore the most shared URLs as well. While there are several URL-based columns, we will check out the <code>urls_t.co</code> column for demonstration purposes. Notice we haven’t pre-processed our data yet, so the links are intact.</p>
+<div class="sourceCode" id="cb1028"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1028-1"><a href="text-mining-and-semantic-network-analysis.html#cb1028-1" aria-hidden="true" tabindex="-1"></a>AUGSAMPQ_df <span class="sc">%&gt;%</span></span>
+<span id="cb1028-2"><a href="text-mining-and-semantic-network-analysis.html#cb1028-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Prepocess your data, first select and rename the variable of interest</span></span>
+<span id="cb1028-3"><a href="text-mining-and-semantic-network-analysis.html#cb1028-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">urls =</span> urls_t.co) <span class="sc">%&gt;%</span></span>
+<span id="cb1028-4"><a href="text-mining-and-semantic-network-analysis.html#cb1028-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Unnest the list column</span></span>
+<span id="cb1028-5"><a href="text-mining-and-semantic-network-analysis.html#cb1028-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1028-6"><a href="text-mining-and-semantic-network-analysis.html#cb1028-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter out missing data</span></span>
+<span id="cb1028-7"><a href="text-mining-and-semantic-network-analysis.html#cb1028-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(urls)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1028-8"><a href="text-mining-and-semantic-network-analysis.html#cb1028-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Count and select the top </span></span>
+<span id="cb1028-9"><a href="text-mining-and-semantic-network-analysis.html#cb1028-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(urls) <span class="sc">%&gt;%</span></span>
+<span id="cb1028-10"><a href="text-mining-and-semantic-network-analysis.html#cb1028-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">urls =</span> <span class="fu">fct_reorder</span>(urls, n)) <span class="sc">%&gt;%</span></span>
+<span id="cb1028-11"><a href="text-mining-and-semantic-network-analysis.html#cb1028-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">25</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1028-12"><a href="text-mining-and-semantic-network-analysis.html#cb1028-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb1028-13"><a href="text-mining-and-semantic-network-analysis.html#cb1028-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Graph</span></span>
+<span id="cb1028-14"><a href="text-mining-and-semantic-network-analysis.html#cb1028-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> urls, <span class="at">y =</span> n, <span class="at">fill =</span> n)) <span class="sc">+</span></span>
+<span id="cb1028-15"><a href="text-mining-and-semantic-network-analysis.html#cb1028-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb1028-16"><a href="text-mining-and-semantic-network-analysis.html#cb1028-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb1028-17"><a href="text-mining-and-semantic-network-analysis.html#cb1028-17" aria-hidden="true" tabindex="-1"></a>  viridis<span class="sc">::</span><span class="fu">scale_fill_viridis</span>(<span class="at">option =</span> <span class="st">&quot;plasma&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1028-18"><a href="text-mining-and-semantic-network-analysis.html#cb1028-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;URL Count&quot;</span>,</span>
+<span id="cb1028-19"><a href="text-mining-and-semantic-network-analysis.html#cb1028-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;URLs&quot;</span>,</span>
+<span id="cb1028-20"><a href="text-mining-and-semantic-network-analysis.html#cb1028-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;#QAnon Conversation (AUG 1-3)&quot;</span>,</span>
+<span id="cb1028-21"><a href="text-mining-and-semantic-network-analysis.html#cb1028-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Shared URLs&quot;</span>)</span></code></pre></div>
+<p><img src="9-Text_Minning_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>We’ll build a data frame so we can search for links on the web (you don’t have to do this).</p>
+<div class="sourceCode" id="cb1029"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1029-1"><a href="text-mining-and-semantic-network-analysis.html#cb1029-1" aria-hidden="true" tabindex="-1"></a>count_urls_df <span class="ot">&lt;-</span> AUGSAMPQ_df <span class="sc">%&gt;%</span></span>
+<span id="cb1029-2"><a href="text-mining-and-semantic-network-analysis.html#cb1029-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">link =</span> urls_t.co) <span class="sc">%&gt;%</span></span>
+<span id="cb1029-3"><a href="text-mining-and-semantic-network-analysis.html#cb1029-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(link) <span class="sc">%&gt;%</span></span>
+<span id="cb1029-4"><a href="text-mining-and-semantic-network-analysis.html#cb1029-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(link, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1029-5"><a href="text-mining-and-semantic-network-analysis.html#cb1029-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(link))</span>
+<span id="cb1029-6"><a href="text-mining-and-semantic-network-analysis.html#cb1029-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1029-7"><a href="text-mining-and-semantic-network-analysis.html#cb1029-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(count_urls_df)</span></code></pre></div>
+<pre><code># A tibble: 6 x 2
+  link                        n
+  &lt;chr&gt;                   &lt;int&gt;
+1 https://t.co/8ADgmjM3hH   110
+2 https://t.co/91DwYgx0JO    95
+3 https://t.co/64dRKrmk8B    94
+4 https://t.co/yq7k7feywg    92
+5 https://t.co/IyAY7UcW36    79
+6 https://t.co/6FfK8vtJyB    45</code></pre>
+<div id="data-formatting-and-preprocessing-text" class="section level3" number="16.1.1">
+<h3><span class="header-section-number">16.1.1</span> Data Formatting and Preprocessing Text</h3>
+<p>We need to preprocess our data before doing any more text analysis (well, at least what we cover in class). Specifically, we will do the following (we will not cover stemming or lemmatization in this lab):</p>
+<ol style="list-style-type: decimal">
+<li>Use <code>select()</code> function to simplify our data set.</li>
+<li>Use <code>mutate()</code> to modify the content of the text.</li>
+<li>Utilize <code>unnest_tokens()</code> to pull out all words from the tweets.</li>
+<li>Apply extant and custom stop word list(s) to remove common stop words (e.g., “and,” “of”)</li>
+</ol>
+<p><strong>We did not do these steps before looking for active accounts, frequently used hashtags in the conversations, commonly shared links, etc. because pre-processing may affect some of those items.</strong></p>
+<p>Also keep in mind that you will often find yourself going through some of these steps multiple times in your analyses. For instance, it is common to see unwanted characters (such as those produced by emojis) in the analysis of social media-based data, which you may not pick up at first.</p>
+<p>Once you’ve run the code below, you should see words associated with accounts.</p>
+<div class="sourceCode" id="cb1031"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1031-1"><a href="text-mining-and-semantic-network-analysis.html#cb1031-1" aria-hidden="true" tabindex="-1"></a>words_df <span class="ot">&lt;-</span> AUGSAMPQ_df <span class="sc">%&gt;%</span></span>
+<span id="cb1031-2"><a href="text-mining-and-semantic-network-analysis.html#cb1031-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select variables of interst</span></span>
+<span id="cb1031-3"><a href="text-mining-and-semantic-network-analysis.html#cb1031-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(screen_name, text) <span class="sc">%&gt;%</span></span>
+<span id="cb1031-4"><a href="text-mining-and-semantic-network-analysis.html#cb1031-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove digits and punctuation with str_remove_all </span></span>
+<span id="cb1031-5"><a href="text-mining-and-semantic-network-analysis.html#cb1031-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_remove_all</span>(text, <span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">d|[:punct:]&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1031-6"><a href="text-mining-and-semantic-network-analysis.html#cb1031-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove additional junk from the text: https</span></span>
+<span id="cb1031-7"><a href="text-mining-and-semantic-network-analysis.html#cb1031-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_remove_all</span>(text, <span class="at">pattern =</span> <span class="st">&quot;https|t.co&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1031-8"><a href="text-mining-and-semantic-network-analysis.html#cb1031-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Standardize your words by transforming them to upper case</span></span>
+<span id="cb1031-9"><a href="text-mining-and-semantic-network-analysis.html#cb1031-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_to_upper</span>(text)) <span class="sc">%&gt;%</span></span>
+<span id="cb1031-10"><a href="text-mining-and-semantic-network-analysis.html#cb1031-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Unnest/extract words</span></span>
+<span id="cb1031-11"><a href="text-mining-and-semantic-network-analysis.html#cb1031-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text)</span>
+<span id="cb1031-12"><a href="text-mining-and-semantic-network-analysis.html#cb1031-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1031-13"><a href="text-mining-and-semantic-network-analysis.html#cb1031-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(words_df)</span></code></pre></div>
+<pre><code>  screen_name    word
+1    S223S223   qanon
+2    S223S223      to
+3    S223S223 reverse
+4    S223S223     the
+5    S223S223  spells
+6    S223S223   qanon</code></pre>
+<p>You’ll notice that we need to remove some commonly used words, such as “the” and “to,” that do not contribute to our analysis in a meaningful way. Such words are called, stop words. We can delete stop words by leveraging existing stop word lists. One package is the <strong>stopwords</strong> package.</p>
+<div class="sourceCode" id="cb1033"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1033-1"><a href="text-mining-and-semantic-network-analysis.html#cb1033-1" aria-hidden="true" tabindex="-1"></a>sw_list_en <span class="ot">&lt;-</span> stopwords<span class="sc">::</span><span class="fu">stopwords</span>(<span class="at">language =</span> <span class="st">&quot;en&quot;</span>, <span class="at">source =</span> <span class="st">&quot;snowball&quot;</span>)</span></code></pre></div>
+<p>Take a peek at what words are included in the <code>sw_list_1</code> vector:</p>
+<div class="sourceCode" id="cb1034"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1034-1"><a href="text-mining-and-semantic-network-analysis.html#cb1034-1" aria-hidden="true" tabindex="-1"></a>sw_list_en[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>[1] &quot;i&quot;      &quot;me&quot;     &quot;my&quot;     &quot;myself&quot; &quot;we&quot;    </code></pre>
+<p>Now filter your data to remove these unwanted words. While we are at it, remove any <code>NA</code> from your data.</p>
+<div class="sourceCode" id="cb1036"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1036-1"><a href="text-mining-and-semantic-network-analysis.html#cb1036-1" aria-hidden="true" tabindex="-1"></a>words_df <span class="ot">&lt;-</span> words_df <span class="sc">%&gt;%</span></span>
+<span id="cb1036-2"><a href="text-mining-and-semantic-network-analysis.html#cb1036-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> sw_list_en) <span class="sc">%&gt;%</span>  </span>
+<span id="cb1036-3"><a href="text-mining-and-semantic-network-analysis.html#cb1036-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(word))</span>
+<span id="cb1036-4"><a href="text-mining-and-semantic-network-analysis.html#cb1036-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1036-5"><a href="text-mining-and-semantic-network-analysis.html#cb1036-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(words_df)</span></code></pre></div>
+<pre><code>  screen_name              word
+1    S223S223             qanon
+2    S223S223           reverse
+3    S223S223            spells
+4    S223S223             qanon
+5    S223S223 thegreatawakening
+6   Shaddilay               wow</code></pre>
+<p>Not all stop words lists are the same, even those for the same language. Thus, you can leverage multiple stop lists to refine your data further. You can check out the <code>stopwords</code> github site (<a href="https://github.com/quanteda/stopwords" class="uri">https://github.com/quanteda/stopwords</a>) to explore additional options. Here we’ll apply two additional stop word lists to our data set; one in English and another in Japanese (we have many tweets in Japanese).</p>
+<div class="sourceCode" id="cb1038"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1038-1"><a href="text-mining-and-semantic-network-analysis.html#cb1038-1" aria-hidden="true" tabindex="-1"></a>sw_list_en2 <span class="ot">&lt;-</span> stopwords<span class="sc">::</span><span class="fu">stopwords</span>(<span class="at">language =</span> <span class="st">&quot;en&quot;</span>, <span class="at">source =</span> <span class="st">&quot;marimo&quot;</span>)</span>
+<span id="cb1038-2"><a href="text-mining-and-semantic-network-analysis.html#cb1038-2" aria-hidden="true" tabindex="-1"></a>sw_list_ja <span class="ot">&lt;-</span> stopwords<span class="sc">::</span><span class="fu">stopwords</span>(<span class="at">language =</span> <span class="st">&quot;ja&quot;</span>, <span class="at">source =</span> <span class="st">&quot;marimo&quot;</span>)</span></code></pre></div>
+<p>Now continue filtering your data to remove redundant words. Notice the dimensions of the data frame contains fewer observations.</p>
+<div class="sourceCode" id="cb1039"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1039-1"><a href="text-mining-and-semantic-network-analysis.html#cb1039-1" aria-hidden="true" tabindex="-1"></a>words_df <span class="ot">&lt;-</span> words_df<span class="sc">%&gt;%</span></span>
+<span id="cb1039-2"><a href="text-mining-and-semantic-network-analysis.html#cb1039-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> sw_list_en2) <span class="sc">%&gt;%</span></span>
+<span id="cb1039-3"><a href="text-mining-and-semantic-network-analysis.html#cb1039-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> sw_list_ja)</span></code></pre></div>
+<p>You may create your own list of stop words, too. To create one, generate a character vector using the <code>c()</code> function and then filter your data like before.</p>
+<div class="sourceCode" id="cb1040"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1040-1"><a href="text-mining-and-semantic-network-analysis.html#cb1040-1" aria-hidden="true" tabindex="-1"></a>sw_list_extras <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;tcofztfwqi&quot;</span>, <span class="st">&quot;amp&quot;</span>, <span class="st">&quot;sa&quot;</span>, <span class="st">&quot;submitted&quot;</span>, <span class="st">&quot;submission&quot;</span>,</span>
+<span id="cb1040-2"><a href="text-mining-and-semantic-network-analysis.html#cb1040-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;submit&quot;</span>)</span>
+<span id="cb1040-3"><a href="text-mining-and-semantic-network-analysis.html#cb1040-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1040-4"><a href="text-mining-and-semantic-network-analysis.html#cb1040-4" aria-hidden="true" tabindex="-1"></a>words_df <span class="ot">&lt;-</span> words_df <span class="sc">%&gt;%</span></span>
+<span id="cb1040-5"><a href="text-mining-and-semantic-network-analysis.html#cb1040-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> sw_list_extras) </span></code></pre></div>
+<p>At this point, our data should be sufficiently “clean.” That is, free of stop words (e.g., determiners, coordinating conjunctions, prepositions, etc.) and in the correct format to execute some analysis.</p>
+</div>
+</div>
+<div id="analysis" class="section level2" number="16.2">
+<h2><span class="header-section-number">16.2</span> Analysis</h2>
+<div id="frequencies" class="section level3" number="16.2.1">
+<h3><span class="header-section-number">16.2.1</span> Frequencies</h3>
+<p>Like with hashtags and URLs, we may want to “mine” the tweets to identify “important terms.” A basic approach is observing term frequencies. Once you’ve counted the number of times that each term appears, you can visualize the results several ways.</p>
+<p>First, we have to count how many times a word appears.</p>
+<div class="sourceCode" id="cb1041"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1041-1"><a href="text-mining-and-semantic-network-analysis.html#cb1041-1" aria-hidden="true" tabindex="-1"></a>word_counts <span class="ot">&lt;-</span> words_df <span class="sc">%&gt;%</span></span>
+<span id="cb1041-2"><a href="text-mining-and-semantic-network-analysis.html#cb1041-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb1041-3"><a href="text-mining-and-semantic-network-analysis.html#cb1041-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">freq =</span> n) <span class="sc">%&gt;%</span></span>
+<span id="cb1041-4"><a href="text-mining-and-semantic-network-analysis.html#cb1041-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(freq))</span>
+<span id="cb1041-5"><a href="text-mining-and-semantic-network-analysis.html#cb1041-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1041-6"><a href="text-mining-and-semantic-network-analysis.html#cb1041-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(word_counts)</span></code></pre></div>
+<pre><code>         word  freq
+1       qanon 20375
+2      wwgwga  7608
+3       trump  4154
+4           q  4128
+5 trafficking  2577
+6   pizzagate  2365</code></pre>
+<p>Let’s plot our most frequent words(n = 25) using a basic bar plot. Notice “qanon” appears 20,053 times, which is how many tweets we started out with based on our search parameters using Twitter’s API.</p>
+<div class="sourceCode" id="cb1043"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1043-1"><a href="text-mining-and-semantic-network-analysis.html#cb1043-1" aria-hidden="true" tabindex="-1"></a>word_counts <span class="sc">%&gt;%</span></span>
+<span id="cb1043-2"><a href="text-mining-and-semantic-network-analysis.html#cb1043-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">25</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1043-3"><a href="text-mining-and-semantic-network-analysis.html#cb1043-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">fct_reorder</span>(word, freq)) <span class="sc">%&gt;%</span></span>
+<span id="cb1043-4"><a href="text-mining-and-semantic-network-analysis.html#cb1043-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> word, <span class="at">y =</span> freq, <span class="at">fill =</span> freq)) <span class="sc">+</span></span>
+<span id="cb1043-5"><a href="text-mining-and-semantic-network-analysis.html#cb1043-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb1043-6"><a href="text-mining-and-semantic-network-analysis.html#cb1043-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb1043-7"><a href="text-mining-and-semantic-network-analysis.html#cb1043-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb1043-8"><a href="text-mining-and-semantic-network-analysis.html#cb1043-8" aria-hidden="true" tabindex="-1"></a>  viridis<span class="sc">::</span><span class="fu">scale_fill_viridis</span>(<span class="at">option =</span> <span class="st">&quot;plasma&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1043-9"><a href="text-mining-and-semantic-network-analysis.html#cb1043-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Count&quot;</span>,</span>
+<span id="cb1043-10"><a href="text-mining-and-semantic-network-analysis.html#cb1043-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">&quot;Words&quot;</span>,</span>
+<span id="cb1043-11"><a href="text-mining-and-semantic-network-analysis.html#cb1043-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">&quot;#QAnon Conversation (AUG 1-3)&quot;</span>,</span>
+<span id="cb1043-12"><a href="text-mining-and-semantic-network-analysis.html#cb1043-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">&quot;Frequently Used Terms&quot;</span>)</span></code></pre></div>
+<p><img src="9-Text_Minning_files/figure-html/unnamed-chunk-25-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Word clouds have their critics and are not necessarily considered analysis; however, they can be useful in limited occasions. To build one, we will leverage the <strong>wordcloud2</strong> package. Here will plot only words that appear at least 150 times in the text.</p>
+<div class="sourceCode" id="cb1044"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1044-1"><a href="text-mining-and-semantic-network-analysis.html#cb1044-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">142</span>) <span class="co"># We set this so you can get similar results. </span></span>
+<span id="cb1044-2"><a href="text-mining-and-semantic-network-analysis.html#cb1044-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1044-3"><a href="text-mining-and-semantic-network-analysis.html#cb1044-3" aria-hidden="true" tabindex="-1"></a>word_counts <span class="sc">%&gt;%</span> </span>
+<span id="cb1044-4"><a href="text-mining-and-semantic-network-analysis.html#cb1044-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter out words to a minimum frequency of 150</span></span>
+<span id="cb1044-5"><a href="text-mining-and-semantic-network-analysis.html#cb1044-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(freq <span class="sc">&gt;=</span><span class="dv">150</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1044-6"><a href="text-mining-and-semantic-network-analysis.html#cb1044-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">wordcloud2</span>(<span class="at">size =</span> <span class="fl">1.6</span>, <span class="at">color =</span> <span class="st">&#39;random-light&#39;</span>, <span class="at">backgroundColor =</span> <span class="st">&quot;white&quot;</span>)</span></code></pre></div>
+<div id="htmlwidget-2cf3b0be8728cae9cda9" style="width:50%;height:415.296px;" class="wordcloud2 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2cf3b0be8728cae9cda9">{"x":{"word":["qanon","wwgwga","trump","q","trafficking","pizzagate","like","savethechildren","now","maga","pedowood","pedogate","crazy","elite","know","realdonaldtrump","billclintonisapedo","people","think","child","human","adrenochrome","clintons","hollywood","remember","billgates","connected","just","tried","pizzagateisreal","epsteinfiles","clintoncrimefamily","powerful","huh","networks","conspiracy","covid","tcodrovnipcj","keep","children","patriots","great","thegreatawakening","new","us","secret","truth","sounds","today","potus","see","news","kag","world","wouldnt","slavery","criminal","vast","billionaires","berlin","wealth","figure","generating","revelations","consortium","holocaustlevel","industrialized","spilling","good","greatawakening","can","turn","childlivesmatter","knows","の","epsteindidntkillhimself","humantraffickingawareness","killary","wwgwgaworldwide","de","tcotzdqkbsij","everything","big","spread","epstein","qanons","thread","die","movement","deepstate","day","proof","plan","america","take","dont","germany","cnn","already","make","didnt","qarmy","thank","gop","also","fight","real","go","twitter","evil","video","please","million","follow","freedom","save","wakeupamerica","clinton","president","put","fake","friend","anything","get","heres","building","factsmatter","lets","first","way","media","pandemic","signs","back","life","peace","unitednotdivided","cases","watch","frazzledrip","und","digitalsoldier","state","going","obamagate","right","wake","la","win","around","saveamerica","shouting","stormed","tcohtakbyveb","wearethenewsnow","に","bill","every","final","addsubtract","input","qanonanyone","tcotppxdsjggo","jeffreyepstein","time","deal","demonstrate","weinerslaptop","immediate","termination","youtube","etc","even","fakenews","qanonfrance","が","god","msm","filsdepangolin","lies","à","deep","は","government","pedoisland","won","fear","im","satanic","retweet","away","either","を","le","without","dead","forced","mask","wow","far","research","nwo","welcome","corona","anyone","declass","wwggwa","show","en","come","banned","nobody","witnessing","b","china","coming","hcq","obama","stage","legitimate","coronavirus","theyre","something","exposed","cat","posts","give","americas","socialists","bounce","cant","end","must","billions","globe","photo","study","annons","relax","tcoupahkm","election","done","wakes","doctors","comms","everyone","stop","leaders","wide","israel","change","got","hands","lie","become","facebook","nyt","days","alert","look","carolynga","donaldtrump","original","で","qui","chloroquine","dwarf","frontline","tcorywhqx","st","feeling","group","u","left","help","reminder","congress","france","believe","biden","plz","sweatshops","craziness","support","fraudulent","cheer","killing","never","purpose","tcobwjznbguv","dr","nothing","publicly","case","completely","qanonworldwide","available","discredited","flawed","𝐇𝐂𝐐","boots","deliberately","halfway","propelling","tcolbfqjv","years","check","another","e","force","marketing","need","shows","island","physical","positions","storm","って","party","sex","der","long","related","て","hi","mobilizing","production","border","steinbart","still","volunteer","nonprofit","control","creative","publishing","seen","tcolegnlnvvj","tcoosvtauv","wrong","made","happen","tiktok","hashtag","panic","drop","love","humantrafficking","republican","american","prince","sont","grab","mine","found","business","much","theres","women","whistleblower","barackobama","wuhan","entire","knee","posted","que","tcoaeevbpsp","wont","ladygaga","ask","important","let","order","realized","redpill","yet","country","gone","lost","night","op","yesterday","clasped","dealing","mouth","sell","yeah","dem","global","understanding","youve","darktolight","rt","simple","tape","anons","propaganda","want","wwgwwga","heart","together","death","pedovores","tcowvhranaog","start","stimulus","し","evidence","horrible","ops","satanicelite","via","based","live","un","honor","response"],"freq":[20375,7608,4154,4128,2577,2365,2174,2125,2118,2088,1882,1874,1870,1854,1514,1375,1346,1324,1301,1271,1242,1218,1197,1192,1174,1138,1113,1102,1091,1083,1072,1064,1062,1057,1052,1048,1042,1039,996,959,907,894,891,885,879,870,865,861,853,852,847,834,827,825,814,806,805,802,798,795,795,794,791,791,789,789,789,789,757,736,719,682,679,679,673,670,668,668,666,655,651,647,641,641,615,612,605,596,595,574,563,553,542,537,536,520,508,503,495,485,484,482,482,479,478,477,476,468,463,444,433,428,421,417,414,413,410,407,403,403,402,396,394,386,384,383,383,381,377,377,375,375,370,369,369,369,368,366,366,365,365,364,364,361,361,360,358,356,353,350,348,348,348,348,343,340,340,338,338,337,337,337,337,336,327,324,316,316,315,315,313,312,312,312,311,310,308,307,306,306,305,305,304,304,304,304,303,302,300,299,298,295,294,294,292,291,291,291,291,290,290,286,285,284,281,279,279,275,274,273,266,265,265,261,261,261,261,261,261,259,257,257,254,253,252,252,251,249,249,248,248,248,248,247,247,247,247,246,246,246,244,243,241,240,237,237,236,232,232,231,230,230,229,229,228,227,227,226,225,225,223,223,223,222,222,220,220,220,220,218,217,217,217,216,215,215,213,213,212,211,211,210,209,209,208,206,206,206,206,206,205,205,205,204,204,204,203,203,203,202,202,202,202,202,202,202,200,198,198,197,196,194,194,193,193,193,193,192,192,192,191,191,191,190,190,190,190,189,189,189,189,188,187,187,187,187,187,187,187,186,184,184,181,181,179,179,176,175,174,174,174,173,173,172,171,171,171,171,170,169,168,167,167,167,167,167,167,166,165,165,164,164,164,163,163,162,162,162,162,162,162,161,161,161,161,161,160,160,160,160,159,159,159,159,158,158,158,158,157,157,156,156,155,154,154,153,153,152,152,152,152,151,151,151,150,150],"fontFamily":"Segoe UI","fontWeight":"bold","color":"random-light","minSize":0,"weightFactor":0.0141349693251534,"backgroundColor":"white","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":true,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+</div>
+<div id="term-frequency---inverse-document-frequency-tf-idf" class="section level3" number="16.2.2">
+<h3><span class="header-section-number">16.2.2</span> Term Frequency - Inverse Document Frequency (TF-IDF)</h3>
+<p>This statistic is intended to help us measure how important a word is to a document in a collection (or corpus) of documents <span class="citation">(<a href="#ref-Silge2017" role="doc-biblioref">Robinson and Silge 2017</a>)</span>. For example, we can see how important words are to top active users across the entire collection of tweets. You can think of this statistic as a logical next step from basic term frequencies because it accounts for the distribution of each term throughout an entire corpus. With this statistic, we can ask ourselves, are users using similar terms or language? What distinguishes an account in a data set from the others?</p>
+<p>The first step is to produce a word per Twitter user count using the code below. For example, the first user’s tweets contain the term “trump” 102 times in the data set.</p>
+<div class="sourceCode" id="cb1045"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1045-1"><a href="text-mining-and-semantic-network-analysis.html#cb1045-1" aria-hidden="true" tabindex="-1"></a>words_df <span class="sc">%&gt;%</span></span>
+<span id="cb1045-2"><a href="text-mining-and-semantic-network-analysis.html#cb1045-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(screen_name, word) <span class="sc">%&gt;%</span></span>
+<span id="cb1045-3"><a href="text-mining-and-semantic-network-analysis.html#cb1045-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">word_freq_by_user =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb1045-4"><a href="text-mining-and-semantic-network-analysis.html#cb1045-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(word_freq_by_user)) <span class="sc">%&gt;%</span></span>
+<span id="cb1045-5"><a href="text-mining-and-semantic-network-analysis.html#cb1045-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code># A tibble: 10 x 3
+# Groups:   screen_name [6]
+   screen_name     word  word_freq_by_user
+   &lt;chr&gt;           &lt;chr&gt;             &lt;int&gt;
+ 1 IngaKaybor      trump               102
+ 2 GMiller06698349 trump               100
+ 3 realmikes0017   trump                96
+ 4 xenadog         trump                96
+ 5 SomeGuyOnABoat  trump                92
+ 6 GMiller06698349 qanon                71
+ 7 IngaKaybor      qanon                70
+ 8 xenadog         qanon                62
+ 9 MccollumTylan   trump                61
+10 realmikes0017   qanon                60</code></pre>
+<p>Next, look at the total words per user account.</p>
+<div class="sourceCode" id="cb1047"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1047-1"><a href="text-mining-and-semantic-network-analysis.html#cb1047-1" aria-hidden="true" tabindex="-1"></a>words_df <span class="sc">%&gt;%</span></span>
+<span id="cb1047-2"><a href="text-mining-and-semantic-network-analysis.html#cb1047-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(screen_name, word) <span class="sc">%&gt;%</span></span>
+<span id="cb1047-3"><a href="text-mining-and-semantic-network-analysis.html#cb1047-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">word_freq_by_user =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb1047-4"><a href="text-mining-and-semantic-network-analysis.html#cb1047-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1047-5"><a href="text-mining-and-semantic-network-analysis.html#cb1047-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(screen_name) <span class="sc">%&gt;%</span></span>
+<span id="cb1047-6"><a href="text-mining-and-semantic-network-analysis.html#cb1047-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_words_by_user =</span> <span class="fu">sum</span>(word_freq_by_user)) <span class="sc">%&gt;%</span></span>
+<span id="cb1047-7"><a href="text-mining-and-semantic-network-analysis.html#cb1047-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(word_freq_by_user)) <span class="sc">%&gt;%</span></span>
+<span id="cb1047-8"><a href="text-mining-and-semantic-network-analysis.html#cb1047-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code># A tibble: 10 x 4
+# Groups:   screen_name [6]
+   screen_name     word  word_freq_by_user total_words_by_user
+   &lt;chr&gt;           &lt;chr&gt;             &lt;int&gt;               &lt;int&gt;
+ 1 IngaKaybor      trump               102                1826
+ 2 GMiller06698349 trump               100                1830
+ 3 realmikes0017   trump                96                1548
+ 4 xenadog         trump                96                1600
+ 5 SomeGuyOnABoat  trump                92                1452
+ 6 GMiller06698349 qanon                71                1830
+ 7 IngaKaybor      qanon                70                1826
+ 8 xenadog         qanon                62                1600
+ 9 MccollumTylan   trump                61                1016
+10 realmikes0017   qanon                60                1548</code></pre>
+<p>Now that we have built code to arrive at the necessary information, let’s go ahead and calculate TF-IDF using <code>bind_tf_idf()</code> and passing this into an object for future use. Terms with a <code>tf_idf</code> score of 0 are extremely common words throughout the entire set of videos. In other words, words with higher scores are relatively unique to an account in comparison to the total distribution of words.</p>
+<div class="sourceCode" id="cb1049"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1049-1"><a href="text-mining-and-semantic-network-analysis.html#cb1049-1" aria-hidden="true" tabindex="-1"></a>tf_idf_user <span class="ot">&lt;-</span> words_df <span class="sc">%&gt;%</span></span>
+<span id="cb1049-2"><a href="text-mining-and-semantic-network-analysis.html#cb1049-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(screen_name, word) <span class="sc">%&gt;%</span></span>
+<span id="cb1049-3"><a href="text-mining-and-semantic-network-analysis.html#cb1049-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">word_freq_by_user =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb1049-4"><a href="text-mining-and-semantic-network-analysis.html#cb1049-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1049-5"><a href="text-mining-and-semantic-network-analysis.html#cb1049-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(screen_name) <span class="sc">%&gt;%</span></span>
+<span id="cb1049-6"><a href="text-mining-and-semantic-network-analysis.html#cb1049-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_words_by_user =</span> <span class="fu">sum</span>(word_freq_by_user)) <span class="sc">%&gt;%</span></span>
+<span id="cb1049-7"><a href="text-mining-and-semantic-network-analysis.html#cb1049-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(word_freq_by_user)) <span class="sc">%&gt;%</span></span>
+<span id="cb1049-8"><a href="text-mining-and-semantic-network-analysis.html#cb1049-8" aria-hidden="true" tabindex="-1"></a>  tidytext<span class="sc">::</span><span class="fu">bind_tf_idf</span>(word, screen_name, word_freq_by_user) <span class="sc">%&gt;%</span></span>
+<span id="cb1049-9"><a href="text-mining-and-semantic-network-analysis.html#cb1049-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_if</span>(<span class="at">.predicate =</span> is.double, <span class="sc">~</span> <span class="fu">round</span>(.x, <span class="at">digits =</span> <span class="dv">3</span>))</span>
+<span id="cb1049-10"><a href="text-mining-and-semantic-network-analysis.html#cb1049-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1049-11"><a href="text-mining-and-semantic-network-analysis.html#cb1049-11" aria-hidden="true" tabindex="-1"></a>tf_idf_user</span></code></pre></div>
+<pre><code># A tibble: 256,227 x 7
+# Groups:   screen_name [10,155]
+   screen_name     word  word_freq_by_user total_words_by_us~    tf   idf tf_idf
+   &lt;chr&gt;           &lt;chr&gt;             &lt;int&gt;              &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1 IngaKaybor      trump               102               1826 0.056 2.06   0.115
+ 2 GMiller06698349 trump               100               1830 0.055 2.06   0.113
+ 3 realmikes0017   trump                96               1548 0.062 2.06   0.128
+ 4 xenadog         trump                96               1600 0.06  2.06   0.124
+ 5 SomeGuyOnABoat  trump                92               1452 0.063 2.06   0.131
+ 6 GMiller06698349 qanon                71               1830 0.039 0.037  0.001
+ 7 IngaKaybor      qanon                70               1826 0.038 0.037  0.001
+ 8 xenadog         qanon                62               1600 0.039 0.037  0.001
+ 9 MccollumTylan   trump                61               1016 0.06  2.06   0.124
+10 realmikes0017   qanon                60               1548 0.039 0.037  0.001
+# ... with 256,217 more rows</code></pre>
+<p>Now we want to plot the most “important” words, as measured by TF-IDF, per user. However, we cannot plot the results in a meaningful way at this point because we have thousands of Twitter accounts in our data set. Instead, let’s plot the TF-IDF scores for the most active accounts (remember, we saved that info in the “active_accounts” data frame), let say, those with more than 40 tweets during the August 1-3 time frame. Doing this by centrality might be misleading unless we consider only retweets; for example, President Trump has a high in-degree centrality score but did not tweet anything with #QAnon.</p>
+<p>We will do the following steps to build some plots:</p>
+<ol style="list-style-type: decimal">
+<li>Filter/extract out the most active accounts (&gt;40 tweets).</li>
+<li>Use <code>left_join()</code> to merge these active accounts with their TF-IDF scores (i.e, “tf_idf_user” data frame).</li>
+<li>Visualize the most active accounts’ scores.</li>
+</ol>
+<p>First, let’s use <code>dplyr</code> to extract videos that users have quoted, replied to, or retweeted more than 40 times (i.e. top 6 accounts). We will call this <code>top_accounts</code> and then rename n to reflect their number of tweets.</p>
+<div class="sourceCode" id="cb1051"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1051-1"><a href="text-mining-and-semantic-network-analysis.html#cb1051-1" aria-hidden="true" tabindex="-1"></a>top_accounts <span class="ot">&lt;-</span> active_accounts <span class="sc">%&gt;%</span></span>
+<span id="cb1051-2"><a href="text-mining-and-semantic-network-analysis.html#cb1051-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">40</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1051-3"><a href="text-mining-and-semantic-network-analysis.html#cb1051-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">No_Tweets =</span> n)</span>
+<span id="cb1051-4"><a href="text-mining-and-semantic-network-analysis.html#cb1051-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1051-5"><a href="text-mining-and-semantic-network-analysis.html#cb1051-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(top_accounts)</span></code></pre></div>
+<pre><code>      screen_name No_Tweets
+1 GMiller06698349        71
+2      IngaKaybor        70
+3         xenadog        62
+4   realmikes0017        60
+5  SomeGuyOnABoat        56
+6 AustinSteinbart        41</code></pre>
+<p>Use <code>left_join()</code> function to match and join rows from our <code>tf_idf_user</code> data set that match a “screen_name” in our “top_accounts” data frame. Once we select a few key columns of interest, the result gives us TF-IDF scores of the most active accounts.</p>
+<div class="sourceCode" id="cb1053"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1053-1"><a href="text-mining-and-semantic-network-analysis.html#cb1053-1" aria-hidden="true" tabindex="-1"></a>top_tf_idf_user <span class="ot">&lt;-</span> top_accounts <span class="sc">%&gt;%</span></span>
+<span id="cb1053-2"><a href="text-mining-and-semantic-network-analysis.html#cb1053-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(tf_idf_user, <span class="at">by =</span> <span class="st">&quot;screen_name&quot;</span>)</span>
+<span id="cb1053-3"><a href="text-mining-and-semantic-network-analysis.html#cb1053-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1053-4"><a href="text-mining-and-semantic-network-analysis.html#cb1053-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(top_tf_idf_user)</span></code></pre></div>
+<pre><code>      screen_name No_Tweets    word word_freq_by_user total_words_by_user    tf
+1 GMiller06698349        71   trump               100                1830 0.055
+2 GMiller06698349        71   qanon                71                1830 0.039
+3 GMiller06698349        71   hands                14                1830 0.008
+4 GMiller06698349        71 leaders                12                1830 0.007
+5 GMiller06698349        71     new                12                1830 0.007
+6 GMiller06698349        71   photo                12                1830 0.007
+    idf tf_idf
+1 2.062  0.113
+2 0.037  0.001
+3 5.218  0.040
+4 4.869  0.032
+5 2.949  0.019
+6 4.856  0.032</code></pre>
+<p>Now, using <strong>ggplot2</strong>, let’s create a few plots to depict the results for the most active accounts.</p>
+<div class="sourceCode" id="cb1055"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1055-1"><a href="text-mining-and-semantic-network-analysis.html#cb1055-1" aria-hidden="true" tabindex="-1"></a>top_tf_idf_user <span class="sc">%&gt;%</span></span>
+<span id="cb1055-2"><a href="text-mining-and-semantic-network-analysis.html#cb1055-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(tf_idf)) <span class="sc">%&gt;%</span></span>
+<span id="cb1055-3"><a href="text-mining-and-semantic-network-analysis.html#cb1055-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">factor</span>(word, <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">unique</span>(word)))) <span class="sc">%&gt;%</span></span>
+<span id="cb1055-4"><a href="text-mining-and-semantic-network-analysis.html#cb1055-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(screen_name) <span class="sc">%&gt;%</span> </span>
+<span id="cb1055-5"><a href="text-mining-and-semantic-network-analysis.html#cb1055-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1055-6"><a href="text-mining-and-semantic-network-analysis.html#cb1055-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, tf_idf, <span class="at">fill =</span> screen_name)) <span class="sc">+</span></span>
+<span id="cb1055-7"><a href="text-mining-and-semantic-network-analysis.html#cb1055-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1055-8"><a href="text-mining-and-semantic-network-analysis.html#cb1055-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">&quot;tf-idf&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1055-9"><a href="text-mining-and-semantic-network-analysis.html#cb1055-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>screen_name, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1055-10"><a href="text-mining-and-semantic-network-analysis.html#cb1055-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="9-Text_Minning_files/figure-html/unnamed-chunk-33-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="bigrams" class="section level3" number="16.2.3">
+<h3><span class="header-section-number">16.2.3</span> Bigrams</h3>
+<p>A useful approach to gain context about how words are used is to look at pairs of co-occurring words. As you can guess, many ways exist to define exactly what “co-occurrence” means (e.g, bi-gram, sentence, and paragraph). Here we will look at “bigrams,” or pairs of words, to set ourselves for semantic network analysis. One can imagine how this might be helpful. For instance, “America” might be a frequently used term and indicate our country’s prominence in a particular subject; however, our interpretation may change slightly if “America” appears frequently with negative terms, such as “defeat” or “imperialist.”</p>
+<p>As we did before, let’s leverage the <code>unnest_tokens()</code> function to identify bigrams and subsequently place them into their own column. Once we do that, we’ll have to preprocess our data again but can do so in the same chunk of code.</p>
+<div class="sourceCode" id="cb1056"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1056-1"><a href="text-mining-and-semantic-network-analysis.html#cb1056-1" aria-hidden="true" tabindex="-1"></a>bigrams_df <span class="ot">&lt;-</span> AUGSAMPQ_df <span class="sc">%&gt;%</span></span>
+<span id="cb1056-2"><a href="text-mining-and-semantic-network-analysis.html#cb1056-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select and clean the relevant variables as needed:</span></span>
+<span id="cb1056-3"><a href="text-mining-and-semantic-network-analysis.html#cb1056-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(screen_name, text) <span class="sc">%&gt;%</span></span>
+<span id="cb1056-4"><a href="text-mining-and-semantic-network-analysis.html#cb1056-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> stringr<span class="sc">::</span><span class="fu">str_remove_all</span>(text, <span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">d|[:punct:]&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1056-5"><a href="text-mining-and-semantic-network-analysis.html#cb1056-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> stringr<span class="sc">::</span><span class="fu">str_remove_all</span>(text, <span class="at">pattern =</span> <span class="st">&quot;https|t.co&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1056-6"><a href="text-mining-and-semantic-network-analysis.html#cb1056-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Unnest your tokens into bigraphs (two-word pairings)</span></span>
+<span id="cb1056-7"><a href="text-mining-and-semantic-network-analysis.html#cb1056-7" aria-hidden="true" tabindex="-1"></a>  tidytext<span class="sc">::</span><span class="fu">unnest_tokens</span>(bigram, text, <span class="at">token =</span><span class="st">&quot;ngrams&quot;</span>, <span class="at">n =</span><span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1056-8"><a href="text-mining-and-semantic-network-analysis.html#cb1056-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Split your bigram into two columns (Source and Target) </span></span>
+<span id="cb1056-9"><a href="text-mining-and-semantic-network-analysis.html#cb1056-9" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">separate</span>(bigram, <span class="fu">c</span>(<span class="st">&quot;Source&quot;</span>, <span class="st">&quot;Target&quot;</span>), <span class="at">sep =</span> <span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1056-10"><a href="text-mining-and-semantic-network-analysis.html#cb1056-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter out your stopwords</span></span>
+<span id="cb1056-11"><a href="text-mining-and-semantic-network-analysis.html#cb1056-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>Source <span class="sc">%in%</span> sw_list_en) <span class="sc">%&gt;%</span>  </span>
+<span id="cb1056-12"><a href="text-mining-and-semantic-network-analysis.html#cb1056-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>Target <span class="sc">%in%</span> sw_list_en) <span class="sc">%&gt;%</span> </span>
+<span id="cb1056-13"><a href="text-mining-and-semantic-network-analysis.html#cb1056-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>Source <span class="sc">%in%</span> sw_list_en2) <span class="sc">%&gt;%</span></span>
+<span id="cb1056-14"><a href="text-mining-and-semantic-network-analysis.html#cb1056-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>Target <span class="sc">%in%</span> sw_list_en2) <span class="sc">%&gt;%</span></span>
+<span id="cb1056-15"><a href="text-mining-and-semantic-network-analysis.html#cb1056-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>Source <span class="sc">%in%</span> sw_list_ja) <span class="sc">%&gt;%</span></span>
+<span id="cb1056-16"><a href="text-mining-and-semantic-network-analysis.html#cb1056-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>Target <span class="sc">%in%</span> sw_list_ja) <span class="sc">%&gt;%</span></span>
+<span id="cb1056-17"><a href="text-mining-and-semantic-network-analysis.html#cb1056-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove NAs from your data</span></span>
+<span id="cb1056-18"><a href="text-mining-and-semantic-network-analysis.html#cb1056-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Source) <span class="sc">|</span> <span class="sc">!</span><span class="fu">is.na</span>(Target))</span></code></pre></div>
+<p>Let’s look at the most frequent bigrams in our data set. It’s unsurprising we see <code>"qanon"</code> and <code>"wwg1wga"</code> together frequently.</p>
+<div class="sourceCode" id="cb1057"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1057-1"><a href="text-mining-and-semantic-network-analysis.html#cb1057-1" aria-hidden="true" tabindex="-1"></a>bigram_el <span class="ot">&lt;-</span> bigrams_df <span class="sc">%&gt;%</span> </span>
+<span id="cb1057-2"><a href="text-mining-and-semantic-network-analysis.html#cb1057-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Source, Target, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1057-3"><a href="text-mining-and-semantic-network-analysis.html#cb1057-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1057-4"><a href="text-mining-and-semantic-network-analysis.html#cb1057-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bigram_el)</span></code></pre></div>
+<pre><code>              Source          Target    n
+1              qanon          wwgwga 4052
+2              human     trafficking 1211
+3              child     trafficking 1114
+4           pedogate        pedowood 1082
+5 billclintonisapedo        remember 1044
+6 clintoncrimefamily savethechildren 1044</code></pre>
+</div>
+<div id="semantic-networks" class="section level3" number="16.2.4">
+<h3><span class="header-section-number">16.2.4</span> Semantic Networks</h3>
+<p>Numerous approaches exist for analyzing the network structure of texts. Here we draw on
+semantic network analysis where nodes are terms, themes, and concepts, and the ties between them
+indicate some sort of shared commonality, such as being adjacent, in the same sentence, tweet, song, or saying <span class="citation"><a href="#ref-Carley1994" role="doc-biblioref">Carley</a> (<a href="#ref-Carley1994" role="doc-biblioref">1994</a>)</span>. It has been used to examine Jane Austen novels <span class="citation">(<a href="#ref-Silge2017" role="doc-biblioref">Robinson and Silge 2017</a>)</span>, State of the Union addresses <span class="citation">(<a href="#ref-Ruleetal2015" role="doc-biblioref">Rule, Cointet, and Bearman 2015</a>)</span>, Sudanese culture <span class="citation">(<a href="#ref-Diesneretal2012" role="doc-biblioref">Diesner, Kathleen Carley, and Tambayong 2012</a>)</span>, and the Arab Spring <span class="citation">(<a href="#ref-Pfeffer2012" role="doc-biblioref">Pfeffer and Carley 2012</a>)</span>. Here will continue to use our bigrams from the previous section to build a network data set.</p>
+<p>Use the following code to create an <code>igraph</code> object from our bigram date frame. For now we will treat it as non-directed.</p>
+<div class="sourceCode" id="cb1059"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1059-1"><a href="text-mining-and-semantic-network-analysis.html#cb1059-1" aria-hidden="true" tabindex="-1"></a>twitter_ig <span class="ot">&lt;-</span> <span class="fu">graph_from_data_frame</span>(bigram_el,</span>
+<span id="cb1059-2"><a href="text-mining-and-semantic-network-analysis.html#cb1059-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1059-3"><a href="text-mining-and-semantic-network-analysis.html#cb1059-3" aria-hidden="true" tabindex="-1"></a>twitter_ig</span></code></pre></div>
+<pre><code>IGRAPH 7a0df7f UN-- 18892 36918 -- 
++ attr: name (v/c), n (e/n)
++ edges from 7a0df7f (vertex names):
+ [1] qanon             --wwgwga          human             --trafficking    
+ [3] child             --trafficking     pedogate          --pedowood       
+ [5] billclintonisapedo--remember        clintoncrimefamily--savethechildren
+ [7] crazy             --now             child             --elite          
+ [9] pedogate          --epsteinfiles    now               --huh            
+[11] pedowood          --pizzagateisreal pizzagate         --tried          
+[13] qanon             --pizzagateisreal elite             --powerful       
+[15] epsteinfiles      --savethechildren trafficking       --networks       
++ ... omitted several edges</code></pre>
+<p>As you can see, this is a very large network that we should avoid plotting in <strong>igraph</strong>. So, you can either write it to a CSV file Gephi (you do not need to import it for this lab) or you can use subgroup analysis to pull out selected terms and then visualize it in <strong>igraph</strong> (e.g., k-cores). In any case, remember that we based our ties on bigrams, so degree and frequency should essentially tell us the same results.</p>
+<div class="sourceCode" id="cb1061"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1061-1"><a href="text-mining-and-semantic-network-analysis.html#cb1061-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(bigram_el, <span class="at">file =</span> <span class="st">&quot;Semantic_Net.csv&quot;</span>)</span></code></pre></div>
+<p>We can demonstrate the second option using k-cores.</p>
+<div class="sourceCode" id="cb1062"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1062-1"><a href="text-mining-and-semantic-network-analysis.html#cb1062-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">coreness</span>(twitter_ig))</span></code></pre></div>
+<pre><code>
+   1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16 
+8227 7176 1282  767  422  310  183  137  109   77  134   23    2    5    6    5 
+  17   19 
+   8   19 </code></pre>
+<p>We will use the largest k-core for demonstration purposes, which is the 19-core containing 19 nodes. First, we need to assign k-core values as attributes.</p>
+<div class="sourceCode" id="cb1064"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1064-1"><a href="text-mining-and-semantic-network-analysis.html#cb1064-1" aria-hidden="true" tabindex="-1"></a>largest_core <span class="ot">&lt;-</span> twitter_ig <span class="sc">%&gt;%</span></span>
+<span id="cb1064-2"><a href="text-mining-and-semantic-network-analysis.html#cb1064-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_vertex_attr</span>(<span class="at">name =</span> <span class="st">&quot;core&quot;</span>, <span class="at">value =</span> <span class="fu">coreness</span>(.)) <span class="sc">%&gt;%</span></span>
+<span id="cb1064-3"><a href="text-mining-and-semantic-network-analysis.html#cb1064-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">induced_subgraph</span>(<span class="fu">V</span>(.)<span class="sc">$</span>core <span class="sc">==</span> <span class="dv">19</span>)</span></code></pre></div>
+<p>Simplify and plot plot the k-cores of interest.</p>
+<div class="sourceCode" id="cb1065"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1065-1"><a href="text-mining-and-semantic-network-analysis.html#cb1065-1" aria-hidden="true" tabindex="-1"></a>largest_core <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">simplify</span>(largest_core,</span>
+<span id="cb1065-2"><a href="text-mining-and-semantic-network-analysis.html#cb1065-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">remove.multiple =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1065-3"><a href="text-mining-and-semantic-network-analysis.html#cb1065-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1065-4"><a href="text-mining-and-semantic-network-analysis.html#cb1065-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(largest_core,</span>
+<span id="cb1065-5"><a href="text-mining-and-semantic-network-analysis.html#cb1065-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.size =</span> <span class="dv">10</span>, </span>
+<span id="cb1065-6"><a href="text-mining-and-semantic-network-analysis.html#cb1065-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">edge.arrow.size =</span> <span class="fl">0.1</span>, </span>
+<span id="cb1065-7"><a href="text-mining-and-semantic-network-analysis.html#cb1065-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.shape =</span> <span class="st">&quot;sphere&quot;</span>,</span>
+<span id="cb1065-8"><a href="text-mining-and-semantic-network-analysis.html#cb1065-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">layout =</span> layout_with_fr, </span>
+<span id="cb1065-9"><a href="text-mining-and-semantic-network-analysis.html#cb1065-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vertex.color =</span> <span class="st">&quot;lightblue&quot;</span>, </span>
+<span id="cb1065-10"><a href="text-mining-and-semantic-network-analysis.html#cb1065-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Largest K-Core (19)&quot;</span>)</span></code></pre></div>
+<p><img src="9-Text_Minning_files/figure-html/unnamed-chunk-40-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>That’s all for now.</p>
+
+</div>
+</div>
+</div>
+
+
+
+</div>
+
+
+
+<h3> References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Carley1994" class="csl-entry">
+Carley, Kathleen. 1994. <span>“Extracting Culture Through Textual Analysis.”</span> <em>Poetics</em>, 291–312.
+</div>
+<div id="ref-Diesneretal2012" class="csl-entry">
+Diesner, Jana, Kathleen Carley, and L Tambayong. 2012. <span>“Mapping Socio-Cultural Networks of Sudan from Open-Source, Large-Scale Text Data.”</span> <em>Computational and Mathematical Organizational Theory</em> 18 (3): 328–39.
+</div>
+<div id="ref-Pfeffer2012" class="csl-entry">
+Pfeffer, Juergen, and Kathleen Carley. 2012. <span>“Rapid Modeling and Analyzing Networks Extracted from Pre-Structured New Articles.”</span> <em>Computational and Mathematical Organizational Theory</em> 18: 280–99.
+</div>
+<div id="ref-Silge2017" class="csl-entry">
+Robinson, David, and Julia Silge. 2017. <em>Text Mining with r: A Tidy Approach</em>. O’Reilly Media, Inc.
+</div>
+<div id="ref-Ruleetal2015" class="csl-entry">
+Rule, Alix, Jean-Philippe Cointet, and Peter S. Bearman. 2015. <span>“Lexical Shifts, Substantive Changes, and Continuity in State of the Union Discourse, 1790–2014.”</span> <em>PNAS</em> 112 (35): 10837–44.
+</div>
+<div id="ref-Wickham2019" class="csl-entry">
+Wickham, Hadley. 2019. <em>Advanced r</em>. 12th ed. Paperback; Chapman; Hall/CRC. <a href="https://adv-r.hadley.nz/">https://adv-r.hadley.nz/</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="stochastic-actor-oriented-models-saoms.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjcallag/r4ds/edit/editing/9-Text_Minning.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"font_settings": {
+"family": "sans",
+"theme": "white",
+"size": 2
+},
+"info": true,
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
