@@ -251,6 +251,16 @@ frequencies
 term-frequency---inverse-document-frequency-tf-idf
 bigrams
 semantic-networks
+topic-modeling-and-sentiment-analysis-of-social-media-networks
+data-and-setup-2
+load-libraries-9
+data
+sentiment-analysis-multiple-network-levels
+sentiment-for-overall-network
+sentiment-for-individual-topics
+subgroup-sentiment
+key-actor-sentiment
+topic-modeling-community-level
 basic-base-r-and-tidyverse-data-manipulation-cheat-sheet
 basic-base-r-and-dplyr-functions
 installation
