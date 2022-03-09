@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>17 Topic Modeling and Sentiment Analysis of Social Media Networks | R for Social Network Analysis</title>
+  <meta name="description" content="TBD." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="17 Topic Modeling and Sentiment Analysis of Social Media Networks | R for Social Network Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="TBD." />
+  <meta name="github-repo" content="cjcallag/r4sna" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="17 Topic Modeling and Sentiment Analysis of Social Media Networks | R for Social Network Analysis" />
+  
+  <meta name="twitter:description" content="TBD." />
+  
+
+<meta name="author" content="CORE Lab" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="text-mining-and-semantic-network-analysis.html"/>
+<link rel="next" href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.20/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="libs/selectize-0.12.0/selectize.min.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/wordcloud2-0.0.1/wordcloud.css" rel="stylesheet" />
+<script src="libs/wordcloud2-0.0.1/wordcloud2-all.js"></script>
+<script src="libs/wordcloud2-0.0.1/hover.js"></script>
+<script src="libs/wordcloud2-binding-0.2.1/wordcloud2.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="my_style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">R for Social Network Analysis</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#instructors"><i class="fa fa-check"></i><b>1.1</b> Instructors</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="2" data-path="setting-up.html"><a href="setting-up.html"><i class="fa fa-check"></i><b>2</b> Setting Up</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="setting-up.html"><a href="setting-up.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.1</b> R and RStudio Basics</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="setting-up.html"><a href="setting-up.html#basics-of-r-coding-in-rstudio"><i class="fa fa-check"></i><b>2.1.1</b> Basics of R Coding in RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="setting-up.html"><a href="setting-up.html#project-workflow"><i class="fa fa-check"></i><b>2.2</b> Project Workflow</a></li>
+</ul></li>
+<li class="part"><span><b>II Lab 1</b></span></li>
+<li class="chapter" data-level="3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>3</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#setup"><i class="fa fa-check"></i><b>3.1</b> Setup</a></li>
+<li class="chapter" data-level="3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#load-libraries"><i class="fa fa-check"></i><b>3.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#one-mode-social-network-data-in-igraph-koschade-network"><i class="fa fa-check"></i><b>3.3</b> One-mode Social Network Data in <strong>igraph</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-one-mode-social-network-data"><i class="fa fa-check"></i><b>3.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="3.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-visualizing-the-koschade-network"><i class="fa fa-check"></i><b>3.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="3.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff"><i class="fa fa-check"></i><b>3.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="3.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data"><i class="fa fa-check"></i><b>3.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#two-mode-social-network-data-in-igraph-davis-southern-women"><i class="fa fa-check"></i><b>3.4</b> Two-mode Social Network Data in <strong>igraph</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#importing-two-mode-social-network-data-into-igraph"><i class="fa fa-check"></i><b>3.4.1</b> Importing Two-Mode Social Network Data into <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-two-mode-social-network-data-in-igraph"><i class="fa fa-check"></i><b>3.4.2</b> Plotting Two-Mode Social Network Data in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-igraph"><i class="fa fa-check"></i><b>3.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="3.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#plotting-projected-one-mode-networks"><i class="fa fa-check"></i><b>3.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="3.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-plots"><i class="fa fa-check"></i><b>3.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="3.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-igraph.html#saving-network-data-1"><i class="fa fa-check"></i><b>3.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>4</b> Importing and Visualizing One- and Two-Mode Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#setup-1"><i class="fa fa-check"></i><b>4.1</b> Setup</a></li>
+<li class="chapter" data-level="4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#load-libraries-1"><i class="fa fa-check"></i><b>4.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#one-mode-social-network-data-in-statnet-koschade-network"><i class="fa fa-check"></i><b>4.3</b> One-mode Social Network Data in <strong>statnet</strong>: Koschade Network</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-one-mode-social-network-data-1"><i class="fa fa-check"></i><b>4.3.1</b> Importing One-Mode Social Network Data</a></li>
+<li class="chapter" data-level="4.3.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-visualizing-the-koschade-network-1"><i class="fa fa-check"></i><b>4.3.2</b> Plotting (Visualizing) the Koschade Network</a></li>
+<li class="chapter" data-level="4.3.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-e.g.-pdf-jpeg-png-tiff-1"><i class="fa fa-check"></i><b>4.3.3</b> Saving Network Plots (e.g., pdf, jpeg, png, tiff)</a></li>
+<li class="chapter" data-level="4.3.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-2"><i class="fa fa-check"></i><b>4.3.4</b> Saving Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#two-mode-social-network-data-in-statnet-davis-southern-women"><i class="fa fa-check"></i><b>4.4</b> Two-Mode Social Network Data in <strong>statnet</strong>: Davis Southern Women</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#importing-two-mode-network-data"><i class="fa fa-check"></i><b>4.4.1</b> Importing Two-Mode Network Data</a></li>
+<li class="chapter" data-level="4.4.2" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-two-mode-networks"><i class="fa fa-check"></i><b>4.4.2</b> Plotting Two-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.3" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#projecting-folding-two-mode-networks-into-one-mode-networks-in-statnet."><i class="fa fa-check"></i><b>4.4.3</b> Projecting (Folding) Two-Mode Networks into One-Mode Networks in <strong>statnet</strong>.</a></li>
+<li class="chapter" data-level="4.4.4" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#plotting-projected-one-mode-networks-1"><i class="fa fa-check"></i><b>4.4.4</b> Plotting Projected One-Mode Networks</a></li>
+<li class="chapter" data-level="4.4.5" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-plots-1"><i class="fa fa-check"></i><b>4.4.5</b> Saving Network Plots</a></li>
+<li class="chapter" data-level="4.4.6" data-path="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html"><a href="importing-and-visualizing-one--and-two-mode-social-network-data-in-statnet.html#saving-network-data-3"><i class="fa fa-check"></i><b>4.4.6</b> Saving Network Data</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Lab 2</b></span></li>
+<li class="chapter" data-level="5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html"><i class="fa fa-check"></i><b>5</b> Manipulating and Simplifying Social Network Data in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#setup-2"><i class="fa fa-check"></i><b>5.1</b> Setup</a></li>
+<li class="chapter" data-level="5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-libraries-2"><i class="fa fa-check"></i><b>5.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-the-backbones-of-two-mode-network-projections"><i class="fa fa-check"></i><b>5.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#load-data"><i class="fa fa-check"></i><b>5.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="5.3.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#non-statistical-projections-of-the-co-sponsorhip-data"><i class="fa fa-check"></i><b>5.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="5.3.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-backbones"><i class="fa fa-check"></i><b>5.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#simplifying-networks-in-igraph-anabaptist-leadership-network"><i class="fa fa-check"></i><b>5.4</b> Simplifying Networks in <strong>igraph</strong>: Anabaptist Leadership Network</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-network-and-attribute-data"><i class="fa fa-check"></i><b>5.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-the-anabaptist-network"><i class="fa fa-check"></i><b>5.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="5.4.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#shrinking-collapsing-contracting-networks"><i class="fa fa-check"></i><b>5.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="5.4.4" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-subnetworks"><i class="fa fa-check"></i><b>5.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#multiple-stacked-networks-in-igraph-sampson-monastery"><i class="fa fa-check"></i><b>5.5</b> Multiple (Stacked) Networks in <strong>igraph</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#importing-edge-list-network-data"><i class="fa fa-check"></i><b>5.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="5.5.2" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#plotting-stacked-networks"><i class="fa fa-check"></i><b>5.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="5.5.3" data-path="manipulating-and-simplifying-social-network-data-in-igraph.html"><a href="manipulating-and-simplifying-social-network-data-in-igraph.html#extracting-and-plotting-individual-networks"><i class="fa fa-check"></i><b>5.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html"><i class="fa fa-check"></i><b>6</b> Manipulating and Simplifying Social Network Data in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#setup-3"><i class="fa fa-check"></i><b>6.1</b> Setup</a></li>
+<li class="chapter" data-level="6.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-libraries-3"><i class="fa fa-check"></i><b>6.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="6.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-the-backbones-of-two-mode-network-projections-1"><i class="fa fa-check"></i><b>6.3</b> Extracting the “Backbones” of Two-Mode Network Projections</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#load-data-1"><i class="fa fa-check"></i><b>6.3.1</b> Load Data</a></li>
+<li class="chapter" data-level="6.3.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#non-statistical-projections-of-the-co-sponsorhip-data-1"><i class="fa fa-check"></i><b>6.3.2</b> Non-Statistical Projections of the Co-Sponsorhip Data</a></li>
+<li class="chapter" data-level="6.3.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-backbones-1"><i class="fa fa-check"></i><b>6.3.3</b> Extracting Backbones</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#simplifying-networks-in-statnet-anabaptist-network"><i class="fa fa-check"></i><b>6.4</b> Simplifying Networks in <strong>statnet</strong>: Anabaptist Network</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-network-and-attribute-data-1"><i class="fa fa-check"></i><b>6.4.1</b> Importing Network and Attribute Data</a></li>
+<li class="chapter" data-level="6.4.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-the-anabaptist-network-1"><i class="fa fa-check"></i><b>6.4.2</b> Plotting the Anabaptist Network</a></li>
+<li class="chapter" data-level="6.4.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#shrinking-collapsing-contracting-networks-1"><i class="fa fa-check"></i><b>6.4.3</b> Shrinking (Collapsing, Contracting) Networks</a></li>
+<li class="chapter" data-level="6.4.4" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-subnetworks-1"><i class="fa fa-check"></i><b>6.4.4</b> Extracting Subnetworks</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#multiple-stacked-networks-in-statnet-sampson-monastery"><i class="fa fa-check"></i><b>6.5</b> Multiple (Stacked) Networks in <strong>statnet</strong>: Sampson Monastery</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#importing-edge-list-network-data-1"><i class="fa fa-check"></i><b>6.5.1</b> Importing Edge List Network Data</a></li>
+<li class="chapter" data-level="6.5.2" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#plotting-stacked-networks-1"><i class="fa fa-check"></i><b>6.5.2</b> Plotting Stacked Networks</a></li>
+<li class="chapter" data-level="6.5.3" data-path="manipulating-and-simplifying-social-network-data-in-statnet.html"><a href="manipulating-and-simplifying-social-network-data-in-statnet.html#extracting-and-plotting-individual-networks-1"><i class="fa fa-check"></i><b>6.5.3</b> Extracting and Plotting Individual Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Lab 3</b></span></li>
+<li class="chapter" data-level="7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html"><i class="fa fa-check"></i><b>7</b> Network Topography in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#setup-4"><i class="fa fa-check"></i><b>7.1</b> Setup</a></li>
+<li class="chapter" data-level="7.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#load-libraries-4"><i class="fa fa-check"></i><b>7.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="7.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#import-data"><i class="fa fa-check"></i><b>7.3</b> Import Data</a></li>
+<li class="chapter" data-level="7.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size-and-interconnectedness"><i class="fa fa-check"></i><b>7.4</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-size"><i class="fa fa-check"></i><b>7.4.1</b> Network Size</a></li>
+<li class="chapter" data-level="7.4.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#density-and-average-degree"><i class="fa fa-check"></i><b>7.4.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="7.4.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#clustering-coefficient-global-and-local"><i class="fa fa-check"></i><b>7.4.3</b> Clustering Coefficient (Global and Local)</a></li>
+<li class="chapter" data-level="7.4.4" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#cohesion-and-fragmentation"><i class="fa fa-check"></i><b>7.4.4</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="7.4.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#compactness-and-breadth"><i class="fa fa-check"></i><b>7.4.5</b> Compactness and Breadth</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization-and-related-measures-of-spread"><i class="fa fa-check"></i><b>7.5</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#centralization"><i class="fa fa-check"></i><b>7.5.1</b> Centralization</a></li>
+<li class="chapter" data-level="7.5.2" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#variance-and-standard-deviation"><i class="fa fa-check"></i><b>7.5.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="7.5.3" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#diameter-and-average-path-distance"><i class="fa fa-check"></i><b>7.5.3</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#calculating-the-e-i-index-with-isnar"><i class="fa fa-check"></i><b>7.6</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+<li class="chapter" data-level="7.7" data-path="network-topography-in-igraph.html"><a href="network-topography-in-igraph.html#network-level-measures-table"><i class="fa fa-check"></i><b>7.7</b> Network Level Measures Table</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html"><i class="fa fa-check"></i><b>8</b> Network Topography in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#setup-5"><i class="fa fa-check"></i><b>8.1</b> Setup</a></li>
+<li class="chapter" data-level="8.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#load-libraries-5"><i class="fa fa-check"></i><b>8.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="8.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#import-data-1"><i class="fa fa-check"></i><b>8.3</b> Import Data</a></li>
+<li class="chapter" data-level="8.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-and-interconnectedness-1"><i class="fa fa-check"></i><b>8.4</b> Network Size and Interconnectedness</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#network-size-1"><i class="fa fa-check"></i><b>8.4.1</b> Network Size</a></li>
+<li class="chapter" data-level="8.4.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#density-and-average-degree-1"><i class="fa fa-check"></i><b>8.4.2</b> Density and Average Degree</a></li>
+<li class="chapter" data-level="8.4.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#cohesion-and-fragmentation-1"><i class="fa fa-check"></i><b>8.4.3</b> Cohesion and Fragmentation</a></li>
+<li class="chapter" data-level="8.4.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#compactness-and-breadth-1"><i class="fa fa-check"></i><b>8.4.4</b> Compactness and Breadth</a></li>
+<li class="chapter" data-level="8.4.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-interconnectedness-scores"><i class="fa fa-check"></i><b>8.4.5</b> Table of Interconnectedness Scores</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-and-related-measures-of-spread-1"><i class="fa fa-check"></i><b>8.5</b> Centralization and Related Measures of Spread</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#centralization-1"><i class="fa fa-check"></i><b>8.5.1</b> Centralization</a></li>
+<li class="chapter" data-level="8.5.2" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#variance-and-standard-deviation-1"><i class="fa fa-check"></i><b>8.5.2</b> Variance and Standard Deviation</a></li>
+<li class="chapter" data-level="8.5.3" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#table-of-centralization-scores"><i class="fa fa-check"></i><b>8.5.3</b> Table of Centralization Scores</a></li>
+<li class="chapter" data-level="8.5.4" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#diameter-and-average-path-distance-1"><i class="fa fa-check"></i><b>8.5.4</b> Diameter and Average Path Distance</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="network-topography-in-statnet.html"><a href="network-topography-in-statnet.html#calculating-the-e-i-index-with-isnar-1"><i class="fa fa-check"></i><b>8.6</b> Calculating the E-I Index with <strong>isnar</strong></a></li>
+</ul></li>
+<li class="part"><span><b>V Lab 4</b></span></li>
+<li class="chapter" data-level="9" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html"><i class="fa fa-check"></i><b>9</b> Detecting Subgroups in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#setup-6"><i class="fa fa-check"></i><b>9.1</b> Setup</a></li>
+<li class="chapter" data-level="9.2" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#load-library"><i class="fa fa-check"></i><b>9.2</b> Load Library</a></li>
+<li class="chapter" data-level="9.3" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#import-and-plot-network"><i class="fa fa-check"></i><b>9.3</b> Import and Plot Network</a></li>
+<li class="chapter" data-level="9.4" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#components-in-igraph"><i class="fa fa-check"></i><b>9.4</b> Components in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.5" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#cliques-in-igraph"><i class="fa fa-check"></i><b>9.5</b> Cliques in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.6" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#k-cores-in-igraph"><i class="fa fa-check"></i><b>9.6</b> K-Cores in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="9.7" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#community-detection-in-igraph"><i class="fa fa-check"></i><b>9.7</b> Community Detection in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="9.7.1" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#girvan-newman"><i class="fa fa-check"></i><b>9.7.1</b> Girvan-Newman</a></li>
+<li class="chapter" data-level="9.7.2" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#walktrap"><i class="fa fa-check"></i><b>9.7.2</b> Walktrap</a></li>
+<li class="chapter" data-level="9.7.3" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#spin-glass"><i class="fa fa-check"></i><b>9.7.3</b> Spin-Glass</a></li>
+<li class="chapter" data-level="9.7.4" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#louvain"><i class="fa fa-check"></i><b>9.7.4</b> Louvain</a></li>
+<li class="chapter" data-level="9.7.5" data-path="detecting-subgroups-in-igraph.html"><a href="detecting-subgroups-in-igraph.html#table-of-results"><i class="fa fa-check"></i><b>9.7.5</b> Table of Results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html"><i class="fa fa-check"></i><b>10</b> Detecting Subgroups in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#setup-7"><i class="fa fa-check"></i><b>10.1</b> Setup</a></li>
+<li class="chapter" data-level="10.2" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#load-libraries-6"><i class="fa fa-check"></i><b>10.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="10.3" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#import-and-plot-network-1"><i class="fa fa-check"></i><b>10.3</b> Import and Plot Network</a></li>
+<li class="chapter" data-level="10.4" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#components-in-statnet"><i class="fa fa-check"></i><b>10.4</b> Components in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.5" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#cliques-in-statnet"><i class="fa fa-check"></i><b>10.5</b> Cliques in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.6" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#k-cores-in-statnet"><i class="fa fa-check"></i><b>10.6</b> K-Cores in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="10.7" data-path="detecting-subgroups-in-statnet.html"><a href="detecting-subgroups-in-statnet.html#community-detection-in-statnet"><i class="fa fa-check"></i><b>10.7</b> Community Detection in <strong>statnet</strong></a></li>
+</ul></li>
+<li class="part"><span><b>VI Lab 5</b></span></li>
+<li class="chapter" data-level="11" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html"><i class="fa fa-check"></i><b>11</b> Centrality and Brokerage in <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#setup-8"><i class="fa fa-check"></i><b>11.1</b> Setup</a></li>
+<li class="chapter" data-level="11.2" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#load-libraries-7"><i class="fa fa-check"></i><b>11.2</b> Load Libraries</a></li>
+<li class="chapter" data-level="11.3" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#load-data-2"><i class="fa fa-check"></i><b>11.3</b> Load Data</a></li>
+<li class="chapter" data-level="11.4" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#centrality-and-power-undirected-networks"><i class="fa fa-check"></i><b>11.4</b> Centrality and Power (Undirected Networks)</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#degree-closeness-betweenness-and-eigenvector"><i class="fa fa-check"></i><b>11.4.1</b> Degree, Closeness, Betweenness, and Eigenvector</a></li>
+<li class="chapter" data-level="11.4.2" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#correlations"><i class="fa fa-check"></i><b>11.4.2</b> Correlations</a></li>
+<li class="chapter" data-level="11.4.3" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#interactive-table"><i class="fa fa-check"></i><b>11.4.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#centrality-and-prestige-directed-networks"><i class="fa fa-check"></i><b>11.5</b> Centrality and Prestige (Directed Networks)</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#in-n-out-degree-hubs-and-authorities"><i class="fa fa-check"></i><b>11.5.1</b> In-N-Out Degree, Hubs and Authorities</a></li>
+<li class="chapter" data-level="11.5.2" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#correlations-1"><i class="fa fa-check"></i><b>11.5.2</b> Correlations</a></li>
+<li class="chapter" data-level="11.5.3" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#interactive-table-1"><i class="fa fa-check"></i><b>11.5.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#brokerage"><i class="fa fa-check"></i><b>11.6</b> Brokerage</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#cutpoints"><i class="fa fa-check"></i><b>11.6.1</b> Cutpoints</a></li>
+<li class="chapter" data-level="11.6.2" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#cutsets-key-player"><i class="fa fa-check"></i><b>11.6.2</b> Cutsets (Key Player)</a></li>
+<li class="chapter" data-level="11.6.3" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#burts-constraint"><i class="fa fa-check"></i><b>11.6.3</b> Burt’s Constraint</a></li>
+<li class="chapter" data-level="11.6.4" data-path="centrality-and-brokerage-in-igraph.html"><a href="centrality-and-brokerage-in-igraph.html#bridges-edge-betweenness"><i class="fa fa-check"></i><b>11.6.4</b> Bridges: Edge Betweenness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html"><i class="fa fa-check"></i><b>12</b> Centrality and Brokerage in <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#setup-9"><i class="fa fa-check"></i><b>12.1</b> Setup</a></li>
+<li class="chapter" data-level="12.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#libraries"><i class="fa fa-check"></i><b>12.2</b> Libraries</a></li>
+<li class="chapter" data-level="12.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#load-data-3"><i class="fa fa-check"></i><b>12.3</b> Load Data</a></li>
+<li class="chapter" data-level="12.4" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#centrality-and-power-undirected-networks-1"><i class="fa fa-check"></i><b>12.4</b> Centrality and Power (Undirected Networks)</a>
+<ul>
+<li class="chapter" data-level="12.4.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#degree-closeness-betweenness-and-eigenvector-centrality"><i class="fa fa-check"></i><b>12.4.1</b> Degree, Closeness, Betweenness and Eigenvector Centrality</a></li>
+<li class="chapter" data-level="12.4.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#correlations-2"><i class="fa fa-check"></i><b>12.4.2</b> Correlations</a></li>
+<li class="chapter" data-level="12.4.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#interactive-table-2"><i class="fa fa-check"></i><b>12.4.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#centrality-and-prestige-directed-networks-1"><i class="fa fa-check"></i><b>12.5</b> Centrality and Prestige (Directed Networks)</a>
+<ul>
+<li class="chapter" data-level="12.5.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#in-n-out-degree-input-domain-and-proximity-prestige"><i class="fa fa-check"></i><b>12.5.1</b> In-N-Out Degree, Input Domain, and Proximity Prestige</a></li>
+<li class="chapter" data-level="12.5.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#correlations-3"><i class="fa fa-check"></i><b>12.5.2</b> Correlations</a></li>
+<li class="chapter" data-level="12.5.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#interactive-table-3"><i class="fa fa-check"></i><b>12.5.3</b> Interactive Table</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#brokerage-1"><i class="fa fa-check"></i><b>12.6</b> Brokerage</a>
+<ul>
+<li class="chapter" data-level="12.6.1" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#cutpoints-1"><i class="fa fa-check"></i><b>12.6.1</b> Cutpoints</a></li>
+<li class="chapter" data-level="12.6.2" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#cutsets-key-player-1"><i class="fa fa-check"></i><b>12.6.2</b> Cutsets (Key Player)</a></li>
+<li class="chapter" data-level="12.6.3" data-path="centrality-and-brokerage-in-statnet.html"><a href="centrality-and-brokerage-in-statnet.html#gould-and-fernandez"><i class="fa fa-check"></i><b>12.6.3</b> Gould and Fernandez</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>VII Lab 6</b></span></li>
+<li class="chapter" data-level="13" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html"><i class="fa fa-check"></i><b>13</b> Hypothesis Testing (QAP and CUG)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#introduction-1"><i class="fa fa-check"></i><b>13.1</b> Introduction</a></li>
+<li class="chapter" data-level="13.2" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#developing-and-testing-working-hypotheses"><i class="fa fa-check"></i><b>13.2</b> Developing and Testing Working Hypotheses</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#univariate-bivariate-and-multivariate-statistical-tests"><i class="fa fa-check"></i><b>13.2.1</b> Univariate, Bivariate, and Multivariate Statistical Tests</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#challenging-expectations-with-conditional-uniform-graphs-cugs"><i class="fa fa-check"></i><b>13.3</b> Challenging Expectations with Conditional Uniform Graphs (CUGs)</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#univariate-cug-tests-in-statnet"><i class="fa fa-check"></i><b>13.3.1</b> Univariate CUG Tests in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="13.3.2" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#bivariate-tests-using-cug"><i class="fa fa-check"></i><b>13.3.2</b> Bivariate Tests Using CUG</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#quadratic-assignment-procedure-qap"><i class="fa fa-check"></i><b>13.4</b> Quadratic Assignment Procedure (QAP)</a>
+<ul>
+<li class="chapter" data-level="13.4.1" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#bivariate-tests-using-qap-correlation"><i class="fa fa-check"></i><b>13.4.1</b> Bivariate Tests Using QAP: Correlation</a></li>
+<li class="chapter" data-level="13.4.2" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#multivariate-models-using-qap"><i class="fa fa-check"></i><b>13.4.2</b> Multivariate Models using QAP</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#a-note-on-interpretation-causality-in-networks"><i class="fa fa-check"></i><b>13.5</b> A Note on interpretation: Causality in Networks</a></li>
+<li class="chapter" data-level="13.6" data-path="hypothesis-testing-qap-and-cug.html"><a href="hypothesis-testing-qap-and-cug.html#summary-lessons-learned"><i class="fa fa-check"></i><b>13.6</b> Summary: Lessons Learned</a></li>
+</ul></li>
+<li class="part"><span><b>VIII Lab 7</b></span></li>
+<li class="chapter" data-level="14" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html"><i class="fa fa-check"></i><b>14</b> Exponential Random Graph Models (ERGMs)</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#introduction-2"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#ergms-with-undirected-data"><i class="fa fa-check"></i><b>14.2</b> ERGMs With Undirected Data</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#data-and-setup"><i class="fa fa-check"></i><b>14.2.1</b> Data and Setup</a></li>
+<li class="chapter" data-level="14.2.2" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#pira-ergms"><i class="fa fa-check"></i><b>14.2.2</b> PIRA ERGMs</a></li>
+<li class="chapter" data-level="14.2.3" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#compare-to-qap-logistic-regression"><i class="fa fa-check"></i><b>14.2.3</b> Compare to QAP logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#ergms-with-directed-data"><i class="fa fa-check"></i><b>14.3</b> ERGMs With Directed Data</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#data-and-setup-1"><i class="fa fa-check"></i><b>14.3.1</b> Data and Setup</a></li>
+<li class="chapter" data-level="14.3.2" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#explore-data"><i class="fa fa-check"></i><b>14.3.2</b> Explore Data</a></li>
+<li class="chapter" data-level="14.3.3" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#teo-ergms"><i class="fa fa-check"></i><b>14.3.3</b> TEO ERGMs</a></li>
+<li class="chapter" data-level="14.3.4" data-path="exponential-random-graph-models-ergms.html"><a href="exponential-random-graph-models-ergms.html#appendix-ergm-package-and-pnet-comparison"><i class="fa fa-check"></i><b>14.3.4</b> Appendix: ERGM Package and PNet Comparison</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IX Lab 8</b></span></li>
+<li class="chapter" data-level="15" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html"><i class="fa fa-check"></i><b>15</b> Stochastic Actor Oriented Models (SAOMs)</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#core-assumptions"><i class="fa fa-check"></i><b>15.1</b> Core Assumptions</a></li>
+<li class="chapter" data-level="15.2" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#brief-overview-of-statistical-procedure"><i class="fa fa-check"></i><b>15.2</b> Brief Overview of Statistical Procedure</a></li>
+<li class="chapter" data-level="15.3" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#general-steps-in-r"><i class="fa fa-check"></i><b>15.3</b> General Steps in R</a></li>
+<li class="chapter" data-level="15.4" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#exploratory-analysis"><i class="fa fa-check"></i><b>15.4</b> Exploratory Analysis</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#load-libraries-8"><i class="fa fa-check"></i><b>15.4.1</b> Load Libraries</a></li>
+<li class="chapter" data-level="15.4.2" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#import-data-2"><i class="fa fa-check"></i><b>15.4.2</b> Import Data</a></li>
+<li class="chapter" data-level="15.4.3" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#network-plots"><i class="fa fa-check"></i><b>15.4.3</b> Network Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#data-and-setup-for-saoms-in-rsiena"><i class="fa fa-check"></i><b>15.5</b> Data and Setup for SAOMs in <strong>RSiena</strong></a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#load-and-detach-libraries"><i class="fa fa-check"></i><b>15.5.1</b> Load and Detach Libraries</a></li>
+<li class="chapter" data-level="15.5.2" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#import-and-format-data"><i class="fa fa-check"></i><b>15.5.2</b> Import and Format Data</a></li>
+<li class="chapter" data-level="15.5.3" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#structural-model"><i class="fa fa-check"></i><b>15.5.3</b> Structural Model</a></li>
+<li class="chapter" data-level="15.5.4" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#model-with-actor-covariates"><i class="fa fa-check"></i><b>15.5.4</b> Model with Actor Covariates</a></li>
+<li class="chapter" data-level="15.5.5" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#goodness-of-fit-gof"><i class="fa fa-check"></i><b>15.5.5</b> Goodness of Fit (GOF)</a></li>
+<li class="chapter" data-level="15.5.6" data-path="stochastic-actor-oriented-models-saoms.html"><a href="stochastic-actor-oriented-models-saoms.html#interpret-the-results"><i class="fa fa-check"></i><b>15.5.6</b> Interpret the Results</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>X Lab 9</b></span></li>
+<li class="chapter" data-level="16" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html"><i class="fa fa-check"></i><b>16</b> Text Mining and Semantic Network Analysis</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#data-exploration"><i class="fa fa-check"></i><b>16.1</b> Data Exploration</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#data-formatting-and-preprocessing-text"><i class="fa fa-check"></i><b>16.1.1</b> Data Formatting and Preprocessing Text</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#analysis"><i class="fa fa-check"></i><b>16.2</b> Analysis</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#frequencies"><i class="fa fa-check"></i><b>16.2.1</b> Frequencies</a></li>
+<li class="chapter" data-level="16.2.2" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#term-frequency---inverse-document-frequency-tf-idf"><i class="fa fa-check"></i><b>16.2.2</b> Term Frequency - Inverse Document Frequency (TF-IDF)</a></li>
+<li class="chapter" data-level="16.2.3" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#bigrams"><i class="fa fa-check"></i><b>16.2.3</b> Bigrams</a></li>
+<li class="chapter" data-level="16.2.4" data-path="text-mining-and-semantic-network-analysis.html"><a href="text-mining-and-semantic-network-analysis.html#semantic-networks"><i class="fa fa-check"></i><b>16.2.4</b> Semantic Networks</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>XI Lab 10</b></span></li>
+<li class="chapter" data-level="17" data-path="topic-modeling-and-sentiment-analysis-of-social-media-networks.html"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html"><i class="fa fa-check"></i><b>17</b> Topic Modeling and Sentiment Analysis of Social Media Networks</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="topic-modeling-and-sentiment-analysis-of-social-media-networks.html"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#data-and-setup-2"><i class="fa fa-check"></i><b>17.1</b> Data and Setup</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="topic-modeling-and-sentiment-analysis-of-social-media-networks.html"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#load-libraries-9"><i class="fa fa-check"></i><b>17.1.1</b> Load Libraries</a></li>
+<li class="chapter" data-level="17.1.2" data-path="topic-modeling-and-sentiment-analysis-of-social-media-networks.html"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#data"><i class="fa fa-check"></i><b>17.1.2</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="topic-modeling-and-sentiment-analysis-of-social-media-networks.html"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#sentiment-analysis-multiple-network-levels"><i class="fa fa-check"></i><b>17.2</b> Sentiment Analysis (Multiple Network Levels)</a>
+<ul>
+<li class="chapter" data-level="17.2.1" data-path="topic-modeling-and-sentiment-analysis-of-social-media-networks.html"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#sentiment-for-overall-network"><i class="fa fa-check"></i><b>17.2.1</b> Sentiment for Overall Network</a></li>
+<li class="chapter" data-level="17.2.2" data-path="topic-modeling-and-sentiment-analysis-of-social-media-networks.html"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#sentiment-for-individual-topics"><i class="fa fa-check"></i><b>17.2.2</b> Sentiment for Individual Topics</a></li>
+<li class="chapter" data-level="17.2.3" data-path="topic-modeling-and-sentiment-analysis-of-social-media-networks.html"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#subgroup-sentiment"><i class="fa fa-check"></i><b>17.2.3</b> Subgroup Sentiment</a></li>
+<li class="chapter" data-level="17.2.4" data-path="topic-modeling-and-sentiment-analysis-of-social-media-networks.html"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#key-actor-sentiment"><i class="fa fa-check"></i><b>17.2.4</b> Key Actor Sentiment</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="topic-modeling-and-sentiment-analysis-of-social-media-networks.html"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#topic-modeling-community-level"><i class="fa fa-check"></i><b>17.3</b> Topic Modeling (Community Level)</a></li>
+</ul></li>
+<li class="part"><span><b>XII Appendices</b></span></li>
+<li class="chapter" data-level="18" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><i class="fa fa-check"></i><b>18</b> Basic Base R and Tidyverse Data Manipulation Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#basic-base-r-and-dplyr-functions"><i class="fa fa-check"></i><b>18.1</b> Basic Base R and <strong>dplyr</strong> Functions</a></li>
+<li class="chapter" data-level="18.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#installation"><i class="fa fa-check"></i><b>18.2</b> Installation</a></li>
+<li class="chapter" data-level="18.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#loading"><i class="fa fa-check"></i><b>18.3</b> Loading</a></li>
+<li class="chapter" data-level="18.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#import-and-view-data"><i class="fa fa-check"></i><b>18.4</b> Import and View Data</a></li>
+<li class="chapter" data-level="18.5" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#extracting-variablescolumns"><i class="fa fa-check"></i><b>18.5</b> Extracting Variables/Columns</a></li>
+<li class="chapter" data-level="18.6" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#creating-filtersextracting-rows"><i class="fa fa-check"></i><b>18.6</b> Creating Filters/Extracting Rows</a></li>
+<li class="chapter" data-level="18.7" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#arrange-rows"><i class="fa fa-check"></i><b>18.7</b> Arrange Rows</a></li>
+<li class="chapter" data-level="18.8" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#making-a-new-columnvariable"><i class="fa fa-check"></i><b>18.8</b> Making a New Column/Variable</a></li>
+<li class="chapter" data-level="18.9" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#rename-variables"><i class="fa fa-check"></i><b>18.9</b> Rename Variables</a></li>
+<li class="chapter" data-level="18.10" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#summarizing"><i class="fa fa-check"></i><b>18.10</b> Summarizing</a>
+<ul>
+<li class="chapter" data-level="18.10.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#simple-summary"><i class="fa fa-check"></i><b>18.10.1</b> Simple Summary</a></li>
+<li class="chapter" data-level="18.10.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#group-summary"><i class="fa fa-check"></i><b>18.10.2</b> Group Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="18.11" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#combining-data"><i class="fa fa-check"></i><b>18.11</b> Combining Data</a>
+<ul>
+<li class="chapter" data-level="18.11.1" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#left-join"><i class="fa fa-check"></i><b>18.11.1</b> Left Join</a></li>
+<li class="chapter" data-level="18.11.2" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#right-join"><i class="fa fa-check"></i><b>18.11.2</b> Right Join</a></li>
+<li class="chapter" data-level="18.11.3" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#inner-join"><i class="fa fa-check"></i><b>18.11.3</b> Inner Join</a></li>
+<li class="chapter" data-level="18.11.4" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#full-join"><i class="fa fa-check"></i><b>18.11.4</b> Full Join</a></li>
+</ul></li>
+<li class="chapter" data-level="18.12" data-path="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html"><a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html#piping-multiple-variables"><i class="fa fa-check"></i><b>18.12</b> Piping Multiple Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html"><i class="fa fa-check"></i><b>19</b> Key SNA Functions and Visualization Cheat Sheet</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#igraph"><i class="fa fa-check"></i><b>19.1</b> <strong>igraph</strong></a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-igraph"><i class="fa fa-check"></i><b>19.1.1</b> Creating a graph object in <strong>igraph</strong></a></li>
+<li class="chapter" data-level="19.1.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-igraph"><i class="fa fa-check"></i><b>19.1.2</b> Visualization Parameters and Layouts in <strong>igraph</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="19.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#statnet"><i class="fa fa-check"></i><b>19.2</b> <strong>statnet</strong></a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#creating-a-graph-object-in-statnet"><i class="fa fa-check"></i><b>19.2.1</b> Creating a graph object in <strong>statnet</strong></a></li>
+<li class="chapter" data-level="19.2.2" data-path="key-sna-functions-and-visualization-cheat-sheet.html"><a href="key-sna-functions-and-visualization-cheat-sheet.html#visualization-parameters-and-layouts-in-statnet"><i class="fa fa-check"></i><b>19.2.2</b> Visualization Parameters and Layouts in <strong>statnet</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>XIII References</b></span></li>
+<li class="chapter" data-level="20" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>20</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown">
+Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Social Network Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="topic-modeling-and-sentiment-analysis-of-social-media-networks" class="section level1" number="17">
+<h1><span class="header-section-number">17</span> Topic Modeling and Sentiment Analysis of Social Media Networks</h1>
+<p>A common challenge we face during analysis is our ability to efficiently and effectively organize, sort, structure, and analyze a collection of documents that contain pertinent information in the form of text, such as news sites, blogs, tweets, YouTube comments, etc. Typically, we examine websites manually (e.g., looking up Twitter accounts of interest) and conduct keyword searches (e.g., databases or Google) to identify sources of information on which we need to allocate our limited time and resources.</p>
+<p>Given the amount of information that we have to sift through during a typical analytic cycle, however, we cannot rely solely on manual methods to understand sentiment and central topics embedded within documents, let alone a large set of documents. Furthermore, we risk focusing too much on specific documents and ignoring other potentially relevant texts by relying our “best guess” as to which sources are most relevant to our topic at hand.</p>
+<p>This lab serves as an introduction to two examples of natural language processing (NLP) for analyzing social media data: namely, sentiment analysis and topic modeling. The former, often used synonymously with opinion mining (though they are not the same thing), is a broad set of approaches to identify sentiments expressed in a body of text, such as a large collection of tweets.While several approaches exist, two commonly used sentiment analysis are machine learning (ML) (supervised and unsupervised) and lexicon-based techniques. While ML and hybrid ML-lexicon approaches offer many advantages, this lab introduces you to a lexicon-based approach for identifying sentiment in Twitter data.</p>
+<p>As several researchers have explained (e.g., Giachanou and Crestani (2016)), Twitter data poses unique challenges for sentiment analysis. For instance, tweets are short by nature (the 140 characters could be of an issue for ML approaches); samples and underlying sentiment may not be representative of a target population (e.g., younger individuals use Twitter more often than older people); we often do not know “where” or from whom data originates; users often use emoticons, emojis, and incorrect English; many samples contain multi-lingual text, which often forces analysts to “throw away” data depending on their approach; and samples regularly contain multiple topics for which users have sentiment. The data set we use here, which is a sample of tweets containing #QAnon in early-August 2020, is no exception. Not everyone who has tweeted #QAnon is a “believer” and the movement incorporates a variety of topics for which users may express sentiment.</p>
+<p>Topic modeling is another useful approach for understanding large bodies of text. It is form of statistical modeling for discovering hidden topics and themes that occur in a collection of documents, as well as for classifying documents based on those themes. Because we do not have time to read and/or hand-code themes within large collections of text, we need statistical algorithms to analyze the words in the texts and to uncover the structure of topics within the set of documents and within individual documents themselves.</p>
+<p>Here we cover latent dirichlet allocation (LDA), which is a commonly used form of topic modeling. This form of modeling makes two basic assumptions (Silge and Robinson, 2017):</p>
+<p><strong>Every document is a mixture of topics</strong>. Let’s use an oversimplified example for demonstration purposes. If we tell an LDA model to identify two prominent topics in two extremely active Twitter accounts (i.e., two documents), we might find that Twitter Account A is 90% topic A (e.g., music) and 10% topic B (e.g., sports) while Twitter Account B is 50% topic A (e.g., music) and 50% topic B (e.g., sports). <strong>Every topic is a mixture of words</strong>. Using the same Twitter accounts, we could imagine common words embedded in the tweets for the music topic might be “hip-hop,” “rock,” “pop,” “Michael Jackson,” “Led Zeppelin,” and “Tupac,” whereas the most relevant words for sports might be “basketball,” “football,” “athlete,” “run,” and “swim.”</p>
+<p>As with Lab 9, we adapted much of this lab from the excellent reference, <em>Text Mining with R: A Tidy Approach</em> (2017) (<a href="https://www.tidytextmining.com/" class="uri">https://www.tidytextmining.com/</a>).</p>
+<div id="data-and-setup-2" class="section level2" number="17.1">
+<h2><span class="header-section-number">17.1</span> Data and Setup</h2>
+<p>Place a header at the top of your script that tells you what you called it, what it accomplishes, etc.</p>
+<div class="sourceCode" id="cb1066"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1066-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1066-1" aria-hidden="true" tabindex="-1"></a><span class="do">########################################################################</span></span>
+<span id="cb1066-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1066-2" aria-hidden="true" tabindex="-1"></a><span class="co"># What: Topic Modeling and Sentiment Analysis of Social Media Networks</span></span>
+<span id="cb1066-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1066-3" aria-hidden="true" tabindex="-1"></a><span class="co"># File: Lab10_Data_QSamp.RData</span></span>
+<span id="cb1066-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1066-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Created: 02.28.19</span></span>
+<span id="cb1066-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1066-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Revised: 03.03.22</span></span>
+<span id="cb1066-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1066-6" aria-hidden="true" tabindex="-1"></a><span class="do">########################################################################</span></span></code></pre></div>
+<div id="load-libraries-9" class="section level3" number="17.1.1">
+<h3><span class="header-section-number">17.1.1</span> Load Libraries</h3>
+<p>After you set your working directory, go ahead and load the following packages for this lab. You should be familiar with most of these by now.</p>
+<div class="sourceCode" id="cb1067"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1067-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1067-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) </span>
+<span id="cb1067-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1067-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb1067-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1067-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)<span class="co">#Good for working with temporal data, which contains dates. </span></span>
+<span id="cb1067-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1067-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1067-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1067-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb1067-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1067-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rtweet)<span class="co"># For functions like &quot;round_time&quot;</span></span>
+<span id="cb1067-7"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1067-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(textdata)</span>
+<span id="cb1067-8"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1067-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb1067-9"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1067-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(topicmodels)<span class="co"># Used for LDA. </span></span>
+<span id="cb1067-10"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1067-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ldatuning)<span class="co"># This will help us identify how many topics we want to ask for in the LDA section. </span></span>
+<span id="cb1067-11"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1067-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)<span class="co"># Helps us export our data into csv. </span></span>
+<span id="cb1067-12"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1067-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span></code></pre></div>
+<p>As with the previous lab, set your global options so that strings are NOT considered as factors.</p>
+<div class="sourceCode" id="cb1068"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1068-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1068-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+</div>
+<div id="data" class="section level3" number="17.1.2">
+<h3><span class="header-section-number">17.1.2</span> Data</h3>
+<p>As briefly mentioned above, the data set we will use here is similar to what we examined in the previous lab. Specifically, this data set contains only a 9 of the original 90 columns and is limited to tweets in the English language. <strong>We have pre-processed the text already for you (e.g., removed stop words and converted text to lower case). We will “tokenize” our data shortly. If you want practice, please feel free to work through the process on Lab 9’s data set</strong>.</p>
+<p>Once you run the next chunk of code, note the last few columns contained in our data: “hubs,” “auth,” and “community.” The first two reflect each user’s hubs and authority scores for a combined replies, quotes, mentions, and retweets network among the “English” speaking users. Hence, the data are directed for these statistics and this is not an <code>igraph</code> object, but rather the results from running statistics on one.</p>
+<p>It also contains the “louvain” community to which each user belongs. There are 739 louvain communities and the network appears rather modular (.82) even though it was too large to visualize efficiently.</p>
+<div class="sourceCode" id="cb1069"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1069-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1069-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Lab10_Data_QSamp.RData&quot;</span>)</span>
+<span id="cb1069-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1069-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(QA_df)</span></code></pre></div>
+<pre><code>[1] &quot;user_id&quot;     &quot;status_id&quot;   &quot;screen_name&quot; &quot;created_at&quot;  &quot;text&quot;       
+[6] &quot;lang&quot;        &quot;hubs&quot;        &quot;auth&quot;        &quot;community&quot;  </code></pre>
+<p>As we’ve discussed in class, you have to consider at least two important issues when conducting sentiment analysis using a lexicon-based approach: choice of lexicon dictionary and unit of analysis. The former is important because dictionaries are often built for a specific context. In this case, we will use the <code>AFINN</code> sentiment lexicon, which is a list of English terms rated by Finn Arup Nielsen with values between -5 (negative) and +5 (positive) (<a href="http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html" class="uri">http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html</a>). Like other lexicons, not all words, especially neutral ones, are included in the dictionary.</p>
+<p>It is not the only dictionary option that is available using the <code>get_sentiments()</code> function, but it is useful because it is built specifically for microblogs, of which Twitter is a form. You can see, for example, that the term “abandon” is given a value of -2.</p>
+<div class="sourceCode" id="cb1071"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1071-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1071-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>))</span></code></pre></div>
+<pre><code># A tibble: 6 x 2
+  word       value
+  &lt;chr&gt;      &lt;dbl&gt;
+1 abandon       -2
+2 abandoned     -2
+3 abandons      -2
+4 abducted      -2
+5 abduction     -2
+6 abductions    -2</code></pre>
+<p>The second important consideration is our unit of analysis. Commonly used units for sentiment analysis are the document, sentence, or entity. Thus, we might be using a lexicon based on words, but we’re identifying sentiment for different units of analysis. Because networks are multi-level in nature, we will examine sentiment based on the entire network, specific communities (i.e., louvain subgroups), and central user accounts (e.g., “hubs”). However, we will stick with the community-level for LDA to identify topics underlying narratives within each cluster.</p>
+</div>
+</div>
+<div id="sentiment-analysis-multiple-network-levels" class="section level2" number="17.2">
+<h2><span class="header-section-number">17.2</span> Sentiment Analysis (Multiple Network Levels)</h2>
+<div id="sentiment-for-overall-network" class="section level3" number="17.2.1">
+<h3><span class="header-section-number">17.2.1</span> Sentiment for Overall Network</h3>
+<p>Let’s begin by looking at the overall sentiment in the network. First, we need to use the <code>unnest()</code> function to parse out individual words from our data set’s “text” column.</p>
+<div class="sourceCode" id="cb1073"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1073-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1073-1" aria-hidden="true" tabindex="-1"></a>text_words <span class="ot">&lt;-</span> QA_df <span class="sc">%&gt;%</span></span>
+<span id="cb1073-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1073-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text)</span>
+<span id="cb1073-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1073-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1073-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1073-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(text_words[<span class="dv">3</span><span class="sc">:</span><span class="dv">9</span>])<span class="co">#Here we are looking at the last seven columns.</span></span></code></pre></div>
+<pre><code>  screen_name          created_at lang hubs auth community              word
+1    S223S223 2020-08-01 17:32:48   en    0    0       163             qanon
+2    S223S223 2020-08-01 17:32:48   en    0    0       163           reverse
+3    S223S223 2020-08-01 17:32:48   en    0    0       163             spell
+4    S223S223 2020-08-01 17:32:48   en    0    0       163             qanon
+5    S223S223 2020-08-01 17:32:48   en    0    0       163 thegreatawakening
+6   Shaddilay 2020-08-01 17:32:25   en    0    0       190               wow</code></pre>
+<p>Let’s explore the overall score a few different ways, such as the distribution of sentiment values (-5 to 5), average word sentiment across all tweets, and some extreme values/terms.</p>
+<p>Run the code below to obtain the distribution of sentiment values. For instance, only 34 words are extremely negative (-5) and 23 are extremely positive (+5).</p>
+<div class="sourceCode" id="cb1075"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1075-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1075-1" aria-hidden="true" tabindex="-1"></a>count_sent <span class="ot">&lt;-</span> text_words <span class="sc">%&gt;%</span>  </span>
+<span id="cb1075-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1075-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>), <span class="at">by =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1075-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1075-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(value)</span>
+<span id="cb1075-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1075-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1075-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1075-5" aria-hidden="true" tabindex="-1"></a>count_sent</span></code></pre></div>
+<pre><code>   value     n
+1     -5    34
+2     -4  3422
+3     -3 16016
+4     -2 11794
+5     -1  6682
+6      1 14109
+7      2 23272
+8      3  5439
+9      4  1361
+10     5    23</code></pre>
+<p>It’s more useful to observe the distribution visually. Let’s go ahead and plot the distribution with a histogram.</p>
+<div class="sourceCode" id="cb1077"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1077-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1077-1" aria-hidden="true" tabindex="-1"></a>count_sent <span class="sc">%&gt;%</span></span>
+<span id="cb1077-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1077-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb1077-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1077-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb1077-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1077-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb1077-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1077-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Count&quot;</span>,</span>
+<span id="cb1077-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1077-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">&quot;Sentiment Value&quot;</span>,</span>
+<span id="cb1077-7"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1077-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">&quot;#QAnon Conversation (AUG 1-7)&quot;</span>,</span>
+<span id="cb1077-8"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1077-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">&quot;English Tweets - AFINN&quot;</span>)</span></code></pre></div>
+<p><img src="10-TMandSA_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>While the average may not be super illuminating, we can calculate it using the following code. The <code>inner_join()</code> function applies the “afinn” dictionary to our data frame and we use <code>tally()</code> and <code>mean()</code> to obtain our overall average. The average indicates the overall sentiment is negative but perhaps less so than one would expect from #QAnon.</p>
+<div class="sourceCode" id="cb1078"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1078-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1078-1" aria-hidden="true" tabindex="-1"></a>net_sent <span class="ot">&lt;-</span> text_words <span class="sc">%&gt;%</span><span class="co">#Average score across tweets. </span></span>
+<span id="cb1078-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1078-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>), <span class="at">by =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1078-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1078-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>(<span class="fu">mean</span>(value))</span>
+<span id="cb1078-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1078-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1078-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1078-5" aria-hidden="true" tabindex="-1"></a>net_sent</span></code></pre></div>
+<pre><code>           n
+1 -0.1174287</code></pre>
+<p>Averages are somewhat tricky because we have temporal data. Using the code below, we can obtain and visualize the daily average sentiment from 1-7 August (we modified code from <a href="https://github.com/mkearney/rstudioconf_tweets#explore" class="uri">https://github.com/mkearney/rstudioconf_tweets#explore</a>). Negative values/sentiment (i.e., those below 0) are colored in red, while positive daily scores are blue.</p>
+<div class="sourceCode" id="cb1080"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1080-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-1" aria-hidden="true" tabindex="-1"></a>text_words <span class="sc">%&gt;%</span></span>
+<span id="cb1080-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>), <span class="at">by =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1080-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">round_time</span>(created_at, <span class="st">&quot;days&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1080-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time) <span class="sc">%&gt;%</span></span>
+<span id="cb1080-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">value =</span> <span class="fu">mean</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1080-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">valence =</span> <span class="fu">ifelse</span>(value <span class="sc">&gt;</span> 0L, <span class="st">&quot;Positive&quot;</span>, <span class="st">&quot;Negative&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb1080-7"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> value)) <span class="sc">+</span></span>
+<span id="cb1080-8"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="at">span =</span> .<span class="dv">5</span>,</span>
+<span id="cb1080-9"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">&quot;purple&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1080-10"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">fill =</span> valence, <span class="at">colour =</span> valence), </span>
+<span id="cb1080-11"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">size =</span> <span class="fl">3.5</span>) <span class="sc">+</span></span>
+<span id="cb1080-12"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb1080-13"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>,</span>
+<span id="cb1080-14"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>),</span>
+<span id="cb1080-15"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">rel</span>(<span class="dv">1</span>), <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb1080-16"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">rel</span>(.<span class="dv">75</span>)),</span>
+<span id="cb1080-17"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb1080-18"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb1080-19"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="at">Positive =</span> <span class="st">&quot;royalblue4&quot;</span>, <span class="at">Negative =</span> <span class="st">&quot;red&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb1080-20"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(</span>
+<span id="cb1080-21"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="at">Positive =</span> <span class="st">&quot;#001155&quot;</span>, <span class="at">Negative =</span> <span class="st">&quot;#550000&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb1080-22"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1080-23"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Sentiment #QAnon from 1-7 Aug&quot;</span>,</span>
+<span id="cb1080-24"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Mean sentiment of tweets aggregated on daily intervals&quot;</span>,</span>
+<span id="cb1080-25"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1080-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Source: Data gathered using rtweet. Sentiment analysis done using afinn lexicon&quot;</span>)</span></code></pre></div>
+<p><img src="10-TMandSA_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Now, let’s check out each term’s “contribution” to the overall sentiment, which is the product of a term’s sentiment according to the dictionary and the number of times it appears. For instance, the term “conspiracy” has a value of -3 and it appears 4,427 times in our data set, which means its contribution score is -13,281. We’ve included code to export code in case you want to examine more than a sample of terms.</p>
+<div class="sourceCode" id="cb1081"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1081-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1081-1" aria-hidden="true" tabindex="-1"></a>contributions <span class="ot">&lt;-</span> text_words <span class="sc">%&gt;%</span></span>
+<span id="cb1081-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1081-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>), <span class="at">by =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1081-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1081-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb1081-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1081-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">occurences =</span> <span class="fu">n</span>(),</span>
+<span id="cb1081-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1081-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">contribution =</span> <span class="fu">sum</span>(value))</span>
+<span id="cb1081-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1081-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1081-7"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1081-7" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(contributions, <span class="st">&quot;QAnon_Sentiment_Contributions.csv&quot;</span>)</span></code></pre></div>
+<p>As with our distribution of values, it can be more effective to visualize/plot the results. Unsurprisingly, we can see that “conspiracy” is a negative term that contributes substantially to the overall average.</p>
+<div class="sourceCode" id="cb1082"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1082-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1082-1" aria-hidden="true" tabindex="-1"></a>contributions <span class="sc">%&gt;%</span></span>
+<span id="cb1082-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1082-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">25</span>, <span class="fu">abs</span>(contribution)) <span class="sc">%&gt;%</span></span>
+<span id="cb1082-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1082-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, contribution)) <span class="sc">%&gt;%</span></span>
+<span id="cb1082-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1082-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, contribution, <span class="at">fill =</span> contribution <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb1082-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1082-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1082-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1082-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="10-TMandSA_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="sentiment-for-individual-topics" class="section level3" number="17.2.2">
+<h3><span class="header-section-number">17.2.2</span> Sentiment for Individual Topics</h3>
+<p>While the Twitter conversation is about #QAnon, there are almost certainly subtopics that we can explore using sentiment analysis. One approach is to extract tweets about specific entities/topics about which there might an opinion for which we can assess sentiment, such as “Hollywood” and “deep state.” Such an approach may give us an idea about how Twitter users felt toward the two during that time and within the broader #QAnon conversation (which is actually just one hashtag about the movement).</p>
+<p>Let’s begin by extracting all tweets that contain the terms “Hollywood” and “deepstate/deep state” and put them into their own data frames.</p>
+<div class="sourceCode" id="cb1083"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1083-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1083-1" aria-hidden="true" tabindex="-1"></a>hollywood_df<span class="ot">&lt;-</span>QA_df<span class="sc">%&gt;%</span></span>
+<span id="cb1083-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1083-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(<span class="at">string =</span> text, <span class="at">pattern =</span> <span class="st">&quot;hollywood&quot;</span>))</span>
+<span id="cb1083-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1083-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1083-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1083-4" aria-hidden="true" tabindex="-1"></a>deepstate_df<span class="ot">&lt;-</span>QA_df<span class="sc">%&gt;%</span></span>
+<span id="cb1083-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1083-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(<span class="at">string =</span> text, <span class="at">pattern =</span> <span class="st">&quot;deepstate | deep state&quot;</span>))</span></code></pre></div>
+<p>Now we can run the same code for our two new data frames as we did above. We’ll do Hollywood and then deep state.</p>
+<div class="sourceCode" id="cb1084"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1084-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1084-1" aria-hidden="true" tabindex="-1"></a>hollywood_sent <span class="ot">&lt;-</span> hollywood_df <span class="sc">%&gt;%</span> </span>
+<span id="cb1084-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1084-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text) <span class="sc">%&gt;%</span></span>
+<span id="cb1084-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1084-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>), <span class="at">by =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1084-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1084-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(value)</span>
+<span id="cb1084-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1084-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1084-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1084-6" aria-hidden="true" tabindex="-1"></a>hollywood_sent <span class="sc">%&gt;%</span></span>
+<span id="cb1084-7"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1084-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb1084-8"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1084-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb1084-9"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1084-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb1084-10"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1084-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Count&quot;</span>,</span>
+<span id="cb1084-11"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1084-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">&quot;Sentiment Value&quot;</span>,</span>
+<span id="cb1084-12"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1084-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">&quot;Sentiment - Hollywood&quot;</span>,</span>
+<span id="cb1084-13"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1084-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">&quot;English Tweets - AFINN&quot;</span>)</span></code></pre></div>
+<p><img src="10-TMandSA_files/figure-html/unnamed-chunk-15-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Now, let’s do deep state.</p>
+<div class="sourceCode" id="cb1085"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1085-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1085-1" aria-hidden="true" tabindex="-1"></a>deepstate_sent <span class="ot">&lt;-</span> deepstate_df <span class="sc">%&gt;%</span> </span>
+<span id="cb1085-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1085-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text) <span class="sc">%&gt;%</span></span>
+<span id="cb1085-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1085-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>), <span class="at">by =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1085-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1085-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(value)</span>
+<span id="cb1085-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1085-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1085-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1085-6" aria-hidden="true" tabindex="-1"></a>deepstate_sent <span class="sc">%&gt;%</span></span>
+<span id="cb1085-7"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1085-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb1085-8"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1085-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> F) <span class="sc">+</span></span>
+<span id="cb1085-9"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1085-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb1085-10"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1085-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Count&quot;</span>,</span>
+<span id="cb1085-11"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1085-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">&quot;Sentiment Value&quot;</span>,</span>
+<span id="cb1085-12"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1085-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">&quot;Sentiment - Deep State&quot;</span>,</span>
+<span id="cb1085-13"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1085-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">&quot;English Tweets - AFINN&quot;</span>)</span></code></pre></div>
+<p><img src="10-TMandSA_files/figure-html/unnamed-chunk-16-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Now, calculate the average sentiment for each.</p>
+<div class="sourceCode" id="cb1086"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1086-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1086-1" aria-hidden="true" tabindex="-1"></a>avg_hollywood_sent <span class="ot">&lt;-</span> hollywood_df <span class="sc">%&gt;%</span><span class="co">#Average score across tweets. </span></span>
+<span id="cb1086-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1086-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">unnest_tokens</span>(word, text) <span class="sc">%&gt;%</span></span>
+<span id="cb1086-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1086-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>), <span class="at">by =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1086-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1086-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>(<span class="fu">mean</span>(value))</span>
+<span id="cb1086-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1086-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1086-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1086-6" aria-hidden="true" tabindex="-1"></a>avg_hollywood_sent</span></code></pre></div>
+<pre><code>         n
+1 1.655154</code></pre>
+<div class="sourceCode" id="cb1088"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1088-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1088-1" aria-hidden="true" tabindex="-1"></a>avg_deepstate_sent <span class="ot">&lt;-</span> deepstate_df <span class="sc">%&gt;%</span><span class="co">#Average score across tweets. </span></span>
+<span id="cb1088-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1088-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text) <span class="sc">%&gt;%</span></span>
+<span id="cb1088-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1088-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>), <span class="at">by =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1088-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1088-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>(<span class="fu">mean</span>(value))</span>
+<span id="cb1088-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1088-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1088-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1088-6" aria-hidden="true" tabindex="-1"></a>avg_deepstate_sent</span></code></pre></div>
+<pre><code>          n
+1 -1.098325</code></pre>
+<p>Finally, take a look at word contributions for Hollywood and then deep state. What might this graph show about some limitations of sentiment analysis using a lexicon approach?</p>
+<div class="sourceCode" id="cb1090"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1090-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1090-1" aria-hidden="true" tabindex="-1"></a>hollywood_df <span class="sc">%&gt;%</span></span>
+<span id="cb1090-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1090-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text) <span class="sc">%&gt;%</span></span>
+<span id="cb1090-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1090-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>), <span class="at">by =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1090-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1090-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb1090-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1090-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">occurences =</span> <span class="fu">n</span>(),</span>
+<span id="cb1090-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1090-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">contribution =</span> <span class="fu">sum</span>(value))<span class="sc">%&gt;%</span></span>
+<span id="cb1090-7"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1090-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">25</span>, <span class="fu">abs</span>(contribution)) <span class="sc">%&gt;%</span></span>
+<span id="cb1090-8"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1090-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, contribution)) <span class="sc">%&gt;%</span></span>
+<span id="cb1090-9"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1090-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, contribution, <span class="at">fill =</span> contribution <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb1090-10"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1090-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1090-11"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1090-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="10-TMandSA_files/figure-html/unnamed-chunk-18-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb1091"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1091-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1091-1" aria-hidden="true" tabindex="-1"></a>deepstate_df <span class="sc">%&gt;%</span></span>
+<span id="cb1091-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1091-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text) <span class="sc">%&gt;%</span></span>
+<span id="cb1091-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1091-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>), <span class="at">by =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1091-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1091-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(word) <span class="sc">%&gt;%</span></span>
+<span id="cb1091-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1091-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">occurences =</span> <span class="fu">n</span>(),</span>
+<span id="cb1091-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1091-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">contribution =</span> <span class="fu">sum</span>(value))<span class="sc">%&gt;%</span></span>
+<span id="cb1091-7"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1091-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">25</span>, <span class="fu">abs</span>(contribution)) <span class="sc">%&gt;%</span></span>
+<span id="cb1091-8"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1091-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">reorder</span>(word, contribution)) <span class="sc">%&gt;%</span></span>
+<span id="cb1091-9"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1091-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(word, contribution, <span class="at">fill =</span> contribution <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb1091-10"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1091-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1091-11"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1091-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="10-TMandSA_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="subgroup-sentiment" class="section level3" number="17.2.3">
+<h3><span class="header-section-number">17.2.3</span> Subgroup Sentiment</h3>
+<p>Let’s turn to sentiment analysis based on communities. One question we can ask is, which communities were the most positive and negative overall? Because we have over 700 communities, we will limit ourselves to the 10 largest subgroups, all of which have over 1,000 members. Also, we will limit ourselves to overall sentiment per community rather than follow all the steps for sentiment for the overall network.</p>
+<p>First, we need to extract tweets from users who are embedded in the 10 largest subgroups. You can use the first chunk of code to explore which communities have the most members. We can see that communities “190” and “194” have the most members (indicated by the “Freq” column).</p>
+<div class="sourceCode" id="cb1092"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1092-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1092-1" aria-hidden="true" tabindex="-1"></a>groups_lv <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">table</span>(QA_df<span class="sc">$</span>community))</span>
+<span id="cb1092-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1092-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1092-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1092-3" aria-hidden="true" tabindex="-1"></a>top10 <span class="ot">&lt;-</span> groups_lv <span class="sc">%&gt;%</span></span>
+<span id="cb1092-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1092-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1092-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1092-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Freq))</span>
+<span id="cb1092-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1092-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1092-7"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1092-7" aria-hidden="true" tabindex="-1"></a>top10</span></code></pre></div>
+<pre><code>   Var1 Freq
+1   190 4846
+2   194 3143
+3   637 2823
+4   490 2459
+5   738 2382
+6   723 1696
+7   163 1500
+8   410 1354
+9   231 1039
+10  726 1013</code></pre>
+<p>Next, let’s filter all tweets from users in these subgroups.</p>
+<div class="sourceCode" id="cb1094"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1094-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1094-1" aria-hidden="true" tabindex="-1"></a>main_grps <span class="ot">&lt;-</span> QA_df<span class="sc">%&gt;%</span></span>
+<span id="cb1094-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1094-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(community <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;190&quot;</span>,</span>
+<span id="cb1094-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1094-3" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;194&quot;</span>,</span>
+<span id="cb1094-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1094-4" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;637&quot;</span>,</span>
+<span id="cb1094-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1094-5" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;490&quot;</span>,</span>
+<span id="cb1094-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1094-6" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;738&quot;</span>,</span>
+<span id="cb1094-7"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1094-7" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;723&quot;</span>,</span>
+<span id="cb1094-8"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1094-8" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;163&quot;</span>,</span>
+<span id="cb1094-9"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1094-9" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;410&quot;</span>,</span>
+<span id="cb1094-10"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1094-10" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;231&quot;</span>,</span>
+<span id="cb1094-11"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1094-11" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;726&quot;</span>))</span>
+<span id="cb1094-12"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1094-12" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(main_grps<span class="sc">$</span>community)<span class="co"># We&#39;ll use this to double-check our filter worked. </span></span></code></pre></div>
+<pre><code>
+ 163  190  194  231  410  490  637  723  726  738 
+1500 4846 3143 1039 1354 2459 2823 1696 1013 2382 </code></pre>
+<p>We need to assign a count of each word to each community. You can see that users in community “190” used the word “qanon” 5,300 times while accounts in subgroup “637” used it 3,714 times.</p>
+<div class="sourceCode" id="cb1096"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1096-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1096-1" aria-hidden="true" tabindex="-1"></a>text_main_grps <span class="ot">&lt;-</span> main_grps <span class="sc">%&gt;%</span></span>
+<span id="cb1096-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1096-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text) <span class="sc">%&gt;%</span></span>
+<span id="cb1096-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1096-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(community, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1096-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1096-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb1096-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1096-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1096-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1096-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(text_main_grps)</span></code></pre></div>
+<pre><code>  community   word    n
+1       190  qanon 5300
+2       490    now 4773
+3       637  qanon 3714
+4       190 wwgwga 3705
+5       194  qanon 3253
+6       738  qanon 2860</code></pre>
+<p>Now we can get the average sentiment for each community.</p>
+<div class="sourceCode" id="cb1098"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1098-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1098-1" aria-hidden="true" tabindex="-1"></a>group_sent <span class="ot">&lt;-</span> text_main_grps <span class="sc">%&gt;%</span></span>
+<span id="cb1098-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1098-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>), <span class="at">by =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1098-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1098-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(community) <span class="sc">%&gt;%</span></span>
+<span id="cb1098-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1098-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">value =</span> <span class="fu">sum</span>(value <span class="sc">*</span> n) <span class="sc">/</span> <span class="fu">sum</span>(n))</span>
+<span id="cb1098-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1098-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1098-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1098-6" aria-hidden="true" tabindex="-1"></a>group_sent</span></code></pre></div>
+<pre><code># A tibble: 10 x 2
+   community   value
+       &lt;dbl&gt;   &lt;dbl&gt;
+ 1       163  0.450 
+ 2       190  0.277 
+ 3       194 -0.202 
+ 4       231 -0.0580
+ 5       410 -0.642 
+ 6       490 -0.128 
+ 7       637 -0.469 
+ 8       723 -0.360 
+ 9       726 -0.100 
+10       738 -0.155 </code></pre>
+<p>Go ahead and visualize the results like we did before. You can see that the largest subgroup (i.e., “190”) is the second most positive group during the time frame while cluster “410” is the most negative.</p>
+<div class="sourceCode" id="cb1100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1100-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1100-1" aria-hidden="true" tabindex="-1"></a>group_sent <span class="sc">%&gt;%</span></span>
+<span id="cb1100-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">community =</span> <span class="fu">reorder</span>(community, value)) <span class="sc">%&gt;%</span></span>
+<span id="cb1100-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(community, value, <span class="at">fill =</span> value <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb1100-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1100-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1100-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1100-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb1100-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1100-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Average sentiment value across communities&quot;</span>)</span></code></pre></div>
+<p><img src="10-TMandSA_files/figure-html/unnamed-chunk-24-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="key-actor-sentiment" class="section level3" number="17.2.4">
+<h3><span class="header-section-number">17.2.4</span> Key Actor Sentiment</h3>
+<p>Next, let’s explore the sentiment expressed by key actors. We could use this approach for any centrality measure, but here we will demonstrate it with “hubs.” Specifically, we will look at sentiment underlying tweets from the top 20 hubs, that is, tweets from those accounts with a hub centrality score &gt;=1.26 (you can see this yourself in the data set but we’ll just tell you for demonstration purposes).</p>
+<div class="sourceCode" id="cb1101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1101-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1101-1" aria-hidden="true" tabindex="-1"></a>key_acts <span class="ot">&lt;-</span> QA_df <span class="sc">%&gt;%</span></span>
+<span id="cb1101-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1101-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(hubs <span class="sc">&gt;=</span> <span class="fl">0.126</span>)</span></code></pre></div>
+<p>As with communities in the previous section, we need to assign a count of each word to each of our top 20 hubs. You can see that “IngaKaybor” used the word “trump” 102 times.</p>
+<div class="sourceCode" id="cb1102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1102-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1102-1" aria-hidden="true" tabindex="-1"></a>text_main_acts <span class="ot">&lt;-</span> key_acts <span class="sc">%&gt;%</span></span>
+<span id="cb1102-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text) <span class="sc">%&gt;%</span></span>
+<span id="cb1102-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1102-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(screen_name, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1102-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1102-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb1102-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1102-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1102-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1102-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(text_main_acts)</span></code></pre></div>
+<pre><code>      screen_name  word   n
+1      IngaKaybor trump 102
+2 GMiller06698349 trump 100
+3         xenadog trump  98
+4   michicaligirl trump  96
+5   realmikes0017 trump  96
+6  SomeGuyOnABoat trump  92</code></pre>
+<p>Now we can get the average sentiment for each of our main hubs.</p>
+<div class="sourceCode" id="cb1104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1104-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1104-1" aria-hidden="true" tabindex="-1"></a>key_act_sent <span class="ot">&lt;-</span> text_main_acts <span class="sc">%&gt;%</span></span>
+<span id="cb1104-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>), <span class="at">by =</span> <span class="st">&quot;word&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1104-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1104-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(screen_name) <span class="sc">%&gt;%</span></span>
+<span id="cb1104-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1104-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">value =</span> <span class="fu">sum</span>(value <span class="sc">*</span> n) <span class="sc">/</span> <span class="fu">sum</span>(n))</span>
+<span id="cb1104-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1104-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1104-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1104-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(key_act_sent)</span></code></pre></div>
+<pre><code># A tibble: 6 x 2
+  screen_name      value
+  &lt;chr&gt;            &lt;dbl&gt;
+1 augustine11535  -0.131
+2 conserv2mysoul  -0.266
+3 dinmadness      -0.293
+4 ellimayradrep   -0.325
+5 GegeBebiii      -0.160
+6 GMiller06698349 -0.290</code></pre>
+<p>Go ahead and visualize the results for the hubs. Only one of them has an average sentiment value that is positive (albeit barely positive).</p>
+<div class="sourceCode" id="cb1106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1106-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1106-1" aria-hidden="true" tabindex="-1"></a>key_act_sent <span class="sc">%&gt;%</span></span>
+<span id="cb1106-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">screen_name =</span> <span class="fu">reorder</span>(screen_name, value)) <span class="sc">%&gt;%</span></span>
+<span id="cb1106-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1106-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(screen_name, value, <span class="at">fill =</span> value <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb1106-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1106-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1106-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1106-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb1106-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1106-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Average sentiment value for key hubs&quot;</span>)</span></code></pre></div>
+<p><img src="10-TMandSA_files/figure-html/unnamed-chunk-28-1.png" width="70%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="topic-modeling-community-level" class="section level2" number="17.3">
+<h2><span class="header-section-number">17.3</span> Topic Modeling (Community Level)</h2>
+<p>We will limit topic modeling to the community level for this exercise, which will give us an idea about underlying topics in Tweets among users within each community. While modeling the global structure and key actor-levels might be interesting, we will hold off on that now to keep things simple.</p>
+<p>As we outlined at the beginning of the lab, LDA assumes every document is a mixture of topics and that every topic is a mixture of words. Thus, our first first step is to divide our data set into meaningful “documents,” which we will define here as communities. We’ve sort have done this already (see <code>text_words</code> data frame), but we’ll do it again to walk through the processes.</p>
+<div class="sourceCode" id="cb1107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1107-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1107-1" aria-hidden="true" tabindex="-1"></a>q_lda <span class="ot">&lt;-</span> QA_df <span class="sc">%&gt;%</span></span>
+<span id="cb1107-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(community) <span class="sc">%&gt;%</span></span>
+<span id="cb1107-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1107-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+<p>Again, we have to use the <code>unnest</code> function to parse out words so we can figure out which words appear within each community.</p>
+<div class="sourceCode" id="cb1108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1108-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1108-1" aria-hidden="true" tabindex="-1"></a>com_word <span class="ot">&lt;-</span> q_lda <span class="sc">%&gt;%</span></span>
+<span id="cb1108-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, text)</span></code></pre></div>
+<p>Next, we need to find document-word counts and then use <code>tidytext's</code> <code>cast_dtm</code> function to put our data frame into a document-term matrix. Again, this probably looks familiar because we’ve done this already for sentiment analysis, but we want to walk through the entire process again.</p>
+<div class="sourceCode" id="cb1109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1109-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1109-1" aria-hidden="true" tabindex="-1"></a>com_word_cts <span class="ot">&lt;-</span> com_word <span class="sc">%&gt;%</span></span>
+<span id="cb1109-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1109-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(community, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1109-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1109-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb1109-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1109-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(com_word_cts)</span></code></pre></div>
+<pre><code># A tibble: 6 x 3
+  community word       n
+      &lt;dbl&gt; &lt;chr&gt;  &lt;int&gt;
+1       190 qanon   5300
+2       490 now     4773
+3       637 qanon   3714
+4       190 wwgwga  3705
+5       194 qanon   3253
+6       738 qanon   2860</code></pre>
+<p>Now use the <code>cast_dtm</code> function to convert the tibble to a document-term matrix.</p>
+<div class="sourceCode" id="cb1111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1111-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1111-1" aria-hidden="true" tabindex="-1"></a>lda_dtm <span class="ot">&lt;-</span> com_word_cts <span class="sc">%&gt;%</span></span>
+<span id="cb1111-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1111-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cast_dtm</span>(community, word, n)</span></code></pre></div>
+<p>Next, we need identify an appropriate number of topics, which is not a manual process. Because our data are in DTM format, we can choose from several available algorithms to guide us (<a href="http://www.rpubs.com/MNidhi/NumberoftopicsLDA" class="uri">http://www.rpubs.com/MNidhi/NumberoftopicsLDA</a>). <strong>This step takes substantial time to complete, so save your workplace first and be patient (if you try this and your computer freezes, feel free to skip down to the next chunk of code (“perplexity”))</strong>. What we want are low scores for “CaoJuan2009” and “Arun2010” but high for “Griffiths2004.” According to “CaoJuan2009” and “Griffiths2004.” Ultimately, we want 48 topics.</p>
+<div class="sourceCode" id="cb1112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1112-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1112-1" aria-hidden="true" tabindex="-1"></a>my_topics <span class="ot">&lt;-</span> <span class="fu">FindTopicsNumber</span>(lda_dtm, <span class="at">topics =</span> <span class="fu">seq</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">50</span>),</span>
+<span id="cb1112-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1112-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">metrics =</span> <span class="fu">c</span>(<span class="st">&quot;Griffiths2004&quot;</span>, <span class="st">&quot;CaoJuan2009&quot;</span>,</span>
+<span id="cb1112-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1112-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Arun2010&quot;</span>), </span>
+<span id="cb1112-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1112-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">method =</span> <span class="st">&quot;Gibbs&quot;</span>,</span>
+<span id="cb1112-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1112-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1112-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1112-6" aria-hidden="true" tabindex="-1"></a><span class="fu">FindTopicsNumber_plot</span>(my_topics)</span>
+<span id="cb1112-7"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1112-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Sometimes the graphs are difficult to see, so you can view the table instead.</span></span>
+<span id="cb1112-8"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1112-8" aria-hidden="true" tabindex="-1"></a><span class="co"># View(my_topics) </span></span></code></pre></div>
+<p><img src="10-TMandSA_files/figure-html/unnamed-chunk-34-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>We need to run LDA before getting into perplexity to “confirm” how many topics we should select. It’s pretty straight forward. You’ll notice k represents how many topics we want.</p>
+<div class="sourceCode" id="cb1113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1113-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1113-1" aria-hidden="true" tabindex="-1"></a>grps_lda <span class="ot">&lt;-</span> <span class="fu">LDA</span>(lda_dtm, <span class="at">k =</span> <span class="dv">48</span>, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">seed =</span> <span class="dv">1234</span>))</span>
+<span id="cb1113-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1113-2" aria-hidden="true" tabindex="-1"></a>grps_lda</span></code></pre></div>
+<pre><code>A LDA_VEM topic model with 48 topics.</code></pre>
+<p>Let’s now check out our perplexity results and see how a 48 topic model compares to other models with 10, 20, 30, 40, and 50 topics. Again, we want a low score. <strong>Again, this will take a long time, so be patient</strong>.</p>
+<div class="sourceCode" id="cb1115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1115-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1115-1" aria-hidden="true" tabindex="-1"></a>n_topics <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>)</span>
+<span id="cb1115-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1115-2" aria-hidden="true" tabindex="-1"></a>my_lda_compare <span class="ot">&lt;-</span> n_topics <span class="sc">%&gt;%</span></span>
+<span id="cb1115-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1115-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map</span>(LDA, <span class="at">x =</span> lda_dtm, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">seed =</span> <span class="dv">1234</span>))</span></code></pre></div>
+<p>Go ahead and plot the results. While 50 topics may do a little better than 48, it looks like we’re in pretty good shape. For demonstration purposes, we will move forward with your 48 topic model but in the future you can re-run your models based on these results.</p>
+<div class="sourceCode" id="cb1116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1116-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data_frame</span>(<span class="at">k =</span> n_topics,</span>
+<span id="cb1116-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1116-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">perplex =</span> <span class="fu">map_dbl</span>(my_lda_compare, perplexity)) <span class="sc">%&gt;%</span></span>
+<span id="cb1116-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1116-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(k, perplex)) <span class="sc">+</span></span>
+<span id="cb1116-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1116-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb1116-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1116-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb1116-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1116-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Evaluating LDA topic models&quot;</span>,</span>
+<span id="cb1116-7"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1116-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Optimal number of topics (smaller is better)&quot;</span>,</span>
+<span id="cb1116-8"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1116-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Number of topics&quot;</span>,</span>
+<span id="cb1116-9"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1116-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Perplexity&quot;</span>)</span></code></pre></div>
+<p><img src="10-TMandSA_files/figure-html/unnamed-chunk-38-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>We can examine per-topic-per-word probabilities, which is what we get with beta. In other words, it computes the probability of that term being generated from that topic. For instance, the term “qanon” makes at least 5% of each of the topics (i.e., 1-6) seen here.</p>
+<div class="sourceCode" id="cb1117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1117-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1117-1" aria-hidden="true" tabindex="-1"></a>grps_topics <span class="ot">&lt;-</span> <span class="fu">tidy</span>(grps_lda, <span class="at">matrix =</span> <span class="st">&quot;beta&quot;</span>)</span>
+<span id="cb1117-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1117-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(grps_topics)</span></code></pre></div>
+<pre><code># A tibble: 6 x 3
+  topic term    beta
+  &lt;int&gt; &lt;chr&gt;  &lt;dbl&gt;
+1     1 qanon 0.0519
+2     2 qanon 0.0536
+3     3 qanon 0.0804
+4     4 qanon 0.0499
+5     5 qanon 0.0555
+6     6 qanon 0.0553</code></pre>
+<p>Let’s use <code>dplyr’s</code> <code>top_n</code> function to find the top 10 terms within each topic. Here we can see, for example, that “movement” makes up about 1.5% of topic 1. As we’ve discussed, the topics are not named for you but rather you have to infer them from relevant terms.</p>
+<div class="sourceCode" id="cb1119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1119-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1119-1" aria-hidden="true" tabindex="-1"></a>top_terms_grps <span class="ot">&lt;-</span> grps_topics <span class="sc">%&gt;%</span></span>
+<span id="cb1119-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1119-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb1119-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1119-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">top_n</span>(<span class="dv">10</span>, beta) <span class="sc">%&gt;%</span></span>
+<span id="cb1119-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1119-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1119-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1119-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(topic, <span class="sc">-</span>beta)</span>
+<span id="cb1119-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1119-6" aria-hidden="true" tabindex="-1"></a><span class="co"># You can view the data frame to check out the betas.</span></span>
+<span id="cb1119-7"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1119-7" aria-hidden="true" tabindex="-1"></a><span class="co"># View(top_terms_grps)  </span></span></code></pre></div>
+<p>We can plot the results as well; however, we have 48 topics, which would would produce very cluttered graphs. Let’s check out the betas for just a few of them (e.g., topics 1, 13, 18, 42).</p>
+<div class="sourceCode" id="cb1120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1120-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1120-1" aria-hidden="true" tabindex="-1"></a>sample_top <span class="ot">&lt;-</span> top_terms_grps <span class="sc">%&gt;%</span></span>
+<span id="cb1120-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1120-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(topic <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;1&quot;</span>,</span>
+<span id="cb1120-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1120-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;13&quot;</span>,</span>
+<span id="cb1120-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1120-4" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;18&quot;</span>,</span>
+<span id="cb1120-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1120-5" aria-hidden="true" tabindex="-1"></a>                      <span class="st">&quot;42&quot;</span>))</span></code></pre></div>
+<p>Now, go ahead and plot.</p>
+<div class="sourceCode" id="cb1121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1121-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1121-1" aria-hidden="true" tabindex="-1"></a>sample_top <span class="sc">%&gt;%</span></span>
+<span id="cb1121-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1121-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">reorder</span>(term, beta)) <span class="sc">%&gt;%</span></span>
+<span id="cb1121-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1121-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(term, beta, <span class="at">fill =</span> <span class="fu">factor</span>(topic))) <span class="sc">+</span></span>
+<span id="cb1121-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1121-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb1121-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1121-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> topic, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1121-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1121-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="10-TMandSA_files/figure-html/unnamed-chunk-42-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Remember, each document in this analysis represents a subgroup. Thus, we may want to know which topics are associated with each one. We can find this out by examining the per-document-per-topic probabilities (i.e.,gamma). As Silge and Robinson explain, “each of these values is an estimated proportion of words from that document that are generated from that topic.” For example, the model estimates that far less than 1% of of the words in community 615 were generated from topic 1.</p>
+<div class="sourceCode" id="cb1122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1122-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1122-1" aria-hidden="true" tabindex="-1"></a>grps_gamma <span class="ot">&lt;-</span> <span class="fu">tidy</span>(grps_lda, <span class="at">matrix =</span> <span class="st">&quot;gamma&quot;</span>)</span>
+<span id="cb1122-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(grps_gamma)</span></code></pre></div>
+<pre><code># A tibble: 6 x 3
+  document topic       gamma
+  &lt;chr&gt;    &lt;int&gt;       &lt;dbl&gt;
+1 190          1 0.000000487
+2 490          1 0.000000501
+3 637          1 0.000000533
+4 194          1 0.000000823
+5 738          1 0.000000819
+6 723          1 0.000000771</code></pre>
+<p>Now that we have these topic probabilities, we can see how well our unsupervised learning did at distinguishing the subgroups. As we did before, let’s extract our 10 largest communities and check out the results. We’ll do this by five groups at a time to improve our visuals in the next step.</p>
+<div class="sourceCode" id="cb1124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1124-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1124-1" aria-hidden="true" tabindex="-1"></a>main_grps_gamma1 <span class="ot">&lt;-</span> grps_gamma <span class="sc">%&gt;%</span></span>
+<span id="cb1124-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1124-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(document <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;190&quot;</span>,</span>
+<span id="cb1124-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1124-3" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;194&quot;</span>,</span>
+<span id="cb1124-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1124-4" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;637&quot;</span>,</span>
+<span id="cb1124-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1124-5" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;490&quot;</span>,</span>
+<span id="cb1124-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1124-6" aria-hidden="true" tabindex="-1"></a>                          <span class="st">&quot;738&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb1125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1125-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1125-1" aria-hidden="true" tabindex="-1"></a>main_grps_gamma2 <span class="ot">&lt;-</span> grps_gamma <span class="sc">%&gt;%</span></span>
+<span id="cb1125-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1125-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(document <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;723&quot;</span>,</span>
+<span id="cb1125-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1125-3" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;163&quot;</span>,</span>
+<span id="cb1125-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1125-4" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;410&quot;</span>,</span>
+<span id="cb1125-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1125-5" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;231&quot;</span>,</span>
+<span id="cb1125-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1125-6" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;726&quot;</span>))</span></code></pre></div>
+<p>Plot the first five’s gamma outputs, which will tell us about topics within each community. For example, community 490 is %100 about topic 31, whereas 194, 637, 190, and 738 are defined by multiple topics.</p>
+<div class="sourceCode" id="cb1126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1126-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1126-1" aria-hidden="true" tabindex="-1"></a>main_grps_gamma1 <span class="sc">%&gt;%</span></span>
+<span id="cb1126-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1126-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">document =</span> <span class="fu">reorder</span>(document, gamma <span class="sc">*</span> topic)) <span class="sc">%&gt;%</span></span>
+<span id="cb1126-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1126-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(topic), gamma)) <span class="sc">+</span></span>
+<span id="cb1126-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1126-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb1126-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1126-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> document, <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb1126-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1126-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb1126-7"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1126-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Topic&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Gamma&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1126-8"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1126-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
+<p><img src="10-TMandSA_files/figure-html/unnamed-chunk-46-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>Now let’s plot the second set of community-based topics. We can see that subgroups 163, 723, and 410 are defined by a single topic, wheres communities 231 and 726 are defined by multiple topics. Again, we have to infer these by analyzing the beta outputs.</p>
+<div class="sourceCode" id="cb1127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1127-1"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1127-1" aria-hidden="true" tabindex="-1"></a>main_grps_gamma2 <span class="sc">%&gt;%</span></span>
+<span id="cb1127-2"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1127-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">document =</span> <span class="fu">reorder</span>(document, gamma <span class="sc">*</span> topic)) <span class="sc">%&gt;%</span></span>
+<span id="cb1127-3"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1127-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(topic), gamma)) <span class="sc">+</span></span>
+<span id="cb1127-4"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1127-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb1127-5"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1127-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> document, <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb1127-6"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1127-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb1127-7"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1127-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Topic&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Gamma&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1127-8"><a href="topic-modeling-and-sentiment-analysis-of-social-media-networks.html#cb1127-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>))</span></code></pre></div>
+<p><img src="10-TMandSA_files/figure-html/unnamed-chunk-47-1.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>That’s all for now.</p>
+
+</div>
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="text-mining-and-semantic-network-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="basic-base-r-and-tidyverse-data-manipulation-cheat-sheet.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/cjcallag/r4ds/edit/editing/10-TMandSA.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+},
+"font_settings": {
+"family": "sans",
+"theme": "white",
+"size": 2
+},
+"info": true,
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
